@@ -1,0 +1,37 @@
+role,icon,group,text
+Electrician,⚡,covered,"Common area electrical infrastructure — corridor and cellar lights, lift power supply, DG connections, motor panels"
+Electrician,⚡,covered,Faults up to the flat's MCB point
+Electrician,⚡,covered,"Periodic inspection of panels, switchboards and DG wiring"
+Electrician,⚡,covered,DG operations during power outages
+Electrician,⚡,not_covered,Any electrical work inside flats beyond the MCB point
+Electrician,⚡,not_covered,"Personal appliances, fixtures or internal wiring"
+Electrician,⚡,not_covered,Engage your own licensed electrician
+Plumber,🚰,covered,"WTP, STP, drainage systems and overhead water tanks"
+Plumber,🚰,covered,"Water levels, pump operations and pipelines across the society"
+Plumber,🚰,covered,"Cellar drainage, rainwater harvesting and external pipeline repairs"
+Plumber,🚰,covered,Leakages and blockages inside flats on a best-effort basis during working hours
+Plumber,🚰,not_covered,"Tap repairs, faucet replacements or fixture installation inside flats"
+Plumber,🚰,not_covered,Internal bathroom or kitchen plumbing modifications and renovations
+Plumber,🚰,not_covered,Engage your own licensed plumber
+Housekeeping,🧹,covered,"Corridors, staircases, lobbies, lifts, reception and clubhouse"
+Housekeeping,🧹,covered,"Gym, pool surroundings, indoor games room, yoga room, amphitheater"
+Housekeeping,🧹,covered,"Guest rooms, including bedsheets and towels between bookings"
+Housekeeping,🧹,covered,"Cellars, parking areas, driveways, ducts and cobweb cleaning"
+Housekeeping,🧹,not_covered,Cleaning or domestic work inside individual flats
+Housekeeping,🧹,not_covered,"Personal errands, grocery carrying or shifting assistance"
+Gardener,🌱,covered,"Lawns, flower beds, hedges, potted plants and tree lines in common areas"
+Gardener,🌱,covered,"Watering, pruning, trimming and seasonal planting"
+Gardener,🌱,covered,"Tot-lot greens, walkway plants and entrance landscaping"
+Gardener,🌱,covered,"Fertilisers, pesticides and soil treatment for common greenery"
+Gardener,🌱,not_covered,"Gardening inside flats, balconies or terraces"
+Gardener,🌱,not_covered,"Personal plant purchases, potting or balcony garden setup"
+Security Personnel,🛡,covered,Check-in and check-out of all persons and vehicles at entry and exit gates
+Security Personnel,🛡,covered,Visitor identity verification and the visitor register
+Security Personnel,🛡,covered,Vehicle movement log and gate entry process
+Security Personnel,🛡,covered,First response to fire and medical emergencies outside working hours
+Security Personnel,🛡,covered,"Periodic night rounds of cellars, corridors and common areas"
+Security Personnel,🛡,duties,Cooperate with entry and exit checks without exception
+Security Personnel,🛡,duties,Pre-inform about large gatherings or external visitors
+Security Personnel,🛡,duties,Do not assign security staff tasks outside their duties
+Treat staff with respect,👤,prose,"Support staff are valued members of our society's ecosystem, working to ensure a safe and comfortable living environment for everyone. Courteous and respectful interaction is expected at all times."
+Treat staff with respect,👤,prose,"Any form of verbal abuse, intimidation or disrespectful behaviour towards support staff is strictly unacceptable and may be escalated to the Core Committee. Complaints about staff should be reported to the Maintenance Manager or Core Committee."

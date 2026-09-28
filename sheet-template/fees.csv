@@ -1,0 +1,17 @@
+type,label,amount,note,colour
+card,Maintenance,Quarterly · NBH only,Payable only through NoBrokerhood. All dues must be cleared by the **15th of the first month** of the payment quarter.,gold
+card,Late payment,2% per month,"Charged on the balance amount after the due date. Three notices are issued, after which the flat is marked a defaulter and services may be impacted.",red
+card,Move-in / out,"₹1,000 each","Applicable to tenants only, charged separately for move-in and move-out.",grey
+penalty,Wrongly parked 2-wheeler (per day),₹200,,
+penalty,Wrongly parked 4-wheeler (per day),₹500,,
+penalty,Lift damage (scratches / intentional),"Minimum ₹1,000 (max based on damage extent)",,
+penalty,Spitting in common areas,"₹1,000",,
+penalty,Scribbling on walls,At committee discretion,,
+penalty,Dumping waste in common areas,Waste removal charges + applicable fines,,
+penalty,Pet policy violations,"₹1,000",,
+penalty,Corridor / common area violations,"₹1,000",,
+penalty,Fire alarm / extinguisher misuse,At committee discretion,,
+penalty,Disposing diapers / napkins via flush,"₹1,000",,
+penalty,Play area violations,At committee discretion,,
+penalty,Late maintenance payment,2% per month on balance + potential service impact,,
+penalty,Damage to society assets,As per actual repair / replacement cost,,

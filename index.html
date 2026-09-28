@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shweta Shubham &mdash; Flat Owners Cooperative Maintenance Society Ltd</title>
+<meta name="description" content="Official information portal for Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd — society guidelines, amenity timings, committee contacts, fees and resident onboarding.">
+<meta name="theme-color" content="#14564a">
+<link rel="icon" href="images/favicon.png" sizes="any" type="image/png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+
+<!-- Link preview (WhatsApp / Facebook / X). These must stay ABSOLUTE URLs.
+     If the site ever moves to a new address (e.g. a custom domain), update the
+     canonical, og:image and og:url values below to the new address. -->
+<link rel="canonical" href="https://roaring-moxie-0dcc0a.netlify.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Shweta Shubham Society">
+<meta property="og:title" content="Shweta Shubham — Resident Information Portal">
+<meta property="og:description" content="Society guidelines, amenity timings, committee contacts, maintenance payments and the new-resident checklist.">
+<meta property="og:image" content="https://roaring-moxie-0dcc0a.netlify.app/images/social-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://roaring-moxie-0dcc0a.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+/* ---------- design tokens ---------- */
+:root{
+  --ink:#0e2b25;
+  --ink-2:#2f4f47;
+  --muted:#65807a;
+  --brand:#14564a;
+  --brand-600:#0f4239;
+  --brand-50:#e8f2ef;
+  --gold:#c08a2e;
+  --gold-50:#fbf3e2;
+  --bg:#f8f7f3;
+  --card:#ffffff;
+  --line:#e2e5df;
+  --danger:#a9331f;
+  --danger-50:#fdeeea;
+  --ok:#1f7a4d;
+  --radius:14px;
+  --shadow:0 1px 2px rgba(14,43,37,.06), 0 8px 24px -12px rgba(14,43,37,.18);
+  --maxw:1120px;
+  --font:'Segoe UI', system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --serif:Georgia, 'Times New Roman', serif;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:120px}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:var(--font); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; display:block}
+a{color:var(--brand); text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{line-height:1.25; margin:0 0 .5em; font-weight:650}
+h2{font-size:clamp(1.4rem,3vw,1.9rem)}
+h3{font-size:1.08rem}
+p{margin:0 0 1em}
+ul{margin:0 0 1em; padding-left:1.15em}
+li{margin:.3em 0}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:8px;top:8px;z-index:999;background:#fff;padding:10px 16px;border-radius:8px}
+:focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px}
+
+/* ---------- emergency bar ---------- */
+.ebar{background:var(--brand-600); color:#dff0eb; font-size:.85rem}
+.ebar .wrap{display:flex; flex-wrap:wrap; gap:6px 22px; align-items:center; padding-top:8px; padding-bottom:8px}
+.ebar strong{color:#fff}
+.ebar a{color:#ffd98a; font-weight:600; white-space:nowrap}
+.ebar .dot{width:7px;height:7px;border-radius:50%;background:#5ddc9f;display:inline-block;margin-right:7px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* ---------- header ---------- */
+header.site{position:sticky; top:0; z-index:60; background:rgba(248,247,243,.92); backdrop-filter:blur(10px); border-bottom:1px solid var(--line)}
+header.site .wrap{display:flex; align-items:center; gap:16px; padding-top:12px; padding-bottom:12px}
+.brand{display:flex; align-items:center; gap:11px; flex:none; margin-right:auto; min-width:0}
+.logo{width:42px;height:42px;border-radius:11px;background:var(--brand);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:1.15rem;font-weight:700;flex:none}
+.logo-img{height:44px; width:auto; flex:none; display:block}
+.brand-txt{padding-left:13px; border-left:1px solid var(--line); line-height:1.45}
+.brand b{display:block; font-size:1.02rem; letter-spacing:.2px; line-height:1.2}
+.brand span{display:block; font-size:.72rem; color:var(--muted); letter-spacing:.06em; text-transform:uppercase}
+/* The wrap is capped at --maxw, so nine nav links plus the CTA never leave room
+   for the brand subtitle. The logo wordmark already carries the society name. */
+header.site .brand .brand-txt{display:none}
+nav.main{display:flex; gap:2px; align-items:center; flex:none}
+nav.main a{padding:8px 8px; border-radius:8px; font-size:.83rem; font-weight:550; color:var(--ink-2); white-space:nowrap}
+nav.main a:hover{background:var(--brand-50); color:var(--brand-600); text-decoration:none}
+.btn{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; font-weight:600; font-size:.88rem; border:1px solid transparent; cursor:pointer; font-family:inherit}
+.btn-primary{background:var(--brand); color:#fff}
+.btn-primary:hover{background:var(--brand-600); text-decoration:none}
+.btn-gold{background:var(--gold); color:#20160a}
+.btn-gold:hover{background:#a9761f; text-decoration:none}
+.btn-ghost{background:transparent; border-color:var(--line); color:var(--ink-2)}
+.btn-ghost:hover{border-color:var(--brand); color:var(--brand); text-decoration:none}
+.menu-btn{display:none; background:none; border:1px solid var(--line); border-radius:9px; padding:9px 11px; cursor:pointer}
+.menu-btn span{display:block;width:18px;height:2px;background:var(--ink);margin:3px 0;border-radius:2px}
+header.site .btn-gold{flex:none; white-space:nowrap}
+header.site .wrap{gap:10px}
+
+@media(max-width:1080px){
+  nav.main{position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:stretch; background:var(--card); border-bottom:1px solid var(--line); padding:10px; gap:0; box-shadow:var(--shadow); display:none; max-height:72vh; overflow-y:auto; overscroll-behavior:contain}
+  nav.main.open{display:flex}
+  nav.main a{padding:12px 14px; font-size:.95rem; border-bottom:1px solid var(--line)}
+  nav.main a:last-child{border-bottom:0}
+  .menu-btn{display:block}
+  header.site .btn-gold{display:none}
+}
+
+/* ---------- hero ---------- */
+.hero{background:linear-gradient(150deg,var(--brand) 0%, #0b3a32 60%, #082b25 100%); color:#eaf5f1; position:relative; overflow:hidden}
+.hero::after{content:""; position:absolute; inset:0; background-image:radial-gradient(circle at 85% 15%, rgba(216,169,74,.22), transparent 42%), radial-gradient(circle at 12% 88%, rgba(93,220,159,.14), transparent 45%); pointer-events:none}
+.hero .wrap{position:relative; z-index:1; padding-top:62px; padding-bottom:58px}
+.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:46px; align-items:center}
+.hero-copy{min-width:0}
+.hero-shot{margin:0}
+.hero-shot img{display:block; width:100%; max-width:360px; height:auto; margin-left:auto; border-radius:16px; border:1px solid rgba(255,255,255,.2); box-shadow:0 24px 54px rgba(0,0,0,.4)}
+.eyebrow{display:inline-block; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); border:1px solid rgba(216,169,74,.45); padding:5px 12px; border-radius:100px; margin-bottom:18px}
+.hero h1{font-family:var(--serif); font-size:clamp(2rem,5.2vw,3.3rem); font-weight:600; color:#fff; letter-spacing:-.5px; margin-bottom:.35em}
+.hero-title{margin-bottom:.5em}
+.hero-name{display:block; font-family:var(--serif); font-size:clamp(2.7rem,7.4vw,4.6rem); line-height:1.02; color:#fff; letter-spacing:-1.5px}
+.hero-tag{display:block; font-family:var(--font); font-size:clamp(1.02rem,2.3vw,1.45rem); font-weight:500; line-height:1.35; color:var(--gold); letter-spacing:0; margin-top:.5rem}
+.hero p.lede{font-size:clamp(1rem,2vw,1.12rem); max-width:62ch; color:#c6ded7; margin-bottom:26px}
+.hero-cta{display:flex; flex-wrap:wrap; gap:12px}
+.stats{display:flex; flex-wrap:wrap; gap:34px; margin-top:42px; padding-top:26px; border-top:1px solid rgba(255,255,255,.14)}
+.stat b{display:block; font-family:var(--serif); font-size:1.65rem; color:var(--gold); line-height:1}
+.stat span{font-size:.78rem; letter-spacing:.07em; text-transform:uppercase; color:#a9c8c0}
+
+/* ---------- sections ---------- */
+section.band{padding:58px 0}
+section.band.alt{background:var(--card); border-block:1px solid var(--line)}
+.sec-head{max-width:70ch; margin-bottom:30px}
+.sec-head .kicker{font-size:.72rem; letter-spacing:.15em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:9px}
+.sec-head p{color:var(--muted); margin:0}
+
+/* ---------- cards / grids ---------- */
+.grid{display:grid; gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+section.alt .card{background:var(--bg)}
+.tile{display:flex; flex-direction:column; gap:7px; text-align:left; transition:.18s}
+a.tile:hover{transform:translateY(-3px); border-color:var(--brand); text-decoration:none}
+.tile .ico{width:40px;height:40px;border-radius:10px;background:var(--brand-50); color:var(--brand); display:grid; place-items:center; font-size:1.15rem; margin-bottom:4px}
+.tile b{color:var(--ink); font-size:1rem}
+.tile small{color:var(--muted); font-size:.85rem; line-height:1.45}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card)}
+table{border-collapse:collapse; width:100%; min-width:520px; font-size:.92rem}
+th,td{text-align:left; padding:12px 16px; border-bottom:1px solid var(--line); vertical-align:top}
+thead th{background:var(--brand-50); color:var(--brand-600); font-size:.74rem; letter-spacing:.09em; text-transform:uppercase; font-weight:700; white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfbf9}
+td.num{white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600}
+
+/* ---------- pills ---------- */
+.pill{display:inline-block; padding:3px 10px; border-radius:100px; font-size:.74rem; font-weight:700; letter-spacing:.03em}
+.pill-green{background:#e4f4ec; color:var(--ok)}
+.pill-red{background:var(--danger-50); color:var(--danger)}
+.pill-gold{background:var(--gold-50); color:#8a6015}
+.pill-grey{background:#eef0ec; color:var(--muted)}
+
+/* ---------- search + accordion ---------- */
+.searchbox{position:relative; margin-bottom:22px}
+.searchbox input{width:100%; padding:15px 16px 15px 46px; font-size:1rem; font-family:inherit; border:1px solid var(--line); border-radius:12px; background:var(--card); color:var(--ink)}
+.searchbox input:focus{outline:none; border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-50)}
+.searchbox .mag{position:absolute; left:16px; top:50%; transform:translateY(-50%); color:var(--muted); font-size:1.05rem}
+.searchbox .count{font-size:.83rem; color:var(--muted); margin-top:8px; display:block}
+
+details.acc{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); margin-bottom:10px; overflow:hidden}
+details.acc[open]{border-color:var(--brand); box-shadow:var(--shadow)}
+details.acc summary{cursor:pointer; padding:16px 20px; font-weight:650; display:flex; align-items:center; gap:12px; list-style:none; color:var(--ink)}
+details.acc summary::-webkit-details-marker{display:none}
+details.acc summary::after{content:"+"; margin-left:auto; font-size:1.3rem; color:var(--brand); font-weight:400; transition:.2s}
+details.acc[open] summary::after{transform:rotate(45deg)}
+details.acc summary:hover{background:var(--brand-50)}
+details.acc .body{padding:2px 20px 18px; border-top:1px solid var(--line); color:var(--ink-2)}
+details.acc .body ul{margin-top:12px}
+.sec-no{font-family:var(--serif); color:var(--gold); font-size:.9rem; font-weight:700; min-width:26px}
+.hidden{display:none !important}
+.noresult{text-align:center; padding:34px; color:var(--muted); background:var(--card); border:1px dashed var(--line); border-radius:var(--radius)}
+
+/* ---------- scope (covered / not covered) ---------- */
+.scope{display:grid; grid-template-columns:1fr 1fr; gap:0; border-top:1px solid var(--line); margin-top:14px}
+.scope > div{padding:14px 0}
+.scope > div:first-child{padding-right:16px; border-right:1px solid var(--line)}
+.scope > div:last-child{padding-left:16px}
+.scope h4{font-size:.74rem; letter-spacing:.09em; text-transform:uppercase; margin-bottom:8px}
+.scope ul{padding-left:1.05em; font-size:.9rem; color:var(--ink-2); margin:0}
+@media(max-width:560px){
+  .scope{grid-template-columns:1fr}
+  .scope > div:first-child{padding-right:0; border-right:0; border-bottom:1px solid var(--line)}
+  .scope > div:last-child{padding-left:0}
+}
+
+/* ---------- checklist ---------- */
+.check{display:flex; gap:13px; align-items:flex-start; padding:14px 16px; border:1px solid var(--line); border-radius:11px; background:var(--card); margin-bottom:9px; cursor:pointer; transition:.15s}
+.check:hover{border-color:var(--brand)}
+.check input{margin-top:3px; width:19px; height:19px; accent-color:var(--brand); flex:none; cursor:pointer}
+.check b{display:block; font-size:.97rem}
+.check small{color:var(--muted); font-size:.86rem; line-height:1.45}
+.check.done{background:#f2f8f5; border-color:#bfe0d1}
+.check.done b{text-decoration:line-through; color:var(--muted)}
+.progress{height:8px; background:var(--line); border-radius:100px; overflow:hidden; margin:6px 0 18px}
+.progress > i{display:block; height:100%; width:0; background:linear-gradient(90deg,var(--brand),#2e9d7f); border-radius:100px; transition:width .35s}
+
+/* ---------- list filters, resolutions, records ---------- */
+.listbar{display:flex; flex-wrap:wrap; align-items:center; gap:14px; justify-content:space-between; margin-bottom:18px}
+.listcount{font-size:.82rem; color:var(--muted); letter-spacing:.03em}
+.seg{display:inline-flex; background:var(--card); border:1px solid var(--line); border-radius:100px; padding:4px; gap:4px}
+.seg-btn{border:0; background:none; font:inherit; font-size:.86rem; font-weight:600; color:var(--ink-2); padding:8px 20px; border-radius:100px; cursor:pointer}
+.seg-btn:hover{color:var(--brand)}
+.seg-btn.is-on{background:var(--brand); color:#fff}
+.empty{color:var(--muted); font-size:.92rem; padding:22px 2px; margin:0}
+
+.reslist{display:flex; flex-direction:column; gap:12px}
+.res{background:var(--card); border:1px solid var(--line); border-left:3px solid var(--brand); border-radius:0 var(--radius) var(--radius) 0; padding:16px 20px; box-shadow:var(--shadow)}
+.res[hidden]{display:none}
+.res-top{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:8px}
+.res-ref{font-family:var(--serif); font-size:.82rem; font-weight:700; color:var(--brand); letter-spacing:.04em}
+.res-top time{font-size:.8rem; color:var(--muted)}
+.res > b{display:block; font-size:1rem; margin-bottom:4px}
+.res > p{margin:0; font-size:.9rem; color:var(--ink-2)}
+
+.reclist{overflow:hidden}
+.rec{display:flex; gap:16px; align-items:flex-start; padding:16px 20px; border-bottom:1px solid var(--line); color:inherit; text-decoration:none}
+.rec:last-child{border-bottom:0}
+.rec:hover{background:var(--brand-50); text-decoration:none}
+.rec[hidden]{display:none}
+.rec-date{flex:none; width:56px; text-align:center; border-right:1px solid var(--line); padding-right:12px}
+.rec-date b{display:block; font-family:var(--serif); font-size:1.4rem; line-height:1; color:var(--brand)}
+.rec-date span{display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); margin-top:3px}
+.rec-main{min-width:0}
+.rec-main b{display:block; margin-top:7px; font-size:.97rem}
+.rec-main small{display:block; color:var(--muted); font-size:.87rem; line-height:1.45}
+
+/* ---------- misc ---------- */
+.note{background:var(--gold-50); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 10px 10px 0; font-size:.9rem; color:#6d4f12}
+.note.red{background:var(--danger-50); border-color:var(--danger); color:#7d2717}
+.note.green{background:#e9f6ef; border-color:var(--ok); color:#155c3a}
+.split{display:grid; grid-template-columns:1.1fr .9fr; gap:30px; align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
+.chip{background:var(--card); border:1px solid var(--line); border-radius:100px; padding:7px 15px; font-size:.86rem; color:var(--ink-2)}
+section.alt .chip{background:var(--bg)}
+/* filter chips are buttons; these must sit after .chip so they win on order */
+.chips .chip-btn{font:inherit; font-size:.86rem; cursor:pointer; color:var(--ink-2)}
+.chips .chip-btn:hover{border-color:var(--brand); color:var(--brand)}
+.chips .chip-btn.is-on{background:var(--brand); border-color:var(--brand); color:#fff}
+.masked{filter:blur(4.5px); user-select:none}
+
+/* nbh banner */
+.nbh{background:linear-gradient(135deg,#132f2a,#0b211d); color:#dcebe6; border-radius:18px; padding:34px; position:relative; overflow:hidden}
+.nbh h2{color:#fff; margin-bottom:.4em}
+.nbh p{color:#a9c8c0}
+.nbh .g2{margin-top:22px}
+.nbh .card{background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.12); box-shadow:none; color:#cfe3dd}
+.nbh .card b{color:#fff}
+.nbh .card .pill{background:rgba(216,169,74,.18); color:#e9c377}
+
+/* ---------- gallery + lightbox ---------- */
+.gal{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px}
+.gal figure{margin:0; position:relative; border-radius:var(--radius); overflow:hidden; background:var(--line); cursor:zoom-in; aspect-ratio:4/3; box-shadow:var(--shadow)}
+.gal img{width:100%; height:100%; object-fit:cover; transition:transform .45s ease}
+.gal figure:hover img{transform:scale(1.06)}
+.gal figcaption{position:absolute; inset:auto 0 0 0; padding:26px 14px 12px; color:#fff; font-size:.9rem; font-weight:600;
+  background:linear-gradient(to top, rgba(6,26,22,.85), transparent)}
+.gal figure:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+.lb{position:fixed; inset:0; z-index:200; background:rgba(6,20,17,.93); display:none; align-items:center; justify-content:center; padding:24px}
+.lb.open{display:flex}
+.lb img{max-width:min(1000px,92vw); max-height:80vh; border-radius:12px; object-fit:contain}
+.lb .cap{position:absolute; bottom:26px; left:0; right:0; text-align:center; color:#dceae5; font-size:.95rem}
+.lb button{position:absolute; background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.22); width:46px; height:46px; border-radius:50%; font-size:1.2rem; cursor:pointer}
+.lb .x{top:20px; right:20px}
+.lb .prev{left:20px; top:50%; transform:translateY(-50%)}
+.lb .next{right:20px; top:50%; transform:translateY(-50%)}
+.lb button:hover{background:rgba(255,255,255,.22)}
+.gal-band{background:#0f2b25; color:#c4dbd4; border-block:1px solid #0a211c}
+.gal-band h2{color:#fff}
+.gal-band .sec-head p{color:#9dbcb3}
+
+/* footer */
+footer.site{background:#0b211d; color:#8fb0a8; font-size:.88rem; padding:44px 0 26px; margin-top:0}
+footer.site a{color:#c8ded8}
+footer.site h4{color:#fff; font-size:.76rem; letter-spacing:.12em; text-transform:uppercase; margin-bottom:12px}
+footer.site .grid{gap:30px}
+footer.site ul{list-style:none; padding:0}
+footer.site li{margin:.45em 0}
+.foot-bottom{border-top:1px solid rgba(255,255,255,.1); margin-top:32px; padding-top:18px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:.8rem}
+
+#top-btn{position:fixed; right:18px; bottom:18px; z-index:70; width:44px; height:44px; border-radius:50%; background:var(--brand); color:#fff; border:none; cursor:pointer; box-shadow:var(--shadow); font-size:1.1rem; display:none}
+#top-btn.show{display:block}
+
+/* ---------- responsive ---------- */
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr; gap:32px}
+  .hero-shot img{max-width:300px; margin:0 auto}
+  .hero .wrap{padding-top:44px; padding-bottom:44px}
+}
+@media(max-width:640px){
+  .wrap{padding:0 16px}
+  section.band{padding:42px 0}
+  .brand .brand-txt{display:none}
+  .logo-img{height:38px}
+  .stats{gap:18px 0; margin-top:32px; display:grid; grid-template-columns:1fr 1fr}
+  .stat b{font-size:1.45rem}
+  .hero-cta .btn{flex:1 1 100%; justify-content:center}
+  .ebar .wrap{gap:10px}
+  .nbh{padding:24px 20px; border-radius:14px}
+  .listbar{gap:10px}
+  .seg-btn{padding:9px 17px}
+  .res{padding:14px 16px}
+  .rec{gap:12px; padding:14px 15px}
+  .rec-date{width:46px; padding-right:10px}
+  .rec-date b{font-size:1.25rem}
+  .foot-bottom{justify-content:flex-start}
+  #top-btn{right:14px; bottom:14px}
+  /* tables: fit the phone where possible, scroll where not */
+  table{min-width:0; font-size:.84rem}
+  th,td{padding:10px 9px}
+  thead th{white-space:normal; letter-spacing:.05em}
+  .menu-btn{padding:12px 13px}
+  .tbl-wrap{background:
+    linear-gradient(to right, var(--card) 30%, rgba(255,255,255,0)) left center/26px 100% no-repeat local,
+    linear-gradient(to left, var(--card) 30%, rgba(255,255,255,0)) right center/26px 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, rgba(10,40,34,.16), transparent) left center/12px 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, rgba(10,40,34,.16), transparent) right center/12px 100% no-repeat scroll,
+    var(--card)}
+}
+/* comfortable touch targets on phones and tablets */
+@media(hover:none){
+  nav.main a,.check,.btn{min-height:44px}
+  .btn{padding:12px 18px}
+  details.acc > summary{min-height:48px}
+  .menu-btn{padding:12px 13px}
+  td a[href^="tel:"],.ebar a[href^="tel:"]{display:inline-block; padding:6px 0}
+  .gal figure{cursor:default}
+  .gal figure:hover img{transform:none}
+}
+
+@media print{
+  header.site,.ebar,#top-btn,.hero-cta,nav.main{display:none !important}
+  details.acc{break-inside:avoid}
+  details.acc .body{display:block !important}
+}
+</style>
+
+<script>
+/* Placeholder artwork until real photos are dropped into /images.
+   Replace images/<name>.jpg and the fallback simply stops firing. */
+window.phFallback = function(img){
+  if (img.dataset.ph) return;
+  img.dataset.ph = '1';
+  var label = (img.alt || '').toUpperCase();
+  var a = img.dataset.c1 || '#14564a', b = img.dataset.c2 || '#0b3a32';
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">' +
+    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">' +
+    '<stop offset="0" stop-color="' + a + '"/><stop offset="1" stop-color="' + b + '"/>' +
+    '</linearGradient></defs>' +
+    '<rect width="800" height="600" fill="url(#g)"/>' +
+    '<circle cx="660" cy="120" r="150" fill="rgba(216,169,74,.16)"/>' +
+    '<circle cx="110" cy="520" r="180" fill="rgba(255,255,255,.06)"/>' +
+    '<text x="400" y="300" font-family="Georgia,serif" font-size="40" fill="rgba(255,255,255,.5)" text-anchor="middle">' + label + '</text>' +
+    '<text x="400" y="345" font-family="Segoe UI,sans-serif" font-size="19" fill="rgba(255,255,255,.3)" text-anchor="middle">photo coming soon</text>' +
+    '</svg>';
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+};
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============ EMERGENCY BAR ============ -->
+<div class="ebar">
+  <div class="wrap" id="ebarRow">
+    <span><span class="dot"></span><strong>Maintenance Manager</strong> <a href="tel:+919704285706">97042 85706</a> &middot; 9:00 AM&ndash;6:30 PM</span>
+    <span><strong>Security ASO (nights)</strong> <a href="tel:+919030493579">90304 93579</a> &middot; 6:30 PM&ndash;9:00 AM</span>
+  </div>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top" style="text-decoration:none" aria-label="Shweta Shubham — back to top">
+      <img class="logo-img" src="images/logo.png" alt="Shweta Shubham" width="294" height="155" decoding="async">
+      <span class="brand-txt">Flat Owners Co-operative<br>Maintenance Society Ltd</span>
+    </a>
+    <nav class="main" id="nav">
+      <a href="#timings">Timings</a>
+      <a href="#guidelines">Guidelines</a>
+      <a href="#resolutions">Resolutions</a>
+      <a href="#records">Minutes &amp; Notices</a>
+      <a href="#fees">Fees &amp; Fines</a>
+      <a href="#committee">Committee</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#onboarding">New Residents</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="btn btn-gold" href="#nbh">Open NoBrokerhood</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+<a id="top"></a>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Resident Information Portal</span>
+        <h1 class="hero-title">
+          <span class="hero-name" data-ss="society_short_name">Shweta Shubham</span>
+          <span class="hero-tag" data-ss="hero_title">A safe, clean and harmonious place to call home.</span>
+        </h1>
+        <p class="lede" data-ss="hero_lede">Everything residents and tenants of Shweta Shubham need in one place &mdash; society guidelines, amenity timings, committee contacts, maintenance payments and the new-resident checklist.</p>
+        <div class="hero-cta">
+          <a class="btn btn-gold" href="#guidelines">Read the Guidelines</a>
+          <a class="btn btn-ghost" href="#nbh" style="color:#dfeee9;border-color:rgba(255,255,255,.3)">Pay Maintenance on NBH</a>
+        </div>
+      </div>
+      <figure class="hero-shot">
+        <img src="images/building.jpg" alt="Shweta Shubham apartment block seen from the landscaped lawn" width="391" height="486" decoding="async" fetchpriority="high">
+      </figure>
+    </div>
+    <div class="stats" id="heroStats">
+      <div class="stat"><b>6</b><span>Blocks &middot; A to F</span></div>
+      <div class="stat"><b>9</b><span>Core Committee</span></div>
+      <div class="stat"><b>15</b><span>Guideline Sections</span></div>
+      <div class="stat"><b>24&times;7</b><span>Security &amp; CCTV</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUICK ACTIONS ============ -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Quick Actions</div>
+      <h2>What do you need today?</h2>
+    </div>
+    <div class="grid g4" id="qaGrid">
+      <a class="card tile" href="#nbh">
+        <span class="ico">&#8377;</span>
+        <b>Pay Maintenance</b>
+        <small>Quarterly, via NoBrokerhood only. Due by the 15th of the first month of the quarter.</small>
+      </a>
+      <a class="card tile" href="#book">
+        <span class="ico">&#128197;</span>
+        <b>Book Clubhouse / Guest Room</b>
+        <small>First-come, first-served. Contact the Maintenance Manager.</small>
+      </a>
+      <a class="card tile" href="#timings">
+        <span class="ico">&#9200;</span>
+        <b>Amenity Timings</b>
+        <small>Pool, gym, indoor games, clubhouse sessions and quiet hours.</small>
+      </a>
+      <a class="card tile" href="#scope">
+        <span class="ico">&#128295;</span>
+        <b>Report an Issue</b>
+        <small>Check what support staff cover, then call the Maintenance Manager.</small>
+      </a>
+      <a class="card tile" href="#onboarding">
+        <span class="ico">&#128230;</span>
+        <b>Moving In / Out</b>
+        <small>8-step checklist, timings, charges and NOC process.</small>
+      </a>
+      <a class="card tile" href="#fees">
+        <span class="ico">&#9878;</span>
+        <b>Fines &amp; Penalties</b>
+        <small>Consolidated penalty schedule as approved in the GBM.</small>
+      </a>
+      <a class="card tile" href="#resolutions">
+        <span class="ico">&#128220;</span>
+        <b>Resolutions</b>
+        <small>Decisions passed by the committee and in General Body Meetings.</small>
+      </a>
+      <a class="card tile" href="#records">
+        <span class="ico">&#128194;</span>
+        <b>Minutes &amp; Notices</b>
+        <small>Meeting minutes, circulars and important notices in one place.</small>
+      </a>
+      <a class="card tile" href="#committee">
+        <span class="ico">&#128101;</span>
+        <b>Who Do I Contact?</b>
+        <small>Committee responsibilities and the escalation matrix.</small>
+      </a>
+      <a class="card tile" href="#downloads">
+        <span class="ico">&#128196;</span>
+        <b>Forms &amp; Downloads</b>
+        <small>Guidelines PDF, move-in proforma, NOC request and more.</small>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NOTICES ============ -->
+<section class="band alt">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="sec-head" style="margin-bottom:18px">
+          <div class="kicker">Notice Board</div>
+          <h2>Latest announcements</h2>
+          <p>Full notices, polls and resident communications are published on NoBrokerhood.</p>
+        </div>
+        <div class="card" style="padding:0" id="noticeList">
+          <div style="padding:18px 22px;border-bottom:1px solid var(--line)">
+            <span class="pill pill-gold">Guidelines</span>
+            <b style="display:block;margin-top:8px">Society Guidelines v1.0 released</b>
+            <small style="color:var(--muted)">Approved in the April GBM. All owners and tenants are requested to read and sign the proforma.</small>
+          </div>
+          <div style="padding:18px 22px;border-bottom:1px solid var(--line)">
+            <span class="pill pill-red">Reminder</span>
+            <b style="display:block;margin-top:8px">Quarterly maintenance due by the 15th</b>
+            <small style="color:var(--muted)">A 2% per month penalty applies on the outstanding balance after the due date.</small>
+          </div>
+          <div style="padding:18px 22px">
+            <span class="pill pill-grey">Maintenance</span>
+            <b style="display:block;margin-top:8px">Swimming pool closed every Monday</b>
+            <small style="color:var(--muted)">Weekly cleaning and water treatment. Normal timings resume Tuesday.</small>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="sec-head" style="margin-bottom:18px">
+          <div class="kicker">Community &amp; Culture</div>
+          <h2>Celebrations we share</h2>
+          <p>Celebrations are optional and subject to resident participation, volunteer availability and committee decisions.</p>
+        </div>
+        <div class="chips" id="festChips">
+          <span class="chip">Sankranthi</span><span class="chip">Republic Day</span>
+          <span class="chip">Women's Day</span><span class="chip">Holi</span>
+          <span class="chip">Sri Rama Navami</span><span class="chip">Ugadi</span>
+          <span class="chip">Krishna Ashtami</span><span class="chip">Independence Day</span>
+          <span class="chip">Ganesh Chaturthi</span><span class="chip">Bathukamma</span>
+          <span class="chip">Ganesh Temple Anniversary</span><span class="chip">Christmas</span>
+          <span class="chip">New Year</span><span class="chip">Yearly Recognitions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RESOLUTIONS ============ -->
+<section class="band" id="resolutions">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Governance</div>
+      <h2>Resolutions</h2>
+      <p>Decisions formally passed by the Managing Committee and in General Body Meetings.</p>
+    </div>
+
+    <div class="listbar">
+      <div class="seg" id="resFilter" role="tablist" aria-label="Filter resolutions">
+        <button type="button" class="seg-btn is-on" data-res="latest" role="tab" aria-selected="true">Latest</button>
+        <button type="button" class="seg-btn" data-res="all" role="tab" aria-selected="false">All</button>
+      </div>
+      <span class="listcount" id="resCount" aria-live="polite"></span>
+    </div>
+
+    <div class="reslist" id="resList">
+      <article class="res" data-date="2025-04-26">
+        <div class="res-top"><span class="res-ref">GBM/2025/01</span><time datetime="2025-04-26">26 April 2025</time><span class="pill pill-green">Passed</span></div>
+        <b>Society Guidelines v1.0 adopted</b>
+        <p>The consolidated guidelines document was approved and circulated to all owners and tenants for sign-off.</p>
+      </article>
+      <article class="res" data-date="2025-03-12">
+        <div class="res-top"><span class="res-ref">MC/2025/04</span><time datetime="2025-03-12">12 March 2025</time><span class="pill pill-green">Passed</span></div>
+        <b>Penalty schedule for guideline violations</b>
+        <p>A consolidated schedule of fines was approved, to be applied uniformly across all blocks.</p>
+      </article>
+      <article class="res" data-date="2025-02-08">
+        <div class="res-top"><span class="res-ref">MC/2025/03</span><time datetime="2025-02-08">8 February 2025</time><span class="pill pill-green">Passed</span></div>
+        <b>Quarterly maintenance due on the 15th</b>
+        <p>Maintenance is payable quarterly through NoBrokerhood, with a 2% per month penalty on overdue balances.</p>
+      </article>
+      <article class="res" data-date="2025-01-18">
+        <div class="res-top"><span class="res-ref">MC/2025/02</span><time datetime="2025-01-18">18 January 2025</time><span class="pill pill-green">Passed</span></div>
+        <b>Swimming pool closed on Mondays</b>
+        <p>Weekly cleaning and water treatment scheduled for Mondays; normal timings resume Tuesday.</p>
+      </article>
+      <article class="res" data-date="2025-01-04">
+        <div class="res-top"><span class="res-ref">MC/2025/01</span><time datetime="2025-01-04">4 January 2025</time><span class="pill pill-green">Passed</span></div>
+        <b>Vehicle registration for Gate 2 access</b>
+        <p>All resident vehicles must be registered with the society office for boom barrier access at Gate 2.</p>
+      </article>
+      <article class="res" data-date="2024-12-15">
+        <div class="res-top"><span class="res-ref">GBM/2024/02</span><time datetime="2024-12-15">15 December 2024</time><span class="pill pill-green">Passed</span></div>
+        <b>Housekeeping and security agency appointment</b>
+        <p>Appointment of the housekeeping and security agencies for the following financial year was ratified.</p>
+      </article>
+      <article class="res" data-date="2024-11-09">
+        <div class="res-top"><span class="res-ref">MC/2024/07</span><time datetime="2024-11-09">9 November 2024</time><span class="pill pill-green">Passed</span></div>
+        <b>Clubhouse and guest room booking rules</b>
+        <p>Bookings are first-come, first-served through the Maintenance Manager, with charges as per the fee schedule.</p>
+      </article>
+      <article class="res" data-date="2024-09-21">
+        <div class="res-top"><span class="res-ref">MC/2024/06</span><time datetime="2024-09-21">21 September 2024</time><span class="pill pill-grey">Noted</span></div>
+        <b>Festival celebrations and volunteer participation</b>
+        <p>Celebrations remain optional and subject to resident participation, volunteer availability and committee approval.</p>
+      </article>
+    </div>
+    <p class="empty" id="resEmpty" hidden>No resolutions to show.</p>
+    <div class="note" style="margin-top:18px">Sample entries &mdash; the committee should replace these with the society&rsquo;s actual resolutions.</div>
+  </div>
+</section>
+
+<!-- ============ MINUTES &amp; NOTICES ============ -->
+<section class="band alt" id="records">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Society Records</div>
+      <h2>Minutes of meetings &amp; important notices</h2>
+      <p>Meeting minutes, circulars and notices issued by the committee, newest first.</p>
+    </div>
+
+    <div class="listbar">
+      <div class="chips" id="recFilter" role="tablist" aria-label="Filter records">
+        <button type="button" class="chip chip-btn is-on" data-rec="all" role="tab" aria-selected="true">All</button>
+        <button type="button" class="chip chip-btn" data-rec="mom" role="tab" aria-selected="false">Minutes of Meeting</button>
+        <button type="button" class="chip chip-btn" data-rec="notice" role="tab" aria-selected="false">Notices</button>
+        <button type="button" class="chip chip-btn" data-rec="circular" role="tab" aria-selected="false">Circulars</button>
+      </div>
+      <span class="listcount" id="recCount" aria-live="polite"></span>
+    </div>
+
+    <div class="card reclist" style="padding:0" id="recList">
+      <a class="rec" data-type="mom" data-date="2025-04-26" href="#contact">
+        <span class="rec-date"><b>26</b><span>Apr 2025</span></span>
+        <span class="rec-main"><span class="pill pill-green">Minutes of Meeting</span>
+          <b>General Body Meeting &mdash; April 2025</b>
+          <small>Adoption of Guidelines v1.0, the penalty schedule and the annual accounts.</small></span>
+      </a>
+      <a class="rec" data-type="notice" data-date="2025-04-02" href="#contact">
+        <span class="rec-date"><b>02</b><span>Apr 2025</span></span>
+        <span class="rec-main"><span class="pill pill-red">Notice</span>
+          <b>Quarterly maintenance due by the 15th</b>
+          <small>A 2% per month penalty applies on the outstanding balance after the due date.</small></span>
+      </a>
+      <a class="rec" data-type="circular" data-date="2025-03-20" href="#contact">
+        <span class="rec-date"><b>20</b><span>Mar 2025</span></span>
+        <span class="rec-main"><span class="pill pill-gold">Circular</span>
+          <b>Move-in and move-out timings</b>
+          <small>Shifting is permitted only between 9:00 AM and 6:00 PM, with prior intimation to the society office.</small></span>
+      </a>
+      <a class="rec" data-type="mom" data-date="2025-03-08" href="#contact">
+        <span class="rec-date"><b>08</b><span>Mar 2025</span></span>
+        <span class="rec-main"><span class="pill pill-green">Minutes of Meeting</span>
+          <b>Managing Committee meeting &mdash; March 2025</b>
+          <small>Penalty schedule finalised, housekeeping review and pool maintenance contract.</small></span>
+      </a>
+      <a class="rec" data-type="notice" data-date="2025-02-14" href="#contact">
+        <span class="rec-date"><b>14</b><span>Feb 2025</span></span>
+        <span class="rec-main"><span class="pill pill-red">Notice</span>
+          <b>Swimming pool closed every Monday</b>
+          <small>Weekly cleaning and water treatment. Normal timings resume on Tuesday.</small></span>
+      </a>
+      <a class="rec" data-type="mom" data-date="2025-02-01" href="#contact">
+        <span class="rec-date"><b>01</b><span>Feb 2025</span></span>
+        <span class="rec-main"><span class="pill pill-green">Minutes of Meeting</span>
+          <b>Managing Committee meeting &mdash; February 2025</b>
+          <small>Gate 2 boom barrier rollout, vehicle registration drive and DG maintenance.</small></span>
+      </a>
+      <a class="rec" data-type="circular" data-date="2025-01-10" href="#contact">
+        <span class="rec-date"><b>10</b><span>Jan 2025</span></span>
+        <span class="rec-main"><span class="pill pill-gold">Circular</span>
+          <b>Pet registration and vaccination records</b>
+          <small>Pet owners are requested to submit current vaccination certificates to the society office.</small></span>
+      </a>
+      <a class="rec" data-type="notice" data-date="2024-12-20" href="#contact">
+        <span class="rec-date"><b>20</b><span>Dec 2024</span></span>
+        <span class="rec-main"><span class="pill pill-red">Notice</span>
+          <b>Quiet hours during festive gatherings</b>
+          <small>Amplified music is not permitted after 10:00 PM in common areas, as per the guidelines.</small></span>
+      </a>
+    </div>
+    <p class="empty" id="recEmpty" hidden>Nothing filed under this category yet.</p>
+    <div class="note" style="margin-top:18px">Sample entries with placeholder links &mdash; replace the link for each row with the actual PDF once it is uploaded.</div>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section class="band gal-band" id="gallery">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Our Community</div>
+      <h2>Life at Shweta Shubham</h2>
+      <p>A glimpse of the amenities and spaces our residents share.</p>
+    </div>
+    <div class="gal" id="gal">
+      <figure tabindex="0" data-cap="Club House — bookable in morning and evening sessions">
+        <img src="images/clubhouse.jpg" alt="Club House" data-c1="#14564a" data-c2="#0b3a32" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Club House</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Swimming Pool — open 7 AM–12 PM and 3 PM–9 PM, closed Mondays">
+        <img src="images/pool.jpg" alt="Swimming Pool" data-c1="#15616d" data-c2="#0a3540" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Swimming Pool</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Gym — open 5 AM–12 PM and 5 PM–9 PM, age 14 and above">
+        <img src="images/gym.jpg" alt="Gym" data-c1="#3d3a52" data-c2="#1b1a2c" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Gym</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Amphitheater — small gatherings and religious events, with prior written permission">
+        <img src="images/amphitheater.jpg" alt="Amphitheater" data-c1="#6b4420" data-c2="#38220e" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Amphitheater</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Play area and tot-lots — soft or rubber balls only, children must be supervised">
+        <img src="images/playarea.jpg" alt="Play Area" data-c1="#2f7043" data-c2="#14401f" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Play Area &amp; Tot-lots</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Landscaped gardens maintained across all common areas">
+        <img src="images/gardens.jpg" alt="Gardens" data-c1="#3c6b2f" data-c2="#1b3715" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Landscaped Gardens</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Reception — seating, waiting area and a cabin for private meetings">
+        <img src="images/reception.jpg" alt="Reception" data-c1="#4a4335" data-c2="#252017" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Reception Lobby</figcaption>
+      </figure>
+      <figure tabindex="0" data-cap="Ganesh Temple — anniversary celebrated every year by the community">
+        <img src="images/temple.jpg" alt="Ganesh Temple" data-c1="#8a5a16" data-c2="#472c06" onerror="phFallback(this)" loading="lazy">
+        <figcaption>Ganesh Temple</figcaption>
+      </figure>
+    </div>
+    <p style="margin:18px 0 0;font-size:.86rem;opacity:.75">Placeholder artwork is shown until real photographs are added. Drop images into an <code>images/</code> folder using the file names above.</p>
+  </div>
+</section>
+
+<!-- ============ TIMINGS ============ -->
+<section class="band" id="timings">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Section 13</div>
+      <h2>Timings quick-reference</h2>
+      <p>Rules and timings are also displayed at each facility and must be strictly followed.</p>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Activity / Service</th><th>Timings</th><th>Notes</th></tr></thead>
+        <tbody id="timingRows">
+          <tr><td><b>Maintenance Manager</b></td><td class="num">9:00 AM &ndash; 6:30 PM</td><td>All maintenance requests during these hours</td></tr>
+          <tr><td><b>Security ASO</b> (backup)</td><td class="num">6:30 PM &ndash; 9:00 AM</td><td>Night assistance and emergency coordination</td></tr>
+          <tr><td><b>Swimming Pool</b></td><td class="num">7:00 AM &ndash; 12:00 PM<br>3:00 PM &ndash; 9:00 PM</td><td><span class="pill pill-red">Monday closed</span> for maintenance</td></tr>
+          <tr><td><b>Gym</b></td><td class="num">5:00 AM &ndash; 12:00 PM<br>5:00 PM &ndash; 9:00 PM</td><td>Age below 14 not allowed</td></tr>
+          <tr><td><b>Indoor Games</b></td><td class="num">8:00 AM &ndash; 12:00 PM<br>5:00 PM &ndash; 9:00 PM</td><td>Register entry before use</td></tr>
+          <tr><td><b>Clubhouse &mdash; Morning</b></td><td class="num">7:00 AM &ndash; 3:00 PM</td><td>Bookable session</td></tr>
+          <tr><td><b>Clubhouse &mdash; Evening</b></td><td class="num">4:00 PM &ndash; 11:00 PM</td><td>Bookable session</td></tr>
+          <tr><td><b>Shifting / Move-In / Move-Out</b></td><td class="num">7:00 AM &ndash; 6:00 PM</td><td>Inform Maintenance Manager in advance</td></tr>
+          <tr><td><b>Carpentry / In-House Works</b></td><td class="num">9:00 AM &ndash; 7:00 PM</td><td>Strictly within these hours only</td></tr>
+          <tr><td><b>Quiet Hours</b></td><td class="num">After 10:00 PM</td><td>No loud noise, music or gatherings</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note" style="margin-top:16px">Entry in the register is mandatory before using any facility. Personal trainers and external instructors are not allowed at any facility. Guests may not use society facilities, except Guest Rooms and the Club House.</div>
+  </div>
+</section>
+
+<!-- ============ GUIDELINES ============ -->
+<section class="band alt" id="guidelines">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">The Rulebook</div>
+      <h2>Society guidelines</h2>
+      <p>These guidelines are in addition to the society by-laws, sale deed rules and resolutions passed in previous GBMs. The Committee reserves the right to take decisions based on the sensitivity of each situation.</p>
+    </div>
+
+    <div class="searchbox">
+      <span class="mag">&#128269;</span>
+      <input type="search" id="gsearch" placeholder="Search guidelines &mdash; try &ldquo;pets&rdquo;, &ldquo;parking&rdquo;, &ldquo;lift&rdquo;, &ldquo;pool&rdquo;&hellip;" aria-label="Search guidelines">
+      <span class="count" id="gcount"></span>
+    </div>
+
+    <div id="acclist">
+
+      <details class="acc" data-k="security gate boom barrier cctv vehicle sticker entry exit visitor gate1 gate2 gate3 gate5">
+        <summary><span class="sec-no">3.1</span> Security &amp; Main Gate</summary>
+        <div class="body">
+          <ul>
+            <li><b>Gate 1</b> &mdash; Vendors and guest entry.</li>
+            <li><b>Gate 2</b> &mdash; Residents entry only, with automatic boom barrier.</li>
+            <li><b>Gate 3 and Gate 5</b> &mdash; Exit only.</li>
+            <li>Gate 2 vehicle access is enabled only after vehicle registration details are submitted at the society office with relevant documentation.</li>
+            <li>All residents must have the society sticker affixed on their personal vehicles.</li>
+            <li>CCTV surveillance operates across Shweta Shubham premises.</li>
+            <li>Cooperate with security personnel during entry and exit checks. Do not misuse entry/exit lanes.</li>
+            <li>Do not instruct or assign security staff tasks outside their designated duties.</li>
+            <li>Pre-inform the Security ASO and Maintenance Manager when expecting large gatherings or external visitors.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="fire safety extinguisher alarm sprinkler lightning arrester emergency">
+        <summary><span class="sec-no">3.2</span> Fire &amp; Safety</summary>
+        <div class="body">
+          <ul>
+            <li>Fire extinguishers are available on every floor near the lifts.</li>
+            <li>Fire alarm systems are installed in each block adjacent to the lifts.</li>
+            <li>Fire-sensitive sprinkler systems are installed in Cellars &minus;1 and &minus;2.</li>
+            <li>Lightning arresters are installed on the rooftop.</li>
+            <li>Alarms are strictly for fire or health emergencies. Security at the main gate must be notified of the block where the alarm was triggered.</li>
+          </ul>
+          <div class="note red">Misuse of fire alarms or extinguishers will attract penalties.</div>
+        </div>
+      </details>
+
+      <details class="acc" data-k="power backup dg diesel generator outage electricity load">
+        <summary><span class="sec-no">3.3</span> Power Backup (DG)</summary>
+        <div class="body">
+          <ul>
+            <li>During a power outage from the electricity department, DG power is supplied to all flats.</li>
+            <li>The DG supports essential loads only &mdash; up to <b>2 lights, 2 fans and 1 internet point</b>, as provisioned by the builder.</li>
+            <li>Power points supported under DG are as per builder design. Additional load connections are not supported.</li>
+            <li>DG usage involves fuel costs &mdash; please use power judiciously during outages.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="gym swimming pool indoor games play area yoga amphitheater sports recreation facilities register">
+        <summary><span class="sec-no">4</span> Sports &amp; Recreation Facilities</summary>
+        <div class="body">
+          <p><b>Common rules for all facilities</b></p>
+          <ul>
+            <li>Entry in the register is mandatory before use.</li>
+            <li>Personal trainers or external instructors are not allowed at any facility.</li>
+            <li>Return equipment to its designated place; switch off lights, fans and A/C after use.</li>
+            <li>Maintain cleanliness and decorum; do not disturb other users.</li>
+            <li>Report damaged equipment to the Maintenance Manager.</li>
+            <li>Guests are not permitted to use these facilities (excluding Guest Rooms and Club House).</li>
+          </ul>
+          <p><b>Gym</b></p>
+          <ul>
+            <li>Age below 14 years is not allowed.</li>
+            <li>Do not drop weights or misuse equipment. Limit usage time during peak hours.</li>
+            <li>Individual music preferences will not be accommodated on the shared system; keep volume moderate.</li>
+          </ul>
+          <p><b>Swimming Pool</b></p>
+          <ul>
+            <li>Non-swimmers must be accompanied by a competent adult; children below 12 must be with a parent or guardian.</li>
+            <li>Shower before and after use; use the toilet beforehand. Proper swimming attire (nylon costumes) only; caps recommended.</li>
+            <li>Do not enter with an oiled body or hair, or if suffering from a contagious illness.</li>
+            <li>No diving. No running, pushing or rough play. Use the ladders to enter and exit.</li>
+            <li>No food, beverages, alcohol, smoking or intoxicants in the pool area. Pets and guests are not permitted.</li>
+            <li>Carry your own towel and dry yourself; avoid walking through corridors while wet.</li>
+            <li>Management is not responsible for accidents or loss of valuables.</li>
+          </ul>
+          <p><b>Indoor Games</b></p>
+          <ul>
+            <li>Handle carrom, table tennis, chess and other equipment with care. Do not rearrange or remove furniture.</li>
+            <li>Gambling or betting of any kind is strictly prohibited.</li>
+            <li>Share time slots fairly during peak hours.</li>
+          </ul>
+          <p><b>Play Area / Outdoor Sports</b></p>
+          <ul>
+            <li>Playing football is not permitted. Hard-ball cricket is strictly prohibited &mdash; only soft or rubber balls may be used.</li>
+            <li>Children must be accompanied and supervised by a parent or guardian.</li>
+            <li>Adherence to designated timings is mandatory. Do not damage equipment, fixtures or landscaping.</li>
+          </ul>
+          <p><b>Yoga Room &amp; Amphitheater</b></p>
+          <ul>
+            <li>Dedicated space for yoga sessions; the amphitheater is available for small gatherings and religious events.</li>
+            <li>Prior written permission from the Maintenance Manager is required, with minimal cleaning charges if applicable.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="corridor common area tot lot balcony grill elevation cctv plant pot reception lift parking rooftop cycling skating">
+        <summary><span class="sec-no">5</span> Common Spaces &amp; Building Rules</summary>
+        <div class="body">
+          <p><b>Corridors, common areas &amp; tot-lots</b></p>
+          <ul>
+            <li>Cycling, skating and playing with balls are strictly prohibited in corridors, common areas and tot-lots.</li>
+            <li>Scribbling, drawing or defacing walls is prohibited and will attract a fine.</li>
+            <li>Plucking flowers, damaging plants or tampering with landscaping is not permitted.</li>
+            <li>Corridors must be kept clear of personal items &mdash; shoes, furniture, cartons or any belongings. Footwear must be arranged neatly and must not obstruct walkways.</li>
+            <li>Plant pots in corridors must be within 3 feet of the flat entrance and must not obstruct movement.</li>
+            <li><b>No plant pots or objects on balcony parapet walls</b> &mdash; this is a serious safety risk and strict action will be taken.</li>
+            <li>CCTV cameras for individual flats require prior consent from the opposite flat owner and the society office. Cameras must not capture neighbouring flat interiors or entry areas.</li>
+            <li>Any damage to common property, fixtures or landscaping will be charged to the responsible flat.</li>
+          </ul>
+          <p><b>Reception area</b></p>
+          <ul>
+            <li>Seating and waiting area with a television on a dedicated news channel at low audio; may be used occasionally for sports viewing.</li>
+            <li>The reception cabin may be used for private meetings after registering details with security.</li>
+          </ul>
+          <p><b>Lifts</b></p>
+          <ul>
+            <li>Lifts are available in each block with CCTV monitoring inside. There is no service lift &mdash; use lifts responsibly.</li>
+            <li>Unpacked materials and heavy items are not allowed; use the stairs for heavy items.</li>
+            <li>Children below 8 years must be accompanied by a parent or guardian.</li>
+            <li>Do not keep lift doors open unnecessarily. Tampering with or blocking lift cameras is strictly prohibited.</li>
+          </ul>
+          <div class="note red">Lift damage, including scratches or intentional damage, attracts a minimum fine of &#8377;1,000 against the flat, with the maximum based on the extent of damage.</div>
+          <p style="margin-top:16px"><b>Parking</b></p>
+          <ul>
+            <li>Park only within your allotted space and inside the markings. Cycles must be parked in the respective flat parking.</li>
+            <li>No-parking zones must be strictly followed, for both two-wheelers and four-wheelers.</li>
+            <li>Wrongly parked vehicles may be locked and fined per day &mdash; <b>&#8377;200</b> for two-wheelers, <b>&#8377;500</b> for four-wheelers.</li>
+            <li>Dumping waste or storing materials in parking areas is not allowed.</li>
+            <li>Unused vehicles or cycles should not be parked in common parking areas.</li>
+            <li>A designated walking path is marked near the lifts.</li>
+          </ul>
+          <p><b>Rooftop</b></p>
+          <ul>
+            <li>Residents are not allowed on rooftops; the Society is not responsible for any incidents.</li>
+            <li>Pets are not permitted on rooftops. Wandering or gatherings are not allowed.</li>
+            <li>Access requires approval from the Maintenance Manager with a valid reason and entry in the security register.</li>
+          </ul>
+          <p><b>Balcony &amp; elevation</b></p>
+          <ul>
+            <li>External grills that alter the building's elevation or extend beyond the designated balcony or utility area are strictly prohibited.</li>
+            <li>Existing grills that affect the building's appearance or inconvenience other residents may be required to be removed on receipt of a formal written complaint from the affected flat owner.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" id="book" data-k="clubhouse guest room tent house booking amenities">
+        <summary><span class="sec-no">6</span> Bookable Amenities</summary>
+        <div class="body">
+          <p><b>Club House</b></p>
+          <ul>
+            <li>Book through the Maintenance Manager or the designated committee member. Allotted on a first-come, first-served basis.</li>
+            <li>Morning session 7:00 AM &ndash; 3:00 PM; Evening session 4:00 PM &ndash; 11:00 PM.</li>
+          </ul>
+          <p><b>Guest Rooms</b></p>
+          <ul>
+            <li>Book through the Maintenance Manager or designated committee member; first-come, first-served.</li>
+            <li>Collect the key and A/C remote from the society office and return them after use.</li>
+            <li>Check that clean towels and bedsheets are provided.</li>
+          </ul>
+          <p><b>Tent House Items</b></p>
+          <ul>
+            <li>Available at reasonable rates. Amount to be paid up front.</li>
+            <li>All items must be cleaned, inspected and handed back to the society office within 24 hours of the event, or as agreed at booking.</li>
+            <li>Any damage, breakage or loss will be charged to the flat at replacement or repair cost.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="residents tenants visitors guests pets vaccination leash noc resale commercial owner liability">
+        <summary><span class="sec-no">7</span> Residents, Tenants &amp; Visitors</summary>
+        <div class="body">
+          <p><b>General guidelines for residents</b></p>
+          <ul>
+            <li>Owners must ensure tenants submit required details and sign the society guidelines.</li>
+            <li>Owners are liable for any damage caused by their tenants or their authorised vendors. All fines and violation charges against the flat must be borne by the owner or tenant.</li>
+            <li>Commercial activities are not allowed.</li>
+            <li>Carpentry and in-house works are permitted only between 9:00 AM and 7:00 PM.</li>
+            <li>For resale of a flat, owners must obtain a No Objection Certificate (NOC) from the society office before proceeding.</li>
+          </ul>
+          <p><b>Visitors &amp; guests</b></p>
+          <ul>
+            <li>Visitors must follow the entry process at the security gate and use Gate 1.</li>
+            <li>Visitors must park only in designated visitor parking and must not occupy resident slots.</li>
+            <li>Inform the Security ASO and Maintenance Manager in advance about large gatherings or outside guests.</li>
+            <li>Loud noise, music or gatherings should be avoided after 10:00 PM.</li>
+            <li>Any damage to common property by visitors is the responsibility of the respective resident.</li>
+            <li>Guests may not use society facilities, excluding Guest Rooms and the Club House.</li>
+          </ul>
+          <p><b>Pets policy</b></p>
+          <ul>
+            <li>Pets must be on a leash and accompanied by the owner at all times; use of a muzzle is mandatory.</li>
+            <li>Owners must ensure pets do not cause disturbance, such as excessive barking.</li>
+            <li>A copy of a valid vaccination certificate must be regularly submitted to the society office.</li>
+            <li>Pet owners must clean up pet waste in common areas and are responsible for any damage caused by their pets.</li>
+            <li>Pets may not roam freely in corridors or lifts, and are not permitted on rooftops or in the pool area.</li>
+          </ul>
+          <div class="note red">All pet policy violations attract a fine of &#8377;1,000.</div>
+        </div>
+      </details>
+
+      <details class="acc" data-k="waste management cleanliness dustbin spitting diapers sanitary napkins garbage">
+        <summary><span class="sec-no">8</span> Waste Management &amp; Cleanliness</summary>
+        <div class="body">
+          <ul>
+            <li>Closed-lid dustbins must be used by residents.</li>
+            <li>Dumping waste in common areas or parking areas is strictly prohibited.</li>
+            <li>Waste removal charges, along with applicable fines, will be charged to the respective flat.</li>
+            <li>Spitting is prohibited &mdash; a fine of &#8377;1,000 will be imposed.</li>
+            <li>Disposing of diapers or sanitary napkins via the flush is prohibited.</li>
+          </ul>
+          <div class="note red">All violators shall be fined &#8377;1,000.</div>
+        </div>
+      </details>
+
+      <details class="acc" data-k="children minor safety lift pool play area tot lot supervision parent guardian">
+        <summary><span class="sec-no">9</span> Children &amp; Minor Safety</summary>
+        <div class="body">
+          <ul>
+            <li><b>Lifts</b> &mdash; children below 8 years must be accompanied by a parent or guardian.</li>
+            <li><b>Swimming pool</b> &mdash; children below 12 must be with a parent or guardian; non-swimmers must be accompanied by a competent adult.</li>
+            <li><b>Play area</b> &mdash; ensure fair usage and equal opportunity for others; adherence to designated timings is mandatory.</li>
+            <li><b>Tot-lots and parks</b> &mdash; cycling, skating and playing with hard balls are strictly prohibited.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="noise quiet hours music decorum 10 pm carpentry">
+        <summary><span class="sec-no">10</span> Noise &amp; Quiet Hours</summary>
+        <div class="body">
+          <ul>
+            <li>Loud noise, music or gatherings should be avoided after <b>10:00 PM</b>.</li>
+            <li>Swimming pool &mdash; maintain silence and decorum; no music or disturbance.</li>
+            <li>Indoor games &mdash; do not disturb other users or create excessive noise.</li>
+            <li>Gym &mdash; keep volume on the shared music system moderate.</li>
+            <li>Corridors and common areas &mdash; maintain cleanliness and proper decorum at all times.</li>
+            <li>Carpentry and in-house works only between 9:00 AM and 7:00 PM.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="move in move out shifting proforma noc gate pass luggage vehicle east driveway 1000">
+        <summary><span class="sec-no">7.4</span> Move-In / Move-Out Process</summary>
+        <div class="body">
+          <ul>
+            <li>Give prior information to the Maintenance Manager before moving in or out.</li>
+            <li>Produce the signed proforma by both owner and tenant before moving in.</li>
+            <li>Shifting is permitted only between <b>7:00 AM and 6:00 PM</b>.</li>
+            <li><b>&#8377;1,000</b> is charged each for move-in and move-out (applicable to tenants).</li>
+            <li>Move-out requires an NOC from the Maintenance Manager with owner confirmation for gate pass issuance.</li>
+            <li>The luggage vehicle must be parked so it does not inconvenience residents &mdash; only in designated areas on the East side driveway.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="acc" data-k="suggestion box support complaint office weekend committee">
+        <summary><span class="sec-no">1.4</span> Suggestions &amp; Support</summary>
+        <div class="body">
+          <ul>
+            <li>A suggestion box is available at the reception. Residents are encouraged to submit suggestions or complaints.</li>
+            <li>Contact the society office for maintenance support during working hours.</li>
+            <li>In emergencies, contact any Committee Member.</li>
+            <li>Committee Members may be available at the office on weekends.</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+    <div class="noresult hidden" id="noresult">No guideline matches your search. Try a different word, or <a href="#contact">contact the society office</a>.</div>
+
+    <div style="margin-top:22px;display:flex;flex-wrap:wrap;gap:12px;align-items:center">
+      <a class="btn btn-primary" href="Shweta-Shubham-Guidelines.pdf" download>&#11015; Download full guidelines (PDF)</a>
+      <span style="font-size:.85rem;color:var(--muted)">Version 1.0 &middot; Prepared by SSMAC &middot; Reviewed &amp; approved in the April GBM</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAFF SCOPE ============ -->
+<section class="band" id="scope">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Section 1.3</div>
+      <h2>Support staff &mdash; what's covered, what isn't</h2>
+      <p>Support staff are managed by the Maintenance Manager. They must not be engaged for personal work inside individual flats beyond the defined scope.</p>
+    </div>
+
+    <div class="grid g2" id="scopeGrid">
+
+      <div class="card">
+        <h3>&#9889; Electrician</h3>
+        <div class="scope">
+          <div>
+            <h4><span class="pill pill-green">Covered</span></h4>
+            <ul>
+              <li>Common area electrical infrastructure &mdash; corridor and cellar lights, lift power supply, DG connections, motor panels</li>
+              <li>Faults up to the flat's MCB point</li>
+              <li>Periodic inspection of panels, switchboards and DG wiring</li>
+              <li>DG operations during power outages</li>
+            </ul>
+          </div>
+          <div>
+            <h4><span class="pill pill-red">Not covered</span></h4>
+            <ul>
+              <li>Any electrical work inside flats beyond the MCB point</li>
+              <li>Personal appliances, fixtures or internal wiring</li>
+              <li>Engage your own licensed electrician</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#128688; Plumber</h3>
+        <div class="scope">
+          <div>
+            <h4><span class="pill pill-green">Covered</span></h4>
+            <ul>
+              <li>WTP, STP, drainage systems and overhead water tanks</li>
+              <li>Water levels, pump operations and pipelines across the society</li>
+              <li>Cellar drainage, rainwater harvesting and external pipeline repairs</li>
+              <li>Leakages and blockages inside flats on a best-effort basis during working hours</li>
+            </ul>
+          </div>
+          <div>
+            <h4><span class="pill pill-red">Not covered</span></h4>
+            <ul>
+              <li>Tap repairs, faucet replacements or fixture installation inside flats</li>
+              <li>Internal bathroom or kitchen plumbing modifications and renovations</li>
+              <li>Engage your own licensed plumber</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#129529; Housekeeping</h3>
+        <div class="scope">
+          <div>
+            <h4><span class="pill pill-green">Covered</span></h4>
+            <ul>
+              <li>Corridors, staircases, lobbies, lifts, reception and clubhouse</li>
+              <li>Gym, pool surroundings, indoor games room, yoga room, amphitheater</li>
+              <li>Guest rooms, including bedsheets and towels between bookings</li>
+              <li>Cellars, parking areas, driveways, ducts and cobweb cleaning</li>
+            </ul>
+          </div>
+          <div>
+            <h4><span class="pill pill-red">Not covered</span></h4>
+            <ul>
+              <li>Cleaning or domestic work inside individual flats</li>
+              <li>Personal errands, grocery carrying or shifting assistance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#127793; Gardener</h3>
+        <div class="scope">
+          <div>
+            <h4><span class="pill pill-green">Covered</span></h4>
+            <ul>
+              <li>Lawns, flower beds, hedges, potted plants and tree lines in common areas</li>
+              <li>Watering, pruning, trimming and seasonal planting</li>
+              <li>Tot-lot greens, walkway plants and entrance landscaping</li>
+              <li>Fertilisers, pesticides and soil treatment for common greenery</li>
+            </ul>
+          </div>
+          <div>
+            <h4><span class="pill pill-red">Not covered</span></h4>
+            <ul>
+              <li>Gardening inside flats, balconies or terraces</li>
+              <li>Personal plant purchases, potting or balcony garden setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>&#128737; Security Personnel</h3>
+        <div class="scope">
+          <div>
+            <h4><span class="pill pill-green">Covered</span></h4>
+            <ul>
+              <li>Check-in and check-out of all persons and vehicles at entry and exit gates</li>
+              <li>Visitor identity verification and the visitor register</li>
+              <li>Vehicle movement log and gate entry process</li>
+              <li>First response to fire and medical emergencies outside working hours</li>
+              <li>Periodic night rounds of cellars, corridors and common areas</li>
+            </ul>
+          </div>
+          <div>
+            <h4><span class="pill pill-red">Resident duties</span></h4>
+            <ul>
+              <li>Cooperate with entry and exit checks without exception</li>
+              <li>Pre-inform about large gatherings or external visitors</li>
+              <li>Do not assign security staff tasks outside their duties</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="background:var(--brand);color:#dcece7;border-color:var(--brand)">
+        <h3 style="color:#fff">&#128100; Treat staff with respect</h3>
+        <p style="color:#b9d4cd">Support staff are valued members of our society's ecosystem, working to ensure a safe and comfortable living environment for everyone. Courteous and respectful interaction is expected at all times.</p>
+        <p style="color:#b9d4cd;margin:0">Any form of verbal abuse, intimidation or disrespectful behaviour towards support staff is strictly unacceptable and may be escalated to the Core Committee. Complaints about staff should be reported to the Maintenance Manager or Core Committee.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FEES ============ -->
+<section class="band alt" id="fees">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Sections 2 &amp; 14</div>
+      <h2>Fees, dues &amp; penalty schedule</h2>
+    </div>
+
+    <div class="grid g3" style="margin-bottom:26px" id="feeCards">
+      <div class="card">
+        <span class="pill pill-gold">Maintenance</span>
+        <h3 style="margin-top:12px">Quarterly &middot; NBH only</h3>
+        <p style="margin:0;color:var(--muted);font-size:.92rem">Payable only through NoBrokerhood. All dues must be cleared by the <b>15th of the first month</b> of the payment quarter.</p>
+      </div>
+      <div class="card">
+        <span class="pill pill-red">Late payment</span>
+        <h3 style="margin-top:12px">2% per month</h3>
+        <p style="margin:0;color:var(--muted);font-size:.92rem">Charged on the balance amount after the due date. Three notices are issued, after which the flat is marked a defaulter and services may be impacted.</p>
+      </div>
+      <div class="card">
+        <span class="pill pill-grey">Move-in / out</span>
+        <h3 style="margin-top:12px">&#8377;1,000 each</h3>
+        <p style="margin:0;color:var(--muted);font-size:.92rem">Applicable to tenants only, charged separately for move-in and move-out.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-bottom:12px">Consolidated penalty &amp; fine schedule</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Violation / Charge</th><th>Fine / Penalty</th></tr></thead>
+        <tbody id="penaltyRows">
+          <tr><td>Wrongly parked 2-wheeler (per day)</td><td class="num">&#8377;200</td></tr>
+          <tr><td>Wrongly parked 4-wheeler (per day)</td><td class="num">&#8377;500</td></tr>
+          <tr><td>Lift damage (scratches / intentional)</td><td class="num">Minimum &#8377;1,000 <span style="font-weight:400;color:var(--muted)">(max based on damage extent)</span></td></tr>
+          <tr><td>Spitting in common areas</td><td class="num">&#8377;1,000</td></tr>
+          <tr><td>Scribbling on walls</td><td class="num">At committee discretion</td></tr>
+          <tr><td>Dumping waste in common areas</td><td class="num">Waste removal charges + applicable fines</td></tr>
+          <tr><td>Pet policy violations</td><td class="num">&#8377;1,000</td></tr>
+          <tr><td>Corridor / common area violations</td><td class="num">&#8377;1,000</td></tr>
+          <tr><td>Fire alarm / extinguisher misuse</td><td class="num">At committee discretion</td></tr>
+          <tr><td>Disposing diapers / napkins via flush</td><td class="num">&#8377;1,000</td></tr>
+          <tr><td>Play area violations</td><td class="num">At committee discretion</td></tr>
+          <tr><td>Late maintenance payment</td><td class="num">2% per month on balance + potential service impact</td></tr>
+          <tr><td>Damage to society assets</td><td class="num">As per actual repair / replacement cost</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COMMITTEE ============ -->
+<section class="band" id="committee">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Section 1.1</div>
+      <h2>Society management team</h2>
+      <p>Management is structured into three groups &mdash; Core Committee, Advisory Committee and Extended Team.</p>
+    </div>
+
+    <div style="margin-bottom:16px">
+      <button class="btn btn-ghost" id="revealBtn" aria-pressed="false">&#128065; Show contact numbers</button>
+      <span style="font-size:.84rem;color:var(--muted);margin-left:10px">Numbers are hidden by default to reduce spam.</span>
+    </div>
+
+    <h3 style="margin-bottom:10px">Core Committee <span class="pill pill-grey">Overall governance &amp; administration</span></h3>
+    <div class="tbl-wrap" style="margin-bottom:26px">
+      <table>
+        <thead><tr><th>Name</th><th>Post</th><th>Flat</th><th>Phone</th><th>Responsibilities</th></tr></thead>
+        <tbody id="coreRows">
+          <tr><td><b>P Srujan Reddy</b></td><td>Chairman</td><td>D-201</td><td class="num ph masked">91511 11151</td><td>Procurement, External Affairs, Emergency Issues, Committee Escalation</td></tr>
+          <tr><td><b>P Srikanth Reddy</b></td><td>Vice Chairman</td><td>E-201</td><td class="num ph masked">97000 54360</td><td>Security, Office Staff Management, General Administration, Power Management, Adonmo</td></tr>
+          <tr><td><b>M Ramesh Kumar</b></td><td>Secretary</td><td>D-205</td><td class="num ph masked">70668 76208</td><td>Correspondence, Data Management, Rules &amp; Regulations, Resident Issues</td></tr>
+          <tr><td><b>Putta Damodar</b></td><td>Joint Secretary</td><td>D-305</td><td class="num ph masked">91675 21020</td><td>Data Management, Gido, Finance Assistance</td></tr>
+          <tr><td><b>Shiva Kumar Reddy</b></td><td>Treasurer</td><td>A-302</td><td class="num ph masked">97037 70004</td><td>Finance, Accounting and Audit</td></tr>
+          <tr><td><b>Jogi Joga Rao</b></td><td>Director</td><td>D-405</td><td class="num ph masked">94357 35076</td><td>Housekeeping &amp; Gardening, HK Material Procurement</td></tr>
+          <tr><td><b>M. Vani</b></td><td>Director</td><td>A-402</td><td class="num ph masked">91600 35524</td><td>Society Membership, NBH, Temple Management</td></tr>
+          <tr><td><b>Subrajit Nath</b></td><td>Director</td><td>F-308</td><td class="num ph masked">91777 51182</td><td>STP, WTP, Electricity &amp; Power Management</td></tr>
+          <tr><td><b>A Vinay Kumar</b></td><td>Director</td><td>B-G4</td><td class="num ph masked">84896 01981</td><td>Gym, Sports, Clubhouse, Amenities</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2">
+      <div>
+        <h3 style="margin-bottom:10px">Advisory Committee <span class="pill pill-grey">Guidance on key decisions</span></h3>
+        <div class="tbl-wrap">
+          <table style="min-width:auto">
+            <thead><tr><th>Name</th><th>Flat</th><th>Phone</th></tr></thead>
+            <tbody id="advRows">
+              <tr><td>Kumar A</td><td>A-G1</td><td class="num ph masked">88066 67603</td></tr>
+              <tr><td>Krishna Prakash</td><td>B-308</td><td class="num ph masked">63036 89930</td></tr>
+              <tr><td>Venkateshwar Rao</td><td>A-401</td><td class="num ph masked">99850 66678</td></tr>
+              <tr><td>Shaji Menon</td><td>D-507</td><td class="num ph masked">63098 72919</td></tr>
+              <tr><td>Nikhil</td><td>A-405</td><td class="num ph masked">98487 77708</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:10px">Extended Team <span class="pill pill-grey">Execution &amp; day-to-day coordination</span></h3>
+        <div class="tbl-wrap">
+          <table style="min-width:auto">
+            <thead><tr><th>Name</th><th>Flat</th><th>Phone</th></tr></thead>
+            <tbody id="extRows">
+              <tr><td>Ravinder B</td><td>E-302</td><td class="num ph masked">91777 62227</td></tr>
+              <tr><td>Gajendra B</td><td>B-202</td><td class="num ph masked">83328 07022</td></tr>
+              <tr><td>Prashanth Reddy A</td><td>C-405</td><td class="num ph masked">94902 17248</td></tr>
+              <tr><td>Nivas T</td><td>C-302</td><td class="num ph masked">94905 13589</td></tr>
+              <tr><td>A Kotishwar</td><td>C-204</td><td class="num ph masked">99599 83567</td></tr>
+              <tr><td>Preneeth O</td><td>D-402</td><td class="num ph masked">90009 22546</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin:30px 0 10px">Escalation matrix <span class="pill pill-gold">Section 3.4</span></h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>#</th><th>Contact</th><th>Number</th><th>Availability</th></tr></thead>
+        <tbody id="escRows">
+          <tr><td class="num">1</td><td><b>Maintenance Manager</b></td><td class="num"><a href="tel:+919704285706">97042 85706</a></td><td>9:00 AM &ndash; 6:30 PM (working hours)</td></tr>
+          <tr><td class="num">2</td><td><b>Security ASO</b></td><td class="num"><a href="tel:+919030493579">90304 93579</a></td><td>Night hours / immediate assistance</td></tr>
+          <tr><td class="num">3</td><td><b>Core Committee</b></td><td class="num">As per responsibilities</td><td>Unresolved issues / escalation</td></tr>
+          <tr><td class="num">4</td><td><b>Society Office</b></td><td class="num"><a href="tel:+919704285706">97042 85706</a></td><td>Suggestions &amp; support</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NBH ============ -->
+<section class="band alt" id="nbh">
+  <div class="wrap">
+    <div class="nbh">
+      <span class="eyebrow">Resident App</span>
+      <h2>NoBrokerhood is our transaction hub</h2>
+      <p style="max-width:65ch">This website holds the rules, timings and reference information. Everything transactional &mdash; payments, gate passes, complaints and notices &mdash; happens on NoBrokerhood. Every flat should have at least one registered NBH account.</p>
+      <div class="hero-cta" style="margin-top:20px">
+        <a class="btn btn-gold" href="https://www.nobrokerhood.com/" target="_blank" rel="noopener noreferrer">Open NoBrokerhood &#8599;</a>
+        <a class="btn btn-ghost" style="color:#dfeee9;border-color:rgba(255,255,255,.3)" href="https://play.google.com/store/apps/details?id=com.nobrokerhood.android" target="_blank" rel="noopener noreferrer">Android app</a>
+        <a class="btn btn-ghost" style="color:#dfeee9;border-color:rgba(255,255,255,.3)" href="https://apps.apple.com/in/app/nobrokerhood/id1439016407" target="_blank" rel="noopener noreferrer">iOS app</a>
+      </div>
+      <div class="grid g2">
+        <div class="card">
+          <span class="pill">Use the app for</span>
+          <ul style="margin:12px 0 0">
+            <li>Quarterly maintenance payments, dues and receipts</li>
+            <li>Visitor and delivery gate passes</li>
+            <li>Daily help and staff attendance</li>
+            <li>Complaints and helpdesk tickets</li>
+            <li>Society notices, polls and the resident directory</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Use this website for</span>
+          <ul style="margin:12px 0 0">
+            <li>Society guidelines and the penalty schedule</li>
+            <li>Amenity timings and facility rules</li>
+            <li>Committee directory and escalation matrix</li>
+            <li>Support staff scope of work</li>
+            <li>New resident onboarding, forms and downloads</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin:20px 0 0;font-size:.88rem">Need help registering or paying on NBH? The Maintenance Manager is available for assistance &mdash; <a href="tel:+919704285706" style="color:#ffd98a">97042 85706</a>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ONBOARDING ============ -->
+<section class="band" id="onboarding">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="sec-head">
+          <div class="kicker">Section 12</div>
+          <h2>New resident checklist</h2>
+          <p>New residents and tenants are advised to complete the following on move-in. Your progress is saved on this device.</p>
+        </div>
+        <div class="progress"><i id="bar"></i></div>
+        <div id="checklist">
+          <label class="check"><input type="checkbox" data-c="1"><span><b>1. Vehicle registration</b><small>Submit vehicle registration details at the society office with relevant documentation.</small></span></label>
+          <label class="check"><input type="checkbox" data-c="2"><span><b>2. Society sticker</b><small>Get the society sticker affixed on personal vehicles for identification and security.</small></span></label>
+          <label class="check"><input type="checkbox" data-c="3"><span><b>3. NBH account setup</b><small>Set up your NoBrokerhood account for quarterly maintenance charge payments.</small></span></label>
+          <label class="check"><input type="checkbox" data-c="4"><span><b>4. Guidelines sign-off</b><small>Owner and tenant must sign the society guidelines proforma.</small></span></label>
+          <label class="check"><input type="checkbox" data-c="5"><span><b>5. Pet registration</b><small>Submit a copy of the valid vaccination certificate to the society office, if applicable.</small></span></label>
+          <label class="check"><input type="checkbox" data-c="6"><span><b>6. Parking allotment</b><small>Confirm your allotted parking space with the society office.</small></span></label>
+          <label class="check"><input type="checkbox" data-c="7"><span><b>7. Emergency contacts</b><small>Save Maintenance Manager (97042 85706) and Security ASO (90304 93579).</small></span></label>
+          <label class="check"><input type="checkbox" data-c="8"><span><b>8. Move-in fee</b><small>Pay the &#8377;1,000 move-in charge and inform the Maintenance Manager in advance.</small></span></label>
+        </div>
+        <button class="btn btn-ghost" id="resetBtn" style="margin-top:10px">Reset checklist</button>
+      </div>
+
+      <div id="downloads">
+        <div class="sec-head">
+          <div class="kicker">Documents</div>
+          <h2>Forms &amp; downloads</h2>
+        </div>
+        <div class="card" style="padding:0" id="dlList">
+          <a href="Shweta-Shubham-Guidelines.pdf" download style="display:block;padding:16px 20px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none">
+            <b>&#128196; Society Guidelines (PDF)</b><br><small style="color:var(--muted)">Version 1.0 &middot; Approved in the April GBM</small>
+          </a>
+          <a href="#contact" style="display:block;padding:16px 20px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none">
+            <b>&#128196; Owner &amp; tenant sign-off proforma</b><br><small style="color:var(--muted)">Collect from the society office</small>
+          </a>
+          <a href="#contact" style="display:block;padding:16px 20px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none">
+            <b>&#128196; Vehicle registration form</b><br><small style="color:var(--muted)">Required for Gate 2 boom barrier access</small>
+          </a>
+          <a href="#contact" style="display:block;padding:16px 20px;border-bottom:1px solid var(--line);color:inherit;text-decoration:none">
+            <b>&#128196; NOC request &mdash; resale / move-out</b><br><small style="color:var(--muted)">Issued by the society office</small>
+          </a>
+          <a href="#contact" style="display:block;padding:16px 20px;color:inherit;text-decoration:none">
+            <b>&#128196; Pet vaccination certificate submission</b><br><small style="color:var(--muted)">To be submitted regularly to the society office</small>
+          </a>
+        </div>
+        <div class="note" style="margin-top:16px">Placeholder links &mdash; replace with the actual PDF files once uploaded alongside this page.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="band alt" id="contact">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <div class="sec-head">
+          <div class="kicker">Get in touch</div>
+          <h2>Suggestions &amp; support</h2>
+          <p>A suggestion box is available at the reception. You can also write to the committee using the form, or call the society office during working hours.</p>
+        </div>
+        <form id="suggestForm" novalidate>
+          <div class="grid g2" style="gap:12px">
+            <label style="font-size:.85rem;font-weight:600">Name
+              <input required name="name" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem">
+            </label>
+            <label style="font-size:.85rem;font-weight:600">Flat number
+              <input required name="flat" placeholder="e.g. D-402" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem">
+            </label>
+          </div>
+          <label style="font-size:.85rem;font-weight:600;display:block;margin-top:12px">Category
+            <select name="cat" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem;background:#fff">
+              <option>Suggestion</option><option>Maintenance issue</option><option>Security concern</option>
+              <option>Amenity booking</option><option>Billing / NBH</option><option>Other</option>
+            </select>
+          </label>
+          <label style="font-size:.85rem;font-weight:600;display:block;margin-top:12px">Message
+            <textarea required name="msg" rows="4" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem;resize:vertical"></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit" style="margin-top:14px">Send to committee</button>
+          <p id="formMsg" style="margin-top:12px;font-size:.88rem"></p>
+        </form>
+      </div>
+      <div>
+        <div class="card">
+          <h3>Society office</h3>
+          <p style="margin-bottom:6px"><b data-ss="society_name">Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd</b></p>
+          <p style="color:var(--muted);font-size:.92rem">Suggestions &amp; support: <a href="tel:+919704285706">97042 85706</a></p>
+          <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+          <p style="font-size:.92rem;margin-bottom:6px"><b data-ss="manager_name">Maintenance Manager</b><br><a href="tel:+919704285706" data-ss="manager_phone">97042 85706</a> &middot; <span style="color:var(--muted)" data-ss="manager_hours">9:00 AM &ndash; 6:30 PM</span></p>
+          <p style="font-size:.92rem;margin-bottom:0"><b data-ss="security_name">Security ASO</b><br><a href="tel:+919030493579" data-ss="security_phone">90304 93579</a> &middot; <span style="color:var(--muted)" data-ss="security_hours">Nights &amp; emergencies</span></p>
+          <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+          <p style="font-size:.9rem;color:var(--muted);margin:0">In emergencies, contact any Committee Member. Committee Members may be available at the office on weekends.</p>
+        </div>
+        <div class="note green" style="margin-top:16px">The Committee reserves the right to take decisions based on the sensitivity of each situation. These guidelines are in addition to the society by-laws, sale deed rules and GBM resolutions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site">
+  <div class="wrap">
+    <div class="grid g4">
+      <div>
+        <div class="brand" style="margin-bottom:14px; display:block">
+          <img class="logo-img" src="images/logo.png" alt="Shweta Shubham" width="294" height="155" style="height:56px">
+          <span style="color:#7fa39a; margin-top:10px">Flat Owners Co-operative Maintenance Society Ltd</span>
+        </div>
+        <p style="margin:0">A safe, clean and harmonious living environment for all residents and tenants.</p>
+      </div>
+      <div>
+        <h4>Guidelines</h4>
+        <ul>
+          <li><a href="#guidelines">Security &amp; gates</a></li>
+          <li><a href="#guidelines">Facilities &amp; amenities</a></li>
+          <li><a href="#guidelines">Common areas</a></li>
+          <li><a href="#guidelines">Pets &amp; visitors</a></li>
+          <li><a href="#fees">Penalty schedule</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Residents</h4>
+        <ul>
+          <li><a href="#timings">Timings card</a></li>
+          <li><a href="#onboarding">New resident checklist</a></li>
+          <li><a href="#scope">Staff scope of work</a></li>
+          <li><a href="#committee">Committee directory</a></li>
+          <li><a href="#downloads">Forms &amp; downloads</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Emergency</h4>
+        <ul>
+          <li>Maintenance Manager<br><a href="tel:+919704285706">97042 85706</a></li>
+          <li>Security ASO<br><a href="tel:+919030493579">90304 93579</a></li>
+          <li>Society Office<br><a href="tel:+919704285706">97042 85706</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>&copy; <span id="yr"></span> Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd. All rights reserved.</span>
+      <span data-ss="footer_note">Guidelines v1.0 &middot; Prepared by SSMAC &middot; Approved in the April GBM</span>
+    </div>
+    <div style="margin-top:10px;font-size:.75rem;opacity:.55" id="sheetStatus"></div>
+  </div>
+</footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="x" id="lbX" aria-label="Close">&#10005;</button>
+  <button class="prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
+  <img id="lbImg" src="" alt="">
+  <button class="next" id="lbNext" aria-label="Next photo">&#8250;</button>
+  <div class="cap" id="lbCap"></div>
+</div>
+
+<button id="top-btn" aria-label="Back to top">&#8593;</button>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- mobile nav ---- */
+  var menuBtn = document.getElementById('menuBtn');
+  var nav = document.getElementById('nav');
+  function closeNav(){ nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
+  menuBtn.addEventListener('click', function(){
+    menuBtn.setAttribute('aria-expanded', String(nav.classList.toggle('open')));
+  });
+  nav.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') closeNav();
+  });
+  document.addEventListener('click', function(e){
+    if (nav.classList.contains('open') && !nav.contains(e.target) && !menuBtn.contains(e.target)) closeNav();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && nav.classList.contains('open')) { closeNav(); menuBtn.focus(); }
+  });
+
+  /* ---- guideline search ---- */
+  var input = document.getElementById('gsearch');
+  var countEl = document.getElementById('gcount');
+  var noRes = document.getElementById('noresult');
+
+  function norm(s){ return (s || '').toLowerCase().replace(/\s+/g,' ').trim(); }
+
+  input.addEventListener('input', function(){
+    var accs = Array.prototype.slice.call(document.querySelectorAll('#acclist details.acc'));
+    var q = norm(input.value);
+    var shown = 0;
+    accs.forEach(function(d){
+      if (!q){ d.classList.remove('hidden'); d.open = false; shown++; return; }
+      var hay = norm(d.getAttribute('data-k') + ' ' + d.textContent);
+      var hit = hay.indexOf(q) !== -1;
+      d.classList.toggle('hidden', !hit);
+      d.open = hit;
+      if (hit) shown++;
+    });
+    noRes.classList.toggle('hidden', shown !== 0);
+    countEl.textContent = q ? (shown + ' of ' + accs.length + ' sections match \u201c' + input.value.trim() + '\u201d') : '';
+  });
+
+  /* ---- reveal committee phone numbers ---- */
+  var revealBtn = document.getElementById('revealBtn');
+  revealBtn.addEventListener('click', function(){
+    var on = revealBtn.getAttribute('aria-pressed') === 'true';
+    Array.prototype.forEach.call(document.querySelectorAll('td.ph'), function(td){
+      td.classList.toggle('masked', on);
+      if (!on && !td.querySelector('a')) {
+        var n = td.textContent.trim();
+        td.innerHTML = '<a href="tel:+91' + n.replace(/\s/g,'') + '">' + n + '</a>';
+      }
+    });
+    revealBtn.setAttribute('aria-pressed', String(!on));
+    revealBtn.innerHTML = on ? '\uD83D\uDC41 Show contact numbers' : '\uD83D\uDE48 Hide contact numbers';
+  });
+
+  /* ---- onboarding checklist ---- */
+  var KEY = 'ss-onboarding-v1';
+  var bar = document.getElementById('bar');
+  var checklist = document.getElementById('checklist');
+  function chkBoxes(){ return Array.prototype.slice.call(checklist.querySelectorAll('input[type=checkbox]')); }
+
+  function load(){
+    var saved = {};
+    try { saved = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e){ saved = {}; }
+    chkBoxes().forEach(function(b){ b.checked = !!saved[b.dataset.c]; });
+    paint();
+  }
+  function save(){
+    var o = {};
+    chkBoxes().forEach(function(b){ o[b.dataset.c] = b.checked; });
+    try { localStorage.setItem(KEY, JSON.stringify(o)); } catch(e){}
+  }
+  function paint(){
+    var boxes = chkBoxes();
+    var done = boxes.filter(function(b){ return b.checked; }).length;
+    bar.style.width = (boxes.length ? done / boxes.length * 100 : 0) + '%';
+    boxes.forEach(function(b){ b.closest('.check').classList.toggle('done', b.checked); });
+  }
+  checklist.addEventListener('change', function(e){
+    if (e.target.type === 'checkbox'){ paint(); save(); }
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    chkBoxes().forEach(function(b){ b.checked = false; });
+    paint(); save();
+  });
+  load();
+  window.SSChecklist = load;
+
+  /* ---- resolutions (Latest / All) and records (type filter) ---- */
+  var LATEST_N = 5;
+  var resMode = 'latest', recMode = 'all';
+
+  function markSeg(btn, attr){
+    var group = btn.parentNode;
+    Array.prototype.forEach.call(group.querySelectorAll('[' + attr + ']'), function(b){
+      var on = b === btn;
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-selected', String(on));
+    });
+  }
+
+  function paintList(items, isVisible, countEl, emptyEl, noun){
+    var shown = 0, lastVisible = null;
+    items.forEach(function(el){
+      var vis = isVisible(el);
+      el.hidden = !vis;
+      if (vis) { shown++; lastVisible = el; }
+    });
+    items.forEach(function(el){ el.style.borderBottomWidth = ''; });
+    if (lastVisible && lastVisible.classList.contains('rec')) lastVisible.style.borderBottomWidth = '0';
+    if (countEl) countEl.textContent = items.length
+      ? 'Showing ' + shown + ' of ' + items.length + ' ' + noun : '';
+    if (emptyEl) emptyEl.hidden = shown > 0;
+  }
+
+  function resApply(){
+    var list = document.getElementById('resList');
+    if (!list) return;
+    var items = Array.prototype.slice.call(list.querySelectorAll('.res'));
+    var ranked = items.slice().sort(function(a, b){
+      return (b.getAttribute('data-date') || '').localeCompare(a.getAttribute('data-date') || '');
+    });
+    ranked.forEach(function(el, i){ el.style.order = i; });
+    paintList(items, function(el){
+      return resMode === 'all' || ranked.indexOf(el) < LATEST_N;
+    }, document.getElementById('resCount'), document.getElementById('resEmpty'), 'resolutions');
+  }
+
+  function recApply(){
+    var list = document.getElementById('recList');
+    if (!list) return;
+    var items = Array.prototype.slice.call(list.querySelectorAll('.rec'));
+    paintList(items, function(el){
+      return recMode === 'all' || el.getAttribute('data-type') === recMode;
+    }, document.getElementById('recCount'), document.getElementById('recEmpty'), 'records');
+  }
+
+  document.addEventListener('click', function(e){
+    var r = e.target.closest ? e.target.closest('[data-res]') : null;
+    if (r) { resMode = r.getAttribute('data-res'); markSeg(r, 'data-res'); resApply(); return; }
+    var c = e.target.closest ? e.target.closest('[data-rec]') : null;
+    if (c) { recMode = c.getAttribute('data-rec'); markSeg(c, 'data-rec'); recApply(); }
+  });
+
+  resApply(); recApply();
+  window.SSLists = function(){ resApply(); recApply(); };
+
+  /* ---- suggestion form (prototype: no backend) ---- */
+  var form = document.getElementById('suggestForm');
+  var formMsg = document.getElementById('formMsg');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if (!form.checkValidity()){
+      formMsg.style.color = 'var(--danger)';
+      formMsg.textContent = 'Please fill in your name, flat number and message.';
+      return;
+    }
+    formMsg.style.color = 'var(--ok)';
+    formMsg.textContent = 'Prototype only \u2014 connect this form to email or the NBH helpdesk before going live.';
+    form.reset();
+  });
+
+  /* ---- gallery lightbox ---- */
+  var gal = document.getElementById('gal');
+  var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
+      lbCap = document.getElementById('lbCap'), cur = 0;
+
+  function figList(){ return Array.prototype.slice.call(gal.querySelectorAll('figure')); }
+
+  function show(i){
+    var figs = figList();
+    if (!figs.length) return;
+    cur = (i + figs.length) % figs.length;
+    var f = figs[cur], im = f.querySelector('img');
+    lbImg.src = im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = f.getAttribute('data-cap') || im.alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+  gal.addEventListener('click', function(e){
+    var f = e.target.closest('figure');
+    if (f) show(figList().indexOf(f));
+  });
+  gal.addEventListener('keydown', function(e){
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var f = e.target.closest('figure');
+    if (f) { e.preventDefault(); show(figList().indexOf(f)); }
+  });
+  document.getElementById('lbX').addEventListener('click', close);
+  document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(cur - 1); });
+  document.getElementById('lbNext').addEventListener('click', function(e){ e.stopPropagation(); show(cur + 1); });
+  lb.addEventListener('click', function(e){ if (e.target === lb || e.target === lbImg) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(cur - 1);
+    if (e.key === 'ArrowRight') show(cur + 1);
+  });
+
+  /* ---- back to top ---- */
+  var topBtn = document.getElementById('top-btn');
+  window.addEventListener('scroll', function(){
+    topBtn.classList.toggle('show', window.scrollY > 700);
+  }, { passive:true });
+  topBtn.addEventListener('click', function(){ window.scrollTo({ top:0, behavior:'smooth' }); });
+
+  /* ---- year ---- */
+  document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+<script src="config.js"></script>
+<script src="content.js"></script>
+</body>
+</html>

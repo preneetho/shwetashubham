@@ -1,0 +1,20 @@
+# Node packages used only to rebuild the Google Sheet template and run the
+# tests. They are never needed to host the site, so they stay out of the repo.
+# Run `npm install` to recreate them locally.
+node_modules/
+
+# Windows / macOS / editor noise
+Thumbs.db
+desktop.ini
+.DS_Store
+*~
+
+# Excel and Word lock files, created while a document is open
+~$*
+
+# Scratch files from local screenshot and measurement runs
+__*.html
+__*.js
+
+# Netlify CLI working directory
+.netlify/

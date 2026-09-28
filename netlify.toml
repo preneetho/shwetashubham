@@ -1,0 +1,40 @@
+# Netlify settings for the Shweta Shubham society website.
+#
+# There is no build step. The site is plain HTML, CSS and JavaScript and is
+# served exactly as it sits in this folder, so Netlify just publishes the
+# repository root. Do not add a `command` here.
+
+[build]
+  publish = "."
+
+# Sensible defaults for a public information site.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Photos and the logo rarely change, so let browsers keep them for a week.
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# These three decide what residents actually see, so always re-check them.
+# Without this a committee member can publish an update and still be shown
+# yesterday's page by their browser cache.
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/config.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/content.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

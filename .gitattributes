@@ -1,0 +1,14 @@
+# Keep line endings predictable no matter who clones this repo.
+# Without this, a fresh clone on Windows rewrites the CSV templates to CRLF
+# and the build/test scripts see different bytes than the author did.
+* text=auto eol=lf
+
+# index.html is authored CRLF and the sheet extraction regexes in
+# build-sheet-csv.js are matched against it, so leave it exactly as it is.
+index.html -text
+
+# Binary assets must never be line-ending converted.
+*.png binary
+*.jpg binary
+*.pdf binary
+*.xlsx binary

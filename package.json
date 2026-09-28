@@ -1,0 +1,15 @@
+{
+  "name": "shwetashubham-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Public information website for Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd.",
+  "scripts": {
+    "serve": "npx --yes serve@14 .",
+    "build:sheet": "node build-sheet-csv.js && node build-sheet-xlsx.js",
+    "test": "node test-roundtrip.js && node test-failures.js"
+  },
+  "dependencies": {
+    "jsdom": "^30.1.0",
+    "xlsx": "^0.18.5"
+  }
+}
