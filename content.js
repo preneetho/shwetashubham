@@ -402,6 +402,11 @@
   R.resolutions = function (rows) {
     var el = document.getElementById("resList");
     if (!el) return;
+    /* A resolution with no reference, title or summary carries no information:
+       it means the sheet columns were renamed or the rows were mis-pasted.
+       Skip those rows, and keep the built-in list if none survive. */
+    rows = rows.filter(function (r) { return r.ref || r.title || r.summary; });
+    if (!rows.length) return;
     var pills = {
       passed: "pill-green", approved: "pill-green", adopted: "pill-green",
       noted: "pill-grey", deferred: "pill-grey", withdrawn: "pill-grey",

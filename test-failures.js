@@ -280,6 +280,39 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       seen[0] ? seen[0].slice(0, 78) : "no fetch happened");
   }
 
+  /* 15. a mis-pasted resolutions tab must not blank the section */
+  {
+    /* Reproduces a real incident: a whole column of values was pasted into
+       each header cell, so every column was renamed and no row matched. */
+    const bad =
+      '"ref GBM/2025/01 MC/2025/04","date 2025-04-26 2025-03-12",' +
+      '"title Guidelines adopted Penalty schedule","summary First one. Second one.",' +
+      '"status Passed Passed","link "\r\n' +
+      '"AGBM/2026/SEP","9/27/2026","Water Fund Utilization","The fund pays for tankers.","",""\r\n';
+    const w = makeDom(serve({ resolutions: bad }));
+    await wait();
+    const arts = w.document.querySelectorAll("#resList article.res");
+    check("corrupted resolutions tab keeps the built-in list",
+      arts.length === 8, arts.length + " cards");
+    check("corrupted resolutions tab renders no empty card",
+      [].every.call(arts, a => a.querySelector("b").textContent.trim() !== ""),
+      "an empty card was rendered");
+  }
+
+  /* 16. a healthy resolutions tab still replaces the built-in list */
+  {
+    const w = makeDom(serve());
+    await wait();
+    const arts = w.document.querySelectorAll("#resList article.res");
+    const titles = [].map.call(arts, a => a.querySelector("b").textContent.trim());
+    check("valid resolutions tab still renders every row",
+      arts.length === 8 && titles.every(t => t !== ""),
+      arts.length + " cards");
+    check("valid resolutions tab keeps sheet content",
+      titles.indexOf("Society Guidelines v1.0 adopted") !== -1,
+      titles.slice(0, 2).join(" | "));
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;
