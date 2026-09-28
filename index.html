@@ -297,6 +297,27 @@ section.alt .chip{background:var(--bg)}
 .pos figcaption{margin-top:10px; font-size:.92rem; font-weight:600; line-height:1.35}
 .pos figure:focus-visible .shot{outline:3px solid var(--gold); outline-offset:3px}
 
+/* posters turn into a swipeable one-at-a-time frame on phones */
+.sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+.pos-nav{display:none; align-items:center; justify-content:center; gap:14px; margin-top:18px}
+.pos-arrow{flex:0 0 42px; width:42px; height:42px; border-radius:50%; border:1px solid var(--line);
+  background:#fff; color:var(--brand); font-size:1.35rem; line-height:1; cursor:pointer; box-shadow:var(--shadow)}
+.pos-arrow:active{transform:scale(.94)}
+.pos-dots{display:flex; flex-wrap:wrap; justify-content:center; gap:8px}
+.pos-dot{width:9px; height:9px; padding:0; border:none; border-radius:50%; cursor:pointer;
+  background:#d8cfba; transition:background .2s ease, transform .2s ease}
+.pos-dot.on{background:var(--gold); transform:scale(1.3)}
+.pos-arrow:focus-visible,.pos-dot:focus-visible{outline:3px solid var(--gold); outline-offset:3px}
+@media(max-width:640px){
+  .pos{display:flex; grid-template-columns:none; gap:14px; overflow-x:auto; scroll-snap-type:x mandatory;
+    scroll-behavior:smooth; scrollbar-width:none; -webkit-overflow-scrolling:touch}
+  .pos::-webkit-scrollbar{display:none}
+  .pos figure{flex:0 0 100%; scroll-snap-align:center}
+  .pos figure:hover img{transform:none}
+  .pos-nav:not([hidden]){display:flex}
+}
+@media(prefers-reduced-motion:reduce){.pos{scroll-behavior:auto}}
+
 /* footer */
 footer.site{background:#0b211d; color:#8fb0a8; font-size:.88rem; padding:44px 0 26px; margin-top:0}
 footer.site a{color:#c8ded8}
@@ -1111,6 +1132,12 @@ window.phFallback = function(img){
         <figcaption>Save water &mdash; use it judiciously</figcaption>
       </figure>
     </div>
+    <div class="pos-nav" id="posNav" hidden>
+      <button class="pos-arrow" type="button" data-step="prev" aria-label="Previous poster">&#8249;</button>
+      <div class="pos-dots" id="posDots"></div>
+      <button class="pos-arrow" type="button" data-step="next" aria-label="Next poster">&#8250;</button>
+    </div>
+    <p class="sr-only" id="posLive" aria-live="polite"></p>
   </div>
 </section>
 
@@ -1747,6 +1774,83 @@ window.phFallback = function(img){
     if (e.key === 'ArrowLeft') show(cur - 1);
     if (e.key === 'ArrowRight') show(cur + 1);
   });
+
+  /* ---- poster carousel: phones only, the grid is untouched above 640px ---- */
+  (function(){
+    var grid = document.getElementById('posGrid'),
+        nav  = document.getElementById('posNav'),
+        dots = document.getElementById('posDots'),
+        live = document.getElementById('posLive');
+    if (!grid || !nav || !dots) return;
+
+    function figs(){ return Array.prototype.slice.call(grid.querySelectorAll('figure')); }
+
+    function index(){
+      var f = figs();
+      if (!f.length) return 0;
+      var g = grid.getBoundingClientRect(), mid = g.left + g.width / 2, best = 0, bd = Infinity;
+      f.forEach(function(el, k){
+        var r = el.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid);
+        if (d < bd) { bd = d; best = k; }
+      });
+      return best;
+    }
+
+    function go(k){
+      var f = figs();
+      if (!f.length) return;
+      k = (k + f.length) % f.length;
+      var g = grid.getBoundingClientRect(), r = f[k].getBoundingClientRect();
+      grid.scrollLeft += (r.left + r.width / 2) - (g.left + g.width / 2);
+    }
+
+    function paint(){
+      var n = figs().length, at = index();
+      Array.prototype.forEach.call(dots.children, function(b, k){
+        b.classList.toggle('on', k === at);
+        b.setAttribute('aria-current', k === at ? 'true' : 'false');
+      });
+      if (live) live.textContent = n ? 'Poster ' + (at + 1) + ' of ' + n : '';
+    }
+
+    function build(){
+      var n = figs().length, b;
+      dots.innerHTML = '';
+      for (var k = 0; k < n; k++) {
+        b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pos-dot';
+        b.setAttribute('data-i', k);
+        b.setAttribute('aria-label', 'Show poster ' + (k + 1));
+        dots.appendChild(b);
+      }
+      nav.hidden = n < 2;
+      paint();
+    }
+
+    nav.addEventListener('click', function(e){
+      if (!e.target.closest) return;
+      var d = e.target.closest('.pos-dot');
+      if (d) { go(parseInt(d.getAttribute('data-i'), 10)); return; }
+      var a = e.target.closest('.pos-arrow');
+      if (a) go(index() + (a.getAttribute('data-step') === 'next' ? 1 : -1));
+    });
+
+    var tick = 0;
+    grid.addEventListener('scroll', function(){
+      if (tick) return;
+      tick = requestAnimationFrame(function(){ tick = 0; paint(); });
+    }, { passive:true });
+
+    new MutationObserver(build).observe(grid, { childList:true });
+
+    var mq = window.matchMedia('(max-width:640px)');
+    var onMq = function(){ grid.scrollLeft = 0; paint(); };
+    if (mq.addEventListener) mq.addEventListener('change', onMq);
+    else if (mq.addListener) mq.addListener(onMq);
+
+    build();
+  })();
 
   /* ---- back to top ---- */
   var topBtn = document.getElementById('top-btn');

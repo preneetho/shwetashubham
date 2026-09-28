@@ -348,6 +348,36 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       src[1] === "images/fire.jpg", src[1]);
   }
 
+  /* 19. the carousel dots track whatever the sheet renders */
+  {
+    const csv = "title,file,caption\r\n" +
+      "One,a.jpg,First\r\n" +
+      "Two,b.jpg,Second\r\n" +
+      "Three,c.jpg,Third\r\n";
+    const w = makeDom(serve({ posters: csv }));
+    await wait();
+    const figs = w.document.querySelectorAll("#posGrid figure");
+    const dots = w.document.getElementById("posDots");
+    const nav = w.document.getElementById("posNav");
+    check("carousel builds one dot per sheet poster",
+      figs.length === 3 && dots.children.length === 3,
+      figs.length + " figures, " + dots.children.length + " dots");
+    check("carousel controls are shown for more than one poster",
+      !nav.hasAttribute("hidden"), "hidden=" + nav.hasAttribute("hidden"));
+  }
+
+  /* 20. a lone poster needs no carousel controls */
+  {
+    const csv = "title,file,caption\r\nOnly,a.jpg,Solo\r\n";
+    const w = makeDom(serve({ posters: csv }));
+    await wait();
+    const nav = w.document.getElementById("posNav");
+    const dots = w.document.getElementById("posDots");
+    check("a single poster hides the carousel controls",
+      nav.hasAttribute("hidden") && dots.children.length === 1,
+      "hidden=" + nav.hasAttribute("hidden") + " dots=" + dots.children.length);
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;
