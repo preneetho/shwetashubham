@@ -31,7 +31,7 @@ built into `index.html`. Setting the ID is optional and reversible.
 
 ## Where this site is published
 
-**Live:** <https://roaring-moxie-0dcc0a.netlify.app/> — hosted on Netlify.
+**Live:** <https://shwetashubham.netlify.app/> — hosted on Netlify.
 
 ### Publishing an update
 
@@ -50,7 +50,7 @@ so a bad update can be undone with **Deploys → (older deploy) → Publish depl
 ### Renaming the address
 
 **Site configuration → General → Site details → Change site name** turns
-`roaring-moxie-0dcc0a.netlify.app` into something like
+`shwetashubham.netlify.app` into something like
 `shwetashubham.netlify.app`. A custom domain can be added under **Domain
 management** if the society buys one.
 
@@ -144,9 +144,9 @@ These three tags near the top of `index.html` control the card WhatsApp and
 Teams show when the link is shared. They are already set to the live address:
 
 ```html
-<link rel="canonical" href="https://roaring-moxie-0dcc0a.netlify.app/">
-<meta property="og:image" content="https://roaring-moxie-0dcc0a.netlify.app/images/social-card.jpg">
-<meta property="og:url"   content="https://roaring-moxie-0dcc0a.netlify.app/">
+<link rel="canonical" href="https://shwetashubham.netlify.app/">
+<meta property="og:image" content="https://shwetashubham.netlify.app/images/social-card.jpg">
+<meta property="og:url"   content="https://shwetashubham.netlify.app/">
 ```
 
 They must stay **absolute** URLs — a relative path produces no preview image.
