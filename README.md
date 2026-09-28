@@ -164,7 +164,6 @@ devices.
 The site is live, but these are not finished yet:
 
 - [ ] `SHEET_ID` in `config.js` is still blank — the site runs on built-in content until it is set (`ADMIN-GUIDE.md` Part 1)
-- [ ] Contact form has **no backend** — wire it to Formspree/Google Forms, or remove it
 - [ ] Forms in the Downloads list point to `#contact` — replace with real PDFs
 - [ ] **Resolutions are sample entries** — replace with the society's actual resolutions
 - [ ] **Minutes & notices are sample entries** and link to `#contact` — upload the real PDFs and set each `link`

@@ -1414,48 +1414,23 @@ window.phFallback = function(img){
 <!-- ============ CONTACT ============ -->
 <section class="band alt" id="contact">
   <div class="wrap">
-    <div class="split">
-      <div>
-        <div class="sec-head">
-          <div class="kicker">Get in touch</div>
-          <h2>Suggestions &amp; support</h2>
-          <p>A suggestion box is available at the reception. You can also write to the committee using the form, or call the society office during working hours.</p>
-        </div>
-        <form id="suggestForm" novalidate>
-          <div class="grid g2" style="gap:12px">
-            <label style="font-size:.85rem;font-weight:600">Name
-              <input required name="name" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem">
-            </label>
-            <label style="font-size:.85rem;font-weight:600">Flat number
-              <input required name="flat" placeholder="e.g. D-402" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem">
-            </label>
-          </div>
-          <label style="font-size:.85rem;font-weight:600;display:block;margin-top:12px">Category
-            <select name="cat" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem;background:#fff">
-              <option>Suggestion</option><option>Maintenance issue</option><option>Security concern</option>
-              <option>Amenity booking</option><option>Billing / NBH</option><option>Other</option>
-            </select>
-          </label>
-          <label style="font-size:.85rem;font-weight:600;display:block;margin-top:12px">Message
-            <textarea required name="msg" rows="4" style="width:100%;margin-top:5px;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-family:inherit;font-size:.95rem;resize:vertical"></textarea>
-          </label>
-          <button class="btn btn-primary" type="submit" style="margin-top:14px">Send to committee</button>
-          <p id="formMsg" style="margin-top:12px;font-size:.88rem"></p>
-        </form>
+    <div class="sec-head">
+      <div class="kicker">Get in touch</div>
+      <h2>Suggestions &amp; support</h2>
+      <p>A suggestion box is available at the reception. For complaints and helpdesk tickets please use the NoBrokerhood app, or call the society office during working hours.</p>
+    </div>
+    <div class="grid g2" style="align-items:start">
+      <div class="card">
+        <h3>Society office</h3>
+        <p style="margin-bottom:6px"><b data-ss="society_name">Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd</b></p>
+        <p style="color:var(--muted);font-size:.92rem">Suggestions &amp; support: <a href="tel:+919704285706">97042 85706</a></p>
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+        <p style="font-size:.92rem;margin-bottom:6px"><b data-ss="manager_name">Maintenance Manager</b><br><a href="tel:+919704285706" data-ss="manager_phone">97042 85706</a> &middot; <span style="color:var(--muted)" data-ss="manager_hours">9:00 AM &ndash; 6:30 PM</span></p>
+        <p style="font-size:.92rem;margin-bottom:0"><b data-ss="security_name">Security ASO</b><br><a href="tel:+919030493579" data-ss="security_phone">90304 93579</a> &middot; <span style="color:var(--muted)" data-ss="security_hours">Nights &amp; emergencies</span></p>
+        <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
+        <p style="font-size:.9rem;color:var(--muted);margin:0">In emergencies, contact any Committee Member. Committee Members may be available at the office on weekends.</p>
       </div>
-      <div>
-        <div class="card">
-          <h3>Society office</h3>
-          <p style="margin-bottom:6px"><b data-ss="society_name">Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd</b></p>
-          <p style="color:var(--muted);font-size:.92rem">Suggestions &amp; support: <a href="tel:+919704285706">97042 85706</a></p>
-          <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
-          <p style="font-size:.92rem;margin-bottom:6px"><b data-ss="manager_name">Maintenance Manager</b><br><a href="tel:+919704285706" data-ss="manager_phone">97042 85706</a> &middot; <span style="color:var(--muted)" data-ss="manager_hours">9:00 AM &ndash; 6:30 PM</span></p>
-          <p style="font-size:.92rem;margin-bottom:0"><b data-ss="security_name">Security ASO</b><br><a href="tel:+919030493579" data-ss="security_phone">90304 93579</a> &middot; <span style="color:var(--muted)" data-ss="security_hours">Nights &amp; emergencies</span></p>
-          <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
-          <p style="font-size:.9rem;color:var(--muted);margin:0">In emergencies, contact any Committee Member. Committee Members may be available at the office on weekends.</p>
-        </div>
-        <div class="note green" style="margin-top:16px">The Committee reserves the right to take decisions based on the sensitivity of each situation. These guidelines are in addition to the society by-laws, sale deed rules and GBM resolutions.</div>
-      </div>
+      <div class="note green" style="margin:0">The Committee reserves the right to take decisions based on the sensitivity of each situation. These guidelines are in addition to the society by-laws, sale deed rules and GBM resolutions.</div>
     </div>
   </div>
 </section>
@@ -1670,21 +1645,6 @@ window.phFallback = function(img){
 
   resApply(); recApply();
   window.SSLists = function(){ resApply(); recApply(); };
-
-  /* ---- suggestion form (prototype: no backend) ---- */
-  var form = document.getElementById('suggestForm');
-  var formMsg = document.getElementById('formMsg');
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if (!form.checkValidity()){
-      formMsg.style.color = 'var(--danger)';
-      formMsg.textContent = 'Please fill in your name, flat number and message.';
-      return;
-    }
-    formMsg.style.color = 'var(--ok)';
-    formMsg.textContent = 'Prototype only \u2014 connect this form to email or the NBH helpdesk before going live.';
-    form.reset();
-  });
 
   /* ---- gallery lightbox ---- */
   var gal = document.getElementById('gal');
