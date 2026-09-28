@@ -324,11 +324,13 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     const w = makeDom(serve({ posters: helpTab }));
     await wait();
     const figs = w.document.querySelectorAll("#posGrid figure");
-    check("wrong sheet for posters keeps the built-in poster",
-      figs.length === 1, figs.length + " figures");
-    check("built-in poster still points at its image",
-      figs.length === 1 && /poster-balcony\.jpg$/.test(figs[0].querySelector("img").getAttribute("src")),
-      figs.length ? figs[0].querySelector("img").getAttribute("src") : "none");
+    const builtIn = (html.split('id="posGrid"')[1].split("</section>")[0].match(/<figure/g) || []).length;
+    check("wrong sheet for posters keeps the built-in posters",
+      builtIn > 0 && figs.length === builtIn, figs.length + " of " + builtIn + " figures");
+    check("built-in posters still point at their images",
+      figs.length === builtIn &&
+      Array.prototype.every.call(figs, f => /^images\/poster-[\w.-]+$/.test(f.querySelector("img").getAttribute("src"))),
+      Array.prototype.map.call(figs, f => f.querySelector("img").getAttribute("src")).join(" | ") || "none");
   }
 
   /* 18. a posters tab with a full URL is used as-is */
