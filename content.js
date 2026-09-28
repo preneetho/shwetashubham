@@ -19,6 +19,11 @@
   var CACHE_MIN = typeof CFG.CACHE_MINUTES === "number" ? CFG.CACHE_MINUTES : 10;
   var CACHE_KEY = "ss-sheet-cache-v1";
 
+  /* Admins routinely paste the whole browser address instead of just the ID.
+     Accept either, so a reasonable mistake does not silently break the site. */
+  var idFromUrl = SHEET_ID.match(/\/spreadsheets\/d\/([A-Za-z0-9_-]+)/);
+  if (idFromUrl) SHEET_ID = idFromUrl[1];
+
   if (!SHEET_ID) return; // not configured — keep built-in content
 
   /* ---------- CSV parsing (RFC 4180) ---------- */

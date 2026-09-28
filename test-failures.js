@@ -53,6 +53,7 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
   {
     const dom = new JSDOM(html, { runScripts: "dangerously", url: "http://localhost/" });
     dom.window.eval(cfgSrc);
+    dom.window.SS_CONFIG.SHEET_ID = ""; // do not depend on the shipped value
     dom.window.fetch = () => { throw new Error("should not be called"); };
     dom.window.eval(contentSrc);
     await wait();
@@ -248,6 +249,35 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("settings changes the footer note",
       d.querySelector('[data-ss="footer_note"]').textContent === "Test footer",
       d.querySelector('[data-ss="footer_note"]').textContent);
+  }
+
+  /* 13. SHEET_ID pasted as a full browser address still works */
+  {
+    const seen = [];
+    const w = makeDom(url => { seen.push(String(url)); return serve()(url); }, win => {
+      win.SS_CONFIG.SHEET_ID =
+        "https://docs.google.com/spreadsheets/d/1q5g835WiZntkqVduc4kMhLitrrsXT3ddp4ttI3AaiTs/edit?usp=sharing";
+    });
+    await wait();
+    check("full sheet URL is reduced to the bare ID",
+      seen.length > 0 && seen.every(u =>
+        u.indexOf("/spreadsheets/d/1q5g835WiZntkqVduc4kMhLitrrsXT3ddp4ttI3AaiTs/gviz/") !== -1),
+      seen[0] ? seen[0].slice(0, 78) : "no fetch happened");
+    check("full sheet URL still renders content",
+      w.document.querySelectorAll("#acclist details.acc").length === 12,
+      w.document.querySelectorAll("#acclist details.acc").length + " accordions");
+  }
+
+  /* 14. a sheet ID with surrounding whitespace is tolerated */
+  {
+    const seen = [];
+    const w = makeDom(url => { seen.push(String(url)); return serve()(url); }, win => {
+      win.SS_CONFIG.SHEET_ID = "  1q5g835WiZntkqVduc4kMhLitrrsXT3ddp4ttI3AaiTs  ";
+    });
+    await wait();
+    check("whitespace around the ID is trimmed",
+      seen.length > 0 && seen.every(u => u.indexOf(" ") === -1 && u.indexOf("%20") === -1),
+      seen[0] ? seen[0].slice(0, 78) : "no fetch happened");
   }
 
   let fails = 0;
