@@ -313,6 +313,39 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       titles.slice(0, 2).join(" | "));
   }
 
+  /* 17. an absent posters tab must not wipe the built-in poster */
+  {
+    /* gviz answers an unknown sheet name with the FIRST sheet and status 200,
+       so the renderer receives the help tab rather than a 404. */
+    const helpTab =
+      '"HOW TO USE THIS SHEET",""\r\n' +
+      '"This workbook controls the Shweta Shubham website.",""\r\n' +
+      '"Edit a cell, wait a few minutes, refresh the website - the change is live.",""\r\n';
+    const w = makeDom(serve({ posters: helpTab }));
+    await wait();
+    const figs = w.document.querySelectorAll("#posGrid figure");
+    check("wrong sheet for posters keeps the built-in poster",
+      figs.length === 1, figs.length + " figures");
+    check("built-in poster still points at its image",
+      figs.length === 1 && /poster-balcony\.jpg$/.test(figs[0].querySelector("img").getAttribute("src")),
+      figs.length ? figs[0].querySelector("img").getAttribute("src") : "none");
+  }
+
+  /* 18. a posters tab with a full URL is used as-is */
+  {
+    const csv = "title,file,caption\r\n" +
+      "Water saving,https://example.com/a/water.jpg,Save water\r\n" +
+      "Fire safety,fire.jpg,Know your exits\r\n";
+    const w = makeDom(serve({ posters: csv }));
+    await wait();
+    const src = [].map.call(w.document.querySelectorAll("#posGrid img"),
+      i => i.getAttribute("src"));
+    check("a full URL poster is not prefixed with images/",
+      src[0] === "https://example.com/a/water.jpg", src[0]);
+    check("a bare file name poster is served from images/",
+      src[1] === "images/fire.jpg", src[1]);
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

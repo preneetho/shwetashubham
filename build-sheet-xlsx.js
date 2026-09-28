@@ -12,7 +12,7 @@ const OUT = path.join(__dirname, "Shweta-Shubham-Content.xlsx");
 /* Tab order matters: this is the order the admin sees them in. */
 const TABS = ["settings", "notices", "festivals", "quick_actions", "timings",
   "guidelines", "staff_scope", "fees", "committee", "escalation",
-  "checklist", "downloads", "gallery", "resolutions", "records"];
+  "checklist", "downloads", "gallery", "posters", "resolutions", "records"];
 
 /* Column widths, by header name, so the sheet is readable on open. */
 const WIDTH = {
@@ -68,6 +68,7 @@ const HELP = [
   ["checklist", "The new-resident checklist. Numbering is automatic."],
   ["downloads", "Forms and documents. Put the file next to the website and use its file name in url."],
   ["gallery", "Photos. Put the image in the images folder and use its file name in file."],
+  ["posters", "Tall 9:16 guideline posters. Use the image file name, or a full https:// link."],
   ["resolutions", "Committee / GBM decisions. Newest first is not required \u2014 the site sorts by date."],
   ["records", "Minutes of meetings, notices and circulars. See the note below."],
   [""],

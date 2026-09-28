@@ -85,6 +85,7 @@ Add a new row. Everything is driven by rows:
 | Penalty | `fees` | type = `penalty`, label, amount |
 | Checklist step | `checklist` | title, detail |
 | Photo | `gallery` | title, file, caption |
+| Guideline poster (9:16) | `posters` | title, file, caption |
 | Form or document | `downloads` | title, note, url |
 | Resolution | `resolutions` | ref, date, title, summary, status |
 | Minutes / notice / circular | `records` | type, date, title, note, link |
@@ -245,6 +246,25 @@ Use roughly 1200 × 800 pixels and keep each file under about 300 KB.
 
 Any photo that's missing shows a coloured placeholder instead — the page never
 shows a broken image.
+
+### Guideline posters
+
+The **Guideline posters** section shows tall portrait posters (the same
+**9:16** shape as a phone screen, for example 1080 × 1920). They are listed in
+the `posters` tab, which has three columns:
+
+| Column | What to put in it |
+|---|---|
+| `title` | The caption shown under the poster, e.g. `Balcony safety & cleanliness` |
+| `file` | The image file name, e.g. `poster-balcony.jpg` — or a full `https://` link |
+| `caption` | The longer text shown when the poster is opened full size |
+
+To add a poster, either put the image in the **`images`** folder and use its
+file name, or paste a full `https://` address of an image hosted elsewhere.
+Posters appear in the order the rows appear in the tab.
+
+If the `posters` tab is missing or empty, the page keeps the posters already
+built into it — nothing disappears.
 
 ---
 

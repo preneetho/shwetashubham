@@ -286,6 +286,17 @@ section.alt .chip{background:var(--bg)}
 .gal-band h2{color:#fff}
 .gal-band .sec-head p{color:#9dbcb3}
 
+/* ---------- guideline posters (9:16) ---------- */
+.pos-band{background:linear-gradient(180deg,#fbf7ee,#f6f1e4); border-block:1px solid #ece3d0}
+.pos{display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:20px}
+.pos figure{margin:0; cursor:zoom-in}
+.pos .shot{position:relative; aspect-ratio:9/16; border-radius:var(--radius); overflow:hidden;
+  background:#fff; border:1px solid var(--line); box-shadow:var(--shadow)}
+.pos img{width:100%; height:100%; object-fit:contain; transition:transform .4s ease}
+.pos figure:hover img{transform:scale(1.03)}
+.pos figcaption{margin-top:10px; font-size:.92rem; font-weight:600; line-height:1.35}
+.pos figure:focus-visible .shot{outline:3px solid var(--gold); outline-offset:3px}
+
 /* footer */
 footer.site{background:#0b211d; color:#8fb0a8; font-size:.88rem; padding:44px 0 26px; margin-top:0}
 footer.site a{color:#c8ded8}
@@ -395,6 +406,7 @@ window.phFallback = function(img){
     <nav class="main" id="nav">
       <a href="#timings">Timings</a>
       <a href="#guidelines">Guidelines</a>
+      <a href="#posters">Posters</a>
       <a href="#resolutions">Resolutions</a>
       <a href="#records">Minutes &amp; Notices</a>
       <a href="#fees">Fees &amp; Fines</a>
@@ -1053,6 +1065,23 @@ window.phFallback = function(img){
   </div>
 </section>
 
+<!-- ============ GUIDELINE POSTERS ============ -->
+<section class="band pos-band" id="posters">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Visual guides</div>
+      <h2>Guideline posters</h2>
+      <p>Illustrated do&rsquo;s and don&rsquo;ts for everyday situations. Tap any poster to view it full size.</p>
+    </div>
+    <div class="pos" id="posGrid">
+      <figure tabindex="0" data-cap="Balcony safety &amp; cleanliness &mdash; keep your balcony clean and contained, and never throw water, dust, cigarette butts or waste from balconies">
+        <div class="shot"><img src="images/poster-balcony.jpg" alt="Balcony safety and cleanliness" onerror="phFallback(this)" loading="lazy"></div>
+        <figcaption>Balcony safety &amp; cleanliness</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 <!-- ============ STAFF SCOPE ============ -->
 <section class="band" id="scope">
   <div class="wrap">
@@ -1645,12 +1674,12 @@ window.phFallback = function(img){
   resApply(); recApply();
   window.SSLists = function(){ resApply(); recApply(); };
 
-  /* ---- gallery lightbox ---- */
-  var gal = document.getElementById('gal');
+  /* ---- gallery lightbox (shared by the photo gallery and the posters) ---- */
+  var galleries = Array.prototype.slice.call(document.querySelectorAll('#gal, #posGrid'));
   var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
-      lbCap = document.getElementById('lbCap'), cur = 0;
+      lbCap = document.getElementById('lbCap'), cur = 0, active = galleries[0];
 
-  function figList(){ return Array.prototype.slice.call(gal.querySelectorAll('figure')); }
+  function figList(){ return active ? Array.prototype.slice.call(active.querySelectorAll('figure')) : []; }
 
   function show(i){
     var figs = figList();
@@ -1665,14 +1694,16 @@ window.phFallback = function(img){
   }
   function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
 
-  gal.addEventListener('click', function(e){
-    var f = e.target.closest('figure');
-    if (f) show(figList().indexOf(f));
-  });
-  gal.addEventListener('keydown', function(e){
-    if (e.key !== 'Enter' && e.key !== ' ') return;
-    var f = e.target.closest('figure');
-    if (f) { e.preventDefault(); show(figList().indexOf(f)); }
+  galleries.forEach(function(g){
+    g.addEventListener('click', function(e){
+      var f = e.target.closest('figure');
+      if (f) { active = g; show(figList().indexOf(f)); }
+    });
+    g.addEventListener('keydown', function(e){
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var f = e.target.closest('figure');
+      if (f) { e.preventDefault(); active = g; show(figList().indexOf(f)); }
+    });
   });
   document.getElementById('lbX').addEventListener('click', close);
   document.getElementById('lbPrev').addEventListener('click', function(e){ e.stopPropagation(); show(cur - 1); });

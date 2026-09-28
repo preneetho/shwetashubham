@@ -111,7 +111,7 @@
 
   var TABS = ["settings", "notices", "festivals", "timings", "guidelines",
     "staff_scope", "fees", "committee", "escalation", "checklist",
-    "downloads", "gallery", "quick_actions", "resolutions", "records"];
+    "downloads", "gallery", "quick_actions", "resolutions", "records", "posters"];
 
   function fetchTab(tab) {
     return fetch(sheetURL(tab), { cache: "no-store" })
@@ -352,6 +352,21 @@
         ' data-c1="' + esc(r.colour1 || r.color1 || "#14564a") + '"' +
         ' data-c2="' + esc(r.colour2 || r.color2 || "#0b3a32") + '"' +
         ' onerror="phFallback(this)" loading="lazy">' +
+        "<figcaption>" + esc(r.title) + "</figcaption></figure>";
+    }).join("");
+  };
+
+  R.posters = function (rows) {
+    var el = document.getElementById("posGrid");
+    if (!el) return;
+    rows = rows.filter(function (r) { return r.file; });
+    if (!rows.length) return;
+    el.innerHTML = rows.map(function (r) {
+      /* A bare file name lives in images/; a full URL is used as-is. */
+      var src = /^https?:\/\//i.test(r.file) ? r.file : "images/" + r.file;
+      return '<figure tabindex="0" data-cap="' + esc(r.caption || r.title) + '">' +
+        '<div class="shot"><img src="' + esc(src) + '" alt="' + esc(r.title) + '"' +
+        ' onerror="phFallback(this)" loading="lazy"></div>' +
         "<figcaption>" + esc(r.title) + "</figcaption></figure>";
     }).join("");
   };

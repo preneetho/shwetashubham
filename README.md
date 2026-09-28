@@ -127,6 +127,7 @@ drag-and-drop as a fallback.
 | `building.jpg` | Hero photo of the block |
 | `favicon.png` | Browser tab / phone home-screen icon |
 | `social-card.jpg` | Link preview when the site is shared on WhatsApp |
+| `poster-balcony.jpg` | Guideline poster (9:16) shown in the Posters section |
 
 Gallery photos are generated placeholders. To use real ones, drop files into
 `images/` with these exact names — no HTML edit needed:

@@ -248,4 +248,14 @@ write("settings", [
   write("gallery", rows);
 }
 
+/* ---------- guideline posters ---------- */
+{
+  const rows = [["title", "file", "caption"]];
+  const re = /<figure tabindex="0" data-cap="([^"]*)">\s*<div class="shot"><img src="([^"]+)" alt="([^"]*)"[\s\S]*?<figcaption>([\s\S]*?)<\/figcaption>/g;
+  let m; while ((m = re.exec(pickId("posGrid")))) {
+    rows.push([dec(m[4]), m[2].replace(/^images\//, ""), dec(m[1])]);
+  }
+  write("posters", rows);
+}
+
 console.log("\nCSV files written to: " + OUT);
