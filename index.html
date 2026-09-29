@@ -68,12 +68,19 @@ li{margin:.3em 0}
 .skip:focus{left:8px;top:8px;z-index:999;background:#fff;padding:10px 16px;border-radius:8px}
 :focus-visible{outline:3px solid var(--gold); outline-offset:2px; border-radius:4px}
 
-/* ---------- emergency bar ---------- */
-.ebar{background:var(--brand-600); color:#dff0eb; font-size:.85rem}
-.ebar .wrap{display:flex; flex-wrap:wrap; gap:6px 22px; align-items:center; padding-top:8px; padding-bottom:8px}
-.ebar strong{color:#fff}
-.ebar a{color:#ffd98a; font-weight:600; white-space:nowrap}
-.ebar .dot{width:7px;height:7px;border-radius:50%;background:#5ddc9f;display:inline-block;margin-right:7px;animation:pulse 2s infinite}
+/* ---------- hero contact strip ----------
+   The two numbers a resident actually rings. These used to sit in a bar
+   above the header, where on a phone they wrapped over three lines and
+   pushed the page itself out of view. */
+.hero-contact{display:flex; flex-wrap:wrap; gap:10px; margin:0 0 24px}
+.hc{display:flex; align-items:center; gap:12px; flex:1 1 250px; min-width:0; padding:11px 15px; border-radius:12px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16)}
+.hc-dot{width:8px; height:8px; border-radius:50%; flex:none}
+.hc-dot.day{background:#5ddc9f; animation:pulse 2s infinite}
+.hc-dot.night{background:var(--gold)}
+.hc-body{min-width:0; line-height:1.4}
+.hc-role{display:block; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:#a9c8c0}
+.hc-num{font-size:1rem; font-weight:700; color:#ffd98a; white-space:nowrap}
+.hc-hours{display:block; color:#c6ded7; font-size:.8rem}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
 /* ---------- header ---------- */
@@ -344,7 +351,10 @@ footer.site li{margin:.45em 0}
   .stats{gap:18px 0; margin-top:32px; display:grid; grid-template-columns:1fr 1fr}
   .stat b{font-size:1.45rem}
   .hero-cta .btn{flex:1 1 100%; justify-content:center}
-  .ebar .wrap{gap:10px}
+  /* one full-width card each, and a finger-sized tap target on the number */
+  .hero-contact{gap:8px; margin-bottom:22px}
+  .hc{flex:1 1 100%}
+  .hc-num{display:inline-block; padding:5px 0}
   .nbh{padding:24px 20px; border-radius:14px}
   .listbar{gap:10px}
   .seg-btn{padding:9px 17px}
@@ -372,13 +382,13 @@ footer.site li{margin:.45em 0}
   .btn{padding:12px 18px}
   details.acc > summary{min-height:48px}
   .menu-btn{padding:12px 13px}
-  td a[href^="tel:"],.ebar a[href^="tel:"]{display:inline-block; padding:6px 0}
+  td a[href^="tel:"]{display:inline-block; padding:6px 0}
   .gal figure{cursor:default}
   .gal figure:hover img{transform:none}
 }
 
 @media print{
-  header.site,.ebar,#top-btn,.hero-cta,nav.main{display:none !important}
+  header.site,#top-btn,.hero-cta,nav.main{display:none !important}
   details.acc{break-inside:avoid}
   details.acc .body{display:block !important}
 }
@@ -409,14 +419,6 @@ window.phFallback = function(img){
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-
-<!-- ============ EMERGENCY BAR ============ -->
-<div class="ebar">
-  <div class="wrap" id="ebarRow">
-    <span><span class="dot"></span><strong>Maintenance Manager</strong> <a href="tel:+919704285706">97042 85706</a> &middot; 9:00 AM&ndash;6:30 PM</span>
-    <span><strong>Security ASO (nights)</strong> <a href="tel:+919030493579">90304 93579</a> &middot; 6:30 PM&ndash;9:00 AM</span>
-  </div>
-</div>
 
 <!-- ============ HEADER ============ -->
 <header class="site">
@@ -458,6 +460,24 @@ window.phFallback = function(img){
           <span class="hero-tag" data-ss="hero_title">A safe, clean and harmonious place to call home.</span>
         </h1>
         <p class="lede" data-ss="hero_lede">Everything residents and tenants of Shweta Shubham need in one place &mdash; society guidelines, amenity timings, committee contacts, maintenance payments and the new-resident checklist.</p>
+        <div class="hero-contact" id="heroContact">
+          <div class="hc">
+            <span class="hc-dot day" aria-hidden="true"></span>
+            <span class="hc-body">
+              <span class="hc-role" data-ss="manager_name">Maintenance Manager</span>
+              <a class="hc-num" href="tel:+919704285706" data-ss="manager_phone">97042 85706</a>
+              <span class="hc-hours" data-ss="manager_hours">9:00 AM &ndash; 6:30 PM</span>
+            </span>
+          </div>
+          <div class="hc">
+            <span class="hc-dot night" aria-hidden="true"></span>
+            <span class="hc-body">
+              <span class="hc-role" data-ss="security_name">Security ASO</span>
+              <a class="hc-num" href="tel:+919030493579" data-ss="security_phone">90304 93579</a>
+              <span class="hc-hours" data-ss="security_hours">Nights &amp; emergencies</span>
+            </span>
+          </div>
+        </div>
         <div class="hero-cta">
           <a class="btn btn-gold" href="#guidelines">Read the Guidelines</a>
           <a class="btn btn-ghost" href="#nbh" style="color:#dfeee9;border-color:rgba(255,255,255,.3)">Pay Maintenance on NBH</a>
