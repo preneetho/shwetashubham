@@ -392,6 +392,41 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "hidden=" + nav.hasAttribute("hidden") + " dots=" + dots.children.length);
   }
 
+  /* 21. the map embed only ever accepts a Google address */
+  {
+    const set = v => "key,value\r\nmap_embed," + v + "\r\n";
+    const src = w => w.document.getElementById("mapFrame").getAttribute("src");
+    const hidden = w => w.document.getElementById("mapWrap").hasAttribute("hidden");
+    const builtIn = makeDom(serve({ settings: "key,value\r\nsociety_name,X\r\n" }));
+    await wait();
+    const original = src(builtIn);
+    check("a settings tab with no map_embed leaves the built-in map",
+      !hidden(builtIn) && /^https:\/\/maps\.google\.com\/maps\?/.test(original), original);
+
+    const good = "https://maps.google.com/maps?q=Somewhere&output=embed";
+    let w = makeDom(serve({ settings: set(good) }));
+    await wait();
+    check("a google embed url from the sheet is used", src(w) === good, src(w));
+
+    w = makeDom(serve({ settings: set('"<iframe src=""' + good + '"" loading=""lazy""></iframe>"') }));
+    await wait();
+    check("a whole iframe pasted from google maps is accepted",
+      src(w) === good, src(w));
+
+    w = makeDom(serve({ settings: set("https://evil.example.com/maps?output=embed") }));
+    await wait();
+    check("a non-google embed url is refused",
+      src(w) === original, src(w));
+
+    w = makeDom(serve({ settings: set('"<iframe src=""javascript:alert(1)""></iframe>"') }));
+    await wait();
+    check("a javascript: src is refused", src(w) === original, src(w));
+
+    w = makeDom(serve({ settings: set("off") }));
+    await wait();
+    check("map_embed=off hides the map", hidden(w), "hidden=" + hidden(w));
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

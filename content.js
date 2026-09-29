@@ -141,7 +141,31 @@
         n.innerHTML = rich(v);
       });
     });
+    applyMapEmbed(map.map_embed);
   };
+
+  /* The map is the one place the sheet hands us a URL that goes straight into
+     an iframe, so it is checked against an allow-list of Google embed
+     addresses first. Anything unrecognised is ignored and the built-in map is
+     left alone, rather than trusting whatever was typed. */
+  var MAP_OK = /^https:\/\/(?:www\.)?(?:google\.com\/maps\/embed|maps\.google\.com\/maps\?)/i;
+
+  function applyMapEmbed(raw) {
+    var wrap = document.getElementById("mapWrap");
+    var frame = document.getElementById("mapFrame");
+    if (!wrap || !frame || raw === undefined) return;
+
+    var v = String(raw === null ? "" : raw).trim();
+    if (!v || /^(off|no|none|hide|hidden)$/i.test(v)) { wrap.hidden = true; return; }
+
+    /* accept a whole <iframe> pasted out of Google Maps, not just the URL */
+    var m = v.match(/\bsrc\s*=\s*["']([^"']+)["']/i);
+    var url = (m ? m[1] : v).replace(/&amp;/gi, "&").trim();
+    if (!MAP_OK.test(url)) return;
+
+    wrap.hidden = false;
+    if (frame.getAttribute("src") !== url) frame.setAttribute("src", url);
+  }
 
   R.notices = function (rows) {
     var el = document.getElementById("noticeList");

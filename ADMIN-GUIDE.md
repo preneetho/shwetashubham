@@ -273,7 +273,37 @@ a grid. This happens automatically — there is nothing to set in the tab.
 
 ---
 
-## Part 7 — If something looks wrong
+## Part 6b — The Google map
+
+The Contact section ends with a Google map of the society. It is Google's own
+embed, so the star rating and review count come straight from Google and stay
+current on their own. Nothing is copied into the sheet and there is no API key,
+no Google account and no cost.
+
+**Whether the rating card appears is Google's decision, not ours.** In testing
+it showed reliably on a computer (4.5 ★, 89 reviews) but on a phone Google
+often replaces it with a plain "Open in Maps" button instead. There is no
+setting that forces it.
+
+The map is controlled by the **`map_embed`** row in the **settings** tab:
+
+| Value | What happens |
+|---|---|
+| *(leave the row out)* | The built-in map of the society is shown |
+| `off` | The whole map block is hidden |
+| A Google Maps address | That map is shown instead |
+
+To pin a different or more exact location, open Google Maps, find the place,
+choose **Share → Embed a map → Copy HTML**, and paste the whole thing into the
+`map_embed` cell. The `<iframe ...>` wrapper is fine — the page pulls the
+address out of it. This form points at one exact place, so it is the most
+reliable way to get the rating card to show.
+
+For safety, only Google Maps addresses are accepted. Anything else is ignored
+and the built-in map stays, so a typo cannot put someone else's content on the
+page.
+
+---
 
 **The footer says "Could not reach the Google Sheet."**
 The sharing setting has been reset, or the ID in `config.js` is wrong.

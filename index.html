@@ -337,6 +337,17 @@ footer.site li{margin:.45em 0}
 #top-btn{position:fixed; right:18px; bottom:18px; z-index:70; width:44px; height:44px; border-radius:50%; background:var(--brand); color:#fff; border:none; cursor:pointer; box-shadow:var(--shadow); font-size:1.1rem; display:none}
 #top-btn.show{display:block}
 
+/* ---------- google map ----------
+   Google's own embed, so the rating and review count stay live and nothing
+   is copied or stored on our side. No API key and no billing account. */
+.map-wrap{margin-top:24px}
+.map-wrap[hidden]{display:none}
+.map-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 12px; margin-bottom:12px}
+.map-head h3{margin:0; font-size:1.05rem}
+.map-head p{margin:0; font-size:.86rem; color:var(--muted)}
+.map-frame{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#e9eae4; line-height:0}
+.map-frame iframe{display:block; width:100%; height:380px; border:0}
+
 /* ---------- responsive ---------- */
 @media(max-width:860px){
   .hero-grid{grid-template-columns:1fr; gap:32px}
@@ -351,6 +362,7 @@ footer.site li{margin:.45em 0}
   .stats{gap:18px 0; margin-top:32px; display:grid; grid-template-columns:1fr 1fr}
   .stat b{font-size:1.45rem}
   .hero-cta .btn{flex:1 1 100%; justify-content:center}
+  .map-frame iframe{height:300px}
   /* one full-width card each, and a finger-sized tap target on the number */
   .hero-contact{gap:8px; margin-bottom:22px}
   .hc{flex:1 1 100%}
@@ -1539,6 +1551,15 @@ window.phFallback = function(img){
         <p style="font-size:.9rem;color:var(--muted);margin:0">In emergencies, contact any Committee Member. Committee Members may be available at the office on weekends.</p>
       </div>
       <div class="note green" style="margin:0">The Committee reserves the right to take decisions based on the sensitivity of each situation. These guidelines are in addition to the society by-laws, sale deed rules and GBM resolutions.</div>
+    </div>
+    <div class="map-wrap" id="mapWrap">
+      <div class="map-head">
+        <h3>Find us</h3>
+        <p>Rating and reviews shown live by Google.</p>
+      </div>
+      <div class="map-frame">
+        <iframe id="mapFrame" src="https://maps.google.com/maps?q=Shweta+Shubham,+Kompally,+Hyderabad&amp;z=16&amp;hl=en&amp;output=embed" title="Shweta Shubham on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
     </div>
   </div>
 </section>
