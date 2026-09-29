@@ -21,6 +21,12 @@ const dec = s => String(s)
   .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(parseInt(h, 16)))
   .replace(/&(\w+);/g, (m, n) => (named[n] !== undefined ? named[n] : m));
 
+/* Photos live in images/<section>/, but the sheet only wants the file name,
+   so strip the folder back off on the way out. Full URLs are left alone. */
+const bare = s => /^https?:\/\//i.test(s)
+  ? s
+  : String(s).replace(/^images\//, "").replace(/^(gallery|posters|brand|hero)\//, "");
+
 /* Keep <b> as **bold**, drop every other tag. */
 const txt = s => dec(
   String(s)
@@ -244,7 +250,7 @@ write("settings", [
 {
   const rows = [["title", "file", "caption", "colour1", "colour2"]];
   const re = /<figure tabindex="0" data-cap="([^"]*)">\s*<img src="images\/([^"]+)" alt="([^"]*)" data-c1="([^"]*)" data-c2="([^"]*)"[\s\S]*?<figcaption>([\s\S]*?)<\/figcaption>/g;
-  let m; while ((m = re.exec(pickId("gal")))) rows.push([dec(m[6]), m[2], dec(m[1]), m[4], m[5]]);
+  let m; while ((m = re.exec(pickId("gal")))) rows.push([dec(m[6]), bare(m[2]), dec(m[1]), m[4], m[5]]);
   write("gallery", rows);
 }
 
@@ -253,7 +259,7 @@ write("settings", [
   const rows = [["title", "file", "caption"]];
   const re = /<figure tabindex="0" data-cap="([^"]*)">\s*<div class="shot"><img src="([^"]+)" alt="([^"]*)"[\s\S]*?<figcaption>([\s\S]*?)<\/figcaption>/g;
   let m; while ((m = re.exec(pickId("posGrid")))) {
-    rows.push([dec(m[4]), m[2].replace(/^images\//, ""), dec(m[1])]);
+    rows.push([dec(m[4]), bare(m[2]), dec(m[1])]);
   }
   write("posters", rows);
 }

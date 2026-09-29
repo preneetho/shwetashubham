@@ -12,7 +12,7 @@ Static, dependency-free website for **Shweta Shubham Flat Owners Cooperative Mai
 | `Shweta-Shubham-Content.xlsx` | Upload this to Google Drive to create the sheet |
 | `ADMIN-GUIDE.md` | Step-by-step guide for whoever updates the content |
 | `Shweta-Shubham-Guidelines.pdf` | Source guidelines document, linked from the site |
-| `images/` | Optional. Drop real photos here to replace the generated placeholders |
+| `images/` | Photos, filed in a folder per section — see `images/README.md` |
 
 Build/test helpers, not needed for hosting: `build-sheet-csv.js`,
 `build-sheet-xlsx.js`, `test-roundtrip.js`, `test-failures.js`, `sheet-template/`.
@@ -119,18 +119,22 @@ drag-and-drop as a fallback.
 
 ## Images
 
-`images/` already contains the society's brand assets:
+`images/` is organised by the section of the site a picture appears in, so it
+stays tidy as photos are added:
 
-| File | Used for |
+| Folder | Holds |
 |---|---|
-| `logo.png` | Header and footer wordmark |
-| `building.jpg` | Hero photo of the block |
-| `favicon.png` | Browser tab / phone home-screen icon |
-| `social-card.jpg` | Link preview when the site is shared on WhatsApp |
-| `poster-balcony.jpg` | Guideline poster (9:16) shown in the Posters section |
+| `images/brand/` | `logo.png`, `favicon.png`, `social-card.jpg` |
+| `images/hero/` | `building.jpg` — the photo at the top of the page |
+| `images/posters/` | The 9:16 guideline posters |
+| `images/gallery/` | Amenity photographs |
+
+In the Google Sheet, the `file` column takes **just the file name** —
+`poster-parking.jpg`. The site adds the section folder itself, so photos can be
+re-filed without touching the sheet. A full `https://` link is used as written.
 
 Gallery photos are generated placeholders. To use real ones, drop files into
-`images/` with these exact names — no HTML edit needed:
+`images/gallery/` with these exact names — no HTML edit needed:
 
 ```
 clubhouse.jpg   pool.jpg      gym.jpg         amphitheater.jpg
@@ -146,7 +150,7 @@ Teams show when the link is shared. They are already set to the live address:
 
 ```html
 <link rel="canonical" href="https://shwetashubham.netlify.app/">
-<meta property="og:image" content="https://shwetashubham.netlify.app/images/social-card.jpg">
+<meta property="og:image" content="https://shwetashubham.netlify.app/images/brand/social-card.jpg">
 <meta property="og:url"   content="https://shwetashubham.netlify.app/">
 ```
 

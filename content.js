@@ -343,12 +343,26 @@
     }).join("");
   };
 
+  /* Works out the real path of a picture named in the sheet.
+
+     Photos are filed under images/<section>/, but the sheet only ever needs
+     the bare file name — this fills in the section folder. A name that
+     already has a folder in it is treated as relative to images/, and a full
+     https:// link is used untouched. A stray leading "images/" or "/" is
+     tolerated so a path copied out of the repo still resolves. */
+  function imgSrc(file, folder) {
+    var f = String(file === undefined || file === null ? "" : file).trim();
+    if (/^https?:\/\//i.test(f)) return f;
+    f = f.replace(/^\/+/, "").replace(/^images\//i, "");
+    return "images/" + (f.indexOf("/") < 0 ? folder + "/" : "") + f;
+  }
+
   R.gallery = function (rows) {
     var el = document.getElementById("gal");
     if (!el) return;
     el.innerHTML = rows.map(function (r) {
       return '<figure tabindex="0" data-cap="' + esc(r.caption || r.title) + '">' +
-        '<img src="images/' + esc(r.file) + '" alt="' + esc(r.title) + '"' +
+        '<img src="' + esc(imgSrc(r.file, "gallery")) + '" alt="' + esc(r.title) + '"' +
         ' data-c1="' + esc(r.colour1 || r.color1 || "#14564a") + '"' +
         ' data-c2="' + esc(r.colour2 || r.color2 || "#0b3a32") + '"' +
         ' onerror="phFallback(this)" loading="lazy">' +
@@ -362,8 +376,7 @@
     rows = rows.filter(function (r) { return r.file; });
     if (!rows.length) return;
     el.innerHTML = rows.map(function (r) {
-      /* A bare file name lives in images/; a full URL is used as-is. */
-      var src = /^https?:\/\//i.test(r.file) ? r.file : "images/" + r.file;
+      var src = imgSrc(r.file, "posters");
       return '<figure tabindex="0" data-cap="' + esc(r.caption || r.title) + '">' +
         '<div class="shot"><img src="' + esc(src) + '" alt="' + esc(r.title) + '"' +
         ' onerror="phFallback(this)" loading="lazy"></div>' +

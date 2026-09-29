@@ -329,23 +329,37 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       builtIn > 0 && figs.length === builtIn, figs.length + " of " + builtIn + " figures");
     check("built-in posters still point at their images",
       figs.length === builtIn &&
-      Array.prototype.every.call(figs, f => /^images\/poster-[\w.-]+$/.test(f.querySelector("img").getAttribute("src"))),
+      Array.prototype.every.call(figs, f => /^images\/posters\/poster-[\w.-]+$/.test(f.querySelector("img").getAttribute("src"))),
       Array.prototype.map.call(figs, f => f.querySelector("img").getAttribute("src")).join(" | ") || "none");
   }
 
-  /* 18. a posters tab with a full URL is used as-is */
+  /* 18. sheet file names resolve into their own section folder */
   {
     const csv = "title,file,caption\r\n" +
       "Water saving,https://example.com/a/water.jpg,Save water\r\n" +
-      "Fire safety,fire.jpg,Know your exits\r\n";
+      "Fire safety,fire.jpg,Know your exits\r\n" +
+      "Archive,old/legacy.jpg,Filed somewhere else\r\n" +
+      "Copied path,images/posters/copied.jpg,Pasted straight out of the repo\r\n";
     const w = makeDom(serve({ posters: csv }));
     await wait();
     const src = [].map.call(w.document.querySelectorAll("#posGrid img"),
       i => i.getAttribute("src"));
     check("a full URL poster is not prefixed with images/",
       src[0] === "https://example.com/a/water.jpg", src[0]);
-    check("a bare file name poster is served from images/",
-      src[1] === "images/fire.jpg", src[1]);
+    check("a bare poster name is served from images/posters/",
+      src[1] === "images/posters/fire.jpg", src[1]);
+    check("a poster name with a folder stays relative to images/",
+      src[2] === "images/old/legacy.jpg", src[2]);
+    check("a poster path copied from the repo is not doubled up",
+      src[3] === "images/posters/copied.jpg", src[3]);
+
+    const g = makeDom(serve({
+      gallery: "title,file,caption,colour1,colour2\r\nPool,pool.jpg,The pool,#111,#222\r\n"
+    }));
+    await wait();
+    check("a bare gallery name is served from images/gallery/",
+      g.document.querySelector("#gal img").getAttribute("src") === "images/gallery/pool.jpg",
+      g.document.querySelector("#gal img").getAttribute("src"));
   }
 
   /* 19. the carousel dots track whatever the sheet renders */

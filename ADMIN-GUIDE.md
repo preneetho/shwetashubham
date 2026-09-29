@@ -259,8 +259,9 @@ the `posters` tab, which has three columns:
 | `file` | The image file name, e.g. `poster-balcony.jpg` — or a full `https://` link |
 | `caption` | The longer text shown when the poster is opened full size |
 
-To add a poster, either put the image in the **`images`** folder and use its
-file name, or paste a full `https://` address of an image hosted elsewhere.
+To add a poster, either put the image in the **`images/posters`** folder and
+use just its file name, or paste a full `https://` address of an image hosted
+elsewhere. You never type the folder into the sheet — the site adds it.
 Posters appear in the order the rows appear in the tab.
 
 If the `posters` tab is missing or empty, the page keeps the posters already
