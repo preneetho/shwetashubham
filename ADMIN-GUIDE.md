@@ -79,7 +79,7 @@ Add a new row. Everything is driven by rows:
 | To add a… | Go to tab | Add a row with |
 |---|---|---|
 | Notice | `notices` | tag, colour, title, body |
-| Festival | `festivals` | name |
+| Festival | `festivals` | name, date |
 | Committee member | `committee` | group, name, post, flat, phone, responsibilities |
 | Rule / bullet point | `guidelines` | section, kind, text |
 | Penalty | `fees` | type = `penalty`, label, amount |
@@ -178,6 +178,34 @@ Once installed, the guidelines, timings and helpline numbers stay readable
 **even with no internet** — useful in a power cut, in the basement, or when
 someone is stuck in a lift. The page still refreshes from this sheet every
 time it is opened with a signal, so nobody gets stuck on old content.
+
+---
+
+## Part 2e — Festival dates
+
+The **Celebrations we share** chips come from the **`festivals`** tab, which
+has two columns:
+
+| Column | What to put |
+|---|---|
+| `name` | `Ugadi`, `Bathukamma`, `Independence Day` |
+| `date` | `7 Apr 2027`, or `30 Sep – 8 Oct 2027` for a festival that runs over several days. **Leave it blank** if there is no fixed day yet — the chip simply shows the name. |
+
+The list is seeded with **2027** dates, taken from the panchangam. Most Hindu
+festivals follow the lunar calendar, so **these dates change every year** and
+need refreshing each January. The civil ones — Republic Day, Women's Day,
+Independence Day, Christmas, New Year — never move, so only the year changes.
+
+Keep the chips in **date order**, because that is the order residents read
+them in. A different panchangam can put a festival a day either side of ours;
+if the Committee follows a particular one, use its dates.
+
+> **Type dates as ordinary text, like `7 Apr 2027`.**
+> If you type `07/04/2027`, Google stores it as a real date and may then blank
+> out any entry it cannot read as one — such as `30 Sep – 8 Oct 2027`. This is
+> the same trap described for helpline numbers above. If a date vanishes from
+> the website, select the `date` column and set
+> **Format → Number → Plain text**, then type the dates in again.
 
 ---
 

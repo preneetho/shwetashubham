@@ -185,8 +185,13 @@
   R.festivals = function (rows) {
     var el = document.getElementById("festChips");
     if (!el) return;
-    el.innerHTML = rows.map(function (r) {
-      return '<span class="chip">' + esc(r.name) + "</span>";
+    /* A festival with no name is an empty pill, and a sheet of them would
+       wipe the list, so only render when there is something to show. */
+    var chips = rows.filter(function (r) { return r.name; });
+    if (!chips.length) return;
+    el.innerHTML = chips.map(function (r) {
+      var d = r.date ? ' <em>' + esc(r.date) + "</em>" : "";
+      return '<span class="chip">' + esc(r.name) + d + "</span>";
     }).join("");
   };
 

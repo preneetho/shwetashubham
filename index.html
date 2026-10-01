@@ -262,6 +262,8 @@ details.acc .body ul{margin-top:12px}
 .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
 .chip{background:var(--card); border:1px solid var(--line); border-radius:100px; padding:7px 15px; font-size:.86rem; color:var(--ink-2)}
 section.alt .chip{background:var(--bg)}
+.chip em{font-style:normal; color:var(--brand); font-weight:600}
+.chip em::before{content:"\00b7"; color:var(--ink-2); font-weight:400; opacity:.55; margin:0 5px 0 0}
 /* filter chips are buttons; these must sit after .chip so they win on order */
 .chips .chip-btn{font:inherit; font-size:.86rem; cursor:pointer; color:var(--ink-2)}
 .chips .chip-btn:hover{border-color:var(--brand); color:var(--brand)}
@@ -739,16 +741,16 @@ window.phFallback = function(img){
         <div class="sec-head" style="margin-bottom:18px">
           <div class="kicker">Community &amp; Culture</div>
           <h2>Celebrations we share</h2>
-          <p>Celebrations are optional and subject to resident participation, volunteer availability and committee decisions.</p>
+          <p>Celebrations are optional and subject to resident participation, volunteer availability and committee decisions. Festival dates follow the panchangam and can move by a day, so the Committee confirms each one nearer the time.</p>
         </div>
         <div class="chips" id="festChips">
-          <span class="chip">Sankranthi</span><span class="chip">Republic Day</span>
-          <span class="chip">Women's Day</span><span class="chip">Holi</span>
-          <span class="chip">Sri Rama Navami</span><span class="chip">Ugadi</span>
-          <span class="chip">Krishna Ashtami</span><span class="chip">Independence Day</span>
-          <span class="chip">Ganesh Chaturthi</span><span class="chip">Bathukamma</span>
-          <span class="chip">Ganesh Temple Anniversary</span><span class="chip">Christmas</span>
-          <span class="chip">New Year</span><span class="chip">Yearly Recognitions</span>
+          <span class="chip">New Year <em>1 Jan 2027</em></span><span class="chip">Sankranthi <em>15 Jan 2027</em></span>
+          <span class="chip">Republic Day <em>26 Jan 2027</em></span><span class="chip">Women's Day <em>8 Mar 2027</em></span>
+          <span class="chip">Holi <em>23 Mar 2027</em></span><span class="chip">Ugadi <em>7 Apr 2027</em></span>
+          <span class="chip">Sri Rama Navami <em>15 Apr 2027</em></span><span class="chip">Independence Day <em>15 Aug 2027</em></span>
+          <span class="chip">Krishna Ashtami <em>25 Aug 2027</em></span><span class="chip">Ganesh Chaturthi <em>4 Sep 2027</em></span>
+          <span class="chip">Bathukamma <em>30 Sep &ndash; 8 Oct 2027</em></span><span class="chip">Christmas <em>25 Dec 2027</em></span>
+          <span class="chip">Ganesh Temple Anniversary</span><span class="chip">Yearly Recognitions</span>
         </div>
       </div>
     </div>
@@ -2091,7 +2093,8 @@ window.phFallback = function(img){
       ' #acclist details.acc > summary, #acclist details.acc li, #acclist details.acc p,' +
       ' #scopeGrid li, #feeCards .card, #penaltyRows tr,' +
       ' #coreRows tr, #advRows tr, #extRows tr, #escRows tr,' +
-      ' #checklist label, #dlList a, #resList article, #recList a';
+      ' #checklist label, #dlList a, #resList article, #recList a,' +
+      ' #festChips .chip';
 
     var idx = [], cur = -1;
 
@@ -2145,7 +2148,7 @@ window.phFallback = function(img){
       var from = Math.max(0, at - 42), to = Math.min(e.text.length, from + 150);
       var s = esc(e.text.slice(from, to));
       toks.forEach(function(t){
-        var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\  /* ---- back to top ---- */') + ')', 'ig');
+        var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig');
         s = s.replace(re, '<mark>$1</mark>');
       });
       return (from ? '&hellip;' : '') + s + (to < e.text.length ? '&hellip;' : '');

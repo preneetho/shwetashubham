@@ -512,6 +512,43 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       w.document.querySelector("#helpGrid small").innerHTML.slice(0, 60));
   }
 
+  /* 23. festivals — the optional date column */
+  {
+    const head = "name,date\r\n";
+    const chips = w => w.document.querySelectorAll("#festChips .chip");
+
+    let w = makeDom(serve({ festivals: head + "Ugadi,7 Apr 2027\r\nHoli,23 Mar 2027\r\n" }));
+    await wait();
+    check("festival dates render from the sheet",
+      chips(w).length === 2 && chips(w)[0].querySelector("em").textContent === "7 Apr 2027",
+      chips(w)[0].innerHTML);
+
+    /* most of the list is lunar, but a few society events have no fixed day */
+    w = makeDom(serve({ festivals: head + "Ugadi,7 Apr 2027\r\nYearly Recognitions,\r\n" }));
+    await wait();
+    check("a festival with no date is still listed",
+      chips(w).length === 2 && !chips(w)[1].querySelector("em") &&
+      chips(w)[1].textContent === "Yearly Recognitions",
+      chips(w)[1].innerHTML);
+
+    /* a date is free text, so it is a script injection point like any other */
+    w = makeDom(serve({ festivals: head + 'Holi,"<img src=x onerror=alert(1)>"\r\n' }));
+    await wait();
+    check("html in a festival date is escaped",
+      !w.document.querySelector("#festChips img"),
+      chips(w)[0].innerHTML.slice(0, 60));
+
+    w = makeDom(serve({ festivals: head + ",7 Apr 2027\r\n" }));
+    await wait();
+    check("a nameless row never becomes an empty pill",
+      chips(w).length === 14, chips(w).length + " chips");
+
+    w = makeDom(serve({ festivals: head }));
+    await wait();
+    check("an empty festivals tab keeps the built-in list",
+      chips(w).length === 14, chips(w).length + " chips");
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;
