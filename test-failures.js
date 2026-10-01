@@ -78,8 +78,8 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     await wait();
     const d = w.document;
     check("empty tab keeps that section static",
-      d.querySelectorAll("#festChips .chip").length === 14,
-      d.querySelectorAll("#festChips .chip").length + " chips");
+      d.querySelectorAll("#festRows tr").length === 14,
+      d.querySelectorAll("#festRows tr").length + " rows");
   }
 
   /* 5. a real edit propagates */
@@ -105,7 +105,7 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     }));
     await wait();
     const d = w.document;
-    const chips = d.getElementById("festChips").innerHTML;
+    const chips = d.getElementById("festRows").innerHTML;
     check("script/img injection escaped",
       !/<img/i.test(chips) && /&lt;img/.test(chips), chips.slice(0, 70));
   }
@@ -515,38 +515,39 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
   /* 23. festivals — the optional date column */
   {
     const head = "name,date\r\n";
-    const chips = w => w.document.querySelectorAll("#festChips .chip");
+    const rows = w => w.document.querySelectorAll("#festRows tr");
+    const cell = (w, i, n) => rows(w)[i].querySelectorAll("td")[n].textContent;
 
     let w = makeDom(serve({ festivals: head + "Ugadi,7 Apr 2027\r\nHoli,23 Mar 2027\r\n" }));
     await wait();
     check("festival dates render from the sheet",
-      chips(w).length === 2 && chips(w)[0].querySelector("em").textContent === "7 Apr 2027",
-      chips(w)[0].innerHTML);
+      rows(w).length === 2 && cell(w, 0, 1) === "7 Apr 2027",
+      rows(w)[0].innerHTML);
 
     /* most of the list is lunar, but a few society events have no fixed day */
     w = makeDom(serve({ festivals: head + "Ugadi,7 Apr 2027\r\nYearly Recognitions,\r\n" }));
     await wait();
     check("a festival with no date is still listed",
-      chips(w).length === 2 && !chips(w)[1].querySelector("em") &&
-      chips(w)[1].textContent === "Yearly Recognitions",
-      chips(w)[1].innerHTML);
+      rows(w).length === 2 && cell(w, 1, 0) === "Yearly Recognitions" &&
+      cell(w, 1, 1) === "",
+      rows(w)[1].innerHTML);
 
     /* a date is free text, so it is a script injection point like any other */
     w = makeDom(serve({ festivals: head + 'Holi,"<img src=x onerror=alert(1)>"\r\n' }));
     await wait();
     check("html in a festival date is escaped",
-      !w.document.querySelector("#festChips img"),
-      chips(w)[0].innerHTML.slice(0, 60));
+      !w.document.querySelector("#festRows img"),
+      rows(w)[0].innerHTML.slice(0, 80));
 
     w = makeDom(serve({ festivals: head + ",7 Apr 2027\r\n" }));
     await wait();
-    check("a nameless row never becomes an empty pill",
-      chips(w).length === 14, chips(w).length + " chips");
+    check("a nameless row never becomes a blank line",
+      rows(w).length === 14, rows(w).length + " rows");
 
     w = makeDom(serve({ festivals: head }));
     await wait();
     check("an empty festivals tab keeps the built-in list",
-      chips(w).length === 14, chips(w).length + " chips");
+      rows(w).length === 14, rows(w).length + " rows");
   }
 
   /* 24. records — the default category and links that leave the page */

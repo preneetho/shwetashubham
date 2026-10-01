@@ -133,11 +133,8 @@ write("settings", [
 /* ---------- festivals ---------- */
 {
   const rows = [["name", "date"]];
-  const re = /<span class="chip">([\s\S]*?)<\/span>/g;
-  let m; while ((m = re.exec(pickId("festChips")))) {
-    const d = /<em>([\s\S]*?)<\/em>/.exec(m[1]);
-    rows.push([txt(m[1].replace(/<em>[\s\S]*?<\/em>/, "")), d ? txt(d[1]) : ""]);
-  }
+  const re = /<tr><td><b>([\s\S]*?)<\/b><\/td><td class="num">([\s\S]*?)<\/td><\/tr>/g;
+  let m; while ((m = re.exec(pickId("festRows")))) rows.push([txt(m[1]), txt(m[2])]);
   write("festivals", rows);
 }
 

@@ -183,20 +183,20 @@ time it is opened with a signal, so nobody gets stuck on old content.
 
 ## Part 2e — Festival dates
 
-The **Celebrations we share** chips come from the **`festivals`** tab, which
+The **Celebrations we share** table comes from the **`festivals`** tab, which
 has two columns:
 
 | Column | What to put |
 |---|---|
 | `name` | `Ugadi`, `Bathukamma`, `Independence Day` |
-| `date` | `7 Apr 2027`, or `30 Sep – 8 Oct 2027` for a festival that runs over several days. **Leave it blank** if there is no fixed day yet — the chip simply shows the name. |
+| `date` | `7 Apr 2027`, or `30 Sep – 8 Oct 2027` for a festival that runs over several days. **Leave it blank** if there is no fixed day yet — the row then shows a dash. |
 
 The list is seeded with **2027** dates, taken from the panchangam. Most Hindu
 festivals follow the lunar calendar, so **these dates change every year** and
 need refreshing each January. The civil ones — Republic Day, Women's Day,
 Independence Day, Christmas, New Year — never move, so only the year changes.
 
-Keep the chips in **date order**, because that is the order residents read
+Keep the rows in **date order**, because that is the order residents read
 them in. A different panchangam can put a festival a day either side of ours;
 if the Committee follows a particular one, use its dates.
 

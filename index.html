@@ -262,8 +262,8 @@ details.acc .body ul{margin-top:12px}
 .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
 .chip{background:var(--card); border:1px solid var(--line); border-radius:100px; padding:7px 15px; font-size:.86rem; color:var(--ink-2)}
 section.alt .chip{background:var(--bg)}
-.chip em{font-style:normal; color:var(--brand); font-weight:600}
-.chip em::before{content:"\00b7"; color:var(--ink-2); font-weight:400; opacity:.55; margin:0 5px 0 0}
+/* a festival with no settled date leaves the cell empty rather than guessing */
+#festRows td:empty::after{content:"\2014"; color:var(--muted); font-weight:400}
 /* filter chips are buttons; these must sit after .chip so they win on order */
 .chips .chip-btn{font:inherit; font-size:.86rem; cursor:pointer; color:var(--ink-2)}
 .chips .chip-btn:hover{border-color:var(--brand); color:var(--brand)}
@@ -743,14 +743,26 @@ window.phFallback = function(img){
           <h2>Celebrations we share</h2>
           <p>Celebrations are optional and subject to resident participation, volunteer availability and committee decisions. Festival dates follow the panchangam and can move by a day, so the Committee confirms each one nearer the time.</p>
         </div>
-        <div class="chips" id="festChips">
-          <span class="chip">New Year <em>1 Jan 2027</em></span><span class="chip">Sankranthi <em>15 Jan 2027</em></span>
-          <span class="chip">Republic Day <em>26 Jan 2027</em></span><span class="chip">Women's Day <em>8 Mar 2027</em></span>
-          <span class="chip">Holi <em>23 Mar 2027</em></span><span class="chip">Ugadi <em>7 Apr 2027</em></span>
-          <span class="chip">Sri Rama Navami <em>15 Apr 2027</em></span><span class="chip">Independence Day <em>15 Aug 2027</em></span>
-          <span class="chip">Krishna Ashtami <em>25 Aug 2027</em></span><span class="chip">Ganesh Chaturthi <em>4 Sep 2027</em></span>
-          <span class="chip">Bathukamma <em>30 Sep &ndash; 8 Oct 2027</em></span><span class="chip">Christmas <em>25 Dec 2027</em></span>
-          <span class="chip">Ganesh Temple Anniversary</span><span class="chip">Yearly Recognitions</span>
+        <div class="tbl-wrap">
+          <table style="min-width:auto">
+            <thead><tr><th>Festival</th><th>When</th></tr></thead>
+            <tbody id="festRows">
+              <tr><td><b>New Year</b></td><td class="num">1 Jan 2027</td></tr>
+              <tr><td><b>Sankranthi</b></td><td class="num">15 Jan 2027</td></tr>
+              <tr><td><b>Republic Day</b></td><td class="num">26 Jan 2027</td></tr>
+              <tr><td><b>Women's Day</b></td><td class="num">8 Mar 2027</td></tr>
+              <tr><td><b>Holi</b></td><td class="num">23 Mar 2027</td></tr>
+              <tr><td><b>Ugadi</b></td><td class="num">7 Apr 2027</td></tr>
+              <tr><td><b>Sri Rama Navami</b></td><td class="num">15 Apr 2027</td></tr>
+              <tr><td><b>Independence Day</b></td><td class="num">15 Aug 2027</td></tr>
+              <tr><td><b>Krishna Ashtami</b></td><td class="num">25 Aug 2027</td></tr>
+              <tr><td><b>Ganesh Chaturthi</b></td><td class="num">4 Sep 2027</td></tr>
+              <tr><td><b>Bathukamma</b></td><td class="num">30 Sep &ndash; 8 Oct 2027</td></tr>
+              <tr><td><b>Christmas</b></td><td class="num">25 Dec 2027</td></tr>
+              <tr><td><b>Ganesh Temple Anniversary</b></td><td class="num"></td></tr>
+              <tr><td><b>Yearly Recognitions</b></td><td class="num"></td></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -2103,7 +2115,7 @@ window.phFallback = function(img){
       ' #scopeGrid li, #feeCards .card, #penaltyRows tr,' +
       ' #coreRows tr, #advRows tr, #extRows tr, #escRows tr,' +
       ' #checklist label, #dlList a, #resList article, #recList a,' +
-      ' #festChips .chip';
+      ' #festRows tr';
 
     var idx = [], cur = -1;
 

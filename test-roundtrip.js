@@ -17,7 +17,7 @@ const TABS = ["settings", "notices", "festivals", "timings", "guidelines",
 const html = fs.readFileSync(path.join(dir, "index.html"), "utf8");
 
 function snapshot(doc) {
-  const ids = ["noticeList", "festChips", "timingRows", "acclist", "scopeGrid",
+  const ids = ["noticeList", "festRows", "timingRows", "acclist", "scopeGrid",
     "feeCards", "penaltyRows", "coreRows", "advRows", "extRows", "escRows",
     "checklist", "dlList", "gal", "qaGrid", "resList", "recList", "posGrid",
     "helpGrid"];

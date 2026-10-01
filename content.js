@@ -183,15 +183,15 @@
   };
 
   R.festivals = function (rows) {
-    var el = document.getElementById("festChips");
+    var el = document.getElementById("festRows");
     if (!el) return;
-    /* A festival with no name is an empty pill, and a sheet of them would
+    /* A festival with no name is a blank row, and a sheet of them would
        wipe the list, so only render when there is something to show. */
-    var chips = rows.filter(function (r) { return r.name; });
-    if (!chips.length) return;
-    el.innerHTML = chips.map(function (r) {
-      var d = r.date ? ' <em>' + esc(r.date) + "</em>" : "";
-      return '<span class="chip">' + esc(r.name) + d + "</span>";
+    var list = rows.filter(function (r) { return r.name; });
+    if (!list.length) return;
+    el.innerHTML = list.map(function (r) {
+      return "<tr><td><b>" + esc(r.name) + '</b></td><td class="num">' +
+        esc(r.date || "") + "</td></tr>";
     }).join("");
   };
 
