@@ -9,6 +9,8 @@ Static, dependency-free website for **Shweta Shubham Flat Owners Cooperative Mai
 | `index.html` | The site — HTML, CSS and JS in one file |
 | `config.js` | **The only file an admin edits.** Google Sheet ID + cache setting |
 | `content.js` | Reads the Google Sheet and re-renders the page |
+| `sw.js` | Service worker — lets an installed page work with no internet |
+| `manifest.webmanifest` | Name, icons and colours used when installed to a home screen |
 | `Shweta-Shubham-Content.xlsx` | Upload this to Google Drive to create the sheet |
 | `ADMIN-GUIDE.md` | Step-by-step guide for whoever updates the content |
 | `Shweta-Shubham-Guidelines.pdf` | Source guidelines document, linked from the site |

@@ -112,6 +112,15 @@ write("settings", [
   write("quick_actions", rows);
 }
 
+/* ---------- helplines ---------- */
+{
+  const rows = [["group", "icon", "name", "number", "note"]];
+  const block = pickId("helpGrid");
+  const re = /<a class="card hl[^"]*" href="[^"]*">\s*<span class="hl-top"><span class="hl-ico">([\s\S]*?)<\/span><span class="pill pill-\w+">([\s\S]*?)<\/span><\/span>\s*<b>([\s\S]*?)<\/b>\s*<span class="hl-num">([\s\S]*?)<\/span>\s*<small>([\s\S]*?)<\/small>/g;
+  let m; while ((m = re.exec(block))) rows.push([txt(m[2]), dec(m[1]).trim(), txt(m[3]), txt(m[4]), txt(m[5])]);
+  write("helplines", rows);
+}
+
 /* ---------- notices ---------- */
 {
   const rows = [["tag", "colour", "title", "body"]];

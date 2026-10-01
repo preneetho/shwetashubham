@@ -427,6 +427,58 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("map_embed=off hides the map", hidden(w), "hidden=" + hidden(w));
   }
 
+  /* 22. helplines — grouping, dialling and bad input */
+  {
+    const head = "group,icon,name,number,note\r\n";
+    const cards = w => w.document.querySelectorAll("#helpGrid a.hl");
+    const hrefs = w => Array.from(cards(w)).map(a => a.getAttribute("href"));
+
+    let w = makeDom(serve({
+      helplines: head +
+        "Emergency,X,Fire,101,Call the gate too\r\n" +
+        "Society,Y,Manager,97042 85706,Weekdays\r\n"
+    }));
+    await wait();
+    check("helplines render from the sheet", cards(w).length === 2, cards(w).length + " cards");
+    check("a short code is dialled as-is",
+      hrefs(w)[0] === "tel:101", hrefs(w)[0]);
+    check("a 10-digit mobile gets +91",
+      hrefs(w)[1] === "tel:+919704285706", hrefs(w)[1]);
+    check("the emergency group is styled as urgent",
+      cards(w)[0].classList.contains("sos") && !cards(w)[1].classList.contains("sos"),
+      cards(w)[0].className + " | " + cards(w)[1].className);
+    check("the group sets the pill colour",
+      !!cards(w)[0].querySelector(".pill-red") && !!cards(w)[1].querySelector(".pill-gold"),
+      cards(w)[0].innerHTML.slice(0, 80));
+
+    /* an admin inventing a group must not produce an unstyled card */
+    w = makeDom(serve({ helplines: head + "Plumbing,Z,Plumber,98765 43210,On call\r\n" }));
+    await wait();
+    check("an unknown group falls back to society",
+      !!cards(w)[0].querySelector(".pill-gold") && !cards(w)[0].classList.contains("sos"),
+      cards(w)[0].className);
+
+    /* half-filled rows are the most likely admin mistake */
+    w = makeDom(serve({ helplines: head + "Society,Z,,,\r\nSociety,Z,Lift AMC,,\r\n" }));
+    await wait();
+    check("rows with no number are dropped, keeping the built-in list",
+      cards(w).length === 10, cards(w).length + " cards");
+
+    w = makeDom(serve({ helplines: head }));
+    await wait();
+    check("an empty helplines tab keeps the built-in numbers",
+      cards(w).length === 10, cards(w).length + " cards");
+
+    /* the note is the only free-text field, so it must still be escaped */
+    w = makeDom(serve({
+      helplines: head + 'Society,Z,Plumber,98765 43210,"<img src=x onerror=alert(1)>"\r\n'
+    }));
+    await wait();
+    check("html in a helpline note is escaped",
+      !w.document.querySelector("#helpGrid img"),
+      w.document.querySelector("#helpGrid small").innerHTML.slice(0, 60));
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

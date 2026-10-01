@@ -87,6 +87,7 @@ Add a new row. Everything is driven by rows:
 | Photo | `gallery` | title, file, caption |
 | Guideline poster (9:16) | `posters` | title, file, caption |
 | Form or document | `downloads` | title, note, url |
+| Helpline number | `helplines` | group, icon, name, number, note |
 | Resolution | `resolutions` | ref, date, title, summary, status |
 | Minutes / notice / circular | `records` | type, date, title, note, link |
 
@@ -104,6 +105,61 @@ top to bottom.
 `date` column, newest first, no matter what order the rows are in. So you can
 simply add a new resolution at the bottom and it will still appear at the top
 of the website.
+
+---
+
+## Part 2c — Helpline numbers
+
+The **Helplines & emergency numbers** section near the top of the page is the
+one residents are most likely to need in a hurry, so it is worth keeping
+accurate. It is driven by the **`helplines`** tab.
+
+| Column | What to put |
+|---|---|
+| `group` | `Emergency`, `Society`, `Utility` or `Support` |
+| `icon` | A single emoji. Copy one from an existing row if unsure. |
+| `name` | What it is — "Lift breakdown", "Water tanker" |
+| `number` | `108`, or a 10-digit mobile like `97042 85706` |
+| `note` | One short line saying when to call it |
+
+The `group` decides the colour. **Emergency** rows are shown in red so they
+stand out; everything else is shown in the society green. If you type a group
+that is not in the list above, the row still appears, styled as `Society`.
+
+Short numbers such as 100, 108 or 1912 are dialled exactly as written. A
+10-digit mobile automatically gets `+91` added when a resident taps it, so you
+do not need to type the country code.
+
+**Numbers the Committee still needs to supply** — these cannot be guessed, so
+they are deliberately left out for now:
+
+- Lift breakdown / AMC engineer
+- Society plumber and electrician
+- Water tanker supplier
+- Nearest hospital
+
+Add a row for each and they appear on the website straight away.
+
+---
+
+## Part 2d — Search, and using the site offline
+
+Two things on the page need no maintenance at all, but are worth knowing about
+when residents ask.
+
+**The search box** under "What do you need today?" searches everything already
+on the page — guidelines, timings, fees, helplines, resolutions and notices.
+It builds itself from whatever this sheet contains, so anything you add
+becomes searchable automatically. There is no list to keep up to date.
+
+**Add to Home Screen.** Residents can install the page like an app. On Android
+a button appears in the green banner at the top of the page; on an iPhone they
+tap **Share** in Safari and then **Add to Home Screen**.
+
+Once installed, the guidelines, timings and helpline numbers stay readable
+**even with no internet** — useful in a power cut, in the basement, or when
+someone is stuck in a lift. The page still refreshes from this sheet every
+time it is opened with a signal, so nobody gets stuck on old content.
 
 ---
 
@@ -338,6 +394,15 @@ content and works exactly as it did before the sheet existed.
 - Sheet values are HTML-escaped, then a tiny whitelist (`**bold**`,
   `[text](url)`, `<b> <i> <br>`) is re-enabled. Raw HTML and scripts cannot be
   injected from the sheet.
+- `sw.js` caches the page shell. Pages and scripts are **network-first**, so an
+  online resident never sees a stale page; photos are cache-first. Anything on
+  another origin — the Google Sheet, the Google map — is deliberately not
+  intercepted and is never stored. Bump `VERSION` in `sw.js` whenever the
+  `SHELL` list changes.
+- The search box indexes live DOM text, so `content.js` calls
+  `window.SSSearch()` after the sheet renders to rebuild the index. New
+  sections become searchable by adding their container to `SEL` in the search
+  block of `index.html`.
 - `build-sheet-csv.js` regenerates `sheet-template/*.csv` from whatever is
   currently in `index.html`; `build-sheet-xlsx.js` packs those into the
   uploadable workbook. Re-run both if you change the built-in content.

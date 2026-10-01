@@ -10,8 +10,8 @@ const tpl = path.join(__dirname, "sheet-template");
 const OUT = path.join(__dirname, "Shweta-Shubham-Content.xlsx");
 
 /* Tab order matters: this is the order the admin sees them in. */
-const TABS = ["settings", "notices", "festivals", "quick_actions", "timings",
-  "guidelines", "staff_scope", "fees", "committee", "escalation",
+const TABS = ["settings", "notices", "festivals", "quick_actions", "helplines",
+  "timings", "guidelines", "staff_scope", "fees", "committee", "escalation",
   "checklist", "downloads", "gallery", "posters", "resolutions", "records"];
 
 /* Column widths, by header name, so the sheet is readable on open. */

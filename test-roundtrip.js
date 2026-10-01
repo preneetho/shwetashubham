@@ -11,14 +11,16 @@ const tplDir = path.join(dir, "sheet-template");
 
 const TABS = ["settings", "notices", "festivals", "timings", "guidelines",
   "staff_scope", "fees", "committee", "escalation", "checklist",
-  "downloads", "gallery", "quick_actions", "resolutions", "records", "posters"];
+  "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
+  "helplines"];
 
 const html = fs.readFileSync(path.join(dir, "index.html"), "utf8");
 
 function snapshot(doc) {
   const ids = ["noticeList", "festChips", "timingRows", "acclist", "scopeGrid",
     "feeCards", "penaltyRows", "coreRows", "advRows", "extRows", "escRows",
-    "checklist", "dlList", "gal", "qaGrid", "resList", "recList", "posGrid"];
+    "checklist", "dlList", "gal", "qaGrid", "resList", "recList", "posGrid",
+    "helpGrid"];
   const o = {};
   ids.forEach(id => {
     const el = doc.getElementById(id);

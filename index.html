@@ -7,7 +7,12 @@
 <meta name="description" content="Official information portal for Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd — society guidelines, amenity timings, committee contacts, fees and resident onboarding.">
 <meta name="theme-color" content="#14564a">
 <link rel="icon" href="images/brand/favicon.png" sizes="any" type="image/png">
-<link rel="apple-touch-icon" href="images/brand/favicon.png">
+<link rel="apple-touch-icon" href="images/brand/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Shweta Shubham">
 
 <!-- Link preview (WhatsApp / Facebook / X). These must stay ABSOLUTE URLs.
      If the site ever moves to a new address (e.g. a custom domain), update the
@@ -348,6 +353,40 @@ footer.site li{margin:.45em 0}
 .map-frame{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#e9eae4; line-height:0}
 .map-frame iframe{display:block; width:100%; height:380px; border:0}
 
+/* ---------- helplines ---------- */
+.help-band{background:linear-gradient(180deg,#fdf6f4,#fbefea); border-block:1px solid #f3e0d8}
+.hl{display:flex; flex-direction:column; gap:6px; padding:18px; transition:.18s}
+.hl:hover{transform:translateY(-2px); box-shadow:0 10px 26px rgba(14,43,37,.13); text-decoration:none}
+.hl-top{display:flex; align-items:center; justify-content:space-between; gap:8px}
+.hl-ico{width:34px;height:34px;border-radius:9px;background:var(--brand-50);color:var(--brand);display:grid;place-items:center;font-size:1.05rem;flex:none}
+.hl b{color:var(--ink); font-size:.95rem}
+.hl-num{font-family:var(--serif); font-size:1.45rem; font-weight:700; color:var(--brand); line-height:1.1}
+.hl small{color:var(--muted); font-size:.82rem; line-height:1.45}
+.hl.sos .hl-ico{background:var(--danger-50); color:var(--danger)}
+.hl.sos .hl-num{color:var(--danger)}
+
+/* ---------- install prompt ---------- */
+.install-hint{margin:12px 0 0; font-size:.86rem; line-height:1.5; color:#bcd7cf; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); border-radius:10px; padding:10px 13px}
+.install-hint b{color:#fff}
+
+/* ---------- search ---------- */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.search{position:relative; max-width:640px; margin:0 0 24px}
+.search-ico{position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:.95rem; opacity:.5; pointer-events:none}
+.search input{width:100%; padding:14px 44px 14px 42px; font:inherit; font-size:1rem; color:var(--ink); background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); -webkit-appearance:none; appearance:none}
+.search input::-webkit-search-cancel-button,.search input::-webkit-search-decoration{-webkit-appearance:none}
+.search input:focus{border-color:var(--brand); outline:none; box-shadow:0 0 0 3px rgba(20,86,74,.15)}
+.search-clear{position:absolute; right:9px; top:50%; transform:translateY(-50%); width:30px; height:30px; border:0; border-radius:50%; background:#eef0ec; color:var(--ink-2); font-size:1.15rem; line-height:1; cursor:pointer}
+.search-res{position:absolute; z-index:40; left:0; right:0; top:calc(100% + 8px); max-height:62vh; overflow-y:auto; overscroll-behavior:contain; background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 18px 44px rgba(14,43,37,.18); padding:6px}
+.sr-item{display:block; width:100%; text-align:left; background:none; border:0; padding:11px 13px; border-radius:9px; cursor:pointer; font:inherit}
+.sr-item:hover,.sr-item.on{background:var(--brand-50)}
+.sr-sec{display:block; font-size:.69rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); font-weight:700; margin-bottom:3px}
+.sr-txt{display:block; color:var(--ink-2); font-size:.9rem; line-height:1.45}
+.sr-item mark{background:var(--gold-50); color:#8a6015; padding:0 2px; border-radius:3px}
+.sr-none{padding:14px 13px; color:var(--muted); font-size:.9rem}
+.ss-hit{animation:ssflash 2.2s ease-out 1}
+@keyframes ssflash{0%,50%{background:var(--gold-50)}100%{background:transparent}}
+
 /* ---------- responsive ---------- */
 @media(max-width:860px){
   .hero-grid{grid-template-columns:1fr; gap:32px}
@@ -363,6 +402,14 @@ footer.site li{margin:.45em 0}
   .stat b{font-size:1.45rem}
   .hero-cta .btn{flex:1 1 100%; justify-content:center}
   .map-frame iframe{height:300px}
+  /* two numbers per row, so the whole helpline list fits in one glance */
+  #helpGrid{grid-template-columns:1fr 1fr; gap:10px}
+  .hl{padding:14px}
+  .hl .pill{display:none}
+  .hl-ico{width:30px; height:30px; font-size:.95rem}
+  .hl b{font-size:.9rem}
+  .hl-num{font-size:1.25rem}
+  .hl small{font-size:.77rem; line-height:1.4}
   /* one full-width card each, and a finger-sized tap target on the number */
   .hero-contact{gap:8px; margin-bottom:22px}
   .hc{flex:1 1 100%}
@@ -400,7 +447,7 @@ footer.site li{margin:.45em 0}
 }
 
 @media print{
-  header.site,#top-btn,.hero-cta,nav.main{display:none !important}
+  header.site,#top-btn,.hero-cta,nav.main,.search{display:none !important}
   details.acc{break-inside:avoid}
   details.acc .body{display:block !important}
 }
@@ -441,6 +488,7 @@ window.phFallback = function(img){
     </a>
     <nav class="main" id="nav">
       <a href="#timings">Timings</a>
+      <a href="#helplines">Helplines</a>
       <a href="#guidelines">Guidelines</a>
       <a href="#posters">Posters</a>
       <a href="#resolutions">Resolutions</a>
@@ -493,7 +541,9 @@ window.phFallback = function(img){
         <div class="hero-cta">
           <a class="btn btn-gold" href="#guidelines">Read the Guidelines</a>
           <a class="btn btn-ghost" href="#nbh" style="color:#dfeee9;border-color:rgba(255,255,255,.3)">Pay Maintenance on NBH</a>
+          <button class="btn btn-ghost" id="installBtn" type="button" hidden style="color:#dfeee9;border-color:rgba(255,255,255,.3)">Add to Home Screen</button>
         </div>
+        <p class="install-hint" id="installHint" hidden>On iPhone and iPad: tap the <b>Share</b> button in Safari, then choose <b>Add to Home Screen</b>.</p>
       </div>
       <figure class="hero-shot">
         <img src="images/hero/building.jpg" alt="Shweta Shubham apartment block seen from the landscaped lawn" width="391" height="486" decoding="async" fetchpriority="high">
@@ -514,6 +564,13 @@ window.phFallback = function(img){
     <div class="sec-head">
       <div class="kicker">Quick Actions</div>
       <h2>What do you need today?</h2>
+    </div>
+    <div class="search" id="search">
+      <label class="vh" for="q">Search this page</label>
+      <span class="search-ico" aria-hidden="true">&#128269;</span>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search guidelines, timings, fees, helplines&hellip;" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="qres">
+      <button class="search-clear" id="qclear" type="button" aria-label="Clear search" hidden>&times;</button>
+      <div class="search-res" id="qres" role="listbox" aria-label="Search results" hidden></div>
     </div>
     <div class="grid g4" id="qaGrid">
       <a class="card tile" href="#nbh">
@@ -567,6 +624,80 @@ window.phFallback = function(img){
         <small>Guidelines PDF, move-in proforma, NOC request and more.</small>
       </a>
     </div>
+  </div>
+</section>
+
+<!-- ============ HELPLINES ============ -->
+<section class="band help-band" id="helplines">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Save these numbers</div>
+      <h2>Helplines &amp; emergency numbers</h2>
+      <p>Tap any number to call. Add this page to your phone&rsquo;s home screen and these numbers stay available even with no internet.</p>
+    </div>
+    <div class="grid g4" id="helpGrid">
+      <a class="card hl sos" href="tel:112">
+        <span class="hl-top"><span class="hl-ico">&#128680;</span><span class="pill pill-red">Emergency</span></span>
+        <b>All emergencies</b>
+        <span class="hl-num">112</span>
+        <small>One national number for police, fire and ambulance.</small>
+      </a>
+      <a class="card hl sos" href="tel:100">
+        <span class="hl-top"><span class="hl-ico">&#128110;</span><span class="pill pill-red">Emergency</span></span>
+        <b>Police</b>
+        <span class="hl-num">100</span>
+        <small>Theft, trespass, public nuisance or any unsafe situation.</small>
+      </a>
+      <a class="card hl sos" href="tel:101">
+        <span class="hl-top"><span class="hl-ico">&#128293;</span><span class="pill pill-red">Emergency</span></span>
+        <b>Fire</b>
+        <span class="hl-num">101</span>
+        <small>Also call the Security ASO so the gate can be opened immediately.</small>
+      </a>
+      <a class="card hl sos" href="tel:108">
+        <span class="hl-top"><span class="hl-ico">&#128657;</span><span class="pill pill-red">Emergency</span></span>
+        <b>Ambulance</b>
+        <span class="hl-num">108</span>
+        <small>Free government ambulance service across Telangana.</small>
+      </a>
+      <a class="card hl sos" href="tel:1906">
+        <span class="hl-top"><span class="hl-ico">&#128738;</span><span class="pill pill-red">Emergency</span></span>
+        <b>LPG gas leak</b>
+        <span class="hl-num">1906</span>
+        <small>Do not switch anything on or off. Open the windows and leave.</small>
+      </a>
+      <a class="card hl" href="tel:+919704285706">
+        <span class="hl-top"><span class="hl-ico">&#128736;</span><span class="pill pill-gold">Society</span></span>
+        <b>Maintenance Manager</b>
+        <span class="hl-num">97042 85706</span>
+        <small>All maintenance requests, 9:00 AM &ndash; 6:30 PM.</small>
+      </a>
+      <a class="card hl" href="tel:+919030493579">
+        <span class="hl-top"><span class="hl-ico">&#128737;</span><span class="pill pill-gold">Society</span></span>
+        <b>Security ASO</b>
+        <span class="hl-num">90304 93579</span>
+        <small>Night assistance, gate issues and emergency coordination.</small>
+      </a>
+      <a class="card hl" href="tel:1912">
+        <span class="hl-top"><span class="hl-ico">&#9889;</span><span class="pill pill-grey">Utility</span></span>
+        <b>Electricity complaints</b>
+        <span class="hl-num">1912</span>
+        <small>Power failure and metering complaints (TGSPDCL).</small>
+      </a>
+      <a class="card hl" href="tel:1098">
+        <span class="hl-top"><span class="hl-ico">&#128106;</span><span class="pill pill-green">Support</span></span>
+        <b>Childline</b>
+        <span class="hl-num">1098</span>
+        <small>Round-the-clock help for a child in distress.</small>
+      </a>
+      <a class="card hl" href="tel:181">
+        <span class="hl-top"><span class="hl-ico">&#128105;</span><span class="pill pill-green">Support</span></span>
+        <b>Women&rsquo;s helpline</b>
+        <span class="hl-num">181</span>
+        <small>Round-the-clock support and assistance for women.</small>
+      </a>
+    </div>
+    <div class="note" style="margin-top:16px">Society-specific numbers &mdash; lift breakdown, plumber, electrician, water tanker and the nearest hospital &mdash; are added by the Committee. Tell the Committee if one is missing or out of date.</div>
   </div>
 </section>
 
@@ -1890,6 +2021,209 @@ window.phFallback = function(img){
     var onMq = function(){ grid.scrollLeft = 0; paint(); };
     if (mq.addEventListener) mq.addEventListener('change', onMq);
     else if (mq.addListener) mq.addListener(onMq);
+
+    build();
+  })();
+
+  /* ---- install on the home screen, and work offline ---- */
+  (function(){
+    var btn = document.getElementById('installBtn'),
+        hint = document.getElementById('installHint'),
+        deferred = null;
+
+    /* file:// has no service worker support, so only register on a real host. */
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('sw.js').catch(function(){ /* offline copy is a bonus */ });
+      });
+    }
+
+    var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+      window.navigator.standalone === true;
+    if (standalone || !btn) return;
+
+    window.addEventListener('beforeinstallprompt', function(ev){
+      ev.preventDefault();
+      deferred = ev;
+      btn.hidden = false;
+    });
+
+    /* Safari never fires that event, so offer the manual steps instead. */
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (iOS) btn.hidden = false;
+
+    btn.addEventListener('click', function(){
+      if (deferred) {
+        deferred.prompt();
+        deferred.userChoice.then(function(c){
+          if (c && c.outcome === 'accepted') btn.hidden = true;
+          deferred = null;
+        });
+      } else if (hint) {
+        hint.hidden = false;
+        btn.hidden = true;
+      }
+    });
+
+    window.addEventListener('appinstalled', function(){
+      btn.hidden = true;
+      if (hint) hint.hidden = true;
+    });
+  })();
+
+  /* ---- site search ---- */
+  (function(){
+    var box = document.getElementById('q'),
+        res = document.getElementById('qres'),
+        clr = document.getElementById('qclear');
+    if (!box || !res) return;
+
+    /* Every row, card and bullet worth jumping to. Guideline bullets are
+       indexed individually rather than as one huge accordion blob. */
+    var SEL = '#qaGrid a, #helpGrid a, #noticeList > div, #timingRows tr,' +
+      ' #acclist details.acc > summary, #acclist details.acc li, #acclist details.acc p,' +
+      ' #scopeGrid li, #feeCards .card, #penaltyRows tr,' +
+      ' #coreRows tr, #advRows tr, #extRows tr, #escRows tr,' +
+      ' #checklist label, #dlList a, #resList article, #recList a';
+
+    var idx = [], cur = -1;
+
+    function sectionOf(el){
+      var s = el.closest('section'), h2 = s && s.querySelector('.sec-head h2');
+      return h2 ? h2.textContent.trim() : (s && s.id ? s.id : 'Page');
+    }
+
+    /* A table row or a card is several separate fields. textContent runs
+       them together ("Swimming Pool7:00 AM"), so join them visibly. */
+    /* A line break is a real gap in a timings cell, not a joined word. */
+    function flat(el){
+      if (!el.getElementsByTagName('br').length) return el.textContent || '';
+      var c = el.cloneNode(true), brs = c.getElementsByTagName('br');
+      while (brs.length) brs[0].parentNode.replaceChild(document.createTextNode(' '), brs[0]);
+      return c.textContent || '';
+    }
+
+    function textOf(el){
+      var kids = el.children, parts = [], i, s;
+      for (i = 0; i < kids.length; i++) {
+        s = flat(kids[i]).replace(/\s+/g, ' ').trim();
+        if (s) parts.push(s);
+      }
+      if (parts.length > 1) return parts.join(' \u00b7 ');
+      return flat(el).replace(/\s+/g, ' ').trim();
+    }
+
+    function build(){
+      idx = [];
+      var seen = [];
+      Array.prototype.forEach.call(document.querySelectorAll(SEL), function(el){
+        if (el.closest('.search')) return;
+        var t = textOf(el);
+        if (t.length < 4 || t.length > 400) return;
+        if (seen.indexOf(t) > -1) return;
+        seen.push(t);
+        idx.push({ el: el, text: t, low: t.toLowerCase(), sec: sectionOf(el) });
+      });
+    }
+    window.SSSearch = build;
+
+    function esc(s){
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    }
+
+    /* Show the part of the line the words were actually found in. */
+    function snippet(e, toks){
+      var at = e.low.indexOf(toks[0]);
+      if (at < 0) at = 0;
+      var from = Math.max(0, at - 42), to = Math.min(e.text.length, from + 150);
+      var s = esc(e.text.slice(from, to));
+      toks.forEach(function(t){
+        var re = new RegExp('(' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\  /* ---- back to top ---- */') + ')', 'ig');
+        s = s.replace(re, '<mark>$1</mark>');
+      });
+      return (from ? '&hellip;' : '') + s + (to < e.text.length ? '&hellip;' : '');
+    }
+
+    function close(){
+      res.hidden = true; res.innerHTML = ''; cur = -1;
+      box.setAttribute('aria-expanded', 'false');
+    }
+
+    function go(el){
+      var d = el.closest('details');
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest('details'); }
+      close();
+      var y = el.getBoundingClientRect().top + window.scrollY - 92;
+      window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+      el.classList.remove('ss-hit');
+      void el.offsetWidth;
+      el.classList.add('ss-hit');
+      setTimeout(function(){ el.classList.remove('ss-hit'); }, 2400);
+    }
+
+    function run(){
+      var q = box.value.trim();
+      clr.hidden = !q;
+      if (q.length < 2) { close(); return; }
+      if (!idx.length) build();
+      var toks = q.toLowerCase().split(/\s+/).filter(Boolean);
+      var hits = [];
+      for (var i = 0; i < idx.length; i++) {
+        var e = idx[i], ok = true, first = 1e9;
+        for (var j = 0; j < toks.length; j++) {
+          var p = e.low.indexOf(toks[j]);
+          if (p < 0) { ok = false; break; }
+          if (p < first) first = p;
+        }
+        if (ok) hits.push({ e: e, score: first + e.text.length / 40 });
+      }
+      hits.sort(function(a, b){ return a.score - b.score; });
+      hits = hits.slice(0, 8);
+
+      if (!hits.length) {
+        res.innerHTML = '<div class="sr-none">Nothing found for &ldquo;' + esc(q) +
+          '&rdquo;. Try a single word such as pet, parking, pool or penalty.</div>';
+      } else {
+        res.innerHTML = hits.map(function(hit, n){
+          return '<button class="sr-item" type="button" role="option" aria-selected="false" data-n="' + n + '">' +
+            '<span class="sr-sec">' + esc(hit.e.sec) + '</span>' +
+            '<span class="sr-txt">' + snippet(hit.e, toks) + '</span></button>';
+        }).join('');
+        Array.prototype.forEach.call(res.children, function(btn, n){
+          btn.addEventListener('mousedown', function(ev){ ev.preventDefault(); go(hits[n].e.el); });
+        });
+      }
+      cur = -1;
+      res.hidden = false;
+      box.setAttribute('aria-expanded', 'true');
+      window.__ssHits = hits;
+    }
+
+    function move(step){
+      var items = res.querySelectorAll('.sr-item');
+      if (!items.length) return;
+      if (cur > -1) { items[cur].classList.remove('on'); items[cur].setAttribute('aria-selected','false'); }
+      cur = (cur + step + items.length) % items.length;
+      items[cur].classList.add('on');
+      items[cur].setAttribute('aria-selected','true');
+      items[cur].scrollIntoView({ block: 'nearest' });
+    }
+
+    var t;
+    box.addEventListener('input', function(){ clearTimeout(t); t = setTimeout(run, 120); });
+    box.addEventListener('focus', function(){ if (box.value.trim().length > 1) run(); });
+    box.addEventListener('keydown', function(ev){
+      if (ev.key === 'ArrowDown') { ev.preventDefault(); move(1); }
+      else if (ev.key === 'ArrowUp') { ev.preventDefault(); move(-1); }
+      else if (ev.key === 'Escape') { close(); box.blur(); }
+      else if (ev.key === 'Enter') {
+        var hits = window.__ssHits || [];
+        if (hits.length) { ev.preventDefault(); go(hits[cur > -1 ? cur : 0].e.el); }
+      }
+    });
+    clr.addEventListener('click', function(){ box.value = ''; clr.hidden = true; close(); box.focus(); });
+    document.addEventListener('click', function(ev){ if (!ev.target.closest('.search')) close(); });
 
     build();
   })();

@@ -38,3 +38,17 @@
   for = "/content.js"
   [headers.values]
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# The service worker is what makes the page work offline once a resident has
+# added it to their home screen. It must never be served from cache, or a
+# browser can be stuck on an old offline copy long after the site has moved on.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+    Service-Worker-Allowed = "/"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

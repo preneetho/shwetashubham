@@ -111,7 +111,8 @@
 
   var TABS = ["settings", "notices", "festivals", "timings", "guidelines",
     "staff_scope", "fees", "committee", "escalation", "checklist",
-    "downloads", "gallery", "quick_actions", "resolutions", "records", "posters"];
+    "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
+    "helplines"];
 
   function fetchTab(tab) {
     return fetch(sheetURL(tab), { cache: "no-store" })
@@ -408,6 +409,36 @@
     }).join("");
   };
 
+  /* Group decides the pill colour and whether the card is styled as urgent.
+     Unknown groups fall back to "society" rather than rendering unstyled. */
+  var HL_GROUPS = {
+    emergency: { pill: "pill-red", cls: " sos" },
+    society: { pill: "pill-gold", cls: "" },
+    utility: { pill: "pill-grey", cls: "" },
+    support: { pill: "pill-green", cls: "" }
+  };
+
+  R.helplines = function (rows) {
+    var el = document.getElementById("helpGrid");
+    if (!el) return;
+    var cards = rows.filter(function (r) { return r.name && r.number; });
+    if (!cards.length) return;
+    el.innerHTML = cards.map(function (r) {
+      var label = String(r.group || "Society").trim();
+      var g = HL_GROUPS[label.toLowerCase()] || HL_GROUPS.society;
+      var num = String(r.number).trim();
+      var plain = num.replace(/\s/g, "");
+      /* 100, 108, 1912 … are dialled as-is; a 10-digit mobile needs +91. */
+      var href = /^\d{3,5}$/.test(plain) ? "tel:" + plain : "tel:" + telLink(num);
+      return '<a class="card hl' + g.cls + '" href="' + href + '">' +
+        '<span class="hl-top"><span class="hl-ico">' + esc(r.icon) + "</span>" +
+        '<span class="pill ' + g.pill + '">' + esc(label) + "</span></span>" +
+        "<b>" + esc(r.name) + "</b>" +
+        '<span class="hl-num">' + esc(num) + "</span>" +
+        "<small>" + rich(r.note) + "</small></a>";
+    }).join("");
+  };
+
   R.quick_actions = function (rows) {
     var el = document.getElementById("qaGrid");
     if (!el) return;
@@ -520,6 +551,11 @@
       try { R[tab](rows); applied++; }
       catch (e) { if (window.console) console.warn("Sheet tab '" + tab + "' failed to render:", e); }
     });
+    /* The page search indexes live DOM text, so it has to be rebuilt
+       once the sheet has replaced the built-in content. */
+    if (applied && typeof window.SSSearch === "function") {
+      try { window.SSSearch(); } catch (e) { /* search is optional */ }
+    }
     return applied;
   }
 
