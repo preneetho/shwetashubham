@@ -428,8 +428,12 @@
       var g = HL_GROUPS[label.toLowerCase()] || HL_GROUPS.society;
       var num = String(r.number).trim();
       var plain = num.replace(/\s/g, "");
-      /* 100, 108, 1912 … are dialled as-is; a 10-digit mobile needs +91. */
-      var href = /^\d{3,5}$/.test(plain) ? "tel:" + plain : "tel:" + telLink(num);
+      var digits = num.replace(/[^\d]/g, "");
+      /* Only a bare 10-digit mobile needs +91. Short codes (100, 108),
+         toll-free lines (1800 …) and landlines are dialled as written. */
+      var href = (digits.length === 10 && plain.charAt(0) !== "+")
+        ? "tel:" + telLink(num)
+        : "tel:" + plain;
       return '<a class="card hl' + g.cls + '" href="' + href + '">' +
         '<span class="hl-top"><span class="hl-ico">' + esc(r.icon) + "</span>" +
         '<span class="pill ' + g.pill + '">' + esc(label) + "</span></span>" +

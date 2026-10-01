@@ -444,6 +444,28 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       hrefs(w)[0] === "tel:101", hrefs(w)[0]);
     check("a 10-digit mobile gets +91",
       hrefs(w)[1] === "tel:+919704285706", hrefs(w)[1]);
+
+    /* 1800 numbers are 11 digits — prepending +91 would misdial them. */
+    w = makeDom(serve({
+      helplines: head +
+        "Utility,X,BGL,1800 599 6991,Piped gas\r\n" +
+        "Utility,X,Office,040 23234701,Landline\r\n" +
+        "Society,X,Manager,+91 97042 85706,Already has the code\r\n"
+    }));
+    await wait();
+    check("a toll-free number is dialled as-is",
+      hrefs(w)[0] === "tel:18005996991", hrefs(w)[0]);
+    check("a landline is dialled as-is",
+      hrefs(w)[1] === "tel:04023234701", hrefs(w)[1]);
+    check("a number that already has +91 is left alone",
+      hrefs(w)[2] === "tel:+919704285706", hrefs(w)[2]);
+
+    w = makeDom(serve({
+      helplines: head +
+        "Emergency,X,Fire,101,Call the gate too\r\n" +
+        "Society,Y,Manager,97042 85706,Weekdays\r\n"
+    }));
+    await wait();
     check("the emergency group is styled as urgent",
       cards(w)[0].classList.contains("sos") && !cards(w)[1].classList.contains("sos"),
       cards(w)[0].className + " | " + cards(w)[1].className);
@@ -462,12 +484,12 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     w = makeDom(serve({ helplines: head + "Society,Z,,,\r\nSociety,Z,Lift AMC,,\r\n" }));
     await wait();
     check("rows with no number are dropped, keeping the built-in list",
-      cards(w).length === 10, cards(w).length + " cards");
+      cards(w).length === 11, cards(w).length + " cards");
 
     w = makeDom(serve({ helplines: head }));
     await wait();
     check("an empty helplines tab keeps the built-in numbers",
-      cards(w).length === 10, cards(w).length + " cards");
+      cards(w).length === 11, cards(w).length + " cards");
 
     /* the note is the only free-text field, so it must still be escaped */
     w = makeDom(serve({
