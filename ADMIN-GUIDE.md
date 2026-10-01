@@ -445,6 +445,14 @@ content and works exactly as it did before the sheet existed.
   another origin — the Google Sheet, the Google map — is deliberately not
   intercepted and is never stored. Bump `VERSION` in `sw.js` whenever the
   `SHELL` list changes.
+- **The app icons must be renamed, not overwritten.** Android bakes the icon
+  into the installed app and only refetches when the *manifest text* changes,
+  so replacing `icon-512-v2.png` in place leaves every Android phone showing
+  the old icon forever. Give the new files the next number
+  (`icon-512-v3.png`, …), point `manifest.webmanifest` and the `SHELL` list in
+  `sw.js` at them, and delete the old ones. iPhones are keyed off
+  `apple-touch-icon.png` in `index.html` and update on their own once the
+  shortcut is re-added.
 - The search box indexes live DOM text, so `content.js` calls
   `window.SSSearch()` after the sheet renders to rebuild the index. New
   sections become searchable by adding their container to `SEL` in the search

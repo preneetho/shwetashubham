@@ -15,7 +15,7 @@
 
    Bump VERSION whenever the files in SHELL change.
    ============================================================ */
-var VERSION = "ss-shell-v2";
+var VERSION = "ss-shell-v3";
 
 var SHELL = [
   "./",
@@ -25,8 +25,9 @@ var SHELL = [
   "./manifest.webmanifest",
   "./images/brand/logo.png",
   "./images/brand/favicon.png",
-  "./images/brand/icon-192.png",
-  "./images/brand/icon-512.png",
+  "./images/brand/icon-192-v2.png",
+  "./images/brand/icon-512-v2.png",
+  "./images/brand/icon-maskable-512-v2.png",
   "./images/brand/apple-touch-icon.png",
   "./images/hero/building.jpg"
 ];
