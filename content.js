@@ -132,6 +132,13 @@
       Array.prototype.forEach.call(nodes, function (n) {
         var v = map[k];
         if (n.tagName === "A" && /^(https?:|tel:|mailto:|#)/.test(v)) { n.href = v; return; }
+        /* An admin types an address, not "mailto:", so build the link here
+           rather than leave the old href pointing at the previous mailbox. */
+        if (n.tagName === "A" && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+          n.href = "mailto:" + v;
+          n.textContent = v;
+          return;
+        }
         if (n.tagName === "A" && /^[\d\s()+-]{8,}$/.test(v)) {
           var digits = v.replace(/\D/g, "");
           if (digits.length === 10) digits = "91" + digits;

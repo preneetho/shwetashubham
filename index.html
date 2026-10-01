@@ -139,9 +139,6 @@ header.site .wrap{gap:10px}
 .hero-tag{display:block; font-family:var(--font); font-size:clamp(1.02rem,2.3vw,1.45rem); font-weight:500; line-height:1.35; color:var(--gold); letter-spacing:0; margin-top:.5rem}
 .hero p.lede{font-size:clamp(1rem,2vw,1.12rem); max-width:62ch; color:#c6ded7; margin-bottom:26px}
 .hero-cta{display:flex; flex-wrap:wrap; gap:12px}
-.stats{display:flex; flex-wrap:wrap; gap:34px; margin-top:42px; padding-top:26px; border-top:1px solid rgba(255,255,255,.14)}
-.stat b{display:block; font-family:var(--serif); font-size:1.65rem; color:var(--gold); line-height:1}
-.stat span{font-size:.78rem; letter-spacing:.07em; text-transform:uppercase; color:#a9c8c0}
 
 /* ---------- sections ---------- */
 section.band{padding:58px 0}
@@ -400,8 +397,6 @@ footer.site li{margin:.45em 0}
   section.band{padding:42px 0}
   .brand .brand-txt{display:none}
   .logo-img{height:38px}
-  .stats{gap:18px 0; margin-top:32px; display:grid; grid-template-columns:1fr 1fr}
-  .stat b{font-size:1.45rem}
   .hero-cta .btn{flex:1 1 100%; justify-content:center}
   .map-frame iframe{height:300px}
   /* two numbers per row, so the whole helpline list fits in one glance */
@@ -550,12 +545,6 @@ window.phFallback = function(img){
       <figure class="hero-shot">
         <img src="images/hero/building.jpg" alt="Shweta Shubham apartment block seen from the landscaped lawn" width="391" height="486" decoding="async" fetchpriority="high">
       </figure>
-    </div>
-    <div class="stats" id="heroStats">
-      <div class="stat"><b>6</b><span>Blocks &middot; A to F</span></div>
-      <div class="stat"><b>9</b><span>Core Committee</span></div>
-      <div class="stat"><b>15</b><span>Guideline Sections</span></div>
-      <div class="stat"><b>24&times;7</b><span>Security &amp; CCTV</span></div>
     </div>
   </div>
 </section>
@@ -712,58 +701,26 @@ window.phFallback = function(img){
 <!-- ============ NOTICES ============ -->
 <section class="band alt">
   <div class="wrap">
-    <div class="split">
-      <div>
-        <div class="sec-head" style="margin-bottom:18px">
-          <div class="kicker">Notice Board</div>
-          <h2>Latest announcements</h2>
-          <p>Full notices, polls and resident communications are published on NoBrokerhood.</p>
-        </div>
-        <div class="card" style="padding:0" id="noticeList">
-          <div style="padding:18px 22px;border-bottom:1px solid var(--line)">
-            <span class="pill pill-gold">Guidelines</span>
-            <b style="display:block;margin-top:8px">Society Guidelines v1.0 released</b>
-            <small style="color:var(--muted)">Approved in the April GBM. All owners and tenants are requested to read and sign the proforma.</small>
-          </div>
-          <div style="padding:18px 22px;border-bottom:1px solid var(--line)">
-            <span class="pill pill-red">Reminder</span>
-            <b style="display:block;margin-top:8px">Quarterly maintenance due by the 15th</b>
-            <small style="color:var(--muted)">A 2% per month penalty applies on the outstanding balance after the due date.</small>
-          </div>
-          <div style="padding:18px 22px">
-            <span class="pill pill-grey">Maintenance</span>
-            <b style="display:block;margin-top:8px">Swimming pool closed every Monday</b>
-            <small style="color:var(--muted)">Weekly cleaning and water treatment. Normal timings resume Tuesday.</small>
-          </div>
-        </div>
+    <div class="sec-head">
+      <div class="kicker">Notice Board</div>
+      <h2>Latest announcements</h2>
+      <p>Full notices, polls and resident communications are published on NoBrokerhood.</p>
+    </div>
+    <div class="card" style="padding:0" id="noticeList">
+      <div style="padding:18px 22px;border-bottom:1px solid var(--line)">
+        <span class="pill pill-gold">Guidelines</span>
+        <b style="display:block;margin-top:8px">Society Guidelines v1.0 released</b>
+        <small style="color:var(--muted)">Approved in the April GBM. All owners and tenants are requested to read and sign the proforma.</small>
       </div>
-      <div>
-        <div class="sec-head" style="margin-bottom:18px">
-          <div class="kicker">Community &amp; Culture</div>
-          <h2>Celebrations we share</h2>
-          <p>Celebrations are optional and subject to resident participation, volunteer availability and committee decisions. Festival dates follow the panchangam and can move by a day, so the Committee confirms each one nearer the time.</p>
-        </div>
-        <div class="tbl-wrap">
-          <table style="min-width:auto">
-            <thead><tr><th>Festival</th><th>When</th></tr></thead>
-            <tbody id="festRows">
-              <tr><td><b>New Year</b></td><td class="num">1 Jan 2027</td></tr>
-              <tr><td><b>Sankranthi</b></td><td class="num">15 Jan 2027</td></tr>
-              <tr><td><b>Republic Day</b></td><td class="num">26 Jan 2027</td></tr>
-              <tr><td><b>Women's Day</b></td><td class="num">8 Mar 2027</td></tr>
-              <tr><td><b>Holi</b></td><td class="num">23 Mar 2027</td></tr>
-              <tr><td><b>Ugadi</b></td><td class="num">7 Apr 2027</td></tr>
-              <tr><td><b>Sri Rama Navami</b></td><td class="num">15 Apr 2027</td></tr>
-              <tr><td><b>Independence Day</b></td><td class="num">15 Aug 2027</td></tr>
-              <tr><td><b>Krishna Ashtami</b></td><td class="num">25 Aug 2027</td></tr>
-              <tr><td><b>Ganesh Chaturthi</b></td><td class="num">4 Sep 2027</td></tr>
-              <tr><td><b>Bathukamma</b></td><td class="num">30 Sep &ndash; 8 Oct 2027</td></tr>
-              <tr><td><b>Christmas</b></td><td class="num">25 Dec 2027</td></tr>
-              <tr><td><b>Ganesh Temple Anniversary</b></td><td class="num"></td></tr>
-              <tr><td><b>Yearly Recognitions</b></td><td class="num"></td></tr>
-            </tbody>
-          </table>
-        </div>
+      <div style="padding:18px 22px;border-bottom:1px solid var(--line)">
+        <span class="pill pill-red">Reminder</span>
+        <b style="display:block;margin-top:8px">Quarterly maintenance due by the 15th</b>
+        <small style="color:var(--muted)">A 2% per month penalty applies on the outstanding balance after the due date.</small>
+      </div>
+      <div style="padding:18px 22px">
+        <span class="pill pill-grey">Maintenance</span>
+        <b style="display:block;margin-top:8px">Swimming pool closed every Monday</b>
+        <small style="color:var(--muted)">Weekly cleaning and water treatment. Normal timings resume Tuesday.</small>
       </div>
     </div>
   </div>
@@ -903,6 +860,38 @@ window.phFallback = function(img){
     </div>
     <p class="empty" id="recEmpty" hidden>Nothing filed under this category yet.</p>
     <div class="note" style="margin-top:18px">Sample entries with placeholder links &mdash; replace the link for each row with the actual PDF once it is uploaded.</div>
+  </div>
+</section>
+
+<!-- ============ CELEBRATIONS ============ -->
+<section class="band" id="culture">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">Community &amp; Culture</div>
+      <h2>Celebrations we share</h2>
+      <p>Celebrations are optional and subject to resident participation, volunteer availability and committee decisions. Festival dates follow the panchangam and can move by a day, so the Committee confirms each one nearer the time.</p>
+    </div>
+    <div class="tbl-wrap" style="max-width:680px">
+      <table style="min-width:auto">
+        <thead><tr><th>Festival</th><th>When</th></tr></thead>
+        <tbody id="festRows">
+          <tr><td><b>New Year</b></td><td class="num">1 Jan 2027</td></tr>
+          <tr><td><b>Sankranthi</b></td><td class="num">15 Jan 2027</td></tr>
+          <tr><td><b>Republic Day</b></td><td class="num">26 Jan 2027</td></tr>
+          <tr><td><b>Women's Day</b></td><td class="num">8 Mar 2027</td></tr>
+          <tr><td><b>Holi</b></td><td class="num">23 Mar 2027</td></tr>
+          <tr><td><b>Ugadi</b></td><td class="num">7 Apr 2027</td></tr>
+          <tr><td><b>Sri Rama Navami</b></td><td class="num">15 Apr 2027</td></tr>
+          <tr><td><b>Independence Day</b></td><td class="num">15 Aug 2027</td></tr>
+          <tr><td><b>Krishna Ashtami</b></td><td class="num">25 Aug 2027</td></tr>
+          <tr><td><b>Ganesh Chaturthi</b></td><td class="num">4 Sep 2027</td></tr>
+          <tr><td><b>Bathukamma</b></td><td class="num">30 Sep &ndash; 8 Oct 2027</td></tr>
+          <tr><td><b>Christmas</b></td><td class="num">25 Dec 2027</td></tr>
+          <tr><td><b>Ganesh Temple Anniversary</b></td><td class="num"></td></tr>
+          <tr><td><b>Yearly Recognitions</b></td><td class="num"></td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
@@ -1695,6 +1684,7 @@ window.phFallback = function(img){
         <h3>Society office</h3>
         <p style="margin-bottom:6px"><b data-ss="society_name">Shweta Shubham Flat Owners Cooperative Maintenance Society Ltd</b></p>
         <p style="color:var(--muted);font-size:.92rem">Suggestions &amp; support: <a href="tel:+919704285706">97042 85706</a></p>
+        <p style="color:var(--muted);font-size:.92rem;margin-top:6px;overflow-wrap:anywhere">Email: <a href="mailto:shwetashubhamsociety.macs@gmail.com" data-ss="society_email">shwetashubhamsociety.macs@gmail.com</a></p>
         <hr style="border:0;border-top:1px solid var(--line);margin:16px 0">
         <p style="font-size:.92rem;margin-bottom:6px"><b data-ss="manager_name">Maintenance Manager</b><br><a href="tel:+919704285706" data-ss="manager_phone">97042 85706</a> &middot; <span style="color:var(--muted)" data-ss="manager_hours">9:00 AM &ndash; 6:30 PM</span></p>
         <p style="font-size:.92rem;margin-bottom:0"><b data-ss="security_name">Security ASO</b><br><a href="tel:+919030493579" data-ss="security_phone">90304 93579</a> &middot; <span style="color:var(--muted)" data-ss="security_hours">Nights &amp; emergencies</span></p>

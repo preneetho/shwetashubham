@@ -605,6 +605,40 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       w.document.getElementById("recCount").textContent);
   }
 
+  /* 25. the society email  the sheet holds an address, not a link */
+  {
+    const head = "key,value\r\n";
+    const mail = w => w.document.querySelector('[data-ss="society_email"]');
+
+    let w = makeDom(serve());
+    await wait();
+    check("the built-in email is a working mailto link",
+      mail(w).getAttribute("href") === "mailto:shwetashubhamsociety.macs@gmail.com",
+      mail(w).getAttribute("href"));
+
+    w = makeDom(serve({ settings: head + "society_email,office@example.org\r\n" }));
+    await wait();
+    check("a bare address from the sheet becomes a mailto link",
+      mail(w).getAttribute("href") === "mailto:office@example.org" &&
+      mail(w).textContent === "office@example.org",
+      mail(w).getAttribute("href"));
+
+    /* an admin who does type the scheme should not end up with mailto:mailto: */
+    w = makeDom(serve({ settings: head + "society_email,mailto:office@example.org\r\n" }));
+    await wait();
+    check("an address typed with mailto: is left alone",
+      mail(w).getAttribute("href") === "mailto:office@example.org",
+      mail(w).getAttribute("href"));
+
+    /* anything that is not an address must not be turned into a link */
+    w = makeDom(serve({ settings: head + "society_email,ask at the office\r\n" }));
+    await wait();
+    check("a note instead of an address does not become a link",
+      mail(w).getAttribute("href") === "mailto:shwetashubhamsociety.macs@gmail.com" &&
+      mail(w).textContent === "ask at the office",
+      mail(w).getAttribute("href"));
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;
