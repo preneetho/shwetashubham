@@ -549,6 +549,61 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       chips(w).length === 14, chips(w).length + " chips");
   }
 
+  /* 24. records — the default category and links that leave the page */
+  {
+    const head = "type,date,title,note,link\r\n";
+    const recs = w => Array.prototype.slice.call(w.document.querySelectorAll("#recList .rec"));
+    const vis = w => recs(w).filter(e => !e.hidden);
+
+    let w = makeDom(serve());
+    await wait();
+    check("records open on Minutes of Meeting",
+      vis(w).length > 0 && vis(w).every(e => e.getAttribute("data-type") === "mom"),
+      w.document.getElementById("recCount").textContent);
+    check("the Minutes chip is the selected one",
+      w.document.querySelector('[data-rec="mom"]').getAttribute("aria-selected") === "true" &&
+      w.document.querySelector('[data-rec="all"]').getAttribute("aria-selected") === "false",
+      "aria in sync");
+
+    w = makeDom(serve({
+      records: head + "mom,2025-04-26,April GBM,Minutes,https://example.org/mom.pdf\r\n"
+    }));
+    await wait();
+    check("a document link opens in its own tab",
+      recs(w)[0].getAttribute("target") === "_blank" &&
+      recs(w)[0].getAttribute("rel") === "noopener",
+      recs(w)[0].getAttribute("href"));
+
+    /* the placeholder is an anchor on this same page — a new tab would be wrong */
+    w = makeDom(serve({ records: head + "mom,2025-04-26,April GBM,Minutes,\r\n" }));
+    await wait();
+    check("a placeholder link stays in the page",
+      recs(w)[0].getAttribute("href") === "#contact" && !recs(w)[0].getAttribute("target"),
+      recs(w)[0].getAttribute("href"));
+
+    /* opening on a category that holds nothing would look like a broken page */
+    w = makeDom(serve({
+      records: head + "notice,2025-04-02,Dues reminder,Pay by the 15th,\r\n" +
+        "circular,2025-03-20,Move-in timings,9 to 6,\r\n"
+    }));
+    await wait();
+    check("no minutes on file falls back to showing everything",
+      vis(w).length === 2 &&
+      w.document.querySelector('[data-rec="all"]').getAttribute("aria-selected") === "true",
+      w.document.getElementById("recCount").textContent);
+
+    /* but a category the resident picked must be left alone, even when empty */
+    w = makeDom(serve({
+      records: head + "notice,2025-04-02,Dues reminder,Pay by the 15th,\r\n"
+    }));
+    await wait();
+    w.document.querySelector('[data-rec="circular"]')
+      .dispatchEvent(new w.Event("click", { bubbles: true }));
+    check("a chosen category is never overridden",
+      vis(w).length === 0 && !w.document.getElementById("recEmpty").hidden,
+      w.document.getElementById("recCount").textContent);
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

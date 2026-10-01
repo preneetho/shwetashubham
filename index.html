@@ -831,8 +831,8 @@ window.phFallback = function(img){
 
     <div class="listbar">
       <div class="chips" id="recFilter" role="tablist" aria-label="Filter records">
-        <button type="button" class="chip chip-btn is-on" data-rec="all" role="tab" aria-selected="true">All</button>
-        <button type="button" class="chip chip-btn" data-rec="mom" role="tab" aria-selected="false">Minutes of Meeting</button>
+        <button type="button" class="chip chip-btn" data-rec="all" role="tab" aria-selected="false">All</button>
+        <button type="button" class="chip chip-btn is-on" data-rec="mom" role="tab" aria-selected="true">Minutes of Meeting</button>
         <button type="button" class="chip chip-btn" data-rec="notice" role="tab" aria-selected="false">Notices</button>
         <button type="button" class="chip chip-btn" data-rec="circular" role="tab" aria-selected="false">Circulars</button>
       </div>
@@ -1857,7 +1857,7 @@ window.phFallback = function(img){
 
   /* ---- resolutions (Latest / All) and records (type filter) ---- */
   var LATEST_N = 5;
-  var resMode = 'latest', recMode = 'all';
+  var resMode = 'latest', recMode = 'mom', recTouched = false;
 
   function markSeg(btn, attr){
     var group = btn.parentNode;
@@ -1899,6 +1899,15 @@ window.phFallback = function(img){
     var list = document.getElementById('recList');
     if (!list) return;
     var items = Array.prototype.slice.call(list.querySelectorAll('.rec'));
+    /* The page opens on Minutes of Meeting. If the committee has not filed
+       any yet, show everything rather than an empty section  but never
+       override a category the resident chose themselves. */
+    if (!recTouched && items.length && recMode !== 'all' &&
+        !items.some(function(el){ return el.getAttribute('data-type') === recMode; })) {
+      recMode = 'all';
+      var allBtn = document.querySelector('#recFilter [data-rec="all"]');
+      if (allBtn) markSeg(allBtn, 'data-rec');
+    }
     paintList(items, function(el){
       return recMode === 'all' || el.getAttribute('data-type') === recMode;
     }, document.getElementById('recCount'), document.getElementById('recEmpty'), 'records');
@@ -1908,7 +1917,7 @@ window.phFallback = function(img){
     var r = e.target.closest ? e.target.closest('[data-res]') : null;
     if (r) { resMode = r.getAttribute('data-res'); markSeg(r, 'data-res'); resApply(); return; }
     var c = e.target.closest ? e.target.closest('[data-rec]') : null;
-    if (c) { recMode = c.getAttribute('data-rec'); markSeg(c, 'data-rec'); recApply(); }
+    if (c) { recTouched = true; recMode = c.getAttribute('data-rec'); markSeg(c, 'data-rec'); recApply(); }
   });
 
   resApply(); recApply();

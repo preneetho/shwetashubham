@@ -253,7 +253,12 @@ automatic.
 | `link` | The PDF file name, e.g. `gbm-april-2025.pdf`. |
 
 The `type` column drives the **All / Minutes of Meeting / Notices / Circulars**
-filter buttons, so it must be one of those three words.
+filter buttons, so it must be one of those three words. The section opens on
+**Minutes of Meeting**, since that is what residents look for most; if no row
+is marked `mom`, it opens on **All** instead so the section is never blank.
+
+A `link` that starts with `https://` opens in a **new tab**, so the resident
+does not lose their place on the page.
 
 ### Putting the actual PDFs on the site
 

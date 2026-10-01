@@ -546,8 +546,11 @@
       else { key = "notice"; label = "Notice"; pill = "pill-red"; }
       var dt = parseDate(r.date);
       var href = r.link && /^(https?:|#|mailto:)/.test(r.link) ? r.link : "#contact";
+      /* A real document opens in its own tab so the resident keeps their
+         place on the page; an in-page anchor must not. */
+      var away = /^https?:/i.test(href) ? ' target="_blank" rel="noopener"' : "";
       return '<a class="rec" data-type="' + key + '" data-date="' + esc(dt && dt.iso ? dt.iso : "") +
-        '" href="' + esc(href) + '"><span class="rec-date">' +
+        '" href="' + esc(href) + '"' + away + '><span class="rec-date">' +
         (dt && dt.day ? "<b>" + dt.day + "</b><span>" + esc(dt.monYear) + "</span>"
           : "<b>&middot;</b><span>" + esc(dt ? dt.raw : "") + "</span>") +
         '</span><span class="rec-main"><span class="pill ' + pill + '">' + esc(label) +
