@@ -486,6 +486,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("rows with no number are dropped, keeping the built-in list",
       cards(w).length === 11, cards(w).length + " cards");
 
+    /* Google returns an empty cell for text in a numeric column, which would
+       silently delete a helpline. The built-in list must survive that. */
+    w = makeDom(serve({
+      helplines: head +
+        "Emergency,X,Fire,101,Short code survived\r\n" +
+        "Society,Y,Maintenance Manager,,Number was lost by the sheet\r\n"
+    }));
+    await wait();
+    check("one unreadable number keeps the whole built-in list",
+      cards(w).length === 11, cards(w).length + " cards");
+
     w = makeDom(serve({ helplines: head }));
     await wait();
     check("an empty helplines tab keeps the built-in numbers",

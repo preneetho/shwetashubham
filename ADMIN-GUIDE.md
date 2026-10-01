@@ -122,6 +122,24 @@ accurate. It is driven by the **`helplines`** tab.
 | `number` | `108`, or a 10-digit mobile like `97042 85706` |
 | `note` | One short line saying when to call it |
 
+> **Important — format the `number` column as plain text.**
+> Google decides what a whole column holds by looking at its values. If most
+> of the numbers are plain digits (`112`, `108`, `1906`), Google treats the
+> column as *numbers*, and then quietly sends us a **blank** for anything that
+> is not purely numeric — a mobile like `97042 85706`, a landline, or a
+> toll-free line like `1800 599 6991`. Those helplines would vanish from the
+> page.
+>
+> To fix it: click the **D** column heading on the `helplines` tab, choose
+> **Format → Number → Plain text**, then re-enter or re-paste every number in
+> the column. Changing the format alone is not enough — the values have to be
+> typed in again afterwards.
+>
+> As a safety net, if the website spots a row with a name but no number it
+> ignores the whole tab and shows the built-in numbers instead, so the page
+> never displays a half-complete emergency list. If your edits are not showing
+> up, this is almost always why.
+
 The `group` decides the colour. **Emergency** rows are shown in red so they
 stand out; everything else is shown in the society green. If you type a group
 that is not in the list above, the row still appears, styled as `Society`.

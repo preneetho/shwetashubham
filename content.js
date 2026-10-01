@@ -423,6 +423,20 @@
     if (!el) return;
     var cards = rows.filter(function (r) { return r.name && r.number; });
     if (!cards.length) return;
+    /* A dropped helpline is a number a resident cannot reach, so a partly
+       readable sheet must never replace the vetted built-in list. Google
+       types a column from its values: when most numbers are bare digits the
+       column becomes numeric and every entry containing a space arrives
+       empty. Formatting the number column as plain text fixes it. */
+    var lost = rows.filter(function (r) { return r.name && !r.number; });
+    if (lost.length) {
+      if (window.console && console.warn) {
+        console.warn("Helplines: " + lost.length + " row(s) have a name but no number (" +
+          lost.map(function (r) { return r.name; }).join(", ") +
+          "). Format the number column in the sheet as plain text. Showing the built-in numbers instead.");
+      }
+      return;
+    }
     el.innerHTML = cards.map(function (r) {
       var label = String(r.group || "Society").trim();
       var g = HL_GROUPS[label.toLowerCase()] || HL_GROUPS.society;
