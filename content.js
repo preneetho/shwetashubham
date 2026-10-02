@@ -317,6 +317,13 @@
     }
   };
 
+  /* a committee number is worth tapping; anything else is left as written */
+  function phoneCell(num) {
+    var v = String(num == null ? "" : num).trim();
+    if (!/\d{6,}/.test(v.replace(/\s/g, ""))) return esc(v);
+    return '<a href="tel:' + telLink(v) + '">' + esc(v) + "</a>";
+  }
+
   R.committee = function (rows) {
     var groups = { core: [], advisory: [], extended: [] };
     rows.forEach(function (r) {
@@ -330,7 +337,7 @@
     if (core && groups.core.length) {
       core.innerHTML = groups.core.map(function (r) {
         return "<tr><td><b>" + esc(r.name) + "</b></td><td>" + esc(r.post) + "</td><td>" + esc(r.flat) +
-          '</td><td class="num ph masked">' + esc(r.phone) + "</td><td>" + rich(r.responsibilities) + "</td></tr>";
+          '</td><td class="num ph">' + phoneCell(r.phone) + "</td><td>" + rich(r.responsibilities) + "</td></tr>";
       }).join("");
     }
     [["advRows", groups.advisory], ["extRows", groups.extended]].forEach(function (p) {
@@ -338,7 +345,7 @@
       if (!el || !p[1].length) return;
       el.innerHTML = p[1].map(function (r) {
         return "<tr><td>" + esc(r.name) + "</td><td>" + esc(r.flat) +
-          '</td><td class="num ph masked">' + esc(r.phone) + "</td></tr>";
+          '</td><td class="num ph">' + phoneCell(r.phone) + "</td></tr>";
       }).join("");
     });
   };

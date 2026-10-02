@@ -274,7 +274,6 @@ section.alt .chip{background:var(--bg)}
 .chips .chip-btn{font:inherit; font-size:.86rem; cursor:pointer; color:var(--ink-2)}
 .chips .chip-btn:hover{border-color:var(--brand); color:var(--brand)}
 .chips .chip-btn.is-on{background:var(--brand); border-color:var(--brand); color:#fff}
-.masked{filter:blur(4.5px); user-select:none}
 
 /* nbh banner */
 .nbh{background:linear-gradient(135deg,#132f2a,#0b211d); color:#dcebe6; border-radius:18px; padding:34px; position:relative; overflow:hidden}
@@ -1523,25 +1522,20 @@ window.phFallback = function(img){
       <p>Management is structured into three groups &mdash; Core Committee, Advisory Committee and Extended Team.</p>
     </div>
 
-    <div style="margin-bottom:16px">
-      <button class="btn btn-ghost" id="revealBtn" aria-pressed="false">&#128065; Show contact numbers</button>
-      <span style="font-size:.84rem;color:var(--muted);margin-left:10px">Numbers are hidden by default to reduce spam.</span>
-    </div>
-
     <h3 style="margin-bottom:10px">Core Committee <span class="pill pill-grey">Overall governance &amp; administration</span></h3>
     <div class="tbl-wrap" style="margin-bottom:26px">
       <table>
         <thead><tr><th>Name</th><th>Post</th><th>Flat</th><th>Phone</th><th>Responsibilities</th></tr></thead>
         <tbody id="coreRows">
-          <tr><td><b>P Srujan Reddy</b></td><td>Chairman</td><td>D-201</td><td class="num ph masked">91511 11151</td><td>Procurement, External Affairs, Emergency Issues, Committee Escalation</td></tr>
-          <tr><td><b>P Srikanth Reddy</b></td><td>Vice Chairman</td><td>E-201</td><td class="num ph masked">97000 54360</td><td>Security, Office Staff Management, General Administration, Power Management, Adonmo</td></tr>
-          <tr><td><b>M Ramesh Kumar</b></td><td>Secretary</td><td>D-205</td><td class="num ph masked">70668 76208</td><td>Correspondence, Data Management, Rules &amp; Regulations, Resident Issues</td></tr>
-          <tr><td><b>Putta Damodar</b></td><td>Joint Secretary</td><td>D-305</td><td class="num ph masked">91675 21020</td><td>Data Management, Gido, Finance Assistance</td></tr>
-          <tr><td><b>Shiva Kumar Reddy</b></td><td>Treasurer</td><td>A-302</td><td class="num ph masked">97037 70004</td><td>Finance, Accounting and Audit</td></tr>
-          <tr><td><b>Jogi Joga Rao</b></td><td>Director</td><td>D-405</td><td class="num ph masked">94357 35076</td><td>Housekeeping &amp; Gardening, HK Material Procurement</td></tr>
-          <tr><td><b>M. Vani</b></td><td>Director</td><td>A-402</td><td class="num ph masked">91600 35524</td><td>Society Membership, NBH, Temple Management</td></tr>
-          <tr><td><b>Subrajit Nath</b></td><td>Director</td><td>F-308</td><td class="num ph masked">91777 51182</td><td>STP, WTP, Electricity &amp; Power Management</td></tr>
-          <tr><td><b>A Vinay Kumar</b></td><td>Director</td><td>B-G4</td><td class="num ph masked">84896 01981</td><td>Gym, Sports, Clubhouse, Amenities</td></tr>
+          <tr><td><b>P Srujan Reddy</b></td><td>Chairman</td><td>D-201</td><td class="num ph"><a href="tel:+919151111151">91511 11151</a></td><td>Procurement, External Affairs, Emergency Issues, Committee Escalation</td></tr>
+          <tr><td><b>P Srikanth Reddy</b></td><td>Vice Chairman</td><td>E-201</td><td class="num ph"><a href="tel:+919700054360">97000 54360</a></td><td>Security, Office Staff Management, General Administration, Power Management, Adonmo</td></tr>
+          <tr><td><b>M Ramesh Kumar</b></td><td>Secretary</td><td>D-205</td><td class="num ph"><a href="tel:+917066876208">70668 76208</a></td><td>Correspondence, Data Management, Rules &amp; Regulations, Resident Issues</td></tr>
+          <tr><td><b>Putta Damodar</b></td><td>Joint Secretary</td><td>D-305</td><td class="num ph"><a href="tel:+919167521020">91675 21020</a></td><td>Data Management, Gido, Finance Assistance</td></tr>
+          <tr><td><b>Shiva Kumar Reddy</b></td><td>Treasurer</td><td>A-302</td><td class="num ph"><a href="tel:+919703770004">97037 70004</a></td><td>Finance, Accounting and Audit</td></tr>
+          <tr><td><b>Jogi Joga Rao</b></td><td>Director</td><td>D-405</td><td class="num ph"><a href="tel:+919435735076">94357 35076</a></td><td>Housekeeping &amp; Gardening, HK Material Procurement</td></tr>
+          <tr><td><b>M. Vani</b></td><td>Director</td><td>A-402</td><td class="num ph"><a href="tel:+919160035524">91600 35524</a></td><td>Society Membership, NBH, Temple Management</td></tr>
+          <tr><td><b>Subrajit Nath</b></td><td>Director</td><td>F-308</td><td class="num ph"><a href="tel:+919177751182">91777 51182</a></td><td>STP, WTP, Electricity &amp; Power Management</td></tr>
+          <tr><td><b>A Vinay Kumar</b></td><td>Director</td><td>B-G4</td><td class="num ph"><a href="tel:+918489601981">84896 01981</a></td><td>Gym, Sports, Clubhouse, Amenities</td></tr>
         </tbody>
       </table>
     </div>
@@ -1553,11 +1547,11 @@ window.phFallback = function(img){
           <table style="min-width:auto">
             <thead><tr><th>Name</th><th>Flat</th><th>Phone</th></tr></thead>
             <tbody id="advRows">
-              <tr><td>Kumar A</td><td>A-G1</td><td class="num ph masked">88066 67603</td></tr>
-              <tr><td>Krishna Prakash</td><td>B-308</td><td class="num ph masked">63036 89930</td></tr>
-              <tr><td>Venkateshwar Rao</td><td>A-401</td><td class="num ph masked">99850 66678</td></tr>
-              <tr><td>Shaji Menon</td><td>D-507</td><td class="num ph masked">63098 72919</td></tr>
-              <tr><td>Nikhil</td><td>A-405</td><td class="num ph masked">98487 77708</td></tr>
+              <tr><td>Kumar A</td><td>A-G1</td><td class="num ph"><a href="tel:+918806667603">88066 67603</a></td></tr>
+              <tr><td>Krishna Prakash</td><td>B-308</td><td class="num ph"><a href="tel:+916303689930">63036 89930</a></td></tr>
+              <tr><td>Venkateshwar Rao</td><td>A-401</td><td class="num ph"><a href="tel:+919985066678">99850 66678</a></td></tr>
+              <tr><td>Shaji Menon</td><td>D-507</td><td class="num ph"><a href="tel:+916309872919">63098 72919</a></td></tr>
+              <tr><td>Nikhil</td><td>A-405</td><td class="num ph"><a href="tel:+919848777708">98487 77708</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -1568,12 +1562,12 @@ window.phFallback = function(img){
           <table style="min-width:auto">
             <thead><tr><th>Name</th><th>Flat</th><th>Phone</th></tr></thead>
             <tbody id="extRows">
-              <tr><td>Ravinder B</td><td>E-302</td><td class="num ph masked">91777 62227</td></tr>
-              <tr><td>Gajendra B</td><td>B-202</td><td class="num ph masked">83328 07022</td></tr>
-              <tr><td>Prashanth Reddy A</td><td>C-405</td><td class="num ph masked">94902 17248</td></tr>
-              <tr><td>Nivas T</td><td>C-302</td><td class="num ph masked">94905 13589</td></tr>
-              <tr><td>A Kotishwar</td><td>C-204</td><td class="num ph masked">99599 83567</td></tr>
-              <tr><td>Preneeth O</td><td>D-402</td><td class="num ph masked">90009 22546</td></tr>
+              <tr><td>Ravinder B</td><td>E-302</td><td class="num ph"><a href="tel:+919177762227">91777 62227</a></td></tr>
+              <tr><td>Gajendra B</td><td>B-202</td><td class="num ph"><a href="tel:+918332807022">83328 07022</a></td></tr>
+              <tr><td>Prashanth Reddy A</td><td>C-405</td><td class="num ph"><a href="tel:+919490217248">94902 17248</a></td></tr>
+              <tr><td>Nivas T</td><td>C-302</td><td class="num ph"><a href="tel:+919490513589">94905 13589</a></td></tr>
+              <tr><td>A Kotishwar</td><td>C-204</td><td class="num ph"><a href="tel:+919959983567">99599 83567</a></td></tr>
+              <tr><td>Preneeth O</td><td>D-402</td><td class="num ph"><a href="tel:+919000922546">90009 22546</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -1829,21 +1823,6 @@ window.phFallback = function(img){
     });
     noRes.classList.toggle('hidden', shown !== 0);
     countEl.textContent = q ? (shown + ' of ' + accs.length + ' sections match \u201c' + input.value.trim() + '\u201d') : '';
-  });
-
-  /* ---- reveal committee phone numbers ---- */
-  var revealBtn = document.getElementById('revealBtn');
-  revealBtn.addEventListener('click', function(){
-    var on = revealBtn.getAttribute('aria-pressed') === 'true';
-    Array.prototype.forEach.call(document.querySelectorAll('td.ph'), function(td){
-      td.classList.toggle('masked', on);
-      if (!on && !td.querySelector('a')) {
-        var n = td.textContent.trim();
-        td.innerHTML = '<a href="tel:+91' + n.replace(/\s/g,'') + '">' + n + '</a>';
-      }
-    });
-    revealBtn.setAttribute('aria-pressed', String(!on));
-    revealBtn.innerHTML = on ? '\uD83D\uDC41 Show contact numbers' : '\uD83D\uDE48 Hide contact numbers';
   });
 
   /* ---- onboarding checklist ---- */

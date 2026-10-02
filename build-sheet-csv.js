@@ -221,9 +221,9 @@ write("settings", [
 /* ---------- committee ---------- */
 {
   const rows = [["group", "name", "post", "flat", "phone", "responsibilities"]];
-  const cr = /<tr><td><b>([\s\S]*?)<\/b><\/td><td>([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><td class="num ph masked">([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><\/tr>/g;
+  const cr = /<tr><td><b>([\s\S]*?)<\/b><\/td><td>([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><td class="num ph">([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><\/tr>/g;
   let m; while ((m = cr.exec(pickId("coreRows")))) rows.push(["core", txt(m[1]), txt(m[2]), txt(m[3]), txt(m[4]), txt(m[5])]);
-  const sr = /<tr><td>([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><td class="num ph masked">([\s\S]*?)<\/td><\/tr>/g;
+  const sr = /<tr><td>([\s\S]*?)<\/td><td>([\s\S]*?)<\/td><td class="num ph">([\s\S]*?)<\/td><\/tr>/g;
   [["advisory", "advRows"], ["extended", "extRows"]].forEach(([g, id]) => {
     sr.lastIndex = 0; const b = pickId(id); let n;
     while ((n = sr.exec(b))) rows.push([g, txt(n[1]), "", txt(n[2]), txt(n[3]), ""]);

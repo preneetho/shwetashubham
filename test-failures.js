@@ -143,9 +143,9 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("search filters re-rendered accordions", vis > 0 && vis < 12,
       vis + " of 12 match 'pets'");
 
-    d.getElementById("revealBtn").click();
-    check("phone reveal works on sheet rows",
-      !!d.querySelector("#coreRows td.ph a"),
+    check("committee numbers from the sheet can be dialled",
+      d.querySelectorAll("#coreRows td.ph a[href^='tel:+91']").length ===
+        d.querySelectorAll("#coreRows td.ph").length,
       d.querySelector("#coreRows td.ph").innerHTML);
 
     d.querySelector("#gal figure").dispatchEvent(new w.Event("click", { bubbles: true }));

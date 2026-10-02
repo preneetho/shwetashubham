@@ -175,7 +175,7 @@ The site is live, but these are not finished yet:
 - [ ] **Resolutions are sample entries** — replace with the society's actual resolutions
 - [ ] **Minutes & notices are sample entries** and link to `#contact` — upload the real PDFs and set each `link`
 - [ ] NoBrokerhood links are generic — swap in the society's own NBH URL
-- [ ] Committee phone numbers are blurred behind a toggle — confirm the committee is OK publishing them at all
+- [ ] Committee phone numbers are published in full — confirm the committee is OK with that
 - [ ] Anything in the Google Sheet is effectively public — keep private data out of it
 - [ ] Guidelines PDF version date reads *26 April 2026* — likely should be 2025
 - [ ] Football is banned in the play area (4.5) and ball games in tot-lots (5.1) — clarify where football *is* allowed
