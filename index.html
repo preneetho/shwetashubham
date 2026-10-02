@@ -168,6 +168,8 @@ thead th{background:var(--brand-50); color:var(--brand-600); font-size:.74rem; l
 tbody tr:last-child td{border-bottom:0}
 tbody tr:hover{background:#fbfbf9}
 td.num{white-space:nowrap; font-variant-numeric:tabular-nums; font-weight:600}
+/* flat numbers: third column of the core table, second of the other two */
+#coreRows td:nth-child(3), #advRows td:nth-child(2), #extRows td:nth-child(2){white-space:nowrap}
 
 /* ---------- pills ---------- */
 .pill{display:inline-block; padding:3px 10px; border-radius:100px; font-size:.74rem; font-weight:700; letter-spacing:.03em}
