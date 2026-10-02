@@ -2101,7 +2101,7 @@ window.phFallback = function(img){
         b.classList.toggle('on', k === at);
         b.setAttribute('aria-current', k === at ? 'true' : 'false');
       });
-      if (live) live.textContent = n ? 'Poster ' + (at + 1) + ' of ' + n : '';
+      if (live) live.textContent = (n && Date.now() > quiet) ? 'Poster ' + (at + 1) + ' of ' + n : '';
     }
 
     function build(){
@@ -2117,10 +2117,12 @@ window.phFallback = function(img){
       }
       nav.hidden = n < 2;
       paint();
+      resume();
     }
 
     nav.addEventListener('click', function(e){
       if (!e.target.closest) return;
+      surrender();
       var d = e.target.closest('.pos-dot');
       if (d) { go(parseInt(d.getAttribute('data-i'), 10)); return; }
       var a = e.target.closest('.pos-arrow');
@@ -2129,6 +2131,8 @@ window.phFallback = function(img){
 
     var tick = 0;
     grid.addEventListener('scroll', function(){
+      /* a sideways scroll nobody asked for is the resident swiping */
+      if (touching || Date.now() > quiet) surrender();
       if (tick) return;
       tick = requestAnimationFrame(function(){ tick = 0; paint(); });
     }, { passive:true });
@@ -2136,9 +2140,63 @@ window.phFallback = function(img){
     new MutationObserver(build).observe(grid, { childList:true });
 
     var mq = window.matchMedia('(max-width:640px)');
-    var onMq = function(){ grid.scrollLeft = 0; paint(); };
+    var onMq = function(){ grid.scrollLeft = 0; paint(); resume(); };
     if (mq.addEventListener) mq.addEventListener('change', onMq);
     else if (mq.addListener) mq.addListener(onMq);
+
+    /* the posters move along by themselves, so a resident who never swipes
+       still sees that there is more than one */
+    var AUTO_MS = 5000, QUIET_MS = 1200;
+    var timer = 0, taken = false, quiet = 0, shown = false, touching = false,
+        calm = window.matchMedia('(prefers-reduced-motion:reduce)');
+
+    function running(){
+      return !taken && !touching && !calm.matches && mq.matches && shown &&
+             !document.hidden && figs().length > 1;
+    }
+    function halt(){ if (timer) { clearInterval(timer); timer = 0; } }
+    function resume(){ halt(); if (running()) timer = setInterval(step, AUTO_MS); }
+
+    function step(){
+      var f = figs(), at = index();
+      /* mark the next moment as ours, so the move is not mistaken for a
+         swipe and is not read out to a screen reader every few seconds */
+      quiet = Date.now() + QUIET_MS;
+      if (at >= f.length - 1) {
+        /* start over rather than rewinding back past all nine posters */
+        grid.style.scrollBehavior = 'auto';
+        grid.scrollLeft = 0;
+        requestAnimationFrame(function(){ grid.style.scrollBehavior = ''; });
+      } else {
+        go(at + 1);
+      }
+    }
+
+    /* one deliberate move  a swipe, an arrow, a dot, or opening a poster 
+       and it stays where the resident put it */
+    function surrender(){ taken = true; halt(); }
+    grid.addEventListener('click', surrender);
+
+    /* never move a poster out from under a resting finger; lift the finger
+       without having dragged anything and it carries on */
+    function hold(){ touching = true; halt(); }
+    function release(){ touching = false; resume(); }
+    grid.addEventListener('pointerdown', hold, { passive:true });
+    grid.addEventListener('touchstart', hold, { passive:true });
+    ['pointerup','pointercancel','touchend','touchcancel'].forEach(function(ev){
+      grid.addEventListener(ev, release, { passive:true });
+    });
+
+    document.addEventListener('visibilitychange', resume);
+    if (calm.addEventListener) calm.addEventListener('change', resume);
+    if (window.IntersectionObserver) {
+      new IntersectionObserver(function(e){
+        shown = e[0].isIntersecting;
+        resume();
+      }, { threshold:0.4 }).observe(grid);
+    } else {
+      shown = true;
+    }
 
     build();
   })();
