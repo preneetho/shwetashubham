@@ -284,6 +284,13 @@ section.alt .chip{background:var(--bg)}
 .band .nbh .card{background:rgba(255,255,255,.055); border:1px solid rgba(255,255,255,.12); box-shadow:none; color:#cfe3dd}
 .nbh .card b{color:#fff}
 .nbh .card .pill{background:rgba(216,169,74,.18); color:#e9c377}
+.nbh-task{display:flex; flex-wrap:wrap; align-items:center; gap:14px 20px; margin-top:22px;
+  background:rgba(216,169,74,.1); border:1px solid rgba(216,169,74,.3); border-radius:14px; padding:18px 20px}
+.nbh-task>div{flex:1 1 300px; min-width:0}
+.nbh-task b{color:#fff}
+.nbh-task p{margin:6px 0 0; font-size:.9rem}
+.nbh-task .btn{flex:0 0 auto}
+@media(max-width:640px){ .nbh-task .btn{width:100%; text-align:center} }
 
 /* ---------- gallery + lightbox ---------- */
 .gal{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:14px}
@@ -1600,6 +1607,13 @@ window.phFallback = function(img){
         <a class="btn btn-ghost" style="color:#dfeee9;border-color:rgba(255,255,255,.3)" href="https://play.google.com/store/apps/details?id=com.app.nobrokerhood" target="_blank" rel="noopener noreferrer">Android app</a>
         <a class="btn btn-ghost" style="color:#dfeee9;border-color:rgba(255,255,255,.3)" href="https://apps.apple.com/in/app/nobrokerhood-manage-visitors/id1357972233" target="_blank" rel="noopener noreferrer">iOS app</a>
       </div>
+      <div class="nbh-task">
+        <div>
+          <b>Raising a complaint or helpdesk ticket</b>
+          <p>Tickets are handled in the app, not on this website. On a phone with NoBrokerhood installed this button opens the app &mdash; from there tap <b>Helpdesk</b> under &ldquo;Services You Need&rdquo;, then <b>Create Ticket</b>.</p>
+        </div>
+        <a class="btn btn-gold" href="https://www.nobrokerhood.com/" target="_blank" rel="noopener noreferrer">Raise a ticket &#8599;</a>
+      </div>
       <div class="grid g2">
         <div class="card">
           <span class="pill">Use the app for</span>
@@ -1685,7 +1699,7 @@ window.phFallback = function(img){
     <div class="sec-head">
       <div class="kicker">Get in touch</div>
       <h2>Suggestions &amp; support</h2>
-      <p>A suggestion box is available at the reception. For complaints and helpdesk tickets please use the NoBrokerhood app, or call the society office during working hours.</p>
+      <p>A suggestion box is available at the reception. For complaints and helpdesk tickets please <a href="#nbh">use the NoBrokerhood app</a>, or call the society office during working hours.</p>
     </div>
     <div class="grid g2" style="align-items:start">
       <div class="card">
