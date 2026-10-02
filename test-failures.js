@@ -639,6 +639,81 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       mail(w).getAttribute("href"));
   }
 
+  /* 26. "New" badges  what has appeared since the resident's last visit */
+  {
+    const KEY = "ss-seen-v1";
+    /* the badge pass waits for the renders to stop, so give it longer */
+    const settle = () => new Promise(r => setTimeout(r, 1700));
+    const badged = (w, sel) => w.document.querySelectorAll(sel + ".is-new").length;
+    const count = (w, sel) => {
+      const t = w.document.querySelector(sel + " .newcount");
+      return t ? t.textContent : "";
+    };
+    const forget = keys => makeDom(serve(), win =>
+      win.localStorage.setItem(KEY, JSON.stringify(keys)));
+
+    let w = makeDom(serve());
+    await settle();
+    const seen = JSON.parse(w.localStorage.getItem(KEY) || "[]");
+    check("a first visit badges nothing and just remembers the page",
+      seen.length > 0 && w.document.querySelectorAll(".is-new").length === 0,
+      seen.length + " entries remembered");
+
+    /* a returning resident, with one record and one resolution added since */
+    const rec = seen.find(k => k.indexOf("r|") === 0);
+    const res = seen.find(k => k.indexOf("s|") === 0);
+    w = forget(seen.filter(k => k !== rec && k !== res));
+    await settle();
+    check("an entry added since the last visit is badged",
+      badged(w, "#recList .rec") === 1 && badged(w, "#resList .res") === 1,
+      badged(w, "#recList .rec") + " record, " + badged(w, "#resList .res") + " resolution");
+    check("the menu says how many are new",
+      count(w, '#nav a[href="#records"]') === "1" &&
+      count(w, '#nav a[href="#resolutions"]') === "1",
+      count(w, '#nav a[href="#records"]') + " / " + count(w, '#nav a[href="#resolutions"]'));
+    /* both of those are on screen already, so a chip count would just repeat
+       the badge sitting next to the title */
+    check("a new row already on screen is not counted on a chip",
+      count(w, '#recFilter [data-rec="all"]') === "" &&
+      count(w, '#resFilter [data-res="all"]') === "",
+      "no chip counts");
+
+    /* the list opens on Minutes, so a new notice is behind a filter the
+       resident has no reason to press unless it says so */
+    const titles = Array.prototype.map.call(
+      w.document.querySelectorAll('#recList .rec[data-type="notice"]'),
+      e => e.querySelector(".rec-main b").textContent.trim());
+    const notice = seen.find(k => titles.some(t => k === "r|" + k.split("|")[1] + "|" + t));
+    w = forget(seen.filter(k => k !== notice));
+    await settle();
+    check("a new notice is announced on the chip that hides it",
+      count(w, '#recFilter [data-rec="notice"]') === "1" &&
+      count(w, '#recFilter [data-rec="all"]') === "1" &&
+      count(w, '#recFilter [data-rec="mom"]') === "",
+      "notice " + count(w, '#recFilter [data-rec="notice"]') +
+      ", all " + count(w, '#recFilter [data-rec="all"]'));
+
+    /* and pressing that chip reveals it, so the count has done its job */
+    w.document.querySelector('[data-rec="notice"]')
+      .dispatchEvent(new w.Event("click", { bubbles: true }));
+    check("the count clears once that filter is showing",
+      count(w, '#recFilter [data-rec="notice"]') === "" &&
+      count(w, '#nav a[href="#records"]') === "1",
+      "chip cleared, menu still says 1");
+
+    /* nothing new means no leftover counts cluttering the menu */
+    w = forget(seen);
+    await settle();
+    check("a resident who is up to date sees no badges",
+      w.document.querySelectorAll(".is-new, .newcount").length === 0,
+      w.document.querySelectorAll(".is-new, .newcount").length + " left over");
+
+    /* the badge is drawn by CSS, so it must stay out of the indexed text */
+    check("the badge is not part of the list text",
+      w.document.getElementById("recList").textContent.indexOf("New") === -1,
+      "clean");
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

@@ -250,6 +250,15 @@ details.acc .body ul{margin-top:12px}
 .rec-main b{display:block; margin-top:7px; font-size:.97rem}
 .rec-main small{display:block; color:var(--muted); font-size:.87rem; line-height:1.45}
 
+/* ---------- "new since your last visit" ---------- */
+/* The badge is drawn by CSS instead of being inserted into the list, so it
+   never reaches the page search index or the sheet round-trip. */
+.rec.is-new .rec-main b::after,
+.res.is-new > b::after{content:"New"; display:inline-block; vertical-align:1px; margin-left:8px; background:var(--gold); color:#fff; font-size:.63rem; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:2px 7px; border-radius:100px}
+.newcount{display:inline-block; min-width:18px; margin-left:7px; padding:0 5px; background:var(--gold); color:#fff; font-size:.68rem; font-weight:700; line-height:18px; text-align:center; border-radius:100px; vertical-align:1px}
+.seg-btn.is-on .newcount,
+.chip-btn.is-on .newcount{background:#fff; color:var(--brand)}
+
 /* ---------- misc ---------- */
 .note{background:var(--gold-50); border-left:3px solid var(--gold); padding:14px 18px; border-radius:0 10px 10px 0; font-size:.9rem; color:#6d4f12}
 .note.red{background:var(--danger-50); border-color:var(--danger); color:#7d2717}
@@ -1894,6 +1903,7 @@ window.phFallback = function(img){
     paintList(items, function(el){
       return resMode === 'all' || ranked.indexOf(el) < LATEST_N;
     }, document.getElementById('resCount'), document.getElementById('resEmpty'), 'resolutions');
+    paintCounts();
   }
 
   function recApply(){
@@ -1912,6 +1922,7 @@ window.phFallback = function(img){
     paintList(items, function(el){
       return recMode === 'all' || el.getAttribute('data-type') === recMode;
     }, document.getElementById('recCount'), document.getElementById('recEmpty'), 'records');
+    paintCounts();
   }
 
   document.addEventListener('click', function(e){
@@ -1921,8 +1932,97 @@ window.phFallback = function(img){
     if (c) { recTouched = true; recMode = c.getAttribute('data-rec'); markSeg(c, 'data-rec'); recApply(); }
   });
 
-  resApply(); recApply();
-  window.SSLists = function(){ resApply(); recApply(); };
+  /* ---- "New" since the resident's last visit ---- */
+  /* What counts as new is which entries have appeared since last time, not
+     how recent their dates are: minutes are often uploaded weeks after the
+     meeting, and a back-dated document is still news to the resident. */
+  var SEEN_KEY = 'ss-seen-v1', SESS_KEY = 'ss-new-v1', SEEN_MAX = 300;
+  var decided = false;
+
+  function store(name){
+    try { var s = window[name]; s.getItem(SEEN_KEY); return s; } catch (e) { return null; }
+  }
+
+  function itemKey(el){
+    var isRec = el.classList.contains('rec');
+    /* a record's first <b> is the day of the month, so take the title */
+    var t = isRec ? el.querySelector('.rec-main b') : el.querySelector('b');
+    return [isRec ? 'r' : 's', el.getAttribute('data-date') || '',
+      (t ? t.textContent : '').replace(/\s+/g, ' ').trim()].join('|');
+  }
+
+  function setCount(el, n){
+    if (!el) return;
+    var tag = el.querySelector('.newcount');
+    if (!n) { if (tag) tag.parentNode.removeChild(tag); return; }
+    if (!tag) { tag = document.createElement('span'); tag.className = 'newcount'; el.appendChild(tag); }
+    tag.textContent = n;
+    tag.setAttribute('aria-label', n + ' new since your last visit');
+  }
+
+  /* A chip counts what is new and *hidden behind it*: repeating a count for
+     rows already on screen, which carry their own badge, would just be noise.
+     The menu keeps the section total, since the resident may not have
+     scrolled that far yet. */
+  function paintCounts(){
+    if (!decided) return;
+    var tot = { res: 0, rec: 0 }, hid = { res: 0, mom: 0, notice: 0, circular: 0 };
+    Array.prototype.forEach.call(
+      document.querySelectorAll('#recList .rec.is-new, #resList .res.is-new'),
+      function(el){
+        if (el.classList.contains('res')) { tot.res++; if (el.hidden) hid.res++; return; }
+        tot.rec++;
+        var t = el.getAttribute('data-type');
+        if (el.hidden && t in hid) hid[t]++;
+      });
+    ['mom', 'notice', 'circular'].forEach(function(t){
+      setCount(document.querySelector('#recFilter [data-rec="' + t + '"]'), hid[t]);
+    });
+    setCount(document.querySelector('#recFilter [data-rec="all"]'),
+      hid.mom + hid.notice + hid.circular);
+    setCount(document.querySelector('#resFilter [data-res="all"]'), hid.res);
+    setCount(document.querySelector('#nav a[href="#records"]'), tot.rec);
+    setCount(document.querySelector('#nav a[href="#resolutions"]'), tot.res);
+  }
+
+  function markNew(){
+    var ls = store('localStorage');
+    if (!ls) return;
+    var items = Array.prototype.slice.call(
+      document.querySelectorAll('#recList .rec, #resList .res'));
+    if (!items.length) return;
+    var keys = items.map(itemKey);
+
+    var ss = store('sessionStorage'), fresh = null, held = ss && ss.getItem(SESS_KEY);
+    if (held) { try { fresh = JSON.parse(held); } catch (e) { fresh = null; } }
+    if (!fresh) {
+      var prev = null;
+      try { prev = JSON.parse(ls.getItem(SEEN_KEY) || 'null'); } catch (e) { prev = null; }
+      /* On a first visit every entry would be new, which is noise rather than
+         news, so the first visit only records what is already on the page. */
+      fresh = (prev && prev.length)
+        ? keys.filter(function(k){ return prev.indexOf(k) < 0; }) : [];
+      /* Held for the browsing session so a reload does not clear the badges
+         the resident has not read yet. */
+      if (ss) { try { ss.setItem(SESS_KEY, JSON.stringify(fresh)); } catch (e) {} }
+      try { ls.setItem(SEEN_KEY, JSON.stringify(keys.slice(0, SEEN_MAX))); } catch (e) {}
+    }
+
+    items.forEach(function(el, i){
+      el.classList.toggle('is-new', fresh.indexOf(keys[i]) > -1);
+    });
+    decided = true;
+    paintCounts();
+  }
+
+  /* Both the built-in lists and the sheet render into these sections, so wait
+     for the renders to stop before deciding what the resident has not seen 
+     otherwise every row the sheet brings in looks new on arrival. */
+  var newTimer = null;
+  function scheduleNew(){ clearTimeout(newTimer); newTimer = setTimeout(markNew, 1200); }
+
+  resApply(); recApply(); scheduleNew();
+  window.SSLists = function(){ resApply(); recApply(); scheduleNew(); };
 
   /* ---- gallery lightbox (shared by the photo gallery and the posters) ---- */
   var galleries = Array.prototype.slice.call(document.querySelectorAll('#gal, #posGrid'));

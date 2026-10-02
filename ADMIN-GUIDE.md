@@ -260,6 +260,14 @@ is marked `mom`, it opens on **All** instead so the section is never blank.
 A `link` that starts with `https://` opens in a **new tab**, so the resident
 does not lose their place on the page.
 
+Residents see a small **New** badge against any minute, notice, circular or
+resolution that was not on the page the last time they visited, and a count on
+the filter buttons and the menu. This is worked out on the resident's own
+phone or computer, so there is nothing for you to set  just add the row and
+it will be flagged for everyone who has not seen it yet. It is based on the
+rows appearing, not on the `date` column, so minutes uploaded months after
+the meeting are still flagged.
+
 ### Putting the actual PDFs on the site
 
 1. Give the file a simple name with no spaces, e.g. `gbm-april-2025.pdf`.
