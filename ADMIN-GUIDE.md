@@ -282,6 +282,29 @@ Step 3 needs no redeploy — only adding the PDF itself in step 2 does.
 If you leave `link` blank, the row still appears but points residents at the
 contact section instead of a document.
 
+### Linking a file you keep in Google Drive
+
+You do not have to put a PDF on the website at all. If the file already sits in
+the society's Google Drive, paste its share link instead — into the `link`
+column of `records`, or the `url` column of `downloads`.
+
+1. In Drive, right-click the file → **Share** → under **General access** choose
+   **Anyone with the link**. If you skip this, residents get a "request access"
+   screen.
+2. Right-click again → **Copy link**.
+3. Paste it into the column. Nothing else to do — no redeploy.
+
+The website opens any link beginning `http` **in a new tab**, so residents never
+lose their place on the page.
+
+This is the easier option when a document changes often: replace the file in
+Drive using **Manage versions** and the website points at the new copy straight
+away, with no change to the sheet. The Society Guidelines PDF is linked this way.
+
+A copy of the guidelines also still sits in the website folder as
+`Shweta-Shubham-Guidelines.pdf`. Leave it there — it is the backup if the Drive
+file is ever moved or its sharing is tightened by mistake.
+
 ---
 
 ## Part 3 — The three rules

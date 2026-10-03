@@ -379,7 +379,10 @@
     el.innerHTML = rows.map(function (r, i) {
       var last = i === rows.length - 1;
       var href = r.url || "#contact";
-      var dl = /\.(pdf|docx?|xlsx?|png|jpe?g)$/i.test(href) ? " download" : "";
+      /* An off-site file (Google Drive, say) must not navigate the portal away,
+         and "download" is ignored across origins anyway, so send it to a new tab. */
+      var dl = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener"'
+        : (/\.(pdf|docx?|xlsx?|png|jpe?g)$/i.test(href) ? " download" : "");
       return "<a href=\"" + esc(href) + '"' + dl + ' style="display:block;padding:16px 20px' +
         (last ? "" : ";border-bottom:1px solid var(--line)") +
         ';color:inherit;text-decoration:none"><b>\uD83D\uDCC4 ' + esc(r.title) +

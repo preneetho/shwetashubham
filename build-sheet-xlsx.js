@@ -67,7 +67,7 @@ const HELP = [
   ["committee", "group = core / advisory / extended"],
   ["escalation", "Who to contact, in order"],
   ["checklist", "The new-resident checklist. Numbering is automatic."],
-  ["downloads", "Forms and documents. Put the file next to the website and use its file name in url."],
+  ["downloads", "Forms and documents. Paste a Google Drive share link in url, or a file name kept beside the website."],
   ["gallery", "Photos. Paste a Google Drive share link in file, or use an images folder file name."],
   ["posters", "Tall 9:16 guideline posters. Use a Google Drive link, or the image file name."],
   ["events", "Photographs from society events. See the note below."],

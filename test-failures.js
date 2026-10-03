@@ -860,6 +860,51 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       e.document.querySelectorAll("#builtGrid .built-card").length + " cards kept");
   }
 
+  /* 29. forms & downloads — files kept elsewhere must not steal the tab */
+  {
+    const head = "title,note,url\r\n";
+    const links = w => Array.prototype.slice.call(w.document.querySelectorAll("#dlList a"));
+
+    /* the guidelines now live in Google Drive, so the link must leave for a new tab */
+    let w = makeDom(serve());
+    await wait();
+    const g = links(w)[0];
+    check("the built-in guidelines link points at Google Drive",
+      /^https:\/\/drive\.google\.com\/file\/d\//.test(g.getAttribute("href")),
+      g.getAttribute("href"));
+    check("the built-in guidelines link opens in its own tab",
+      g.getAttribute("target") === "_blank" && g.getAttribute("rel") === "noopener" &&
+      !g.hasAttribute("download"),
+      "target=_blank, no download");
+
+    w = makeDom(serve({
+      downloads: head + "Guidelines,Version 2,https://drive.google.com/file/d/abc/view\r\n" +
+        "Vehicle form,Ask at the office,\r\n" +
+        "Pet form,Fill and return,forms/pet.pdf\r\n"
+    }));
+    await wait();
+    const a = links(w);
+    check("a Drive link from the sheet opens in its own tab",
+      a[0].getAttribute("target") === "_blank" && a[0].getAttribute("rel") === "noopener" &&
+      !a[0].hasAttribute("download"),
+      a[0].getAttribute("href"));
+    check("a row with no link still points at the office",
+      a[1].getAttribute("href") === "#contact" && !a[1].hasAttribute("target"),
+      a[1].getAttribute("href"));
+    check("a file sitting beside the page is still downloaded, not opened",
+      a[2].hasAttribute("download") && !a[2].hasAttribute("target"),
+      a[2].getAttribute("href"));
+
+    /* a pasted link must never be able to run anything */
+    w = makeDom(serve({
+      downloads: head + 'Bad,note,"javascript:alert(1)"\r\n'
+    }));
+    await wait();
+    check("a javascript: link is not treated as an outside file",
+      !links(w)[0].hasAttribute("target"),
+      links(w)[0].getAttribute("href"));
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;
