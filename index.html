@@ -101,7 +101,7 @@ header.site .wrap{display:flex; align-items:center; gap:16px; padding-top:12px; 
    for the brand subtitle. The logo wordmark already carries the society name. */
 header.site .brand .brand-txt{display:none}
 nav.main{display:flex; gap:2px; align-items:center; flex:none}
-nav.main a{padding:8px 8px; border-radius:8px; font-size:.83rem; font-weight:550; color:var(--ink-2); white-space:nowrap}
+nav.main a{padding:8px 6px; border-radius:8px; font-size:.83rem; font-weight:550; color:var(--ink-2); white-space:nowrap}
 nav.main a:hover{background:var(--brand-50); color:var(--brand-600); text-decoration:none}
 .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; font-weight:600; font-size:.88rem; border:1px solid transparent; cursor:pointer; font-family:inherit}
 .btn-primary{background:var(--brand); color:#fff}
@@ -113,9 +113,15 @@ nav.main a:hover{background:var(--brand-50); color:var(--brand-600); text-decora
 .menu-btn{display:none; background:none; border:1px solid var(--line); border-radius:9px; padding:9px 11px; cursor:pointer}
 .menu-btn span{display:block;width:18px;height:2px;background:var(--ink);margin:3px 0;border-radius:2px}
 header.site .btn-gold{flex:none; white-space:nowrap}
-header.site .wrap{gap:10px}
+/* The header carries more across than any band below it, so it is allowed a
+   little more width than the page content rather than spilling past its own
+   edge and pushing the button off the screen. */
+header.site .wrap{gap:10px; max-width:1200px}
 
-@media(max-width:1080px){
+/* Eleven links and the NoBrokerhood button need more room than the centred
+   wrap can give, so the menu is folded away well before the links would
+   run past the edge of the window. */
+@media(max-width:1199px){
   nav.main{position:absolute; top:100%; left:0; right:0; flex-direction:column; align-items:stretch; background:var(--card); border-bottom:1px solid var(--line); padding:10px; gap:0; box-shadow:var(--shadow); display:none; max-height:72vh; overflow-y:auto; overscroll-behavior:contain}
   nav.main.open{display:flex}
   nav.main a{padding:12px 14px; font-size:.95rem; border-bottom:1px solid var(--line)}
