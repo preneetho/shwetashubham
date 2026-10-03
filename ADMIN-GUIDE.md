@@ -517,9 +517,10 @@ page.
 
 ---
 
-## Part 6c — Built since handover
+## Part 6c — Infrastructure & Facilities Created by SSMACS
 
-The **Built since handover** section lists what the Association has added or
+The **Infrastructure & Facilities Created by SSMACS Post Builder Handover**
+section lists what the Association has added or
 restored since the builder handed the community over — the amphitheater, Gate 5,
 the temple, the renovated pool and so on. It sits just below the events
 carousel and is filled from the `improvements` tab:

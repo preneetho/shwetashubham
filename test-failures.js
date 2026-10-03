@@ -817,7 +817,7 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "hidden");
   }
 
-  /* 28. what SSMACS has built since handover */
+  /* 28. infrastructure & facilities created by SSMACS */
   {
     const csv = "title,category,year,details\r\n" +
       "Amphitheater,Community spaces,2024,An open-air stage\r\n" +

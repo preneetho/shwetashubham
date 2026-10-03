@@ -556,7 +556,8 @@
     support: { pill: "pill-green", cls: "" }
   };
 
-  /* What the Association has built since handover. A row with no title is a
+  /* Infrastructure and facilities created by SSMACS since the builder handed
+     the community over. A row with no title is a
      blank line in the sheet, and a tab full of them would empty the section,
      so the static cards are kept unless there is something real to show. */
   R.improvements = function (rows) {

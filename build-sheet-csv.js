@@ -82,7 +82,7 @@ write("settings", [
   ["security_phone", "90304 93579"],
   ["security_hours", "Nights & emergencies"],
   ["society_email", txt(between(/<a[^>]*data-ss="society_email"[^>]*>/, /<\/a>/))],
-  ["footer_note", "Guidelines v1.0 \u00b7 Prepared by SSMAC \u00b7 Approved in the April GBM"],
+  ["footer_note", "Guidelines v1.0 \u00b7 Prepared by SSMACS \u00b7 Approved in the April GBM"],
   ["map_embed", "https://maps.google.com/maps?q=Shweta+Shubham,+Kompally,+Hyderabad&z=16&hl=en&output=embed"]
 ]);
 
@@ -130,7 +130,7 @@ write("settings", [
   write("events", [["name", "date", "details", "photo", "video"]]);
 }
 
-/* ---------- built since handover ---------- */
+/* ---------- infrastructure & facilities created by SSMACS ---------- */
 {
   const rows = [["title", "category", "year", "details"]];
   const re = /<article class="card built-card"><div class="built-top"><span class="chip">([\s\S]*?)<\/span>(?:<span class="built-year">([\s\S]*?)<\/span>)?<\/div><h3>([\s\S]*?)<\/h3><p>([\s\S]*?)<\/p><\/article>/g;

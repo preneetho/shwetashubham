@@ -71,7 +71,7 @@ const HELP = [
   ["gallery", "Photos. Paste a Google Drive share link in file, or use an images folder file name."],
   ["posters", "Tall 9:16 guideline posters. Use a Google Drive link, or the image file name."],
   ["events", "Photographs from society events. See the note below."],
-  ["improvements", "What SSMACS has built since handover. title, category, year, details. No photo."],
+  ["improvements", "Infrastructure and facilities created by SSMACS. title, category, year, details. No photo."],
   ["resolutions", "Committee / GBM decisions. Newest first is not required \u2014 the site sorts by date."],
   ["records", "Minutes of meetings, notices and circulars. See the note below."],
   [""],
