@@ -782,11 +782,11 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
 
   /* 28. what SSMACS has built since handover */
   {
-    const csv = "title,category,details\r\n" +
-      "Amphitheater,Community spaces,An open-air stage\r\n" +
-      "Yoga room,,A quiet indoor room\r\n" +
-      "Gate 5 opened,Access & parking,\r\n" +
-      ",Safety & security,A row with no title\r\n";
+    const csv = "title,category,year,details\r\n" +
+      "Amphitheater,Community spaces,2024,An open-air stage\r\n" +
+      "Yoga room,,2025,A quiet indoor room\r\n" +
+      "Gate 5 opened,Access & parking,,\r\n" +
+      ",Safety & security,2026,A row with no title\r\n";
     const w = makeDom(serve({ improvements: csv }));
     await wait();
     const cards = [...w.document.querySelectorAll("#builtGrid .built-card")];
@@ -807,11 +807,19 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("an ampersand in a category is not double escaped",
       cards[2].querySelector(".chip").textContent === "Access & parking",
       cards[2].querySelector(".chip").textContent);
-    /* an empty tab must leave the sixteen built-in cards alone */
-    const e = makeDom(serve({ improvements: "title,category,details\r\n" }));
+    check("an improvement shows the year the sheet gives it",
+      cards[0].querySelector(".built-year").textContent === "2024",
+      cards[0].querySelector(".built-year").textContent);
+    check("an improvement with no category still shows its year",
+      cards[1].querySelector(".built-year").textContent === "2025",
+      cards[1].querySelector(".built-year").textContent);
+    check("an improvement with no year shows no year badge",
+      !cards[2].querySelector(".built-year"), "no year badge");
+    /* an empty tab must leave the built-in cards alone */
+    const e = makeDom(serve({ improvements: "title,category,year,details\r\n" }));
     await wait();
     check("an empty improvements tab keeps the cards already on the page",
-      e.document.querySelectorAll("#builtGrid .built-card").length === 16,
+      e.document.querySelectorAll("#builtGrid .built-card").length === 18,
       e.document.querySelectorAll("#builtGrid .built-card").length + " cards kept");
   }
 

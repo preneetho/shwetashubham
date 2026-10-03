@@ -90,7 +90,7 @@ Add a new row. Everything is driven by rows:
 | Helpline number | `helplines` | group, icon, name, number, note |
 | Resolution | `resolutions` | ref, date, title, summary, status |
 | Minutes / notice / circular | `records` | type, date, title, note, link |
-| Something SSMACS has built | `improvements` | title, category, details |
+| Something SSMACS has built | `improvements` | title, category, year, details |
 
 ### Removing an item
 
@@ -480,21 +480,25 @@ carousel and is filled from the `improvements` tab:
 |---|---|
 | `title` | The thing itself, e.g. `Yoga room`. A row with no title is skipped |
 | `category` | The small label above the title, e.g. `Safety & security`. Optional |
+| `year` | The year it was done, e.g. `2025`. Shown as a gold badge beside the label. Optional |
 | `details` | One sentence saying what it is or what changed. Optional |
 
 The cards appear in the order the rows appear in the tab, so to move something
-up the page, move its row up the sheet.
+up the page, move its row up the sheet. The page does **not** sort by `year`;
+if you want the oldest first, order the rows that way yourself. Type the year
+as four digits on its own — `2025`, not `June 2025` — so the badges line up.
 
 Keep `category` to a handful of repeated values rather than a different one
 each time; it reads as a set of labels, not as a second title. The ones used
-today are *Community spaces*, *Sports & recreation*, *Safety & security*,
-*Access & parking*, *Grounds & landscaping* and *Buildings & utilities*.
+today are *Community Spaces*, *Sports & Recreation*, *Safety & Security*,
+*Access & Parking*, *Grounds & Landscaping* and *Buildings & Utilities*.
+Short labels read best — a long one wraps onto two lines on a wide screen.
 
 There is no photo column here on purpose — the section is a quick scannable
 list. Photographs of these places belong in the `gallery` tab.
 
-If the `improvements` tab is missing or empty, the page keeps the sixteen
-cards already built into it, so nothing disappears.
+If the `improvements` tab is missing or empty, the page keeps the cards
+already built into it, so nothing disappears.
 
 ---
 

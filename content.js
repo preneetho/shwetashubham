@@ -532,8 +532,14 @@
     var list = rows.filter(function (r) { return r.title; });
     if (!list.length) return;
     el.innerHTML = list.map(function (r) {
-      return '<article class="card built-card">' +
-        (r.category ? '<span class="chip">' + esc(r.category) + "</span>" : "") +
+      var top = "";
+      if (r.category || r.year) {
+        top = '<div class="built-top">' +
+          (r.category ? '<span class="chip">' + esc(r.category) + "</span>" : "<span></span>") +
+          (r.year ? '<span class="built-year">' + esc(r.year) + "</span>" : "") +
+          "</div>";
+      }
+      return '<article class="card built-card">' + top +
         "<h3>" + rich(r.title) + "</h3>" +
         (r.details ? "<p>" + rich(r.details) + "</p>" : "") +
         "</article>";

@@ -132,9 +132,9 @@ write("settings", [
 
 /* ---------- built since handover ---------- */
 {
-  const rows = [["title", "category", "details"]];
-  const re = /<article class="card built-card"><span class="chip">([\s\S]*?)<\/span><h3>([\s\S]*?)<\/h3><p>([\s\S]*?)<\/p><\/article>/g;
-  let m; while ((m = re.exec(pickId("builtGrid")))) rows.push([txt(m[2]), txt(m[1]), txt(m[3])]);
+  const rows = [["title", "category", "year", "details"]];
+  const re = /<article class="card built-card"><div class="built-top"><span class="chip">([\s\S]*?)<\/span>(?:<span class="built-year">([\s\S]*?)<\/span>)?<\/div><h3>([\s\S]*?)<\/h3><p>([\s\S]*?)<\/p><\/article>/g;
+  let m; while ((m = re.exec(pickId("builtGrid")))) rows.push([txt(m[3]), txt(m[1]), txt(m[2] || ""), txt(m[4])]);
   write("improvements", rows);
 }
 
