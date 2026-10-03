@@ -538,8 +538,6 @@
         (r.details ? "<p>" + rich(r.details) + "</p>" : "") +
         "</article>";
     }).join("");
-    var c = document.getElementById("builtCount");
-    if (c) c.textContent = list.length + (list.length === 1 ? " improvement" : " improvements");
   };
 
   R.helplines = function (rows) {

@@ -483,8 +483,7 @@ carousel and is filled from the `improvements` tab:
 | `details` | One sentence saying what it is or what changed. Optional |
 
 The cards appear in the order the rows appear in the tab, so to move something
-up the page, move its row up the sheet. The count in the opening line
-(*"16 improvements so far"*) is worked out from the rows — never type it in.
+up the page, move its row up the sheet.
 
 Keep `category` to a handful of repeated values rather than a different one
 each time; it reads as a set of labels, not as a second title. The ones used

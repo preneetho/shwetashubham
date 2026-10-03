@@ -801,19 +801,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       !cards[1].querySelector(".chip"), "no chip");
     check("an improvement with no details shows no paragraph",
       !cards[2].querySelector("p"), "no paragraph");
+    check("an improvement with no details still shows its title",
+      cards[2].querySelector("h3").textContent === "Gate 5 opened",
+      cards[2].querySelector("h3").textContent);
     check("an ampersand in a category is not double escaped",
       cards[2].querySelector(".chip").textContent === "Access & parking",
       cards[2].querySelector(".chip").textContent);
-    check("the headline count follows the sheet",
-      w.document.getElementById("builtCount").textContent === "3 improvements",
-      w.document.getElementById("builtCount").textContent);
-
     /* an empty tab must leave the sixteen built-in cards alone */
     const e = makeDom(serve({ improvements: "title,category,details\r\n" }));
     await wait();
     check("an empty improvements tab keeps the cards already on the page",
-      e.document.querySelectorAll("#builtGrid .built-card").length === 16 &&
-      e.document.getElementById("builtCount").textContent === "16 improvements",
+      e.document.querySelectorAll("#builtGrid .built-card").length === 16,
       e.document.querySelectorAll("#builtGrid .built-card").length + " cards kept");
   }
 
