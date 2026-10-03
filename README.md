@@ -130,6 +130,7 @@ stays tidy as photos are added:
 | `images/hero/` | `building.jpg` — the photo at the top of the page |
 | `images/posters/` | The 9:16 guideline posters |
 | `images/gallery/` | Amenity photographs |
+| `images/events/` | Event photographs, if not linked from Google Drive |
 
 In the Google Sheet, the `file` column takes **just the file name** —
 `poster-parking.jpg`. The site adds the section folder itself, so photos can be

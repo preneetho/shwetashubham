@@ -122,6 +122,14 @@ write("settings", [
   write("helplines", rows);
 }
 
+/* ---------- latest events ---------- */
+{
+  /* Nothing to lift out of the page here: the events carousel shows only
+     what the committee puts in the sheet, so the tab is created with its
+     headings and no rows. The section stays hidden until one is added. */
+  write("events", [["name", "date", "details", "photo"]]);
+}
+
 /* ---------- notices ---------- */
 {
   const rows = [["tag", "colour", "title", "body"]];

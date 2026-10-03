@@ -12,7 +12,7 @@ const OUT = path.join(__dirname, "Shweta-Shubham-Content.xlsx");
 /* Tab order matters: this is the order the admin sees them in. */
 const TABS = ["settings", "notices", "festivals", "quick_actions", "helplines",
   "timings", "guidelines", "staff_scope", "fees", "committee", "escalation",
-  "checklist", "downloads", "gallery", "posters", "resolutions", "records"];
+  "checklist", "downloads", "gallery", "posters", "events", "resolutions", "records"];
 
 /* Column widths, by header name, so the sheet is readable on open. */
 const WIDTH = {
@@ -22,7 +22,7 @@ const WIDTH = {
   section: 9, kind: 10, group: 13, icon: 6, anchor: 10, colour: 8,
   colour1: 9, colour2: 9, type: 9, amount: 22, phone: 14, flat: 8,
   post: 16, key: 20, link: 14, url: 34, file: 18, number: 14, tag: 14,
-  ref: 15, date: 13, summary: 70, status: 12
+  ref: 15, date: 13, summary: 70, status: 12, details: 64, photo: 52
 };
 
 function readCSV(name) {
@@ -69,8 +69,21 @@ const HELP = [
   ["downloads", "Forms and documents. Put the file next to the website and use its file name in url."],
   ["gallery", "Photos. Put the image in the images folder and use its file name in file."],
   ["posters", "Tall 9:16 guideline posters. Use the image file name, or a full https:// link."],
+  ["events", "Photographs from society events. See the note below."],
   ["resolutions", "Committee / GBM decisions. Newest first is not required \u2014 the site sorts by date."],
   ["records", "Minutes of meetings, notices and circulars. See the note below."],
+  [""],
+  ["ABOUT THE EVENTS TAB"],
+  ["name", "The event, e.g. Ganesh Chaturthi 2026. A row with no name is skipped."],
+  ["date", "Type it as 2026-09-14 (year-month-day). The newest event is shown first."],
+  ["details", "A sentence or two about the day. Optional."],
+  ["photo", "The Google Drive link to the picture. A row with no photo is skipped."],
+  [""],
+  ["IMPORTANT: each photo in Drive must be shared as"],
+  ["", "Share -> General access -> Anyone with the link -> Viewer."],
+  ["Without that the picture is private and residents see a placeholder."],
+  ["Paste the ordinary Drive share link. The website converts it itself."],
+  ["The section stays hidden until this tab has at least one complete row."],
   [""],
   ["ABOUT THE RESOLUTIONS TAB"],
   ["date", "Type it as 2025-04-26 (year-month-day). Format the column as Plain text."],

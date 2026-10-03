@@ -388,6 +388,40 @@ a grid. This happens automatically — there is nothing to set in the tab.
 
 ---
 
+### Event photographs
+
+The **Latest events** section is a carousel of photographs from recent
+celebrations, sitting just below the committee directory. It is filled from
+the `events` tab:
+
+| Column | What to put in it |
+|---|---|
+| `name` | The event, e.g. `Ganesh Chaturthi 2026`. A row with no name is skipped. |
+| `date` | Written as `2026-09-14` (year-month-day). The newest event is shown first. |
+| `details` | A sentence or two about the day. Optional. |
+| `photo` | The Google Drive link to the picture. A row with no photo is skipped. |
+
+**Each photograph has to be shared, or residents only see a placeholder.** In
+Google Drive, right-click the picture and choose **Share**; under *General
+access* pick **Anyone with the link**, leaving the role as **Viewer**. Then
+copy the link and paste it straight into the `photo` column. The ordinary
+`https://drive.google.com/file/d/.../view?usp=sharing` link is exactly right 
+the website works out the picture address by itself, so there is nothing to
+edit or shorten.
+
+A photo kept in the website's own **`images/events`** folder works too: put the
+file there and type just its file name.
+
+The section stays hidden until the tab holds at least one row with both a name
+and a photo, so residents are never shown an empty carousel. The photographs
+move along on their own every few seconds, and stop for good the moment
+somebody swipes, uses an arrow or opens a picture full size.
+
+Pictures are shown whole rather than cropped, so an upright phone photo and a
+wide group shot can follow one another without anybody losing their head.
+
+---
+
 ## Part 6b — The Google map
 
 The Contact section ends with a Google map of the society. It is Google's own

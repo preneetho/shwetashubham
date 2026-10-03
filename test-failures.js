@@ -714,6 +714,45 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "clean");
   }
 
+  /* 27. the events carousel */
+  {
+    const csv = "name,date,details,photo\r\n" +
+      "Holi,2026-03-14,Colours in the garden,https://drive.google.com/file/d/AAAAAAAAAAAA/view?usp=sharing\r\n" +
+      "Ganesh Chaturthi,2026-09-14,Three days of bhajans,https://drive.google.com/open?id=BBBBBBBBBBBB\r\n" +
+      "Diwali,2026-11-08,No picture yet,\r\n" +
+      ",2026-01-01,Nobody to attach this to,https://drive.google.com/file/d/CCCCCCCCCCCC/view\r\n" +
+      "Sports day,2026-02-02,Held in the amphitheatre,sports.jpg\r\n";
+    const w = makeDom(serve({ events: csv }));
+    await wait();
+    const d = w.document;
+    const figs = [...d.querySelectorAll("#evTrack figure")];
+    const src = figs.map(f => f.querySelector("img").getAttribute("src"));
+    const names = figs.map(f => f.querySelector(".ev-name").textContent);
+
+    check("an event needs both a name and a photograph",
+      figs.length === 3, figs.length + " of 5 rows shown");
+    check("the newest event is shown first",
+      names.join(" | ") === "Ganesh Chaturthi | Holi | Sports day",
+      names.join(" | "));
+    check("a Drive share link is turned into a picture",
+      src[0] === "https://lh3.googleusercontent.com/d/BBBBBBBBBBBB=w1600", src[0]);
+    check("the remaining Drive hosts are kept to fall back on",
+      (figs[0].querySelector("img").getAttribute("data-alt") || "").split("|").length === 2,
+      figs[0].querySelector("img").getAttribute("data-alt"));
+    check("a plain file name is served from images/events/",
+      src[2] === "images/events/sports.jpg", src[2]);
+    check("the section is revealed once there are events",
+      d.getElementById("events").hasAttribute("hidden") === false, "shown");
+
+    /* an empty tab must leave no trace of the section */
+    const e = makeDom(serve({ events: "name,date,details,photo\r\n" }));
+    await wait();
+    check("an empty events tab leaves the section hidden",
+      e.document.getElementById("events").hasAttribute("hidden") &&
+      e.document.getElementById("evLink").hasAttribute("hidden"),
+      "hidden");
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

@@ -112,7 +112,7 @@
   var TABS = ["settings", "notices", "festivals", "timings", "guidelines",
     "staff_scope", "fees", "committee", "escalation", "checklist",
     "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
-    "helplines"];
+    "helplines", "events"];
 
   function fetchTab(tab) {
     return fetch(sheetURL(tab), { cache: "no-store" })
@@ -426,6 +426,86 @@
         ' onerror="phFallback(this)" loading="lazy"></div>' +
         "<figcaption>" + esc(r.title) + "</figcaption></figure>";
     }).join("");
+  };
+
+  /* A Google Drive "share" link opens a viewer page, not the picture, so an
+     <img> pointed straight at one shows nothing. Lift the file id out of
+     whichever shape was pasted  /file/d/<id>/view, ?id=<id>, or /d/<id>. */
+  function driveId(u) {
+    var s = String(u);
+    var m = s.match(/\/file\/d\/([A-Za-z0-9_-]{8,})/) ||
+      s.match(/[?&]id=([A-Za-z0-9_-]{8,})/) ||
+      s.match(/\/d\/([A-Za-z0-9_-]{8,})/);
+    return m ? m[1] : "";
+  }
+
+  /* Drive hands the same file out from more than one host, and which of
+     them answers has changed over the years. Rather than bet on one, every
+     candidate is returned and the page tries the next if a photo fails. */
+  function photoSrcs(raw) {
+    var f = String(raw === undefined || raw === null ? "" : raw).trim();
+    if (!f) return [];
+    if (/^https?:\/\/[^\/]*\bgoogle\.com\//i.test(f)) {
+      var id = driveId(f);
+      if (!id) return [f];
+      return ["https://lh3.googleusercontent.com/d/" + id + "=w1600",
+        "https://drive.google.com/thumbnail?id=" + id + "&sz=w1600",
+        "https://drive.google.com/uc?export=view&id=" + id];
+    }
+    return [imgSrc(f, "events")];
+  }
+
+  /* The admin should not have to remember which word we chose for a column,
+     so the usual synonyms are all accepted. */
+  function pick(row, names) {
+    for (var i = 0; i < names.length; i++) {
+      var v = row[names[i]];
+      if (v !== undefined && v !== null && String(v).trim()) return String(v).trim();
+    }
+    return "";
+  }
+
+  R.events = function (rows) {
+    var track = document.getElementById("evTrack");
+    if (!track) return;
+    var list = rows.map(function (r) {
+      return {
+        name: pick(r, ["name", "event", "title"]),
+        note: pick(r, ["details", "detail", "description", "summary", "note"]),
+        photo: pick(r, ["photo", "link", "url", "image", "picture", "file"]),
+        when: parseDate(pick(r, ["date", "held", "on"]))
+      };
+    /* A row with no picture has nothing to show in a photo carousel, and a
+       row with no name would appear as an unlabelled slide. */
+    }).filter(function (e) { return e.photo && e.name; });
+    if (!list.length) return;
+
+    /* "Latest events" should lead with the latest. Rows that carry no date,
+       or a date we could not read, keep the order the sheet put them in. */
+    var dated = list.filter(function (e) { return e.when && e.when.iso; });
+    if (dated.length === list.length) {
+      list.sort(function (a, b) { return a.when.iso < b.when.iso ? 1 : a.when.iso > b.when.iso ? -1 : 0; });
+    }
+
+    track.innerHTML = list.map(function (e) {
+      var srcs = photoSrcs(e.photo);
+      var when = e.when ? '<span class="ev-when">' + esc(e.when.long || e.when.raw) + "</span>" : "";
+      var cap = e.name + (e.note ? " \u2014 " + e.note : "");
+      return '<figure tabindex="0" data-cap="' + esc(cap) + '">' +
+        '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' + esc(e.name) + '"' +
+        ' data-alt="' + esc(srcs.slice(1).join("|")) + '"' +
+        ' onerror="evImgFail(this)" loading="lazy"></div>' +
+        '<figcaption><span class="ev-name">' + esc(e.name) + "</span>" + when +
+        (e.note ? '<p class="ev-note">' + rich(e.note) + "</p>" : "") +
+        "</figcaption></figure>";
+    }).join("");
+
+    /* The section and its menu entry stay out of the way until there is
+       something in them, so an empty carousel is never published. */
+    var sec = document.getElementById("events");
+    if (sec) sec.hidden = false;
+    var link = document.getElementById("evLink");
+    if (link) link.hidden = false;
   };
 
   /* Group decides the pill colour and whether the card is styled as urgent.
