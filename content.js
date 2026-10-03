@@ -487,6 +487,9 @@
       list.sort(function (a, b) { return a.when.iso < b.when.iso ? 1 : a.when.iso > b.when.iso ? -1 : 0; });
     }
 
+    /* Google turns the picture away when the browser names the page asking
+       for it, so the request is made without a referrer. Without this every
+       photograph falls back to the placeholder. */
     track.innerHTML = list.map(function (e) {
       var srcs = photoSrcs(e.photo);
       var when = e.when ? '<span class="ev-when">' + esc(e.when.long || e.when.raw) + "</span>" : "";
@@ -494,7 +497,7 @@
       return '<figure tabindex="0" data-cap="' + esc(cap) + '">' +
         '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' + esc(e.name) + '"' +
         ' data-alt="' + esc(srcs.slice(1).join("|")) + '"' +
-        ' onerror="evImgFail(this)" loading="lazy"></div>' +
+        ' onerror="evImgFail(this)" loading="lazy" referrerpolicy="no-referrer"></div>' +
         '<figcaption><span class="ev-name">' + esc(e.name) + "</span>" + when +
         (e.note ? '<p class="ev-note">' + rich(e.note) + "</p>" : "") +
         "</figcaption></figure>";

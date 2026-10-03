@@ -741,6 +741,10 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       figs[0].querySelector("img").getAttribute("data-alt"));
     check("a plain file name is served from images/events/",
       src[2] === "images/events/sports.jpg", src[2]);
+    check("the photographs ask Google for no referrer",
+      figs.every(function (f) {
+        return f.querySelector("img").getAttribute("referrerpolicy") === "no-referrer";
+      }), "all " + figs.length + " set");
     check("the section is revealed once there are events",
       d.getElementById("events").hasAttribute("hidden") === false, "shown");
 
