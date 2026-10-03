@@ -420,10 +420,11 @@
     rows = rows.filter(function (r) { return r.file; });
     if (!rows.length) return;
     el.innerHTML = rows.map(function (r) {
-      var src = imgSrc(r.file, "posters");
+      var srcs = photoSrcs(r.file, "posters");
       return '<figure tabindex="0" data-cap="' + esc(r.caption || r.title) + '">' +
-        '<div class="shot"><img src="' + esc(src) + '" alt="' + esc(r.title) + '"' +
-        ' onerror="phFallback(this)" loading="lazy"></div>' +
+        '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' + esc(r.title) + '"' +
+        ' data-alt="' + esc(srcs.slice(1).join("|")) + '"' +
+        ' onerror="imgFail(this)" loading="lazy" referrerpolicy="no-referrer"></div>' +
         "<figcaption>" + esc(r.title) + "</figcaption></figure>";
     }).join("");
   };
@@ -442,7 +443,7 @@
   /* Drive hands the same file out from more than one host, and which of
      them answers has changed over the years. Rather than bet on one, every
      candidate is returned and the page tries the next if a photo fails. */
-  function photoSrcs(raw) {
+  function photoSrcs(raw, folder) {
     var f = String(raw === undefined || raw === null ? "" : raw).trim();
     if (!f) return [];
     if (/^https?:\/\/[^\/]*\bgoogle\.com\//i.test(f)) {
@@ -452,7 +453,7 @@
         "https://drive.google.com/thumbnail?id=" + id + "&sz=w1600",
         "https://drive.google.com/uc?export=view&id=" + id];
     }
-    return [imgSrc(f, "events")];
+    return [imgSrc(f, folder || "events")];
   }
 
   /* The admin should not have to remember which word we chose for a column,
@@ -497,7 +498,7 @@
       return '<figure tabindex="0" data-cap="' + esc(cap) + '">' +
         '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' + esc(e.name) + '"' +
         ' data-alt="' + esc(srcs.slice(1).join("|")) + '"' +
-        ' onerror="evImgFail(this)" loading="lazy" referrerpolicy="no-referrer"></div>' +
+        ' onerror="imgFail(this)" loading="lazy" referrerpolicy="no-referrer"></div>' +
         '<figcaption><span class="ev-name">' + esc(e.name) + "</span>" + when +
         (e.note ? '<p class="ev-note">' + rich(e.note) + "</p>" : "") +
         "</figcaption></figure>";

@@ -371,13 +371,16 @@ the `posters` tab, which has three columns:
 | Column | What to put in it |
 |---|---|
 | `title` | The caption shown under the poster, e.g. `Balcony safety & cleanliness` |
-| `file` | The image file name, e.g. `poster-balcony.jpg` — or a full `https://` link |
+| `file` | A Google Drive link, or the image file name, e.g. `poster-balcony.jpg` |
 | `caption` | The longer text shown when the poster is opened full size |
 
-To add a poster, either put the image in the **`images/posters`** folder and
-use just its file name, or paste a full `https://` address of an image hosted
-elsewhere. You never type the folder into the sheet — the site adds it.
-Posters appear in the order the rows appear in the tab.
+To add a poster, put it in Google Drive and paste the share link into the
+`file` column, exactly as you would for an event photograph — **the poster
+has to be shared as *Anyone with the link*, *Viewer*, or residents only see a
+placeholder.** A poster kept in the website's own **`images/posters`** folder
+works too: put the file there and type just its file name. You never type the
+folder into the sheet — the site adds it. Posters appear in the order the
+rows appear in the tab.
 
 If the `posters` tab is missing or empty, the page keeps the posters already
 built into it — nothing disappears.

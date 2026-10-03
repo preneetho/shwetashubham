@@ -515,7 +515,7 @@ window.ssMedia = function(q){
   return { matches:false, addEventListener:function(){}, addListener:function(){} };
 };
 
-window.evImgFail = function(img){
+window.imgFail = function(img){
   var left = (img.getAttribute('data-alt') || '').split('|').filter(Boolean);
   if (left.length) {
     img.setAttribute('data-alt', left.slice(1).join('|'));

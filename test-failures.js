@@ -339,7 +339,8 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "Water saving,https://example.com/a/water.jpg,Save water\r\n" +
       "Fire safety,fire.jpg,Know your exits\r\n" +
       "Archive,old/legacy.jpg,Filed somewhere else\r\n" +
-      "Copied path,images/posters/copied.jpg,Pasted straight out of the repo\r\n";
+      "Copied path,images/posters/copied.jpg,Pasted straight out of the repo\r\n" +
+      "From Drive,https://drive.google.com/file/d/CCCCCCCCCCCC/view?usp=sharing,Shared folder\r\n";
     const w = makeDom(serve({ posters: csv }));
     await wait();
     const src = [].map.call(w.document.querySelectorAll("#posGrid img"),
@@ -352,6 +353,15 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       src[2] === "images/old/legacy.jpg", src[2]);
     check("a poster path copied from the repo is not doubled up",
       src[3] === "images/posters/copied.jpg", src[3]);
+    check("a Drive share link is turned into a poster",
+      src[4] === "https://lh3.googleusercontent.com/d/CCCCCCCCCCCC=w1600", src[4]);
+    check("a poster keeps the other Drive hosts to fall back on",
+      ([].slice.call(w.document.querySelectorAll("#posGrid img"))[4]
+        .getAttribute("data-alt") || "").split("|").length === 2,
+      [].slice.call(w.document.querySelectorAll("#posGrid img"))[4].getAttribute("data-alt"));
+    check("the posters ask Google for no referrer",
+      [].every.call(w.document.querySelectorAll("#posGrid img"),
+        i => i.getAttribute("referrerpolicy") === "no-referrer"), "all set");
 
     const g = makeDom(serve({
       gallery: "title,file,caption,colour1,colour2\r\nPool,pool.jpg,The pool,#111,#222\r\n"
