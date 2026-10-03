@@ -458,6 +458,29 @@
     return [imgSrc(f, folder || "events")];
   }
 
+  /* A film cannot be shown as a photograph. Drive plays a public file in its
+     own viewer and YouTube refuses to be framed at its watch address, so each
+     is turned into the embed it will actually answer on; anything we host
+     ourselves plays in the browser's own player. */
+  function videoSrc(raw, folder) {
+    var f = String(raw === undefined || raw === null ? "" : raw).trim();
+    if (!f) return null;
+    if (/^https?:\/\/[^\/]*\bgoogle\.com\//i.test(f)) {
+      var id = driveId(f);
+      if (id) return { kind: "frame", src: "https://drive.google.com/file/d/" + id + "/preview" };
+    }
+    if (/^https?:\/\/[^\/]*\b(youtube\.com|youtu\.be|youtube-nocookie\.com)\//i.test(f)) {
+      var y = f.match(/[?&]v=([A-Za-z0-9_-]{6,})/) ||
+        f.match(/youtu\.be\/([A-Za-z0-9_-]{6,})/) ||
+        f.match(/\/embed\/([A-Za-z0-9_-]{6,})/);
+      if (y) return { kind: "frame", src: "https://www.youtube-nocookie.com/embed/" + y[1] };
+    }
+    if (/\.(mp4|webm|ogv|ogg|mov|m4v)(\?|#|$)/i.test(f)) {
+      return { kind: "file", src: imgSrc(f, folder || "events") };
+    }
+    return { kind: "frame", src: f };
+  }
+
   /* The admin should not have to remember which word we chose for a column,
      so the usual synonyms are all accepted. */
   function pick(row, names) {
@@ -476,11 +499,12 @@
         name: pick(r, ["name", "event", "title"]),
         note: pick(r, ["details", "detail", "description", "summary", "note"]),
         photo: pick(r, ["photo", "link", "url", "image", "picture", "file"]),
+        video: pick(r, ["video", "clip", "film", "movie", "reel"]),
         when: parseDate(pick(r, ["date", "held", "on"]))
       };
-    /* A row with no picture has nothing to show in a photo carousel, and a
-       row with no name would appear as an unlabelled slide. */
-    }).filter(function (e) { return e.photo && e.name; });
+    /* A row with neither a picture nor a film has nothing to show, and a row
+       with no name would appear as an unlabelled slide. */
+    }).filter(function (e) { return (e.photo || e.video) && e.name; });
     if (!list.length) return;
 
     /* "Latest events" should lead with the latest. Rows that carry no date,
@@ -494,13 +518,19 @@
        for it, so the request is made without a referrer. Without this every
        photograph falls back to the placeholder. */
     track.innerHTML = list.map(function (e) {
-      var srcs = photoSrcs(e.photo);
+      var vid = videoSrc(e.video);
+      /* A film with no still of its own still needs a face on the slide, and
+         Drive hands out a frame of the film at the same picture addresses. */
+      var srcs = photoSrcs(e.photo || e.video);
       var when = e.when ? '<span class="ev-when">' + esc(e.when.long || e.when.raw) + "</span>" : "";
       var cap = e.name + (e.note ? " \u2014 " + e.note : "");
-      return '<figure tabindex="0" data-cap="' + esc(cap) + '">' +
-        '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' + esc(e.name) + '"' +
+      return '<figure tabindex="0" data-cap="' + esc(cap) + '"' +
+        (vid ? ' data-video="' + esc(vid.src) + '" data-vkind="' + esc(vid.kind) + '"' : "") + ">" +
+        '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' +
+        esc(e.name + (vid ? " (video)" : "")) + '"' +
         ' data-alt="' + esc(srcs.slice(1).join("|")) + '"' +
-        ' onerror="imgFail(this)" loading="lazy" referrerpolicy="no-referrer"></div>' +
+        ' onerror="imgFail(this)" loading="lazy" referrerpolicy="no-referrer">' +
+        (vid ? '<span class="ev-play" aria-hidden="true"></span>' : "") + "</div>" +
         '<figcaption><span class="ev-name">' + esc(e.name) + "</span>" + when +
         (e.note ? '<p class="ev-note">' + rich(e.note) + "</p>" : "") +
         "</figcaption></figure>";

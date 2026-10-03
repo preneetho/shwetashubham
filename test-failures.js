@@ -770,6 +770,43 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       }), "all " + figs.length + " set");
     check("the section is revealed once there are events",
       d.getElementById("events").hasAttribute("hidden") === false, "shown");
+    check("a photograph is not mistaken for a film",
+      figs.every(f => !f.getAttribute("data-video")), "no players on photo slides");
+
+    /* a film in the events tab */
+    const vcsv = "name,date,details,photo,video\r\n" +
+      "Road sanctioned,2026-05-01,The MLA at Gate 5,,https://drive.google.com/file/d/DDDDDDDDDDDD/view?usp=sharing\r\n" +
+      "Sports day,2026-02-02,Clip from the ground,sports.jpg,sports.mp4\r\n" +
+      "Republic Day,2026-01-26,Flag hoisting,,https://youtu.be/EEEEEEEEEEE\r\n";
+    const v = makeDom(serve({ events: vcsv }));
+    await wait();
+    const vf = [...v.document.querySelectorAll("#evTrack figure")];
+
+    check("an event with only a film is still shown",
+      vf.length === 3, vf.length + " of 3 rows shown");
+    check("a Drive film is played through the Drive viewer",
+      vf[0].getAttribute("data-video") ===
+      "https://drive.google.com/file/d/DDDDDDDDDDDD/preview",
+      vf[0].getAttribute("data-video"));
+    check("a film with no still of its own borrows a frame from Drive",
+      vf[0].querySelector("img").getAttribute("src") ===
+      "https://lh3.googleusercontent.com/d/DDDDDDDDDDDD=w1600",
+      vf[0].querySelector("img").getAttribute("src"));
+    check("a film slide carries a play button",
+      vf[0].querySelector(".shot .ev-play") !== null, "badge present");
+    check("a film we host ourselves plays in the browser's own player",
+      vf[1].getAttribute("data-vkind") === "file" &&
+      vf[1].getAttribute("data-video") === "images/events/sports.mp4",
+      vf[1].getAttribute("data-vkind") + " " + vf[1].getAttribute("data-video"));
+    check("a row with both keeps its own photograph as the still",
+      vf[1].querySelector("img").getAttribute("src") === "images/events/sports.jpg",
+      vf[1].querySelector("img").getAttribute("src"));
+    check("a YouTube link is turned into one that may be framed",
+      vf[2].getAttribute("data-video") === "https://www.youtube-nocookie.com/embed/EEEEEEEEEEE",
+      vf[2].getAttribute("data-video"));
+    check("a film is announced as a film to a screen reader",
+      vf[0].querySelector("img").getAttribute("alt") === "Road sanctioned (video)",
+      vf[0].querySelector("img").getAttribute("alt"));
 
     /* an empty tab must leave no trace of the section */
     const e = makeDom(serve({ events: "name,date,details,photo\r\n" }));

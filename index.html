@@ -324,6 +324,11 @@ section.alt .chip{background:var(--bg)}
 .lb{position:fixed; inset:0; z-index:200; background:rgba(6,20,17,.93); display:none; align-items:center; justify-content:center; padding:24px}
 .lb.open{display:flex}
 .lb img{max-width:min(1000px,92vw); max-height:80vh; border-radius:12px; object-fit:contain}
+.lb-vid{display:none; width:min(1000px,92vw); height:min(80vh,620px);
+  background:#000; border-radius:12px; overflow:hidden}
+.lb.vid .lb-vid{display:block}
+.lb.vid #lbImg{display:none}
+.lb-vid iframe,.lb-vid video{display:block; width:100%; height:100%; border:0; background:#000}
 .lb .cap{position:absolute; bottom:26px; left:0; right:0; text-align:center; color:#dceae5; font-size:.95rem}
 .lb button{position:absolute; background:rgba(255,255,255,.1); color:#fff; border:1px solid rgba(255,255,255,.22); width:46px; height:46px; border-radius:50%; font-size:1.2rem; cursor:pointer}
 .lb .x{top:20px; right:20px}
@@ -384,6 +389,13 @@ section.alt .chip{background:var(--bg)}
 .ev-when{display:inline-block; margin-top:5px; font-size:.78rem; font-weight:700; color:var(--muted);
   text-transform:uppercase; letter-spacing:.05em}
 .ev-note{margin:9px 0 0; color:var(--muted); line-height:1.65}
+.ev-play{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:66px; height:66px;
+  border-radius:50%; background:rgba(11,58,50,.6); border:2px solid rgba(255,255,255,.92);
+  display:grid; place-items:center; pointer-events:none; box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.ev-play::after{content:""; margin-left:6px; border-style:solid; border-width:11px 0 11px 19px;
+  border-color:transparent transparent transparent #fff}
+.ev figure:hover .ev-play{background:rgba(11,58,50,.8)}
+@media(prefers-reduced-motion:reduce){.ev-play{transition:none}}
 .ev figure:focus-visible .shot{outline:3px solid var(--gold); outline-offset:3px}
 @media(max-width:640px){.ev{gap:12px} .ev-name{font-size:1.04rem}}
 @media(prefers-reduced-motion:reduce){.ev{scroll-behavior:auto}}
@@ -1903,6 +1915,7 @@ window.phFallback = function(img){
   <button class="x" id="lbX" aria-label="Close">&#10005;</button>
   <button class="prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
   <img id="lbImg" src="" alt="" referrerpolicy="no-referrer">
+  <div class="lb-vid" id="lbVid"></div>
   <button class="next" id="lbNext" aria-label="Next photo">&#8250;</button>
   <div class="cap" id="lbCap"></div>
 </div>
@@ -2148,6 +2161,7 @@ window.phFallback = function(img){
   /* ---- gallery lightbox (shared by the photo gallery and the posters) ---- */
   var galleries = Array.prototype.slice.call(document.querySelectorAll('#gal, #posGrid, #evTrack'));
   var lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'),
+      lbVid = document.getElementById('lbVid'),
       lbCap = document.getElementById('lbCap'), cur = 0, active = galleries[0];
 
   function figList(){ return active ? Array.prototype.slice.call(active.querySelectorAll('figure')) : []; }
@@ -2157,13 +2171,32 @@ window.phFallback = function(img){
     if (!figs.length) return;
     cur = (i + figs.length) % figs.length;
     var f = figs[cur], im = f.querySelector('img');
-    lbImg.src = im.src;
-    lbImg.alt = im.alt;
+    var vsrc = f.getAttribute('data-video');
+    clearVid();
+    if (vsrc) {
+      /* The player is built rather than written, so a link typed into the
+         sheet can never arrive on the page as markup. */
+      var pl = document.createElement(f.getAttribute('data-vkind') === 'file' ? 'video' : 'iframe');
+      if (pl.tagName === 'VIDEO') { pl.controls = true; pl.autoplay = true; pl.playsInline = true; }
+      else {
+        pl.setAttribute('allow', 'autoplay; fullscreen; encrypted-media');
+        pl.setAttribute('allowfullscreen', '');
+        pl.setAttribute('referrerpolicy', 'no-referrer');
+      }
+      pl.src = vsrc;
+      lbVid.appendChild(pl);
+      lb.classList.add('vid');
+    } else {
+      lbImg.src = im.src;
+      lbImg.alt = im.alt;
+    }
     lbCap.textContent = f.getAttribute('data-cap') || im.alt;
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-  function close(){ lb.classList.remove('open'); document.body.style.overflow = ''; }
+  /* Emptying the player is what stops the sound; hiding it is not enough. */
+  function clearVid(){ lbVid.innerHTML = ''; lb.classList.remove('vid'); }
+  function close(){ clearVid(); lb.classList.remove('open'); document.body.style.overflow = ''; }
 
   galleries.forEach(function(g){
     g.addEventListener('click', function(e){

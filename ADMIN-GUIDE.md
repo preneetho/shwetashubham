@@ -403,18 +403,22 @@ a grid. This happens automatically — there is nothing to set in the tab.
 
 ---
 
-### Event photographs
+### Event photographs and videos
 
-The **Latest events** section is a carousel of photographs from recent
-celebrations, sitting just below the committee directory. It is filled from
-the `events` tab:
+The **Latest events** section is a carousel of photographs and short films
+from recent celebrations, sitting just below the committee directory. It is
+filled from the `events` tab:
 
 | Column | What to put in it |
 |---|---|
 | `name` | The event, e.g. `Ganesh Chaturthi 2026`. A row with no name is skipped. |
 | `date` | Written as `2026-09-14` (year-month-day). The newest event is shown first. |
 | `details` | A sentence or two about the day. Optional. |
-| `photo` | The Google Drive link to the picture. A row with no photo is skipped. |
+| `photo` | The Google Drive link to the picture. Leave it blank on a video row. |
+| `video` | The Google Drive link to a film, or a YouTube link. Optional. |
+
+A row needs a `name` and then **either** a `photo` **or** a `video`; a row
+with neither is skipped.
 
 **Each photograph has to be shared, or residents only see a placeholder.** In
 Google Drive, right-click the picture and choose **Share**; under *General
@@ -427,8 +431,29 @@ edit or shorten.
 A photo kept in the website's own **`images/events`** folder works too: put the
 file there and type just its file name.
 
-The section stays hidden until the tab holds at least one row with both a name
-and a photo, so residents are never shown an empty carousel. The photographs
+#### Videos
+
+Put the link in the `video` column instead of `photo`, shared exactly the same
+way — **Anyone with the link → Viewer**. The website cannot tell a film from a
+photograph by looking at a Drive link, so a video link left in the `photo`
+column is shown as a still picture that does nothing. It has to go in `video`.
+
+The slide shows a frame from the film with a **▶ play button** over it.
+Tapping it opens the film full screen and plays it there, so the carousel
+moving on cannot cut it off halfway. Closing it stops the sound.
+
+You can leave `photo` blank on a video row — Drive supplies a frame of the
+film to use as the still. Fill both in if you would rather choose the picture
+residents see before they press play.
+
+A YouTube link works as well, in any of its usual forms. A film kept in the
+website's own `images/events` folder works too: type just its file name, e.g.
+`sports-day.mp4`. Keep self-hosted clips short — they are downloaded in full,
+and a large file is slow on a phone. Drive and YouTube do not have that
+problem, so they are the better choice for anything longer than a few seconds.
+
+The section stays hidden until the tab holds at least one complete row, so
+residents are never shown an empty carousel. The photographs
 move along on their own every few seconds, and stop for good the moment
 somebody swipes, uses an arrow or opens a picture full size.
 
