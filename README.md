@@ -33,7 +33,9 @@ built into `index.html`. Setting the ID is optional and reversible.
 
 ## Where this site is published
 
-**Live:** <https://shwetashubham.netlify.app/> — hosted on Netlify.
+**Live:** <https://shwetashubham.in/> — the society's own domain, hosted on
+Netlify. The older <https://shwetashubham.netlify.app/> address still works and
+redirects here.
 
 ### Publishing an update
 
@@ -49,15 +51,23 @@ so a bad update can be undone with **Deploys → (older deploy) → Publish depl
 > Content changes made in the Google Sheet do **not** need a redeploy — the site
 > picks those up on its own. Redeploy only when a file in this folder changes.
 
-### Renaming the address
+### The address
 
-**Site configuration → General → Site details → Change site name** turns
-`shwetashubham.netlify.app` into something like
-`shwetashubham.netlify.app`. A custom domain can be added under **Domain
-management** if the society buys one.
+The society owns `shwetashubham.in`, registered with GoDaddy India. Its
+nameservers point at Netlify (`dns1`–`dns4.p09.nsone.net`), so **every DNS
+record for the domain — including any future `@shwetashubham.in` email — is
+added in Netlify under Domain management → DNS panel**, not at GoDaddy.
 
-If the address changes, update the three tags listed under
-[Link preview](#link-preview) below.
+Netlify issues and renews the HTTPS certificate on its own. `www` redirects to
+the bare domain.
+
+Two things need watching once a year: the **domain renewal** at GoDaddy (set to
+auto-renew; if it lapses the address is lost) and the registrant email, which
+must stay a working society address — the `.in` registry suspends domains whose
+contact email fails verification.
+
+If the address ever changes, update the three tags listed under
+[Link preview](#link-preview) below, and re-render the launch poster.
 
 ## Moving to GitHub (optional, recommended)
 
@@ -152,9 +162,9 @@ These three tags near the top of `index.html` control the card WhatsApp and
 Teams show when the link is shared. They are already set to the live address:
 
 ```html
-<link rel="canonical" href="https://shwetashubham.netlify.app/">
-<meta property="og:image" content="https://shwetashubham.netlify.app/images/brand/social-card.jpg">
-<meta property="og:url"   content="https://shwetashubham.netlify.app/">
+<link rel="canonical" href="https://shwetashubham.in/">
+<meta property="og:image" content="https://shwetashubham.in/images/brand/social-card.jpg">
+<meta property="og:url"   content="https://shwetashubham.in/">
 ```
 
 They must stay **absolute** URLs — a relative path produces no preview image.
