@@ -9,7 +9,7 @@ const { JSDOM } = require("jsdom");
 const dir = __dirname;
 const tplDir = path.join(dir, "sheet-template");
 
-const TABS = ["settings", "notices", "festivals", "timings", "guidelines",
+const TABS = ["settings", "notices", "festivals", "timings", "gates", "guidelines",
   "staff_scope", "fees", "committee", "escalation", "checklist",
   "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
   "helplines", "improvements"];
@@ -17,7 +17,7 @@ const TABS = ["settings", "notices", "festivals", "timings", "guidelines",
 const html = fs.readFileSync(path.join(dir, "index.html"), "utf8");
 
 function snapshot(doc) {
-  const ids = ["noticeList", "festRows", "timingRows", "acclist", "scopeGrid",
+  const ids = ["noticeList", "festRows", "timingRows", "gateRows", "acclist", "scopeGrid",
     "feeCards", "penaltyRows", "coreRows", "advRows", "extRows", "escRows",
     "checklist", "dlList", "gal", "qaGrid", "resList", "recList", "posGrid",
     "helpGrid", "builtGrid"];

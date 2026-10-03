@@ -1,0 +1,10 @@
+gate,timing,access
+**Gate 1**,6:00 AM – 11:00 PM,**Guests & vendors – entry & exit**
+**Gate 1**,11:00 PM – 6:00 AM,Closed
+**Gate 2**,6:00 AM – 11:00 PM,**Owners – entry only**
+**Gate 2**,11:00 PM – 6:00 AM,**Entry & exit – all vehicles**
+**Gate 3**,6:00 AM – 11:00 PM,**Exit only**
+**Gate 3**,11:00 PM – 6:00 AM,Closed
+**Gate 4**,All day,Closed
+**Gate 5**,6:00 AM – 11:00 PM,**Exit only**
+**Gate 5**,11:00 PM – 6:00 AM,Closed

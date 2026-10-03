@@ -86,6 +86,7 @@ Add a new row. Everything is driven by rows:
 | Checklist step | `checklist` | title, detail |
 | Photo | `gallery` | title, file, caption |
 | Guideline poster (9:16) | `posters` | title, file, caption |
+| Gate access period | `gates` | gate, timing, access |
 | Form or document | `downloads` | title, note, url |
 | Helpline number | `helplines` | group, icon, name, number, note |
 | Resolution | `resolutions` | ref, date, title, summary, status |
@@ -158,6 +159,38 @@ they are deliberately left out for now:
 - Nearest hospital
 
 Add a row for each and they appear on the website straight away.
+
+---
+
+## Part 2f — Gate access timings
+
+The **Gate access timings & guidelines** table sits just below the timings
+quick-reference. It comes from the `gates` tab, which has three columns:
+
+| Column | What goes in it |
+| --- | --- |
+| `gate` | `Gate 1`, `Gate 2` … |
+| `timing` | When that rule applies, e.g. `6:00 AM – 11:00 PM` or `All day` |
+| `access` | Who may use it, e.g. `Owners – entry only`, or `Closed` |
+
+**A gate with two periods gets two rows.** Write the gate name on *both*, one
+after the other, and the website joins them into a single cell spanning the
+two — exactly as the printed notice reads:
+
+| gate | timing | access |
+| --- | --- | --- |
+| Gate 1 | 6:00 AM – 11:00 PM | Guests & vendors – entry & exit |
+| Gate 1 | 11:00 PM – 6:00 AM | Closed |
+
+Keep a gate's rows together. If `Gate 1` appears at the top and again at the
+bottom with something else in between, you get two separate `Gate 1` cells.
+
+**Write `Closed` on its own** in the `access` column and the website shows it
+as a red badge, so a shut gate is obvious at a glance. Any other wording is
+shown as ordinary bold text.
+
+The note underneath about night access is part of the page, not the sheet. Ask
+whoever maintains the code to change it.
 
 ---
 

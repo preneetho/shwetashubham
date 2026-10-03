@@ -163,6 +163,20 @@ write("settings", [
   write("timings", rows);
 }
 
+/* ---------- gate access ---------- */
+{
+  const rows = [["gate", "timing", "access"]];
+  /* The gate cell is only present on the first row of a run, so carry the
+     last one forward — the sheet wants a gate name on every row. */
+  const re = /<tr>\s*(?:<td(?: rowspan="\d+")?>([\s\S]*?)<\/td>\s*)?<td class="num">([\s\S]*?)<\/td>\s*<td>([\s\S]*?)<\/td>\s*<\/tr>/g;
+  let m, gate = "";
+  while ((m = re.exec(pickId("gateRows")))) {
+    if (m[1] !== undefined) gate = txt(m[1]);
+    rows.push([gate, txt(m[2]), txt(m[3])]);
+  }
+  write("gates", rows);
+}
+
 /* ---------- guidelines ---------- */
 {
   const rows = [["section", "title", "keywords", "anchor", "kind", "text"]];

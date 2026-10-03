@@ -905,6 +905,70 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       links(w)[0].getAttribute("href"));
   }
 
+  /* 30. gate access — one cell per gate, however many periods it has */
+  {
+    const head = "gate,timing,access\r\n";
+    const rows = w => Array.prototype.slice.call(w.document.querySelectorAll("#gateRows tr"));
+
+    let w = makeDom(serve());
+    await wait();
+    check("the built-in gate table lists every gate period",
+      rows(w).length === 9, rows(w).length + " rows");
+    check("a gate with two periods is written once, spanning both",
+      rows(w)[0].cells[0].getAttribute("rowspan") === "2" &&
+      rows(w)[1].cells.length === 2,
+      rows(w)[0].cells[0].textContent);
+
+    w = makeDom(serve({
+      gates: head + "Gate 2,6 AM to 11 PM,Owners only\r\n" +
+        "Gate 2,11 PM to 6 AM,Entry & exit\r\n" +
+        "Gate 4,All day,Closed\r\n"
+    }));
+    await wait();
+    const r = rows(w);
+    check("the sheet replaces the built-in gate rows",
+      r.length === 3, r.length + " rows");
+    check("rows naming the same gate share one cell",
+      r[0].cells[0].getAttribute("rowspan") === "2" && r[1].cells.length === 2,
+      r[0].cells[0].textContent);
+    check("a gate with a single period needs no span",
+      !r[2].cells[0].hasAttribute("rowspan") && r[2].cells.length === 3,
+      r[2].cells[0].textContent);
+    check("a closed gate is flagged, not just worded",
+      !!r[2].querySelector(".pill-red") &&
+      r[2].cells[2].textContent.trim() === "Closed",
+      r[2].cells[2].textContent.trim());
+    check("an open gate is not flagged as closed",
+      !r[0].querySelector(".pill-red"),
+      r[0].cells[2].textContent.trim());
+    check("an ampersand in the access column is not double escaped",
+      r[1].cells[1].textContent === "Entry & exit",
+      r[1].cells[1].textContent);
+
+    /* two gates that happen to be next to each other must stay apart */
+    w = makeDom(serve({
+      gates: head + "Gate 1,All day,Open\r\nGate 3,All day,Exit only\r\n"
+    }));
+    await wait();
+    check("different gates are never merged",
+      rows(w).every(e => e.cells.length === 3 && !e.cells[0].hasAttribute("rowspan")),
+      rows(w).length + " separate rows");
+
+    /* an empty tab must leave the built-in table alone */
+    w = makeDom(serve({ gates: head }));
+    await wait();
+    check("an empty gates tab keeps the table already on the page",
+      rows(w).length === 9, rows(w).length + " rows kept");
+
+    w = makeDom(serve({
+      gates: head + '"<img src=x onerror=alert(1)>",All day,"<b>Closed</b>"\r\n'
+    }));
+    await wait();
+    check("a script pasted into the gate table cannot run",
+      w.document.querySelectorAll("#gateRows img").length === 0,
+      rows(w)[0].cells[0].textContent.slice(0, 40));
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

@@ -112,7 +112,7 @@
   var TABS = ["settings", "notices", "festivals", "timings", "guidelines",
     "staff_scope", "fees", "committee", "escalation", "checklist",
     "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
-    "helplines", "events", "improvements"];
+    "helplines", "events", "improvements", "gates"];
 
   function fetchTab(tab) {
     return fetch(sheetURL(tab), { cache: "no-store" })
@@ -209,6 +209,42 @@
       return "<tr><td><b>" + rich(r.activity) + "</b></td>" +
         '<td class="num">' + rich(r.timings) + "</td>" +
         "<td>" + rich(r.notes) + "</td></tr>";
+    }).join("");
+  };
+
+  /* Gate access. Rows that name the same gate one after another belong to
+     one gate, so the first of them carries a cell spanning them all — the
+     committee writes "Gate 2" twice and reads it back as a single row.
+     A period written exactly "Closed" is shown as a red pill, so a shut
+     gate is obvious at a glance however the sheet is worded. */
+  R.gates = function (rows) {
+    var el = document.getElementById("gateRows");
+    if (!el) return;
+    var list = rows.filter(function (r) { return r.gate || r.timing || r.access; });
+    if (!list.length) return;
+
+    /* how many rows in a run share this gate name */
+    var span = [], i, j;
+    for (i = 0; i < list.length; i++) {
+      if (span[i] === 0) continue;
+      var name = (list[i].gate || "").trim().toLowerCase();
+      span[i] = 1;
+      if (!name) continue;
+      for (j = i + 1; j < list.length && (list[j].gate || "").trim().toLowerCase() === name; j++) {
+        span[i]++; span[j] = 0;
+      }
+    }
+
+    el.innerHTML = list.map(function (r, k) {
+      var cell = span[k] === 0 ? ""
+        : "<td" + (span[k] > 1 ? ' rowspan="' + span[k] + '"' : "") +
+          "><b>" + rich(r.gate) + "</b></td>";
+      var a = String(r.access || "").trim();
+      var access = /^closed$/i.test(a)
+        ? '<span class="pill pill-red">Closed</span>'
+        : "<b>" + rich(r.access) + "</b>";
+      return "<tr>" + cell + '<td class="num">' + rich(r.timing) +
+        "</td><td>" + access + "</td></tr>";
     }).join("");
   };
 

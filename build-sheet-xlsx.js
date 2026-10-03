@@ -11,7 +11,7 @@ const OUT = path.join(__dirname, "Shweta-Shubham-Content.xlsx");
 
 /* Tab order matters: this is the order the admin sees them in. */
 const TABS = ["settings", "notices", "festivals", "quick_actions", "helplines",
-  "timings", "guidelines", "staff_scope", "fees", "committee", "escalation",
+  "timings", "gates", "guidelines", "staff_scope", "fees", "committee", "escalation",
   "checklist", "downloads", "gallery", "posters", "events", "improvements",
   "resolutions", "records"];
 
@@ -65,6 +65,7 @@ const HELP = [
   ["staff_scope", "What the electrician, plumber, housekeeping, gardener and security cover"],
   ["fees", "type=card for the three summary boxes, type=penalty for the fines table"],
   ["committee", "group = core / advisory / extended"],
+  ["gates", "Which gate is open, when, and to whom. Repeat the gate name on each of its rows."],
   ["escalation", "Who to contact, in order"],
   ["checklist", "The new-resident checklist. Numbering is automatic."],
   ["downloads", "Forms and documents. Paste a Google Drive share link in url, or a file name kept beside the website."],
