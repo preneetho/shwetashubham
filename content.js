@@ -112,7 +112,7 @@
   var TABS = ["settings", "notices", "festivals", "timings", "guidelines",
     "staff_scope", "fees", "committee", "escalation", "checklist",
     "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
-    "helplines", "events"];
+    "helplines", "events", "improvements"];
 
   function fetchTab(tab) {
     return fetch(sheetURL(tab), { cache: "no-store" })
@@ -521,6 +521,25 @@
     society: { pill: "pill-gold", cls: "" },
     utility: { pill: "pill-grey", cls: "" },
     support: { pill: "pill-green", cls: "" }
+  };
+
+  /* What the Association has built since handover. A row with no title is a
+     blank line in the sheet, and a tab full of them would empty the section,
+     so the static cards are kept unless there is something real to show. */
+  R.improvements = function (rows) {
+    var el = document.getElementById("builtGrid");
+    if (!el) return;
+    var list = rows.filter(function (r) { return r.title; });
+    if (!list.length) return;
+    el.innerHTML = list.map(function (r) {
+      return '<article class="card built-card">' +
+        (r.category ? '<span class="chip">' + esc(r.category) + "</span>" : "") +
+        "<h3>" + rich(r.title) + "</h3>" +
+        (r.details ? "<p>" + rich(r.details) + "</p>" : "") +
+        "</article>";
+    }).join("");
+    var c = document.getElementById("builtCount");
+    if (c) c.textContent = list.length + (list.length === 1 ? " improvement" : " improvements");
   };
 
   R.helplines = function (rows) {

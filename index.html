@@ -159,6 +159,12 @@ section.band.alt{background:var(--card); border-block:1px solid var(--line)}
 .g3{grid-template-columns:repeat(auto-fit,minmax(248px,1fr))}
 .g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .card{background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+/* ---------- built since handover ---------- */
+.built-card{display:flex; flex-direction:column; align-items:flex-start; gap:9px; padding:20px}
+.built-card h3{margin:0; font-size:1.02rem}
+.built-card p{margin:0; color:var(--ink-2); font-size:.9rem; line-height:1.55}
+.built-card .chip{padding:4px 11px; font-size:.72rem; letter-spacing:.05em; text-transform:uppercase;
+  font-weight:650; color:var(--brand); background:var(--brand-50); border-color:var(--brand-50)}
 section.alt .card{background:var(--bg)}
 .tile{display:flex; flex-direction:column; gap:7px; text-align:left; transition:.18s}
 a.tile:hover{transform:translateY(-3px); border-color:var(--brand); text-decoration:none}
@@ -1667,6 +1673,38 @@ window.phFallback = function(img){
   </div>
 </section>
 
+<!-- ============ BUILT SINCE HANDOVER ============ -->
+<!-- What the Association has added since the builder handed the community
+     over. Driven by the 'improvements' tab; the cards below are the
+     fallback the page keeps if that tab is missing or empty. -->
+<section class="band alt" id="built">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="kicker">SSMACS at work</div>
+      <h2>Built since handover</h2>
+      <p>Facilities and infrastructure the Association has added or restored since the builder handed the community over &mdash; <b id="builtCount">16 improvements</b> so far, funded from our own maintenance corpus.</p>
+    </div>
+    <div class="grid g3" id="builtGrid">
+      <article class="card built-card"><span class="chip">Community spaces</span><h3>Amphitheater</h3><p>An open-air stage for gatherings, cultural evenings and religious events.</p></article>
+      <article class="card built-card"><span class="chip">Sports &amp; recreation</span><h3>Kids' play area, badminton &amp; cricket box</h3><p>A dedicated play zone for children, with a badminton court and a box cricket area.</p></article>
+      <article class="card built-card"><span class="chip">Access &amp; parking</span><h3>Gate 5 opened</h3><p>A new exit gate for the community, easing the load on the existing gates.</p></article>
+      <article class="card built-card"><span class="chip">Community spaces</span><h3>Ganesha Temple</h3><p>Built and maintained by the community, with the anniversary celebrated every year.</p></article>
+      <article class="card built-card"><span class="chip">Safety &amp; security</span><h3>Security cabins at Gate 1 &amp; Gate 5</h3><p>Proper manned cabins, so guards are stationed and sheltered at both gates.</p></article>
+      <article class="card built-card"><span class="chip">Access &amp; parking</span><h3>Clear parking demarcation</h3><p>Every bay marked out in hot paint, so allotted parking is unambiguous.</p></article>
+      <article class="card built-card"><span class="chip">Community spaces</span><h3>Association office</h3><p>A permanent office for the Association, its records and resident walk-ins.</p></article>
+      <article class="card built-card"><span class="chip">Sports &amp; recreation</span><h3>Yoga room</h3><p>A quiet indoor room set aside for yoga and fitness sessions.</p></article>
+      <article class="card built-card"><span class="chip">Grounds &amp; landscaping</span><h3>Lit walkways through the gardens</h3><p>Elevated walkways through the planted areas, lit for safe use after dark.</p></article>
+      <article class="card built-card"><span class="chip">Community spaces</span><h3>Kitchen area renovated</h3><p>The common kitchen refitted for use during functions and celebrations.</p></article>
+      <article class="card built-card"><span class="chip">Grounds &amp; landscaping</span><h3>Clean &amp; dry driveways</h3><p>The garden pipes were concealed to keep the driveway dry and neat.</p></article>
+      <article class="card built-card"><span class="chip">Safety &amp; security</span><h3>Fire extinguishers installed</h3><p>Extinguishers fitted across the blocks and the common areas.</p></article>
+      <article class="card built-card"><span class="chip">Buildings &amp; utilities</span><h3>Storerooms at multiple locations</h3><p>Secure storage added at several points for equipment and society material.</p></article>
+      <article class="card built-card"><span class="chip">Sports &amp; recreation</span><h3>Swimming pool renovated</h3><p>The pool refurbished and brought back into regular use.</p></article>
+      <article class="card built-card"><span class="chip">Safety &amp; security</span><h3>Solar fencing restored</h3><p>The perimeter solar fence repaired and made live again.</p></article>
+      <article class="card built-card"><span class="chip">Buildings &amp; utilities</span><h3>Cellar water leakage resolved</h3><p>Most of the water leakage issues in the cellars have been resolved.</p></article>
+    </div>
+  </div>
+</section>
+
 <!-- ============ NBH ============ -->
 <section class="band alt" id="nbh">
   <div class="wrap">
@@ -1830,6 +1868,7 @@ window.phFallback = function(img){
           <li><a href="#scope">Staff scope of work</a></li>
           <li><a href="#committee">Committee directory</a></li>
           <li id="evLink" hidden><a href="#events">Latest events</a></li>
+          <li><a href="#built">Built since handover</a></li>
           <li><a href="#downloads">Forms &amp; downloads</a></li>
         </ul>
       </div>

@@ -130,6 +130,14 @@ write("settings", [
   write("events", [["name", "date", "details", "photo"]]);
 }
 
+/* ---------- built since handover ---------- */
+{
+  const rows = [["title", "category", "details"]];
+  const re = /<article class="card built-card"><span class="chip">([\s\S]*?)<\/span><h3>([\s\S]*?)<\/h3><p>([\s\S]*?)<\/p><\/article>/g;
+  let m; while ((m = re.exec(pickId("builtGrid")))) rows.push([txt(m[2]), txt(m[1]), txt(m[3])]);
+  write("improvements", rows);
+}
+
 /* ---------- notices ---------- */
 {
   const rows = [["tag", "colour", "title", "body"]];

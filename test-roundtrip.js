@@ -12,7 +12,7 @@ const tplDir = path.join(dir, "sheet-template");
 const TABS = ["settings", "notices", "festivals", "timings", "guidelines",
   "staff_scope", "fees", "committee", "escalation", "checklist",
   "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
-  "helplines"];
+  "helplines", "improvements"];
 
 const html = fs.readFileSync(path.join(dir, "index.html"), "utf8");
 
@@ -20,7 +20,7 @@ function snapshot(doc) {
   const ids = ["noticeList", "festRows", "timingRows", "acclist", "scopeGrid",
     "feeCards", "penaltyRows", "coreRows", "advRows", "extRows", "escRows",
     "checklist", "dlList", "gal", "qaGrid", "resList", "recList", "posGrid",
-    "helpGrid"];
+    "helpGrid", "builtGrid"];
   const o = {};
   ids.forEach(id => {
     const el = doc.getElementById(id);

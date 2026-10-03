@@ -90,6 +90,7 @@ Add a new row. Everything is driven by rows:
 | Helpline number | `helplines` | group, icon, name, number, note |
 | Resolution | `resolutions` | ref, date, title, summary, status |
 | Minutes / notice / circular | `records` | type, date, title, note, link |
+| Something SSMACS has built | `improvements` | title, category, details |
 
 ### Removing an item
 
@@ -465,6 +466,36 @@ reliable way to get the rating card to show.
 For safety, only Google Maps addresses are accepted. Anything else is ignored
 and the built-in map stays, so a typo cannot put someone else's content on the
 page.
+
+---
+
+## Part 6c — Built since handover
+
+The **Built since handover** section lists what the Association has added or
+restored since the builder handed the community over — the amphitheater, Gate 5,
+the temple, the renovated pool and so on. It sits just below the events
+carousel and is filled from the `improvements` tab:
+
+| Column | What to put in it |
+|---|---|
+| `title` | The thing itself, e.g. `Yoga room`. A row with no title is skipped |
+| `category` | The small label above the title, e.g. `Safety & security`. Optional |
+| `details` | One sentence saying what it is or what changed. Optional |
+
+The cards appear in the order the rows appear in the tab, so to move something
+up the page, move its row up the sheet. The count in the opening line
+(*"16 improvements so far"*) is worked out from the rows — never type it in.
+
+Keep `category` to a handful of repeated values rather than a different one
+each time; it reads as a set of labels, not as a second title. The ones used
+today are *Community spaces*, *Sports & recreation*, *Safety & security*,
+*Access & parking*, *Grounds & landscaping* and *Buildings & utilities*.
+
+There is no photo column here on purpose — the section is a quick scannable
+list. Photographs of these places belong in the `gallery` tab.
+
+If the `improvements` tab is missing or empty, the page keeps the sixteen
+cards already built into it, so nothing disappears.
 
 ---
 

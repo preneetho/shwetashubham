@@ -780,6 +780,43 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "hidden");
   }
 
+  /* 28. what SSMACS has built since handover */
+  {
+    const csv = "title,category,details\r\n" +
+      "Amphitheater,Community spaces,An open-air stage\r\n" +
+      "Yoga room,,A quiet indoor room\r\n" +
+      "Gate 5 opened,Access & parking,\r\n" +
+      ",Safety & security,A row with no title\r\n";
+    const w = makeDom(serve({ improvements: csv }));
+    await wait();
+    const cards = [...w.document.querySelectorAll("#builtGrid .built-card")];
+
+    check("an improvement needs a title to be listed",
+      cards.length === 3, cards.length + " of 4 rows shown");
+    check("the sheet order is kept, newest last is the committee's choice",
+      cards.map(c => c.querySelector("h3").textContent).join(" | ") ===
+      "Amphitheater | Yoga room | Gate 5 opened",
+      cards.map(c => c.querySelector("h3").textContent).join(" | "));
+    check("an improvement with no category shows no chip",
+      !cards[1].querySelector(".chip"), "no chip");
+    check("an improvement with no details shows no paragraph",
+      !cards[2].querySelector("p"), "no paragraph");
+    check("an ampersand in a category is not double escaped",
+      cards[2].querySelector(".chip").textContent === "Access & parking",
+      cards[2].querySelector(".chip").textContent);
+    check("the headline count follows the sheet",
+      w.document.getElementById("builtCount").textContent === "3 improvements",
+      w.document.getElementById("builtCount").textContent);
+
+    /* an empty tab must leave the sixteen built-in cards alone */
+    const e = makeDom(serve({ improvements: "title,category,details\r\n" }));
+    await wait();
+    check("an empty improvements tab keeps the cards already on the page",
+      e.document.querySelectorAll("#builtGrid .built-card").length === 16 &&
+      e.document.getElementById("builtCount").textContent === "16 improvements",
+      e.document.querySelectorAll("#builtGrid .built-card").length + " cards kept");
+  }
+
   let fails = 0;
   results.forEach(([n, ok, det]) => {
     if (!ok) fails++;

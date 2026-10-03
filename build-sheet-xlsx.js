@@ -12,7 +12,8 @@ const OUT = path.join(__dirname, "Shweta-Shubham-Content.xlsx");
 /* Tab order matters: this is the order the admin sees them in. */
 const TABS = ["settings", "notices", "festivals", "quick_actions", "helplines",
   "timings", "guidelines", "staff_scope", "fees", "committee", "escalation",
-  "checklist", "downloads", "gallery", "posters", "events", "resolutions", "records"];
+  "checklist", "downloads", "gallery", "posters", "events", "improvements",
+  "resolutions", "records"];
 
 /* Column widths, by header name, so the sheet is readable on open. */
 const WIDTH = {
@@ -70,6 +71,7 @@ const HELP = [
   ["gallery", "Photos. Paste a Google Drive share link in file, or use an images folder file name."],
   ["posters", "Tall 9:16 guideline posters. Use a Google Drive link, or the image file name."],
   ["events", "Photographs from society events. See the note below."],
+  ["improvements", "What SSMACS has built since handover. title, category, details. No photo."],
   ["resolutions", "Committee / GBM decisions. Newest first is not required \u2014 the site sorts by date."],
   ["records", "Minutes of meetings, notices and circulars. See the note below."],
   [""],
