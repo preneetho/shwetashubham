@@ -405,11 +405,13 @@
     var el = document.getElementById("gal");
     if (!el) return;
     el.innerHTML = rows.map(function (r) {
+      var srcs = photoSrcs(r.file, "gallery");
       return '<figure tabindex="0" data-cap="' + esc(r.caption || r.title) + '">' +
-        '<img src="' + esc(imgSrc(r.file, "gallery")) + '" alt="' + esc(r.title) + '"' +
+        '<img src="' + esc(srcs[0] || imgSrc(r.file, "gallery")) + '" alt="' + esc(r.title) + '"' +
+        ' data-alt="' + esc(srcs.slice(1).join("|")) + '"' +
         ' data-c1="' + esc(r.colour1 || r.color1 || "#14564a") + '"' +
         ' data-c2="' + esc(r.colour2 || r.color2 || "#0b3a32") + '"' +
-        ' onerror="phFallback(this)" loading="lazy">' +
+        ' onerror="imgFail(this)" loading="lazy" referrerpolicy="no-referrer">' +
         "<figcaption>" + esc(r.title) + "</figcaption></figure>";
     }).join("");
   };

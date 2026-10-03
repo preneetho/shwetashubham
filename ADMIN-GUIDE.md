@@ -354,8 +354,19 @@ and add its rows at the point in the list where you want it to appear.
 
 ## Part 6 — Photos
 
-1. Put the image file into the website's **`images`** folder.
-2. In the `gallery` tab, put that exact file name in the **file** column.
+Every picture on the site can come from **Google Drive**, so you never have to
+touch the website's files. Upload the photo to Drive, share it as **Anyone
+with the link → Viewer**, copy the link and paste it into the sheet. If it is
+shared any other way residents only see a coloured placeholder.
+
+For the photo gallery:
+
+1. Upload the photo to Google Drive and share it as *Anyone with the link*,
+   *Viewer*.
+2. In the `gallery` tab, paste that share link into the **file** column.
+
+A photo kept in the website's own **`images/gallery`** folder works too — put
+the file there and type just its file name, with no folder in front of it.
 
 Use roughly 1200 × 800 pixels and keep each file under about 300 KB.
 

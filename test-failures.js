@@ -364,12 +364,25 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
         i => i.getAttribute("referrerpolicy") === "no-referrer"), "all set");
 
     const g = makeDom(serve({
-      gallery: "title,file,caption,colour1,colour2\r\nPool,pool.jpg,The pool,#111,#222\r\n"
+      gallery: "title,file,caption,colour1,colour2\r\nPool,pool.jpg,The pool,#111,#222\r\n" +
+        "Holi,https://drive.google.com/file/d/DDDDDDDDDDDD/view?usp=sharing,Colours,,\r\n"
     }));
     await wait();
+    const gi = [].slice.call(g.document.querySelectorAll("#gal img"));
     check("a bare gallery name is served from images/gallery/",
-      g.document.querySelector("#gal img").getAttribute("src") === "images/gallery/pool.jpg",
-      g.document.querySelector("#gal img").getAttribute("src"));
+      gi[0].getAttribute("src") === "images/gallery/pool.jpg",
+      gi[0].getAttribute("src"));
+    check("a Drive share link is turned into a gallery photo",
+      gi[1].getAttribute("src") === "https://lh3.googleusercontent.com/d/DDDDDDDDDDDD=w1600",
+      gi[1].getAttribute("src"));
+    check("a gallery photo keeps the other Drive hosts to fall back on",
+      (gi[1].getAttribute("data-alt") || "").split("|").length === 2,
+      gi[1].getAttribute("data-alt"));
+    check("the gallery asks Google for no referrer",
+      gi.every(i => i.getAttribute("referrerpolicy") === "no-referrer"), "all set");
+    check("a gallery photo still carries its placeholder colours",
+      gi[0].getAttribute("data-c1") === "#111" && gi[0].getAttribute("data-c2") === "#222",
+      gi[0].getAttribute("data-c1") + " " + gi[0].getAttribute("data-c2"));
   }
 
   /* 19. the carousel dots track whatever the sheet renders */
