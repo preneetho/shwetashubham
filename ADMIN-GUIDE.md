@@ -453,6 +453,11 @@ rows appear in the tab.
 If the `posters` tab is missing or empty, the page keeps the posters already
 built into it — nothing disappears.
 
+The **launch announcement poster** is not in the tab and never will be. It is
+written into the site itself and always sits first, ahead of whatever the tab
+sends, so it cannot be pushed out or deleted by mistake. Ask for it to be
+removed or replaced only when the launch is old news.
+
 On a phone the posters become a swipeable frame showing one poster at a time,
 with arrows and dots underneath. On a tablet or computer they stay laid out as
 a grid. This happens automatically — there is nothing to set in the tab.

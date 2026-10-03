@@ -460,7 +460,12 @@
     if (!el) return;
     rows = rows.filter(function (r) { return r.file; });
     if (!rows.length) return;
-    el.innerHTML = rows.map(function (r) {
+    /* The portal's own launch notice is written into the page, not the sheet,
+       so it is marked data-pin and kept at the front of whatever the sheet
+       sends. Without this the first poster tab entry would wipe it out. */
+    var pinned = "", keep = el.querySelectorAll("figure[data-pin]"), k;
+    for (k = 0; k < keep.length; k++) pinned += keep[k].outerHTML;
+    el.innerHTML = pinned + rows.map(function (r) {
       var srcs = photoSrcs(r.file, "posters");
       return '<figure tabindex="0" data-cap="' + esc(r.caption || r.title) + '">' +
         '<div class="shot"><img src="' + esc(srcs[0]) + '" alt="' + esc(r.title) + '"' +

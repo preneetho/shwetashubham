@@ -343,7 +343,7 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "From Drive,https://drive.google.com/file/d/CCCCCCCCCCCC/view?usp=sharing,Shared folder\r\n";
     const w = makeDom(serve({ posters: csv }));
     await wait();
-    const src = [].map.call(w.document.querySelectorAll("#posGrid img"),
+    const src = [].map.call(w.document.querySelectorAll("#posGrid figure:not([data-pin]) img"),
       i => i.getAttribute("src"));
     check("a full URL poster is not prefixed with images/",
       src[0] === "https://example.com/a/water.jpg", src[0]);
@@ -356,11 +356,11 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("a Drive share link is turned into a poster",
       src[4] === "https://lh3.googleusercontent.com/d/CCCCCCCCCCCC=w1600", src[4]);
     check("a poster keeps the other Drive hosts to fall back on",
-      ([].slice.call(w.document.querySelectorAll("#posGrid img"))[4]
+      ([].slice.call(w.document.querySelectorAll("#posGrid figure:not([data-pin]) img"))[4]
         .getAttribute("data-alt") || "").split("|").length === 2,
-      [].slice.call(w.document.querySelectorAll("#posGrid img"))[4].getAttribute("data-alt"));
+      [].slice.call(w.document.querySelectorAll("#posGrid figure:not([data-pin]) img"))[4].getAttribute("data-alt"));
     check("the posters ask Google for no referrer",
-      [].every.call(w.document.querySelectorAll("#posGrid img"),
+      [].every.call(w.document.querySelectorAll("#posGrid figure:not([data-pin]) img"),
         i => i.getAttribute("referrerpolicy") === "no-referrer"), "all set");
 
     const g = makeDom(serve({
@@ -396,8 +396,13 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     const figs = w.document.querySelectorAll("#posGrid figure");
     const dots = w.document.getElementById("posDots");
     const nav = w.document.getElementById("posNav");
-    check("carousel builds one dot per sheet poster",
-      figs.length === 3 && dots.children.length === 3,
+    check("the launch notice survives a filled posters tab",
+      figs.length === 4 && figs[0].hasAttribute("data-pin") &&
+      /poster-portal-launch/.test(figs[0].querySelector("img").getAttribute("src")),
+      figs.length + " figures, first is " +
+      (figs[0] ? figs[0].querySelector("img").getAttribute("src") : "none"));
+    check("carousel builds one dot per poster shown",
+      figs.length === 4 && dots.children.length === figs.length,
       figs.length + " figures, " + dots.children.length + " dots");
     check("carousel controls are shown for more than one poster",
       !nav.hasAttribute("hidden"), "hidden=" + nav.hasAttribute("hidden"));
@@ -406,7 +411,12 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
   /* 20. a lone poster needs no carousel controls */
   {
     const csv = "title,file,caption\r\nOnly,a.jpg,Solo\r\n";
-    const w = makeDom(serve({ posters: csv }));
+    const w = makeDom(serve({ posters: csv }), win => {
+      /* the launch notice is pinned into the page, so take it out to get
+         back to the genuinely single-poster case the controls guard against */
+      const p = win.document.querySelector("#posGrid figure[data-pin]");
+      if (p) p.parentNode.removeChild(p);
+    });
     await wait();
     const nav = w.document.getElementById("posNav");
     const dots = w.document.getElementById("posDots");
