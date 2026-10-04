@@ -580,7 +580,7 @@ window.phFallback = function(img){
       <a href="#timings">Timings</a>
       <a href="#helplines">Helplines</a>
       <a href="#guidelines">Guidelines</a>
-      <a href="#posters">Posters</a>
+      <a href="#posters" id="posLink" hidden>Posters</a>
       <a href="#resolutions">Resolutions</a>
       <a href="#records">Minutes &amp; Notices</a>
       <a href="#fees">Fees &amp; Fines</a>
@@ -1384,55 +1384,14 @@ window.phFallback = function(img){
 </section>
 
 <!-- ============ GUIDELINE POSTERS ============ -->
-<section class="band pos-band" id="posters">
+<section class="band pos-band" id="posters" hidden>
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">Visual guides</div>
       <h2>Guideline posters</h2>
       <p>Illustrated do&rsquo;s and don&rsquo;ts for everyday situations. Tap any poster to view it full size.</p>
     </div>
-    <div class="pos" id="posGrid">
-      <figure tabindex="0" data-cap="Our Resident Information Portal is now live at shwetashubham.in &mdash; everything about the society in your pocket. The guidelines in full with a search box, amenity timings, helpline numbers you can tap to call, the approved fees and penalty schedule, the committee directory, meeting minutes, notices and resolutions, these posters and the new resident checklist. No login, no app store, no charge. One tap adds it to your home screen, where it opens like an app and stays readable even with no signal. The phone in the picture shows exactly how the icon will look once you have added it.">
-        <div class="shot"><img src="images/posters/poster-portal-launch.png" alt="Resident Information Portal is now live &ndash; one tap to keep it in your pocket, with a phone showing the home screen icon" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>The portal, in your pocket &ndash; in one tap</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Balcony safety &amp; cleanliness &mdash; keep your balcony clean and contained, and never throw water, dust, cigarette butts or waste from balconies">
-        <div class="shot"><img src="images/posters/poster-balcony.jpg" alt="Balcony safety and cleanliness" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Balcony safety &amp; cleanliness</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Corridors must be kept clean &amp; clear &mdash; no footwear, cycles, furniture or storage in the common corridors. Keep the passage tidy and unobstructed for everyone.">
-        <div class="shot"><img src="images/posters/poster-corridors.jpg" alt="Corridors must be kept clean and clear" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Corridors must be kept clean &amp; clear</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Park within your own allotted slot and inside the markings. No-parking zones and fire lanes are strictly enforced &mdash; vehicles are locked and fined Rs 200 a day for two-wheelers and Rs 500 for four-wheelers. No waste or storage in parking areas, and cycles belong in flat parking only.">
-        <div class="shot"><img src="images/posters/poster-parking.jpg" alt="Parking rules" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Parking rules</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Residents: affix the society sticker and register your vehicle for automatic access. Guests and non-registered vehicles must use Gate 1 for entry checks. Do not misuse the entry and exit lanes &mdash; Gates 3 and 5 are planned for exit only.">
-        <div class="shot"><img src="images/posters/poster-gate-security.jpg" alt="Security at the main gate" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Security at the main gate</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Proper swimwear is mandatory. Children must be supervised by an adult at all times. No food or glass items near the pool. The pool is for registered residents only &mdash; guests are not allowed.">
-        <div class="shot"><img src="images/posters/poster-pool.jpg" alt="Swimming pool usage rules" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Swimming pool usage rules</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Under-14s are not allowed in the gym. Do not drop weights or misuse equipment &mdash; place them gently and re-rack after use. Limit sessions to 30 minutes during peak hours so everyone gets a chance, and keep the shared audio at a moderate volume.">
-        <div class="shot"><img src="images/posters/poster-gym.jpg" alt="Gym guidelines" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Gym guidelines</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Treat all support staff with dignity and courtesy &mdash; a smile and kind words go a long way. Do not be rude, dismissive or abusive towards support staff; mistreating them creates an unhealthy environment and is serious misconduct.">
-        <div class="shot"><img src="images/posters/poster-staff-behaviour.jpg" alt="Residents behaviour towards support staff" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Residents&rsquo; behaviour towards support staff</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Support staff are valued members of our society&rsquo;s ecosystem and courteous interaction is expected at all times. They may not be engaged for private work inside flats beyond their defined scope. Verbal abuse, intimidation or disrespectful behaviour is strictly unacceptable &mdash; report any misconduct to the Maintenance Manager or Core Committee.">
-        <div class="shot"><img src="images/posters/poster-staff-interaction.jpg" alt="Resident and support staff interaction guidelines" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Resident &amp; support staff interaction</figcaption>
-      </figure>
-      <figure tabindex="0" data-cap="Boond boond se banta hai kal ka savera. Close taps when not in use, use a bucket instead of a shower, run full loads in washing machines, report leaks promptly, and water plants in the morning or evening.">
-        <div class="shot"><img src="images/posters/poster-savewater.png" alt="Save water" onerror="phFallback(this)" loading="lazy"></div>
-        <figcaption>Save water &mdash; use it judiciously</figcaption>
-      </figure>
-    </div>
+    <div class="pos" id="posGrid"></div>
     <div class="pos-nav" id="posNav" hidden>
       <button class="pos-arrow" type="button" data-step="prev" aria-label="Previous poster">&#8249;</button>
       <div class="pos-dots" id="posDots"></div>

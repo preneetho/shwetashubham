@@ -313,7 +313,7 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       titles.slice(0, 2).join(" | "));
   }
 
-  /* 17. an absent posters tab must not wipe the built-in poster */
+  /* 17. with no sheet posters there is nothing to show */
   {
     /* gviz answers an unknown sheet name with the FIRST sheet and status 200,
        so the renderer receives the help tab rather than a 404. */
@@ -325,12 +325,12 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     await wait();
     const figs = w.document.querySelectorAll("#posGrid figure");
     const builtIn = (html.split('id="posGrid"')[1].split("</section>")[0].match(/<figure/g) || []).length;
-    check("wrong sheet for posters keeps the built-in posters",
-      builtIn > 0 && figs.length === builtIn, figs.length + " of " + builtIn + " figures");
-    check("built-in posters still point at their images",
-      figs.length === builtIn &&
-      Array.prototype.every.call(figs, f => /^images\/posters\/poster-[\w.-]+$/.test(f.querySelector("img").getAttribute("src"))),
-      Array.prototype.map.call(figs, f => f.querySelector("img").getAttribute("src")).join(" | ") || "none");
+    check("the page carries no posters of its own",
+      builtIn === 0 && figs.length === 0, builtIn + " built in, " + figs.length + " rendered");
+    check("a wrong sheet for posters leaves the section and its menu entry hidden",
+      w.document.getElementById("posters").hasAttribute("hidden") &&
+      w.document.getElementById("posLink").hasAttribute("hidden"),
+      "section hidden=" + w.document.getElementById("posters").hasAttribute("hidden"));
   }
 
   /* 18. sheet file names resolve into their own section folder */
@@ -403,6 +403,10 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("carousel builds one dot per sheet poster",
       figs.length === 3 && dots.children.length === 3,
       figs.length + " figures, " + dots.children.length + " dots");
+    check("sheet posters bring the section and its menu entry back",
+      !w.document.getElementById("posters").hasAttribute("hidden") &&
+      !w.document.getElementById("posLink").hasAttribute("hidden"),
+      "section hidden=" + w.document.getElementById("posters").hasAttribute("hidden"));
     check("carousel controls are shown for more than one poster",
       !nav.hasAttribute("hidden"), "hidden=" + nav.hasAttribute("hidden"));
   }

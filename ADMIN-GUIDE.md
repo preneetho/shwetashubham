@@ -445,19 +445,12 @@ the `posters` tab, which has three columns:
 To add a poster, put it in Google Drive and paste the share link into the
 `file` column, exactly as you would for an event photograph — **the poster
 has to be shared as *Anyone with the link*, *Viewer*, or residents only see a
-placeholder.** A poster kept in the website's own **`images/posters`** folder
-works too: put the file there and type just its file name. You never type the
-folder into the sheet — the site adds it. Posters appear in the order the
-rows appear in the tab.
+placeholder.** Posters appear in the order the rows appear in the tab.
 
-If the `posters` tab is missing or empty, the page keeps the posters already
-built into it — nothing disappears.
-
-Once the tab has even one row it becomes the whole list: the posters built
-into the page step aside completely. So if you want the **launch announcement
-poster** on the site, give it a row of its own — file name
-`poster-portal-launch.png`, which is already on the website — and put it
-wherever in the order you want it to appear.
+**This tab is the only source of posters.** The page carries none of its own,
+so whatever is in the tab is exactly what residents see. If the tab is empty,
+or the sheet cannot be reached, the whole **Guideline posters** section and
+its menu entry simply do not appear — residents never see an empty shelf.
 
 On a phone the posters become a swipeable frame showing one poster at a time,
 with arrows and dots underneath. On a tablet or computer they stay laid out as

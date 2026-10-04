@@ -468,6 +468,13 @@
         ' onerror="imgFail(this)" loading="lazy" referrerpolicy="no-referrer"></div>' +
         "<figcaption>" + esc(r.title) + "</figcaption></figure>";
     }).join("");
+
+    /* Posters live only in the sheet, so the section and its menu entry stay
+       out of the way until there is at least one to show. */
+    var sec = document.getElementById("posters");
+    if (sec) sec.hidden = false;
+    var link = document.getElementById("posLink");
+    if (link) link.hidden = false;
   };
 
   /* A Google Drive "share" link opens a viewer page, not the picture, so an

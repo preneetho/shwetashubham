@@ -297,12 +297,10 @@ write("settings", [
 
 /* ---------- guideline posters ---------- */
 {
-  const rows = [["title", "file", "caption"]];
-  const re = /<figure tabindex="0" data-cap="([^"]*)">\s*<div class="shot"><img src="([^"]+)" alt="([^"]*)"[\s\S]*?<figcaption>([\s\S]*?)<\/figcaption>/g;
-  let m; while ((m = re.exec(pickId("posGrid")))) {
-    rows.push([dec(m[4]), bare(m[2]), dec(m[1])]);
-  }
-  write("posters", rows);
+  /* Nothing to lift out of the page here: the poster carousel shows only
+     what the committee puts in the sheet, so the tab is created with its
+     headings and no rows. The section stays hidden until one is added. */
+  write("posters", [["title", "file", "caption"]]);
 }
 
 console.log("\nCSV files written to: " + OUT);
