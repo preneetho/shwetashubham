@@ -453,10 +453,11 @@ rows appear in the tab.
 If the `posters` tab is missing or empty, the page keeps the posters already
 built into it — nothing disappears.
 
-The **launch announcement poster** is not in the tab and never will be. It is
-written into the site itself and always sits first, ahead of whatever the tab
-sends, so it cannot be pushed out or deleted by mistake. Ask for it to be
-removed or replaced only when the launch is old news.
+Once the tab has even one row it becomes the whole list: the posters built
+into the page step aside completely. So if you want the **launch announcement
+poster** on the site, give it a row of its own — file name
+`poster-portal-launch.png`, which is already on the website — and put it
+wherever in the order you want it to appear.
 
 On a phone the posters become a swipeable frame showing one poster at a time,
 with arrows and dots underneath. On a tablet or computer they stay laid out as
