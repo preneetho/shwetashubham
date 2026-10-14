@@ -511,11 +511,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       !!cards(w)[0].querySelector(".pill-gold") && !cards(w)[0].classList.contains("sos"),
       cards(w)[0].className);
 
+    /* Counted rather than pinned, so adding a helpline to the page does
+       not break these checks. */
+    const builtInHelp = (html.split('id="helpGrid"')[1].split("</section>")[0]
+      .match(/class="card hl/g) || []).length;
+
     /* half-filled rows are the most likely admin mistake */
     w = makeDom(serve({ helplines: head + "Society,Z,,,\r\nSociety,Z,Lift AMC,,\r\n" }));
     await wait();
     check("rows with no number are dropped, keeping the built-in list",
-      cards(w).length === 11, cards(w).length + " cards");
+      builtInHelp > 0 && cards(w).length === builtInHelp,
+      cards(w).length + " of " + builtInHelp + " cards");
 
     /* Google returns an empty cell for text in a numeric column, which would
        silently delete a helpline. The built-in list must survive that. */
@@ -526,12 +532,12 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     }));
     await wait();
     check("one unreadable number keeps the whole built-in list",
-      cards(w).length === 11, cards(w).length + " cards");
+      cards(w).length === builtInHelp, cards(w).length + " of " + builtInHelp + " cards");
 
     w = makeDom(serve({ helplines: head }));
     await wait();
     check("an empty helplines tab keeps the built-in numbers",
-      cards(w).length === 11, cards(w).length + " cards");
+      cards(w).length === builtInHelp, cards(w).length + " of " + builtInHelp + " cards");
 
     /* the note is the only free-text field, so it must still be escaped */
     w = makeDom(serve({
