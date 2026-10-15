@@ -21,7 +21,7 @@ function makeDom(fetchImpl, tweak) {
   return w;
 }
 const serve = over => url => {
-  const tab = decodeURIComponent(String(url).split("sheet=")[1] || "");
+  const tab = decodeURIComponent((String(url).match(/[?&]sheet=([^&]*)/) || [])[1] || "");
   if (over && Object.prototype.hasOwnProperty.call(over, tab)) {
     const v = over[tab];
     if (v === null) return Promise.reject(new Error("network"));
@@ -60,6 +60,25 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("blank SHEET_ID never fetches", true, "no throw");
     check("blank SHEET_ID leaves status empty",
       dom.window.document.getElementById("sheetStatus").textContent === "", "");
+  }
+
+  /* 2b. Google must never be left to guess where the headings stop */
+  {
+    const seen = [];
+    const w = makeDom(url => { seen.push(String(url)); return serve({})(url); });
+    await wait();
+    check("every tab is asked for with the heading row pinned",
+      seen.length > 0 && seen.every(u => /[?&]headers=1(&|$)/.test(u)),
+      seen.length + " requests, " +
+      seen.filter(u => !/[?&]headers=1(&|$)/.test(u)).length + " unpinned");
+    check("pinning the heading row does not disturb the tab name",
+      seen.some(u => /[?&]sheet=helplines(&|$)/.test(u)),
+      seen[0] || "none");
+    check("the pinned request still returns every row",
+      w.document.querySelectorAll("#helpGrid .hl").length ===
+      (fs.readFileSync(path.join(tpl, "helplines.csv"), "utf8")
+        .trim().split(/\r?\n/).length - 1),
+      w.document.querySelectorAll("#helpGrid .hl").length + " cards");
   }
 
   /* 3. one tab broken, others fine */

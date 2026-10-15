@@ -43,7 +43,7 @@ function snapshot(doc) {
   w.SS_CONFIG.SHEET_ID = "TEST";
   w.SS_CONFIG.CACHE_MINUTES = 0;
   w.fetch = url => {
-    const tab = decodeURIComponent(String(url).split("sheet=")[1] || "");
+    const tab = decodeURIComponent((String(url).match(/[?&]sheet=([^&]*)/) || [])[1] || "");
     const f = path.join(tplDir, tab + ".csv");
     if (!fs.existsSync(f)) return Promise.resolve({ ok: false, status: 404 });
     return Promise.resolve({ ok: true, status: 200, text: () => Promise.resolve(fs.readFileSync(f, "utf8")) });

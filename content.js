@@ -88,9 +88,13 @@
   }
 
   /* ---------- fetching ---------- */
+  /* Without headers=1, Google guesses how many rows are headings by looking
+     at the column types, and it guesses wrong: one number-only cell in a
+     column of mixed text is enough for it to swallow every row above as a
+     heading and hand back a single row. Pin it to one. */
   function sheetURL(tab) {
     return "https://docs.google.com/spreadsheets/d/" + SHEET_ID +
-      "/gviz/tq?tqx=out:csv&sheet=" + encodeURIComponent(tab);
+      "/gviz/tq?tqx=out:csv&headers=1&sheet=" + encodeURIComponent(tab);
   }
 
   function readCache() {
