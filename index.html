@@ -334,6 +334,10 @@ section.alt .chip{background:var(--bg)}
 .lb .x{top:20px; right:20px}
 .lb .prev{left:20px; top:50%; transform:translateY(-50%)}
 .lb .next{right:20px; top:50%; transform:translateY(-50%)}
+.lb .share{top:20px; left:20px; width:auto; padding:0 18px; border-radius:23px; font-size:.88rem; font-weight:600; font-family:inherit; display:inline-flex; align-items:center; gap:8px}
+.lb .share[hidden]{display:none}
+.lb .share svg{width:17px; height:17px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.lb .share[disabled]{opacity:.65; cursor:default}
 .lb button:hover{background:rgba(255,255,255,.22)}
 .gal-band{background:#0f2b25; color:#c4dbd4; border-block:1px solid #0a211c}
 .gal-band h2{color:#fff}
@@ -1911,6 +1915,10 @@ window.phFallback = function(img){
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <button class="x" id="lbX" aria-label="Close">&#10005;</button>
+  <button class="share" id="lbShare" type="button" hidden>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3"/><path d="m8 7 4-4 4 4"/><path d="M4 13v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-6"/></svg>
+    <span id="lbShareTxt">Share</span>
+  </button>
   <button class="prev" id="lbPrev" aria-label="Previous photo">&#8249;</button>
   <img id="lbImg" src="" alt="" referrerpolicy="no-referrer">
   <div class="lb-vid" id="lbVid"></div>
@@ -2189,6 +2197,8 @@ window.phFallback = function(img){
       lbImg.alt = im.alt;
     }
     lbCap.textContent = f.getAttribute('data-cap') || im.alt;
+    var cr = f.querySelector('figcaption');
+    shareReady(vsrc ? '' : im.src, (cr ? cr.textContent : '').trim() || im.alt);
     lb.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
@@ -2216,6 +2226,84 @@ window.phFallback = function(img){
     if (e.key === 'Escape') close();
     if (e.key === 'ArrowLeft') show(cur - 1);
     if (e.key === 'ArrowRight') show(cur + 1);
+  });
+
+  /* ---- sharing the open picture ---- */
+  /* The picture has to be in hand before the resident taps Share: a phone
+     only honours navigator.share while the tap is still fresh, so waiting
+     for a download inside the handler gets the share refused. It is
+     fetched the moment the viewer opens instead, which costs no extra data
+     because the browser has just downloaded the same picture to show it. */
+  var shareBtn = document.getElementById('lbShare'),
+      shareTxt = document.getElementById('lbShareTxt'),
+      shareFile = null, shareTitle = '', shareToken = 0, shareTimer = null;
+  var ANCHOR = { posGrid: '#posters', gal: '#gallery', evTrack: '#events' };
+
+  function shareName(title, type){
+    var ext = String(type || '').split('/')[1] || 'jpg';
+    if (ext === 'jpeg') ext = 'jpg';
+    var stem = String(title || '').toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48);
+    return (stem || 'poster') + '.' + ext;
+  }
+
+  function shareSay(msg){
+    clearTimeout(shareTimer);
+    shareTxt.textContent = msg;
+    shareTimer = setTimeout(function(){ shareTxt.textContent = 'Share'; }, 2200);
+  }
+
+  function shareReady(src, title){
+    if (!shareBtn) return;
+    shareFile = null;
+    shareTitle = title || '';
+    clearTimeout(shareTimer);
+    shareTxt.textContent = 'Share';
+    /* A film is a link on someone else's site, so there is no file to pass
+       on and nothing useful to share but the page itself. */
+    shareBtn.hidden = !(src && navigator.share);
+    if (!src || !navigator.share || !navigator.canShare) return;
+    var mine = ++shareToken;
+    fetch(src, { referrerPolicy: 'no-referrer' })
+      .then(function(r){ return r.ok ? r.blob() : null; })
+      .then(function(b){
+        if (mine !== shareToken || !b) return;
+        var file = new File([b], shareName(title, b.type), { type: b.type });
+        if (navigator.canShare({ files: [file] })) shareFile = file;
+      })
+      .catch(function(){ /* the link is still worth sharing */ });
+  }
+
+  function shareCopy(url){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(
+        function(){ shareSay('Link copied'); },
+        function(){ shareSay('Could not share'); });
+    } else shareSay('Could not share');
+  }
+
+  if (shareBtn) shareBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if (!navigator.share) return;
+    var url = location.origin + location.pathname +
+      (ANCHOR[active && active.id] || '');
+    var text = shareTitle ? shareTitle + ' \u2014 ' + location.host : location.host;
+    var link = { title: shareTitle || document.title, text: text, url: url };
+    var p;
+    try {
+      p = navigator.share(shareFile
+        ? { files: [shareFile], title: link.title, text: text }
+        : link);
+    } catch (err) { p = Promise.reject(err); }
+    p.catch(function(err){
+      if (err && err.name === 'AbortError') return;
+      /* Some phones accept a link but refuse a picture, so drop back to
+         the link rather than leaving the resident with nothing. */
+      if (!shareFile) return shareCopy(url);
+      navigator.share(link).catch(function(e2){
+        if (!e2 || e2.name !== 'AbortError') shareCopy(url);
+      });
+    });
   });
 
   /* ---- events carousel: one photograph at a time, at every width ---- */

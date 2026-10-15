@@ -442,6 +442,56 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "hidden=" + nav.hasAttribute("hidden") + " dots=" + dots.children.length);
   }
 
+  /* 20b. sharing a poster from a phone */
+  {
+    const csv = "title,file,caption\r\n" +
+      "Balcony safety,https://example.com/b.jpg,Keep it clear\r\n" +
+      "Fire drill,fire.jpg,Know your exits\r\n";
+
+    /* A browser that cannot share must not be offered a button that does
+       nothing, and opening a poster must still work. */
+    let w = makeDom(serve({ posters: csv }));
+    await wait();
+    let d = w.document;
+    d.querySelectorAll("#posGrid figure")[0].dispatchEvent(
+      new w.MouseEvent("click", { bubbles: true }));
+    check("a poster still opens where there is nothing to share with",
+      d.getElementById("lb").classList.contains("open"), "viewer open");
+    check("no share button where the browser cannot share",
+      d.getElementById("lbShare").hidden, "hidden");
+
+    /* Given a phone that can share, the button appears and hands over the
+       picture itself rather than a link to it. */
+    const sent = [];
+    const withPictures = u => /[?&]sheet=/.test(String(u))
+      ? serve({ posters: csv })(u)
+      : Promise.resolve({ ok: true, status: 200,
+          blob: () => Promise.resolve(new w.Blob(["x"], { type: "image/jpeg" })) });
+    w = makeDom(withPictures, win => {
+      win.navigator.share = payload => { sent.push(payload); return Promise.resolve(); };
+      win.navigator.canShare = () => true;
+    });
+    await wait();
+    d = w.document;
+    d.querySelectorAll("#posGrid figure")[0].dispatchEvent(
+      new w.MouseEvent("click", { bubbles: true }));
+    check("a phone that can share is offered the button",
+      !d.getElementById("lbShare").hidden, "shown");
+    await wait();
+    d.getElementById("lbShare").dispatchEvent(new w.MouseEvent("click", { bubbles: true }));
+    await wait();
+    const shared = sent[0] || {};
+    const sentFile = (shared.files || [])[0];
+    check("sharing a poster hands over the picture, not a link",
+      sent.length === 1 && !!sentFile && !shared.url,
+      JSON.stringify(Object.keys(shared)));
+    check("the shared picture is named after the poster",
+      !!sentFile && sentFile.name === "balcony-safety.jpg",
+      sentFile ? sentFile.name : "no file sent");
+    check("the shared picture carries the poster title",
+      /Balcony safety/.test(shared.text || ""), shared.text || "nothing sent");
+  }
+
   /* 21. the map embed only ever accepts a Google address */
   {
     const set = v => "key,value\r\nmap_embed," + v + "\r\n";
