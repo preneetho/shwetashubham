@@ -144,6 +144,14 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       links.length + " valid targets");
     check("the menu has no duplicate section links",
       new Set(targets).size === targets.length, targets.length + " distinct sections");
+    check("Our Amenities opens the existing amenities photographs",
+      nav.querySelector('a[href="#gallery"]').textContent === "Our Amenities",
+      "amenities label, existing section");
+    check("the footer keeps its logo without repeating the long subtitle",
+      !!d.querySelector("footer .brand img") &&
+      d.querySelector("footer .brand").textContent.trim() === "" &&
+      /A safe, clean and harmonious/.test(d.querySelector("footer").textContent),
+      "logo and tagline retained");
     const memories = nav.querySelector('a[href="#memories"]');
     check("memories has a shortcut to the archive card",
       !!memories && memories.textContent === "Memories" && !memories.hidden,
