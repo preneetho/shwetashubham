@@ -138,6 +138,7 @@ stays tidy as photos are added:
 |---|---|
 | `images/brand/` | `logo.png`, `favicon.png`, `social-card.jpg` |
 | `images/hero/` | `building.jpg` — the photo at the top of the page |
+| `images/memories/` | Optimised community collage used by the Memories archive card |
 | `images/posters/` | The 9:16 guideline posters |
 | `images/gallery/` | Amenity photographs |
 | `images/events/` | Event photographs, if not linked from Google Drive |
@@ -213,4 +214,3 @@ npm install jsdom
 node test-roundtrip.js   # sheet-rendered page must match the static page exactly
 node test-failures.js    # offline, malformed tabs, HTML injection, widget re-binding, filters
 ```
-

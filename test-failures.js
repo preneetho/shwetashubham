@@ -102,9 +102,13 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
         a.relList.contains("noreferrer") && /opens in a new tab/.test(a.textContent)),
       "portal stays open");
     const photo = section.querySelector("img");
-    check("the memories card uses an existing society photograph",
-      photo.getAttribute("src") === "images/hero/building.jpg" &&
-      fs.existsSync(path.join(dir, photo.getAttribute("src"))) && !!photo.alt,
+    const photoPath = path.join(dir, photo.getAttribute("src"));
+    check("the memories card uses the supplied community collage",
+      photo.getAttribute("src") ===
+        "images/memories/community-celebration-collage.jpg" &&
+      fs.existsSync(photoPath) && fs.statSync(photoPath).size > 100000 && !!photo.alt &&
+      photo.getAttribute("width") === "1523" &&
+      photo.getAttribute("height") === "1015",
       photo.getAttribute("src"));
     check("the archive is linked, not embedded inside the portal",
       !section.querySelector("iframe"), "no nested site");

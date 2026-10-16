@@ -407,15 +407,14 @@ section.alt .chip{background:var(--bg)}
 @media(prefers-reduced-motion:reduce){.ev{scroll-behavior:auto}}
 
 /* ---------- memories archive ---------- */
-.memories-card{display:grid; grid-template-columns:.85fr 1.15fr; overflow:hidden;
+.memories-card{display:grid; grid-template-columns:1.5fr .85fr; overflow:hidden;
   background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
-.memories-photo{width:100%; height:360px; object-fit:cover; object-position:center 60%}
+.memories-photo{display:block; width:100%; height:auto; align-self:center}
 .memories-copy{padding:32px; align-self:center; min-width:0}
 .memories-copy .sec-head{margin-bottom:22px}
 .memories-copy .memories-note{margin:12px 0 0; color:var(--muted); font-size:.8rem}
 @media(max-width:640px){
   .memories-card{grid-template-columns:1fr}
-  .memories-photo{height:260px}
   .memories-copy{padding:24px}
 }
 
@@ -1722,7 +1721,7 @@ window.phFallback = function(img){
 <section class="band" id="memories" aria-labelledby="memoriesTitle">
   <div class="wrap">
     <div class="memories-card">
-      <img class="memories-photo" src="images/hero/building.jpg" alt="Shweta Shubham buildings and landscaped entrance" width="391" height="486" loading="lazy" decoding="async">
+      <img class="memories-photo" src="images/memories/community-celebration-collage.jpg" alt="Collage of Shweta Shubham celebrations, sports and community gatherings" width="1523" height="1015" loading="lazy" decoding="async">
       <div class="memories-copy">
         <div class="sec-head">
           <div class="kicker">Our community, through the years</div>
