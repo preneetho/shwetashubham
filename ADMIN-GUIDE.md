@@ -517,6 +517,29 @@ wide group shot can follow one another without anybody losing their head.
 
 ---
 
+### Memories archive
+
+The **Shweta Shubham Memories** card sits immediately below **Latest events**.
+Its **Explore our memories** button and the **Memories** link in the footer
+open <https://sites.google.com/view/ssmemories/home> in a new tab, leaving the
+resident portal available.
+
+Keep adding older celebrations, photographs and albums to the existing Google
+Site. Nothing needs copying into the website or its `events` tab. The card is
+available even if there are no latest events or the sheet cannot be reached.
+The archive itself needs an internet connection.
+
+If the archive address changes, add or edit a row in the **settings** tab with
+`key` = **`memories_url`** and `value` = the full **HTTPS** address. This updates
+both links. If that row is absent, the built-in SS Memories address is used;
+there is no need to change your current sheet to enable the card.
+
+Publish the Google Site so residents can view it without requesting access.
+Check its linked Drive files and albums too: test the archive in an incognito
+window, where you are not signed into the owner's account.
+
+---
+
 ## Part 6b — The Google map
 
 The Contact section ends with a Google map of the society. It is Google's own

@@ -15,7 +15,7 @@
 
    Bump VERSION whenever the files in SHELL change.
    ============================================================ */
-var VERSION = "ss-shell-v3";
+var VERSION = "ss-shell-v4";
 
 var SHELL = [
   "./",

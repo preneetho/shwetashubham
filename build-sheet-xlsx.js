@@ -57,6 +57,7 @@ const HELP = [
   [""],
   ["WHAT EACH TAB DOES"],
   ["settings", "Society name, hero wording, emergency numbers shown at the top"],
+  ["settings: memories_url", "The SS Memories archive link used by the Memories card and footer. Leave this row out to keep the built-in archive address."],
   ["notices", "The notice board. Newest at the top. colour = red / gold / green / grey"],
   ["festivals", "The festival chips under 'Celebrations we share'"],
   ["quick_actions", "The eight shortcut tiles near the top of the page"],

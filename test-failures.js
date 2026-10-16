@@ -81,6 +81,52 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       w.document.querySelectorAll("#helpGrid .hl").length + " cards");
   }
 
+  /* 2c. the memories archive works without a sheet and can be relinked there */
+  {
+    const archive = "https://sites.google.com/view/ssmemories/home";
+    let w = makeDom(() => Promise.reject(new Error("offline")));
+    await wait();
+    let d = w.document;
+    const section = d.getElementById("memories");
+    const links = [].slice.call(d.querySelectorAll('[data-ss="memories_url"]'));
+    check("the memories card follows latest events",
+      d.getElementById("events").nextElementSibling === section, "section order");
+    check("memories stay visible without a sheet or latest events",
+      !section.hidden && d.getElementById("events").hidden, "archive card available");
+    check("the card and footer both open the existing memories archive",
+      links.length === 2 && links.every(a => a.href === archive) &&
+      !!d.querySelector('#memories a[data-ss="memories_url"]') &&
+      !!d.querySelector('footer a[data-ss="memories_url"]'), links.length + " links");
+    check("the archive opens safely in a new tab with an accessible hint",
+      links.every(a => a.target === "_blank" && a.relList.contains("noopener") &&
+        a.relList.contains("noreferrer") && /opens in a new tab/.test(a.textContent)),
+      "portal stays open");
+    const photo = section.querySelector("img");
+    check("the memories card uses an existing society photograph",
+      photo.getAttribute("src") === "images/hero/building.jpg" &&
+      fs.existsSync(path.join(dir, photo.getAttribute("src"))) && !!photo.alt,
+      photo.getAttribute("src"));
+    check("the archive is linked, not embedded inside the portal",
+      !section.querySelector("iframe"), "no nested site");
+
+    w = makeDom(serve({ settings: "key,value\r\nsociety_short_name,Test Society\r\n" }));
+    await wait();
+    check("an existing settings tab needs no new row for memories to work",
+      [].every.call(w.document.querySelectorAll('[data-ss="memories_url"]'),
+        a => a.href === archive), "built-in archive retained");
+
+    const changed = "https://sites.google.com/view/ssmemories/events";
+    w = makeDom(serve({ settings: "key,value\r\nmemories_url," + changed + "\r\n" }));
+    await wait();
+    d = w.document;
+    check("one sheet edit updates both memories links without changing their labels",
+      [].every.call(d.querySelectorAll('[data-ss="memories_url"]'),
+        a => a.href === changed && a.target === "_blank") &&
+      /Explore our memories/.test(d.querySelector("#memories a").textContent) &&
+      /Memories/.test(d.querySelector('footer [data-ss="memories_url"]').textContent),
+      "card and footer updated");
+  }
+
   /* 3. one tab broken, others fine */
   {
     const w = makeDom(serve({ committee: "!!! not,csv\nat,,,all\n\n" }));

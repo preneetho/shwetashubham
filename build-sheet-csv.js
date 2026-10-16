@@ -83,6 +83,7 @@ write("settings", [
   ["security_hours", "Nights & emergencies"],
   ["society_email", txt(between(/<a[^>]*data-ss="society_email"[^>]*>/, /<\/a>/))],
   ["footer_note", "Guidelines v1.0 \u00b7 Prepared by SSMACS \u00b7 Approved in the April GBM"],
+  ["memories_url", dec((html.match(/href="([^"]+)" data-ss="memories_url"/) || [])[1] || "")],
   ["map_embed", "https://maps.google.com/maps?q=Shweta+Shubham,+Kompally,+Hyderabad&z=16&hl=en&output=embed"]
 ]);
 

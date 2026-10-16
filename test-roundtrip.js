@@ -20,7 +20,7 @@ function snapshot(doc) {
   const ids = ["noticeList", "festRows", "timingRows", "gateRows", "acclist", "scopeGrid",
     "feeCards", "penaltyRows", "coreRows", "advRows", "extRows", "escRows",
     "checklist", "dlList", "gal", "qaGrid", "resList", "recList",
-    "helpGrid", "builtGrid"];
+    "helpGrid", "memories", "builtGrid"];
   const o = {};
   ids.forEach(id => {
     const el = doc.getElementById(id);

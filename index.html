@@ -404,6 +404,19 @@ section.alt .chip{background:var(--bg)}
 @media(max-width:640px){.ev{gap:12px} .ev-name{font-size:1.04rem}}
 @media(prefers-reduced-motion:reduce){.ev{scroll-behavior:auto}}
 
+/* ---------- memories archive ---------- */
+.memories-card{display:grid; grid-template-columns:.85fr 1.15fr; overflow:hidden;
+  background:var(--card); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow)}
+.memories-photo{width:100%; height:360px; object-fit:cover; object-position:center 60%}
+.memories-copy{padding:32px; align-self:center; min-width:0}
+.memories-copy .sec-head{margin-bottom:22px}
+.memories-copy .memories-note{margin:12px 0 0; color:var(--muted); font-size:.8rem}
+@media(max-width:640px){
+  .memories-card{grid-template-columns:1fr}
+  .memories-photo{height:260px}
+  .memories-copy{padding:24px}
+}
+
 /* footer */
 footer.site{background:#0b211d; color:#8fb0a8; font-size:.88rem; padding:44px 0 26px; margin-top:0}
 footer.site a{color:#c8ded8}
@@ -1694,6 +1707,24 @@ window.phFallback = function(img){
   </div>
 </section>
 
+<!-- ============ MEMORIES ARCHIVE ============ -->
+<section class="band" id="memories" aria-labelledby="memoriesTitle">
+  <div class="wrap">
+    <div class="memories-card">
+      <img class="memories-photo" src="images/hero/building.jpg" alt="Shweta Shubham buildings and landscaped entrance" width="391" height="486" loading="lazy" decoding="async">
+      <div class="memories-copy">
+        <div class="sec-head">
+          <div class="kicker">Our community, through the years</div>
+          <h2 id="memoriesTitle">Shweta Shubham Memories</h2>
+          <p>Relive our celebrations, milestones and moments together &mdash; festivals, sports days, inaugurations and more.</p>
+        </div>
+        <a class="btn btn-primary" href="https://sites.google.com/view/ssmemories/home" data-ss="memories_url" target="_blank" rel="noopener noreferrer">Explore our memories <span aria-hidden="true">&#8599;</span><span class="sr-only"> (opens in a new tab)</span></a>
+        <p class="memories-note">Opens our SS Memories archive on Google Sites in a new tab.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ INFRASTRUCTURE & FACILITIES CREATED BY SSMACS ============ -->
 <!-- What the Association has added since the builder handed the community
      over. Driven by the 'improvements' tab; the cards below are the
@@ -1892,6 +1923,7 @@ window.phFallback = function(img){
           <li><a href="#scope">Staff scope of work</a></li>
           <li><a href="#committee">Committee directory</a></li>
           <li id="evLink" hidden><a href="#events">Latest events</a></li>
+          <li><a href="https://sites.google.com/view/ssmemories/home" data-ss="memories_url" target="_blank" rel="noopener noreferrer">Memories <span aria-hidden="true">&#8599;</span><span class="sr-only"> (opens in a new tab)</span></a></li>
           <li><a href="#built">Infrastructure &amp; facilities</a></li>
           <li><a href="#downloads">Forms &amp; downloads</a></li>
         </ul>
