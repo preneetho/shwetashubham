@@ -127,6 +127,47 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       "card and footer updated");
   }
 
+  /* 2d. the folded menu covers every main section, including memories */
+  {
+    const w = makeDom(serve({}));
+    await wait();
+    const d = w.document;
+    const nav = d.getElementById("nav");
+    const links = [...nav.querySelectorAll("a[href]")];
+    const targets = links.map(a => a.getAttribute("href"));
+    const sections = [...d.querySelectorAll("main > section[id], #downloads")];
+    const missing = sections.filter(s => targets.indexOf("#" + s.id) === -1);
+    check("every main section is reachable from the folded menu",
+      missing.length === 0, missing.map(s => s.id).join(", ") || "all covered");
+    check("every menu shortcut points to an existing section",
+      links.every(a => !!d.getElementById(a.getAttribute("href").slice(1))),
+      links.length + " valid targets");
+    check("the menu has no duplicate section links",
+      new Set(targets).size === targets.length, targets.length + " distinct sections");
+    const memories = nav.querySelector('a[href="#memories"]');
+    check("memories has a shortcut to the archive card",
+      !!memories && memories.textContent === "Memories" && !memories.hidden,
+      memories ? memories.getAttribute("href") : "missing");
+    const extras = [...nav.querySelectorAll(".nav-secondary")];
+    check("the desktop row keeps its existing eleven shortcuts",
+      links.length - extras.length === 11, links.length - extras.length + " primary links");
+
+    const button = d.getElementById("menuBtn");
+    button.click();
+    check("the menu button opens the full list",
+      nav.classList.contains("open") && button.getAttribute("aria-expanded") === "true",
+      "menu expanded");
+    memories.click();
+    check("choosing memories closes the menu",
+      !nav.classList.contains("open") && button.getAttribute("aria-expanded") === "false",
+      "menu collapsed");
+    button.click();
+    d.dispatchEvent(new w.KeyboardEvent("keydown", { key: "Escape", bubbles: true }));
+    check("Escape closes the longer menu and returns focus to its button",
+      !nav.classList.contains("open") && d.activeElement === button,
+      "keyboard dismissal preserved");
+  }
+
   /* 3. one tab broken, others fine */
   {
     const w = makeDom(serve({ committee: "!!! not,csv\nat,,,all\n\n" }));
@@ -899,6 +940,9 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       }), "all " + figs.length + " set");
     check("the section is revealed once there are events",
       d.getElementById("events").hasAttribute("hidden") === false, "shown");
+    check("events reveal both the mobile menu shortcut and footer link",
+      !d.getElementById("evNavLink").hidden && !d.getElementById("evLink").hidden,
+      "both links shown");
     check("a photograph is not mistaken for a film",
       figs.every(f => !f.getAttribute("data-video")), "no players on photo slides");
 
@@ -942,7 +986,8 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     await wait();
     check("an empty events tab leaves the section hidden",
       e.document.getElementById("events").hasAttribute("hidden") &&
-      e.document.getElementById("evLink").hasAttribute("hidden"),
+      e.document.getElementById("evLink").hasAttribute("hidden") &&
+      e.document.getElementById("evNavLink").hasAttribute("hidden"),
       "hidden");
   }
 

@@ -67,6 +67,22 @@ Done. Open the website — at the very bottom it should say
 
 ## Part 2 — Everyday use
 
+### Finding a section on a phone
+
+The menu button opens a scrollable list of all the main website sections,
+including **Memories**, **Gate Access**, **Announcements**, **Staff Support**,
+**Celebrations**, **Latest Events**, **Infrastructure & Facilities**,
+**Forms & Downloads** and **NoBrokerhood**. Scroll within the menu to reach
+the links at the bottom. Selecting a link closes the menu.
+
+**Posters** and **Latest Events** appear only when their sheet tabs have
+content. **Memories** takes residents to the archive card; its button opens
+the existing Google Site in a new tab.
+
+The extra shortcuts appear in the folded menu on phones and tablets. The
+desktop header keeps its compact row of links rather than overflowing.
+These navigation links do not require any new rows in the Google Sheet.
+
 ### Changing something
 
 Find the tab, edit the cell, done. Changes appear on the website within about

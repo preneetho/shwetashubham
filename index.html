@@ -103,6 +103,7 @@ header.site .brand .brand-txt{display:none}
 nav.main{display:flex; gap:2px; align-items:center; flex:none}
 nav.main a{padding:8px 6px; border-radius:8px; font-size:.83rem; font-weight:550; color:var(--ink-2); white-space:nowrap}
 nav.main a:hover{background:var(--brand-50); color:var(--brand-600); text-decoration:none}
+nav.main .nav-secondary{display:none}
 .btn{display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:10px; font-weight:600; font-size:.88rem; border:1px solid transparent; cursor:pointer; font-family:inherit}
 .btn-primary{background:var(--brand); color:#fff}
 .btn-primary:hover{background:var(--brand-600); text-decoration:none}
@@ -126,6 +127,7 @@ header.site .wrap{gap:10px; max-width:1200px}
   nav.main.open{display:flex}
   nav.main a{padding:12px 14px; font-size:.95rem; border-bottom:1px solid var(--line)}
   nav.main a:last-child{border-bottom:0}
+  nav.main .nav-secondary:not([hidden]){display:block}
   .menu-btn{display:block}
   header.site .btn-gold{display:none}
 }
@@ -593,17 +595,26 @@ window.phFallback = function(img){
       <img class="logo-img" src="images/brand/logo.png" alt="Shweta Shubham" width="294" height="155" decoding="async">
       <span class="brand-txt">Flat Owners Co-operative<br>Maintenance Society Ltd</span>
     </a>
-    <nav class="main" id="nav">
+    <nav class="main" id="nav" aria-label="Main navigation">
       <a href="#timings">Timings</a>
+      <a class="nav-secondary" href="#gates">Gate Access</a>
       <a href="#helplines">Helplines</a>
+      <a class="nav-secondary" href="#announcements">Announcements</a>
       <a href="#guidelines">Guidelines</a>
       <a href="#posters" id="posLink" hidden>Posters</a>
       <a href="#resolutions">Resolutions</a>
       <a href="#records">Minutes &amp; Notices</a>
       <a href="#fees">Fees &amp; Fines</a>
       <a href="#committee">Committee</a>
+      <a class="nav-secondary" href="#scope">Staff Support</a>
       <a href="#gallery">Gallery</a>
+      <a class="nav-secondary" href="#culture">Celebrations</a>
+      <a class="nav-secondary" href="#events" id="evNavLink" hidden>Latest Events</a>
+      <a class="nav-secondary" href="#memories">Memories</a>
+      <a class="nav-secondary" href="#built">Infrastructure &amp; Facilities</a>
       <a href="#onboarding">New Residents</a>
+      <a class="nav-secondary" href="#downloads">Forms &amp; Downloads</a>
+      <a class="nav-secondary" href="#nbh">NoBrokerhood</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="btn btn-gold" href="#nbh">Open NoBrokerhood</a>
@@ -815,7 +826,7 @@ window.phFallback = function(img){
 </section>
 
 <!-- ============ NOTICES ============ -->
-<section class="band alt">
+<section class="band alt" id="announcements">
   <div class="wrap">
     <div class="sec-head">
       <div class="kicker">Notice Board</div>

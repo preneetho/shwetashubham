@@ -592,6 +592,8 @@
     if (sec) sec.hidden = false;
     var link = document.getElementById("evLink");
     if (link) link.hidden = false;
+    var navLink = document.getElementById("evNavLink");
+    if (navLink) navLink.hidden = false;
   };
 
   /* Group decides the pill colour and whether the card is styled as urgent.
