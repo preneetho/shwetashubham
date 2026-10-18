@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NOC Request - Resale / Move-In / Move-Out</title>
+<style>
+@page{size:A4;margin:7mm}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#17352e}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:7.9pt;line-height:1.16}
+.page{width:196mm;min-height:283mm;margin:0 auto;border:1px solid #cfdcd7;padding:5mm 7mm;position:relative}
+.header{display:flex;align-items:center;gap:6mm;padding-bottom:2mm;border-bottom:2px solid #14564a}
+.logo{width:35mm;height:auto;display:block}
+.society{flex:1;text-align:right}
+.society strong{display:block;font-family:Georgia,serif;font-size:12pt;line-height:1.1;color:#0f4239}
+.society span{display:block;margin-top:.8mm;font-size:6.8pt;letter-spacing:.05em;text-transform:uppercase;color:#65807a}
+.gold-rule{height:.8mm;background:#c08a2e;margin-top:.8mm}
+h1{margin:2.2mm 0 .7mm;text-align:center;font-family:Georgia,serif;font-size:14pt;color:#0f4239}
+.subtitle{text-align:center;color:#58756e;font-size:7.3pt;margin-bottom:1.8mm}
+.section{margin-top:1.7mm}
+.section-title{background:#e8f2ef;color:#0f4239;border-left:3px solid #14564a;padding:1mm 2mm;
+font-size:8pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr 1fr;column-gap:7mm;row-gap:1.2mm;padding:1.5mm 1.5mm .4mm}
+.field{display:flex;align-items:flex-end;gap:2mm;min-width:0}
+.field.full{grid-column:1/-1}.label{white-space:nowrap;font-weight:600;color:#2f4f47}
+.line{height:3.4mm;flex:1;border-bottom:1px solid #789089;min-width:10mm}
+.choices{display:flex;flex-wrap:wrap;gap:1.5mm 7mm;padding:1.6mm 1.5mm .3mm}
+.check::before{content:"";display:inline-block;width:2.7mm;height:2.7mm;border:1px solid #58756e;margin-right:1.3mm;vertical-align:-.4mm}
+.particulars{display:grid;grid-template-columns:1fr 1fr;gap:2mm 5mm;padding:1.4mm 1.5mm 0}
+.request-box{border:1px solid #d5dfdb;border-radius:2mm;padding:1.7mm 2.2mm}
+.request-box.full{grid-column:1/-1}
+.request-box h3{font-size:8.5pt;margin:0 0 1mm;color:#0f4239}
+.request-box .grid{padding:0;row-gap:1.1mm;column-gap:5mm}
+.documents{display:grid;grid-template-columns:1fr 1fr;gap:.8mm 6mm;padding:1.5mm 1.5mm .2mm}
+.documents .doc{display:flex;align-items:flex-start}
+.required{color:#9c2f1c;font-weight:700}
+.clearance{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8mm 4mm;padding:1.5mm 1.5mm .2mm}
+.clearance-item{display:flex;align-items:center;gap:1mm}
+.declaration{margin:1.3mm 1.5mm 0;padding:1.5mm 2.2mm;border:1px solid #d8e2de;border-radius:2mm;background:#fbfcfb;font-size:7.25pt}
+.declaration p{margin:0 0 .6mm}.declaration ol{margin:0;padding-left:4.5mm}
+.declaration li{margin:0 0 .35mm;padding-left:.5mm}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:5mm;padding:1.6mm 1.5mm 0}
+.signature{border:1px solid #d5dfdb;border-radius:2mm;padding:1.7mm}
+.sig-space{height:5.3mm;border-bottom:1px solid #789089;margin:.8mm 0}
+.office{border:1.5px solid #c08a2e;background:#fffaf0;margin-top:1.6mm;padding:1.7mm}
+.office-title{font-weight:800;color:#75500d;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1mm}
+.office-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.8mm 4mm}
+.office-grid .full{grid-column:1/-1}
+.footer{position:absolute;left:7mm;right:7mm;bottom:2mm;border-top:1px solid #d8e2de;padding-top:1mm;
+display:flex;justify-content:space-between;gap:5mm;color:#65807a;font-size:6.5pt}
+.footer b{color:#2f4f47}
+@media print{.page{border:0;margin:0;width:auto;min-height:283mm}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <img class="logo" src="../images/brand/logo.png" alt="Shweta Shubham">
+    <div class="society">
+      <strong>Shweta Shubham Flat Owners</strong>
+      <strong>Co-operative Maintenance Society Ltd</strong>
+      <span>Resident administration form</span>
+    </div>
+  </header>
+  <div class="gold-rule"></div>
+
+  <h1>NOC Request - Resale / Move-In / Move-Out</h1>
+  <div class="subtitle">Submit to the Society Office for document verification, applicable clearance and movement approval</div>
+
+  <section class="section">
+    <div class="section-title">1. Request type</div>
+    <div class="choices">
+      <span class="check">NOC for flat resale / ownership transfer</span>
+      <span class="check">Tenant move-in approval</span>
+      <span class="check">Tenant move-out NOC / gate pass</span>
+      <span class="check">Owner-confirmed movement gate pass</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">2. Flat, owner &amp; applicant details</div>
+    <div class="grid">
+      <div class="field"><span class="label">Block / Tower:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Flat No.:</span><span class="line"></span></div>
+      <div class="field full"><span class="label">Owner's full name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Owner mobile:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Owner email:</span><span class="line"></span></div>
+      <div class="field full"><span class="label">Applicant / primary tenant name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Applicant mobile:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Application date:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">3. Request particulars</div>
+    <div class="particulars">
+      <div class="request-box">
+        <h3>For resale / ownership transfer</h3>
+        <div class="grid">
+          <div class="field full"><span class="label">Proposed purchaser:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Mobile:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Transfer date:</span><span class="line"></span></div>
+        </div>
+      </div>
+      <div class="request-box">
+        <h3>For tenant move-in</h3>
+        <div class="grid">
+          <div class="field"><span class="label">Move-in date:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Time:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Adults:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Children:</span><span class="line"></span></div>
+          <div class="field full"><span class="label">Previous address:</span><span class="line"></span></div>
+        </div>
+      </div>
+      <div class="request-box full">
+        <h3>For move-in / move-out vehicle and gate arrangements</h3>
+        <div class="grid">
+          <div class="field"><span class="label">Movement date:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Time:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Shifting vehicle No.:</span><span class="line"></span></div>
+          <div class="field"><span class="label">Mover / agency:</span><span class="line"></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">4. Tenant move-in documents <span class="required">- required</span></div>
+    <div class="documents">
+      <span class="doc check">Recent passport-size photograph of each adult tenant</span>
+      <span class="doc check">Self-attested Aadhaar copy of each adult tenant</span>
+      <span class="doc check">Valid rent / leave-and-license agreement copy</span>
+      <span class="doc check">Police / tenant verification acknowledgement</span>
+      <span class="doc check">Signed Owner &amp; Tenant Guidelines proforma</span>
+      <span class="doc check">Owner confirmation and emergency-contact details</span>
+      <span class="doc check">Vehicle RC and registration form, if applicable</span>
+      <span class="doc check">Pet vaccination form, if applicable</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">5. Society clearance checklist</div>
+    <div class="clearance">
+      <span class="clearance-item check">Maintenance dues cleared</span>
+      <span class="clearance-item check">Applicable movement fee paid</span>
+      <span class="clearance-item check">Fines / penalties cleared</span>
+      <span class="clearance-item check">Common-area damage checked</span>
+      <span class="clearance-item check">Parking / vehicle access updated</span>
+      <span class="clearance-item check">Society assets / keys returned</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">6. Owner / applicant declaration</div>
+    <div class="declaration">
+      <p>We confirm that the information and submitted documents are correct and understand that:</p>
+      <ol>
+        <li>The owner is responsible for ensuring that tenant and occupant details remain current and that society guidelines are signed before move-in.</li>
+        <li>Move-in and move-out must be informed in advance, completed only between 7:00 AM-6:00 PM, and use the designated East-side driveway without inconveniencing residents.</li>
+        <li>Applicable charges, dues, fines and damage liabilities must be cleared. Tenant move-out requires owner confirmation.</li>
+        <li>A resale NOC confirms society-account clearance only and does not certify legal title, ownership, statutory approvals or transaction terms.</li>
+        <li>Identity documents will be submitted only to the Society Office for resident administration and security verification.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="signatures">
+    <div class="signature">
+      <b>Owner confirmation &amp; signature</b>
+      <div class="sig-space"></div>
+      <div class="field"><span class="label">Name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+    </div>
+    <div class="signature">
+      <b>Applicant / tenant signature</b>
+      <div class="sig-space"></div>
+      <div class="field"><span class="label">Name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="office">
+    <div class="office-title">For Society Office Use</div>
+    <div class="office-grid">
+      <div class="field"><span class="label">Reference No.:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Received / issue date:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Movement date:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Verified by:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Approved by:</span><span class="line"></span></div>
+      <div class="field"><span class="check">Approved</span><span class="check">Pending</span></div>
+      <div class="field full"><span class="label">Missing documents / remarks:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span><b>Society Office:</b> 97042 85706</span>
+    <span>Approval is subject to document verification, applicable payments and society clearances.</span>
+  </footer>
+</main>
+</body>
+</html>

@@ -1182,8 +1182,10 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       v.getAttribute("href"));
     const n = links(w)[3];
     check("the built-in NOC request downloads the PDF",
-      n.getAttribute("href") === "forms/noc-request-resale-move-out.pdf" &&
-      n.hasAttribute("download"),
+      n.getAttribute("href") === "forms/noc-request-resale-move-in-move-out.pdf" &&
+      n.hasAttribute("download") &&
+      /move-in/.test(n.textContent) &&
+      /Aadhaar/.test(n.textContent),
       n.getAttribute("href"));
     const pet = links(w)[4];
     check("the built-in pet vaccination form downloads the PDF",
@@ -1217,9 +1219,10 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       /RC copy/.test(a[2].textContent),
       a[2].textContent.trim());
     check("the live sheet NOC placeholder resolves to the downloadable form",
-      a[3].getAttribute("href") === "forms/noc-request-resale-move-out.pdf" &&
+      a[3].getAttribute("href") === "forms/noc-request-resale-move-in-move-out.pdf" &&
       a[3].hasAttribute("download") &&
-      /society clearance/.test(a[3].textContent),
+      /move-in/.test(a[3].textContent) &&
+      /Aadhaar/.test(a[3].textContent),
       a[3].textContent.trim());
     check("the live sheet pet placeholder resolves to the downloadable form",
       a[4].getAttribute("href") === "forms/pet-vaccination-certificate-submission.pdf" &&

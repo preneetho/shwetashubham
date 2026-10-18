@@ -607,6 +607,7 @@
       var last = i === rows.length - 1;
       var href = r.url || "#contact";
       var note = r.note || "";
+      var title = r.title || "";
       if (href === "#contact" && /owner.*tenant.*sign.*off.*proforma/i.test(r.title || "")) {
         href = "forms/owner-tenant-signoff-proforma.pdf";
         if (!note || /collect from.*office/i.test(note)) {
@@ -619,10 +620,12 @@
           note = "Download and submit with the RC copy for Gate 2 boom barrier access";
         }
       }
-      if (href === "#contact" && /noc request.*(?:resale|move.?out)/i.test(r.title || "")) {
-        href = "forms/noc-request-resale-move-out.pdf";
-        if (!note || /issued by.*office|society office/i.test(note)) {
-          note = "Download, complete and submit for society clearance";
+      if ((href === "#contact" || /forms\/noc-request-resale-move-out\.pdf$/i.test(href)) &&
+          /noc request.*(?:resale|move.?out)/i.test(title)) {
+        title = "NOC request \u2014 resale / move-in / move-out";
+        href = "forms/noc-request-resale-move-in-move-out.pdf";
+        if (!note || /issued by.*office|society office|society clearance/i.test(note)) {
+          note = "Includes required tenant photo, Aadhaar and move-in documents";
         }
       }
       if (href === "#contact" && /pet.*vaccination.*certificate/i.test(r.title || "")) {
@@ -637,7 +640,7 @@
         : (/\.(pdf|docx?|xlsx?|png|jpe?g)$/i.test(href) ? " download" : "");
       return "<a href=\"" + esc(href) + '"' + dl + ' style="display:block;padding:16px 20px' +
         (last ? "" : ";border-bottom:1px solid var(--line)") +
-        ';color:inherit;text-decoration:none"><b>\uD83D\uDCC4 ' + esc(r.title) +
+        ';color:inherit;text-decoration:none"><b>\uD83D\uDCC4 ' + esc(title) +
         '</b><br><small style="color:var(--muted)">' + rich(note) + "</small></a>";
     }).join("");
   };
