@@ -606,8 +606,12 @@
     el.innerHTML = rows.map(function (r, i) {
       var last = i === rows.length - 1;
       var href = r.url || "#contact";
+      var note = r.note || "";
       if (href === "#contact" && /owner.*tenant.*sign.*off.*proforma/i.test(r.title || "")) {
         href = "forms/owner-tenant-signoff-proforma.pdf";
+        if (!note || /collect from.*office/i.test(note)) {
+          note = "Download, print, sign and submit to the society office";
+        }
       }
       /* An off-site file (Google Drive, say) must not navigate the portal away,
          and "download" is ignored across origins anyway, so send it to a new tab. */
@@ -616,7 +620,7 @@
       return "<a href=\"" + esc(href) + '"' + dl + ' style="display:block;padding:16px 20px' +
         (last ? "" : ";border-bottom:1px solid var(--line)") +
         ';color:inherit;text-decoration:none"><b>\uD83D\uDCC4 ' + esc(r.title) +
-        '</b><br><small style="color:var(--muted)">' + rich(r.note) + "</small></a>";
+        '</b><br><small style="color:var(--muted)">' + rich(note) + "</small></a>";
     }).join("");
   };
 

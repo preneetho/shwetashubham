@@ -1190,8 +1190,9 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       a[0].getAttribute("href"));
     check("the live sheet placeholder resolves to the downloadable proforma",
       a[1].getAttribute("href") === "forms/owner-tenant-signoff-proforma.pdf" &&
-      a[1].hasAttribute("download"),
-      a[1].getAttribute("href"));
+      a[1].hasAttribute("download") &&
+      /Download, print, sign/.test(a[1].textContent),
+      a[1].textContent.trim());
     check("a row with no link still points at the office",
       a[2].getAttribute("href") === "#contact" && !a[2].hasAttribute("target"),
       a[2].getAttribute("href"));
