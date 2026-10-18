@@ -79,7 +79,6 @@ function createStatusUpdateForm() {
     .setChoiceValues(["1 hour", "4 hours", "End of today", "Until resolved"])
     .setRequired(true);
 
-  updatePage.setGoToPage(FormApp.PageNavigationType.SUBMIT);
   action.setChoices([
     action.createChoice("Update a service", updatePage),
     action.createChoice("Mark everything normal", FormApp.PageNavigationType.SUBMIT),
