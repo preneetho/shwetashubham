@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Vehicle Registration & Gate 2 Access Form</title>
+<style>
+@page{size:A4;margin:7mm}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#17352e}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:8.5pt;line-height:1.2}
+.page{width:196mm;min-height:283mm;margin:0 auto;border:1px solid #cfdcd7;padding:5mm 7mm;position:relative}
+.header{display:flex;align-items:center;gap:6mm;padding-bottom:2mm;border-bottom:2px solid #14564a}
+.logo{width:35mm;height:auto;display:block}
+.society{flex:1;text-align:right}
+.society strong{display:block;font-family:Georgia,serif;font-size:12pt;line-height:1.1;color:#0f4239}
+.society span{display:block;margin-top:.8mm;font-size:6.8pt;letter-spacing:.05em;text-transform:uppercase;color:#65807a}
+.gold-rule{height:.8mm;background:#c08a2e;margin-top:.8mm}
+h1{margin:2.4mm 0 .8mm;text-align:center;font-family:Georgia,serif;font-size:14pt;color:#0f4239}
+.subtitle{text-align:center;color:#58756e;font-size:7.5pt;margin-bottom:2.2mm}
+.section{margin-top:2mm}
+.section-title{background:#e8f2ef;color:#0f4239;border-left:3px solid #14564a;padding:1.1mm 2mm;
+font-size:8.2pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr 1fr;column-gap:7mm;row-gap:1.6mm;padding:1.9mm 1.5mm .6mm}
+.grid.three{grid-template-columns:1fr 1fr 1fr}
+.field{display:flex;align-items:flex-end;gap:2mm;min-width:0}
+.field.full{grid-column:1/-1}.field.two{grid-column:span 2}
+.label{white-space:nowrap;font-weight:600;color:#2f4f47}
+.line{height:3.8mm;flex:1;border-bottom:1px solid #789089;min-width:12mm}
+.choices{display:flex;flex-wrap:wrap;gap:2mm 8mm;padding:2mm 1.5mm .5mm}
+.check::before{content:"";display:inline-block;width:2.9mm;height:2.9mm;border:1px solid #58756e;margin-right:1.5mm;vertical-align:-.4mm}
+.vehicle{margin:1.8mm 1.5mm 0;border:1px solid #d5dfdb;border-radius:2mm;padding:2mm 2.5mm}
+.vehicle-head{display:flex;align-items:center;justify-content:space-between;gap:4mm;margin-bottom:1mm;color:#0f4239}
+.vehicle-head b{font-size:9pt}.vehicle-head span{font-size:7pt;color:#65807a}
+.vehicle .grid{padding:1mm 0 0;row-gap:1.4mm}
+.declaration{margin:1.6mm 1.5mm 0;padding:1.8mm 2.5mm;border:1px solid #d8e2de;border-radius:2mm;background:#fbfcfb;font-size:7.7pt}
+.declaration p{margin:0 0 .8mm}.declaration ol{margin:0;padding-left:5mm}
+.declaration li{margin:0 0 .55mm;padding-left:.7mm}
+.attachments{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1mm 5mm;padding:1.5mm 1.5mm 0;font-size:7.6pt}
+.sign-row{display:grid;grid-template-columns:1.2fr .8fr;gap:7mm;padding:2mm 1.5mm 0}
+.signature,.office{border:1px solid #d5dfdb;border-radius:2mm;padding:2mm}
+.sig-space{height:7mm;border-bottom:1px solid #789089;margin:1mm 0}
+.office{border-color:#c08a2e;background:#fffaf0}
+.office-title{font-weight:800;color:#75500d;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.3mm}
+.office-grid{display:grid;grid-template-columns:1fr 1fr;gap:1mm 4mm}
+.footer{position:absolute;left:7mm;right:7mm;bottom:2mm;border-top:1px solid #d8e2de;padding-top:1mm;
+display:flex;justify-content:space-between;gap:5mm;color:#65807a;font-size:6.7pt}
+.footer b{color:#2f4f47}
+@media print{.page{border:0;margin:0;width:auto;min-height:283mm}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <img class="logo" src="../images/brand/logo.png" alt="Shweta Shubham">
+    <div class="society">
+      <strong>Shweta Shubham Flat Owners</strong>
+      <strong>Co-operative Maintenance Society Ltd</strong>
+      <span>Resident administration form</span>
+    </div>
+  </header>
+  <div class="gold-rule"></div>
+
+  <h1>Vehicle Registration &amp; Gate 2 Boom Barrier Access Form</h1>
+  <div class="subtitle">Submit to the Society Office with the vehicle registration certificate (RC) copy</div>
+
+  <section class="section">
+    <div class="section-title">1. Request type</div>
+    <div class="choices">
+      <span class="check">New registration</span>
+      <span class="check">Add another vehicle</span>
+      <span class="check">Update vehicle details</span>
+      <span class="check">Replacement society sticker</span>
+      <span class="check">Deactivate vehicle access</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">2. Resident &amp; flat details</div>
+    <div class="grid">
+      <div class="field"><span class="label">Block / Tower:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Flat No.:</span><span class="line"></span></div>
+      <div class="field full"><span class="label">Resident's full name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Mobile:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Email:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Resident type:</span><span class="check">Owner</span><span class="check">Tenant</span></div>
+      <div class="field"><span class="label">Allotted parking No.:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">3. Vehicle details</div>
+    <div class="vehicle">
+      <div class="vehicle-head"><b>Vehicle 1</b><span>Write the registration number exactly as shown on the RC</span></div>
+      <div class="grid">
+        <div class="field"><span class="label">Registration No.:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Vehicle type:</span><span class="check">2-wheeler</span><span class="check">4-wheeler</span></div>
+        <div class="field"><span class="label">Make &amp; model:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Colour:</span><span class="line"></span></div>
+        <div class="field"><span class="label">RC owner's name:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Fuel:</span><span class="line"></span></div>
+      </div>
+    </div>
+    <div class="vehicle">
+      <div class="vehicle-head"><b>Vehicle 2</b><span>Leave blank if not applicable</span></div>
+      <div class="grid">
+        <div class="field"><span class="label">Registration No.:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Vehicle type:</span><span class="check">2-wheeler</span><span class="check">4-wheeler</span></div>
+        <div class="field"><span class="label">Make &amp; model:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Colour:</span><span class="line"></span></div>
+        <div class="field"><span class="label">RC owner's name:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Fuel:</span><span class="line"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">4. Documents &amp; resident declaration</div>
+    <div class="attachments">
+      <span class="check">RC copy enclosed</span>
+      <span class="check">Parking allotment confirmed</span>
+      <span class="check">Existing sticker returned (replacement only)</span>
+    </div>
+    <div class="declaration">
+      <p>I confirm that the information provided above is correct and agree that:</p>
+      <ol>
+        <li>The vehicle will be parked only within the flat's allotted and marked parking space and will not obstruct driveways, walking paths, gates or no-parking areas.</li>
+        <li>The society sticker issued for identification and security will be affixed to the registered vehicle and will not be transferred or misused.</li>
+        <li>Gate 2 boom-barrier access is for registered resident vehicles. I will cooperate with security checks and follow the designated entry and exit lanes.</li>
+        <li>I will promptly inform the Society Office if the vehicle is sold, replaced, transferred, or no longer associated with this flat.</li>
+        <li>The society may deactivate access for incorrect details, misuse, security concerns or non-compliance with approved parking and gate rules.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sign-row">
+    <div class="signature">
+      <b>Resident acknowledgement</b>
+      <div class="sig-space"></div>
+      <div class="field"><span class="label">Name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+    </div>
+    <div class="office">
+      <div class="office-title">For Society Office Use</div>
+      <div class="office-grid">
+        <div class="field"><span class="label">Verified by:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Sticker 1:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Sticker 2:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Gate 2 access:</span><span class="check">Enabled</span></div>
+        <div class="field"><span class="check">Rejected / pending</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span><b>Society Office:</b> 97042 85706</span>
+    <span>This form is retained for vehicle identification, parking and access administration.</span>
+  </footer>
+</main>
+</body>
+</html>

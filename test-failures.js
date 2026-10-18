@@ -1175,11 +1175,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       p.getAttribute("href") === "forms/owner-tenant-signoff-proforma.pdf" &&
       p.hasAttribute("download"),
       p.getAttribute("href"));
+    const v = links(w)[2];
+    check("the built-in vehicle registration form downloads the PDF",
+      v.getAttribute("href") === "forms/vehicle-registration-form.pdf" &&
+      v.hasAttribute("download"),
+      v.getAttribute("href"));
 
     w = makeDom(serve({
       downloads: head + "Guidelines,Version 2,https://drive.google.com/file/d/abc/view\r\n" +
         "Owner & tenant sign-off proforma,Collect from the society office,#contact\r\n" +
-        "Vehicle form,Ask at the office,\r\n" +
+        "Vehicle registration form,Required for Gate 2 boom barrier access,#contact\r\n" +
+        "Other form,Ask at the office,\r\n" +
         "Pet form,Fill and return,forms/pet.pdf\r\n"
     }));
     await wait();
@@ -1193,12 +1199,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       a[1].hasAttribute("download") &&
       /Download, print, sign/.test(a[1].textContent),
       a[1].textContent.trim());
+    check("the live sheet vehicle placeholder resolves to the downloadable form",
+      a[2].getAttribute("href") === "forms/vehicle-registration-form.pdf" &&
+      a[2].hasAttribute("download") &&
+      /RC copy/.test(a[2].textContent),
+      a[2].textContent.trim());
     check("a row with no link still points at the office",
-      a[2].getAttribute("href") === "#contact" && !a[2].hasAttribute("target"),
-      a[2].getAttribute("href"));
-    check("a file sitting beside the page is still downloaded, not opened",
-      a[3].hasAttribute("download") && !a[3].hasAttribute("target"),
+      a[3].getAttribute("href") === "#contact" && !a[3].hasAttribute("target"),
       a[3].getAttribute("href"));
+    check("a file sitting beside the page is still downloaded, not opened",
+      a[4].hasAttribute("download") && !a[4].hasAttribute("target"),
+      a[4].getAttribute("href"));
 
     /* a pasted link must never be able to run anything */
     w = makeDom(serve({

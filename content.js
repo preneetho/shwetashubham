@@ -613,6 +613,12 @@
           note = "Download, print, sign and submit to the society office";
         }
       }
+      if (href === "#contact" && /vehicle registration form/i.test(r.title || "")) {
+        href = "forms/vehicle-registration-form.pdf";
+        if (!note || /gate 2|boom barrier|office/i.test(note)) {
+          note = "Download and submit with the RC copy for Gate 2 boom barrier access";
+        }
+      }
       /* An off-site file (Google Drive, say) must not navigate the portal away,
          and "download" is ignored across origins anyway, so send it to a new tab. */
       var dl = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener"'
