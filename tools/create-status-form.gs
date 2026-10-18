@@ -87,15 +87,28 @@ function createStatusUpdateForm() {
     action.createChoice("Disable Society Status on website", FormApp.PageNavigationType.SUBMIT)
   ]);
 
-  form.setDestination(FormApp.DestinationType.SPREADSHEET, STATUS_CONTENT_SHEET_ID);
-  Utilities.sleep(1500);
+  /* Print the links before connecting the response sheet. If Google takes
+     longer than expected to create the tab, the form can still be recovered
+     from the execution log without creating a duplicate. */
+  console.log("FORM URL (save this on committee phones): " + form.getPublishedUrl());
+  console.log("FORM EDIT URL (society account only): " + form.getEditUrl());
 
+  form.setDestination(FormApp.DestinationType.SPREADSHEET, STATUS_CONTENT_SHEET_ID);
   var responseSheet = null;
-  spreadsheet.getSheets().forEach(function (sheet) {
-    if (!oldIds[sheet.getSheetId()]) responseSheet = sheet;
-  });
+  for (var attempt = 0; attempt < 12 && !responseSheet; attempt++) {
+    Utilities.sleep(1000);
+    SpreadsheetApp.flush();
+    var refreshed = SpreadsheetApp.openById(STATUS_CONTENT_SHEET_ID);
+    refreshed.getSheets().forEach(function (sheet) {
+      if (!oldIds[sheet.getSheetId()]) responseSheet = sheet;
+    });
+  }
   if (!responseSheet) {
-    throw new Error("Google created the form but not its response tab. Run setup again.");
+    throw new Error(
+      "Google created the form but its response tab is still loading. " +
+      "Do not run setup again. Refresh the spreadsheet and rename the new " +
+      "'Form Responses' tab to '" + STATUS_RESPONSE_TAB + "'."
+    );
   }
   responseSheet.setName(STATUS_RESPONSE_TAB);
   responseSheet.setFrozenRows(1);
@@ -110,7 +123,4 @@ function createStatusUpdateForm() {
     "",
     ""
   ]);
-
-  console.log("FORM URL (save this on committee phones): " + form.getPublishedUrl());
-  console.log("FORM EDIT URL (society account only): " + form.getEditUrl());
 }

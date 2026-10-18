@@ -105,6 +105,12 @@ One committee member performs this setup once:
 The setup creates a `status_updates` response tab automatically. Do not edit
 that tab. The form appends its own rows and the website reads them.
 
+If the first run says **"Google created the form but not its response tab"**,
+do not run it again. The form already exists. Refresh the content spreadsheet,
+find the new **Form Responses** tab and rename it exactly
+`status_updates`. The form itself is in Google Drive under
+**Update Society Status**; open it there to copy its responder link.
+
 The form begins with four actions:
 
 | Action | What happens |
