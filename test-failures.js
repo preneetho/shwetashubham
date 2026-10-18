@@ -1178,7 +1178,7 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
 
     w = makeDom(serve({
       downloads: head + "Guidelines,Version 2,https://drive.google.com/file/d/abc/view\r\n" +
-        "Owner & tenant sign-off proforma,Print and sign,#contact\r\n" +
+        "Owner & tenant sign-off proforma,Collect from the society office,#contact\r\n" +
         "Vehicle form,Ask at the office,\r\n" +
         "Pet form,Fill and return,forms/pet.pdf\r\n"
     }));
