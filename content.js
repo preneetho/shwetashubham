@@ -606,6 +606,9 @@
     el.innerHTML = rows.map(function (r, i) {
       var last = i === rows.length - 1;
       var href = r.url || "#contact";
+      if (href === "#contact" && /owner.*tenant.*sign.*off.*proforma/i.test(r.title || "")) {
+        href = "forms/owner-tenant-signoff-proforma.pdf";
+      }
       /* An off-site file (Google Drive, say) must not navigate the portal away,
          and "download" is ignored across origins anyway, so send it to a new tab. */
       var dl = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener"'

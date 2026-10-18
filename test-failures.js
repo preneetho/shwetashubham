@@ -1170,9 +1170,15 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       g.getAttribute("target") === "_blank" && g.getAttribute("rel") === "noopener" &&
       !g.hasAttribute("download"),
       "target=_blank, no download");
+    const p = links(w)[1];
+    check("the built-in owner and tenant proforma downloads the PDF",
+      p.getAttribute("href") === "forms/owner-tenant-signoff-proforma.pdf" &&
+      p.hasAttribute("download"),
+      p.getAttribute("href"));
 
     w = makeDom(serve({
       downloads: head + "Guidelines,Version 2,https://drive.google.com/file/d/abc/view\r\n" +
+        "Owner & tenant sign-off proforma,Print and sign,#contact\r\n" +
         "Vehicle form,Ask at the office,\r\n" +
         "Pet form,Fill and return,forms/pet.pdf\r\n"
     }));
@@ -1182,12 +1188,16 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       a[0].getAttribute("target") === "_blank" && a[0].getAttribute("rel") === "noopener" &&
       !a[0].hasAttribute("download"),
       a[0].getAttribute("href"));
-    check("a row with no link still points at the office",
-      a[1].getAttribute("href") === "#contact" && !a[1].hasAttribute("target"),
+    check("the live sheet placeholder resolves to the downloadable proforma",
+      a[1].getAttribute("href") === "forms/owner-tenant-signoff-proforma.pdf" &&
+      a[1].hasAttribute("download"),
       a[1].getAttribute("href"));
-    check("a file sitting beside the page is still downloaded, not opened",
-      a[2].hasAttribute("download") && !a[2].hasAttribute("target"),
+    check("a row with no link still points at the office",
+      a[2].getAttribute("href") === "#contact" && !a[2].hasAttribute("target"),
       a[2].getAttribute("href"));
+    check("a file sitting beside the page is still downloaded, not opened",
+      a[3].hasAttribute("download") && !a[3].hasAttribute("target"),
+      a[3].getAttribute("href"));
 
     /* a pasted link must never be able to run anything */
     w = makeDom(serve({
