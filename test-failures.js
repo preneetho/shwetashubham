@@ -235,8 +235,18 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       !panel.querySelector("img") &&
       /&lt;img/.test(d.querySelector('[data-service="pool"]').innerHTML),
       d.querySelector('[data-service="pool"]').innerHTML);
-    check("the form timestamp is shown as the last-updated value",
-      /2026-10-18 08:06/.test(d.getElementById("statusUpdated").textContent),
+    check("the form timestamp is shown in IST",
+      /18 Oct 2026.*8:06 AM IST/.test(d.getElementById("statusUpdated").textContent),
+      d.getElementById("statusUpdated").textContent);
+
+    w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18T02:36:00Z,Enable Society Status on website,,,,,\r\n"
+    }));
+    await wait();
+    d = w.document;
+    check("explicit UTC status timestamps convert to IST",
+      /18 Oct 2026.*8:06 AM IST/.test(d.getElementById("statusUpdated").textContent),
       d.getElementById("statusUpdated").textContent);
 
     w = makeDom(serve({

@@ -189,24 +189,52 @@
         tone === "advisory" ? "Advisory" : "Normal";
   }
 
-  /* Form timestamps are written in the spreadsheet's locale. Accept ISO,
-     Indian day-first dates, and US month-first dates when the middle number
-     makes that unambiguous. Rows still apply in form order if a timestamp is
-     unreadable; only automatic expiry then falls back to "until resolved". */
+  var IST_OFFSET_MS = 330 * 60000;
+
+  function istEpoch(year, month, day, hour, minute, second) {
+    var value = Date.UTC(year, month - 1, day, hour, minute, second) - IST_OFFSET_MS;
+    var check = new Date(value + IST_OFFSET_MS);
+    return check.getUTCFullYear() === year && check.getUTCMonth() === month - 1 &&
+      check.getUTCDate() === day && check.getUTCHours() === hour &&
+      check.getUTCMinutes() === minute && check.getUTCSeconds() === second ? value : 0;
+  }
+
+  /* Google Form timestamps have no timezone suffix, so interpret them as IST
+     rather than the resident's phone timezone. Explicit ISO offsets still win. */
   function statusTime(raw) {
     var s = String(raw || "").trim(), m;
     if (!s) return 0;
-    var iso = Date.parse(s);
-    if (/^\d{4}-\d{1,2}-\d{1,2}/.test(s) && !isNaN(iso)) return iso;
+    if (/(?:Z|[+-]\d{2}:?\d{2})$/i.test(s)) {
+      var zoned = Date.parse(s);
+      return isNaN(zoned) ? 0 : zoned;
+    }
+    m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+    if (m) return istEpoch(+m[1], +m[2], +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));
     m = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?)?/i);
-    if (!m) return isNaN(iso) ? 0 : iso;
+    if (!m) {
+      var fallback = Date.parse(s);
+      return isNaN(fallback) ? 0 : fallback;
+    }
     var a = +m[1], b = +m[2], day = a, month = b;
     if (b > 12) { month = a; day = b; }
     var hour = +(m[4] || 0), minute = +(m[5] || 0), second = +(m[6] || 0);
     if (/pm/i.test(m[7] || "") && hour < 12) hour += 12;
     if (/am/i.test(m[7] || "") && hour === 12) hour = 0;
-    var d = new Date(+m[3], month - 1, day, hour, minute, second);
-    return isNaN(d.getTime()) ? 0 : d.getTime();
+    return istEpoch(+m[3], month, day, hour, minute, second);
+  }
+
+  function formatStatusTime(at) {
+    return new Intl.DateTimeFormat("en-IN", {
+      timeZone: "Asia/Kolkata",
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true
+    }).format(new Date(at)).replace(/\b(am|pm)\b/i, function (part) {
+      return part.toUpperCase();
+    }) + " IST";
   }
 
   function statusExpiry(row, at) {
@@ -221,9 +249,11 @@
     if (/4\s*hour/.test(span)) return at + 4 * 60 * 60000;
     if (/12\s*hour/.test(span)) return at + 12 * 60 * 60000;
     if (/today|end of day/.test(span)) {
-      var end = new Date(at);
-      end.setHours(23, 59, 59, 999);
-      return end.getTime();
+      var ist = new Date(at + IST_OFFSET_MS);
+      return Date.UTC(
+        ist.getUTCFullYear(), ist.getUTCMonth(), ist.getUTCDate(),
+        23, 59, 59, 999
+      ) - IST_OFFSET_MS;
     }
     return at + 12 * 60 * 60000;
   }
@@ -240,7 +270,7 @@
     STATUS_SERVICES.forEach(function (s) {
       services[s.key] = { key: s.key, label: s.label, icon: s.icon, tone: "normal", message: "Operating normally" };
     });
-    var enabled = null, latestRaw = "", latestAt = 0, recognised = 0;
+    var enabled = null, latestAt = 0, recognised = 0;
 
     rows.forEach(function (row) {
       var action = pick(row, ["action", "what_would_you_like_to_do"]).toLowerCase();
@@ -276,10 +306,7 @@
           recognised++;
         }
       }
-      if (rawTime && (!latestAt || !at || at >= latestAt)) {
-        latestRaw = rawTime;
-        if (at) latestAt = at;
-      }
+      if (at && (!latestAt || at >= latestAt)) latestAt = at;
     });
 
     if (!recognised || enabled !== true) return;
@@ -310,7 +337,8 @@
         worst === "advisory" ? "Attention needed" : "All services normal";
     }
     var updated = document.getElementById("statusUpdated");
-    if (updated) updated.innerHTML = latestRaw ? "<strong>Last updated:</strong> " + esc(latestRaw) : "";
+    if (updated) updated.innerHTML = latestAt ?
+      "<strong>Last updated:</strong> " + esc(formatStatusTime(latestAt)) : "";
     sec.hidden = false;
     if (nav) nav.hidden = false;
   };
