@@ -15,7 +15,7 @@
 
    Bump VERSION whenever the files in SHELL change.
    ============================================================ */
-var VERSION = "ss-shell-v13";
+var VERSION = "ss-shell-v14";
 
 var SHELL = [
   "./",
@@ -32,7 +32,8 @@ var SHELL = [
   "./images/hero/building.jpg",
   "./images/memories/community-celebration-collage.jpg",
   "./forms/owner-tenant-signoff-proforma.pdf",
-  "./forms/vehicle-registration-form.pdf"
+  "./forms/vehicle-registration-form.pdf",
+  "./forms/noc-request-resale-move-out.pdf"
 ];
 
 self.addEventListener("install", function (e) {

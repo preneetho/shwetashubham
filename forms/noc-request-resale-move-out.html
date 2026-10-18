@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>NOC Request - Resale / Move-Out</title>
+<style>
+@page{size:A4;margin:7mm}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#17352e}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:8.4pt;line-height:1.2}
+.page{width:196mm;min-height:283mm;margin:0 auto;border:1px solid #cfdcd7;padding:5mm 7mm;position:relative}
+.header{display:flex;align-items:center;gap:6mm;padding-bottom:2mm;border-bottom:2px solid #14564a}
+.logo{width:35mm;height:auto;display:block}
+.society{flex:1;text-align:right}
+.society strong{display:block;font-family:Georgia,serif;font-size:12pt;line-height:1.1;color:#0f4239}
+.society span{display:block;margin-top:.8mm;font-size:6.8pt;letter-spacing:.05em;text-transform:uppercase;color:#65807a}
+.gold-rule{height:.8mm;background:#c08a2e;margin-top:.8mm}
+h1{margin:2.4mm 0 .8mm;text-align:center;font-family:Georgia,serif;font-size:14.5pt;color:#0f4239}
+.subtitle{text-align:center;color:#58756e;font-size:7.5pt;margin-bottom:2.2mm}
+.section{margin-top:2mm}
+.section-title{background:#e8f2ef;color:#0f4239;border-left:3px solid #14564a;padding:1.1mm 2mm;
+font-size:8.2pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr 1fr;column-gap:7mm;row-gap:1.5mm;padding:1.9mm 1.5mm .6mm}
+.field{display:flex;align-items:flex-end;gap:2mm;min-width:0}
+.field.full{grid-column:1/-1}.label{white-space:nowrap;font-weight:600;color:#2f4f47}
+.line{height:3.8mm;flex:1;border-bottom:1px solid #789089;min-width:12mm}
+.choices{display:flex;flex-wrap:wrap;gap:2mm 9mm;padding:2mm 1.5mm .5mm}
+.check::before{content:"";display:inline-block;width:2.9mm;height:2.9mm;border:1px solid #58756e;margin-right:1.5mm;vertical-align:-.4mm}
+.request-box{margin:1.7mm 1.5mm 0;border:1px solid #d5dfdb;border-radius:2mm;padding:2mm 2.5mm}
+.request-box h3{font-size:9pt;margin:0 0 1.2mm;color:#0f4239}
+.request-box .grid{padding:0;row-gap:1.4mm}
+.clearance{display:grid;grid-template-columns:1fr 1fr;gap:1mm 7mm;padding:2mm 1.5mm .5mm}
+.clearance-item{display:flex;align-items:flex-end;gap:1.5mm}
+.clearance-item .text{flex:1}.status{width:25mm;border-bottom:1px solid #789089;height:3.5mm}
+.declaration{margin:1.6mm 1.5mm 0;padding:1.8mm 2.5mm;border:1px solid #d8e2de;border-radius:2mm;background:#fbfcfb;font-size:7.7pt}
+.declaration p{margin:0 0 .8mm}.declaration ol{margin:0;padding-left:5mm}
+.declaration li{margin:0 0 .55mm;padding-left:.7mm}
+.signatures{display:grid;grid-template-columns:1fr 1fr;gap:6mm;padding:2mm 1.5mm 0}
+.signature{border:1px solid #d5dfdb;border-radius:2mm;padding:2mm}
+.sig-space{height:6.5mm;border-bottom:1px solid #789089;margin:1mm 0}
+.office{border:1.5px solid #c08a2e;background:#fffaf0;margin-top:2mm;padding:2mm}
+.office-title{font-weight:800;color:#75500d;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.3mm}
+.office-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1mm 5mm}
+.office-grid .full{grid-column:1/-1}
+.footer{position:absolute;left:7mm;right:7mm;bottom:2mm;border-top:1px solid #d8e2de;padding-top:1mm;
+display:flex;justify-content:space-between;gap:5mm;color:#65807a;font-size:6.7pt}
+.footer b{color:#2f4f47}
+@media print{.page{border:0;margin:0;width:auto;min-height:283mm}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <img class="logo" src="../images/brand/logo.png" alt="Shweta Shubham">
+    <div class="society">
+      <strong>Shweta Shubham Flat Owners</strong>
+      <strong>Co-operative Maintenance Society Ltd</strong>
+      <span>Resident administration form</span>
+    </div>
+  </header>
+  <div class="gold-rule"></div>
+
+  <h1>NOC Request - Resale / Move-Out</h1>
+  <div class="subtitle">Submit to the Society Office for verification, clearance and NOC / gate-pass processing</div>
+
+  <section class="section">
+    <div class="section-title">1. Request type</div>
+    <div class="choices">
+      <span class="check">NOC for flat resale / ownership transfer</span>
+      <span class="check">NOC for tenant move-out</span>
+      <span class="check">Owner-confirmed gate pass for move-out</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">2. Flat, owner &amp; applicant details</div>
+    <div class="grid">
+      <div class="field"><span class="label">Block / Tower:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Flat No.:</span><span class="line"></span></div>
+      <div class="field full"><span class="label">Owner's full name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Owner mobile:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Owner email:</span><span class="line"></span></div>
+      <div class="field full"><span class="label">Applicant / tenant name (if different):</span><span class="line"></span></div>
+      <div class="field"><span class="label">Applicant mobile:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Application date:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">3. Request particulars</div>
+    <div class="request-box">
+      <h3>For resale / ownership transfer</h3>
+      <div class="grid">
+        <div class="field full"><span class="label">Proposed purchaser's name:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Purchaser mobile:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Expected transfer date:</span><span class="line"></span></div>
+      </div>
+    </div>
+    <div class="request-box">
+      <h3>For tenant move-out / gate pass</h3>
+      <div class="grid">
+        <div class="field"><span class="label">Scheduled move-out date:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Time:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Shifting vehicle No.:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Mover / agency:</span><span class="line"></span></div>
+        <div class="field full"><span class="label">Forwarding address:</span><span class="line"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">4. Clearance checklist</div>
+    <div class="clearance">
+      <div class="clearance-item"><span class="check"></span><span class="text">Maintenance dues cleared</span><span class="status"></span></div>
+      <div class="clearance-item"><span class="check"></span><span class="text">Fines / penalties cleared</span><span class="status"></span></div>
+      <div class="clearance-item"><span class="check"></span><span class="text">Move-out charge paid</span><span class="status"></span></div>
+      <div class="clearance-item"><span class="check"></span><span class="text">Common-area damage checked</span><span class="status"></span></div>
+      <div class="clearance-item"><span class="check"></span><span class="text">Parking / vehicle access updated</span><span class="status"></span></div>
+      <div class="clearance-item"><span class="check"></span><span class="text">Society assets / keys returned</span><span class="status"></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">5. Owner / applicant declaration</div>
+    <div class="declaration">
+      <p>We confirm that the information provided is correct and understand that:</p>
+      <ol>
+        <li>All maintenance dues, approved charges, fines and liabilities relating to the flat must be cleared before the Society issues an NOC or move-out gate pass.</li>
+        <li>Move-out must be informed in advance and carried out only between 7:00 AM-6:00 PM. The shifting vehicle must use the designated East-side driveway area without inconveniencing residents.</li>
+        <li>A tenant move-out gate pass requires owner confirmation. Any damage observed during shifting may be charged to the flat.</li>
+        <li>A resale NOC confirms society-account clearance only and does not certify legal title, ownership, statutory approvals or the terms of the proposed transaction.</li>
+        <li>The Society may hold or withdraw the NOC if information is incorrect, dues remain unpaid, or required clearance is incomplete.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="signatures">
+    <div class="signature">
+      <b>Owner confirmation &amp; signature</b>
+      <div class="sig-space"></div>
+      <div class="field"><span class="label">Name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+    </div>
+    <div class="signature">
+      <b>Applicant / tenant signature</b>
+      <div class="sig-space"></div>
+      <div class="field"><span class="label">Name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="office">
+    <div class="office-title">For Society Office Use</div>
+    <div class="office-grid">
+      <div class="field"><span class="label">NOC Ref. No.:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Issue date:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Valid until:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Verified by:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Approved by:</span><span class="line"></span></div>
+      <div class="field"><span class="check">Approved</span><span class="check">Pending</span></div>
+      <div class="field full"><span class="label">Remarks / pending clearance:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span><b>Society Office:</b> 97042 85706</span>
+    <span>NOC issuance is subject to verification of society records and applicable clearances.</span>
+  </footer>
+</main>
+</body>
+</html>

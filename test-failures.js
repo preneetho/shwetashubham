@@ -1180,11 +1180,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       v.getAttribute("href") === "forms/vehicle-registration-form.pdf" &&
       v.hasAttribute("download"),
       v.getAttribute("href"));
+    const n = links(w)[3];
+    check("the built-in NOC request downloads the PDF",
+      n.getAttribute("href") === "forms/noc-request-resale-move-out.pdf" &&
+      n.hasAttribute("download"),
+      n.getAttribute("href"));
 
     w = makeDom(serve({
       downloads: head + "Guidelines,Version 2,https://drive.google.com/file/d/abc/view\r\n" +
         "Owner & tenant sign-off proforma,Collect from the society office,#contact\r\n" +
         "Vehicle registration form,Required for Gate 2 boom barrier access,#contact\r\n" +
+        "NOC request — resale / move-out,Issued by the society office,#contact\r\n" +
         "Other form,Ask at the office,\r\n" +
         "Pet form,Fill and return,forms/pet.pdf\r\n"
     }));
@@ -1204,12 +1210,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       a[2].hasAttribute("download") &&
       /RC copy/.test(a[2].textContent),
       a[2].textContent.trim());
+    check("the live sheet NOC placeholder resolves to the downloadable form",
+      a[3].getAttribute("href") === "forms/noc-request-resale-move-out.pdf" &&
+      a[3].hasAttribute("download") &&
+      /society clearance/.test(a[3].textContent),
+      a[3].textContent.trim());
     check("a row with no link still points at the office",
-      a[3].getAttribute("href") === "#contact" && !a[3].hasAttribute("target"),
-      a[3].getAttribute("href"));
-    check("a file sitting beside the page is still downloaded, not opened",
-      a[4].hasAttribute("download") && !a[4].hasAttribute("target"),
+      a[4].getAttribute("href") === "#contact" && !a[4].hasAttribute("target"),
       a[4].getAttribute("href"));
+    check("a file sitting beside the page is still downloaded, not opened",
+      a[5].hasAttribute("download") && !a[5].hasAttribute("target"),
+      a[5].getAttribute("href"));
 
     /* a pasted link must never be able to run anything */
     w = makeDom(serve({

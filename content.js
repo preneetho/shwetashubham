@@ -619,6 +619,12 @@
           note = "Download and submit with the RC copy for Gate 2 boom barrier access";
         }
       }
+      if (href === "#contact" && /noc request.*(?:resale|move.?out)/i.test(r.title || "")) {
+        href = "forms/noc-request-resale-move-out.pdf";
+        if (!note || /issued by.*office|society office/i.test(note)) {
+          note = "Download, complete and submit for society clearance";
+        }
+      }
       /* An off-site file (Google Drive, say) must not navigate the portal away,
          and "download" is ignored across origins anyway, so send it to a new tab. */
       var dl = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener"'
