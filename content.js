@@ -191,16 +191,16 @@
 
   var IST_OFFSET_MS = 330 * 60000;
 
-  function istEpoch(year, month, day, hour, minute, second) {
-    var value = Date.UTC(year, month - 1, day, hour, minute, second) - IST_OFFSET_MS;
-    var check = new Date(value + IST_OFFSET_MS);
+  function statusSheetEpoch(year, month, day, hour, minute, second) {
+    var value = Date.UTC(year, month - 1, day, hour, minute, second);
+    var check = new Date(value);
     return check.getUTCFullYear() === year && check.getUTCMonth() === month - 1 &&
       check.getUTCDate() === day && check.getUTCHours() === hour &&
       check.getUTCMinutes() === minute && check.getUTCSeconds() === second ? value : 0;
   }
 
-  /* Google Form timestamps have no timezone suffix, so interpret them as IST
-     rather than the resident's phone timezone. Explicit ISO offsets still win. */
+  /* This content spreadsheet records Google Form timestamps in UTC without a
+     timezone suffix. Interpret those values as UTC, then display them in IST. */
   function statusTime(raw) {
     var s = String(raw || "").trim(), m;
     if (!s) return 0;
@@ -209,7 +209,7 @@
       return isNaN(zoned) ? 0 : zoned;
     }
     m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
-    if (m) return istEpoch(+m[1], +m[2], +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));
+    if (m) return statusSheetEpoch(+m[1], +m[2], +m[3], +(m[4] || 0), +(m[5] || 0), +(m[6] || 0));
     m = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?)?/i);
     if (!m) {
       var fallback = Date.parse(s);
@@ -220,7 +220,7 @@
     var hour = +(m[4] || 0), minute = +(m[5] || 0), second = +(m[6] || 0);
     if (/pm/i.test(m[7] || "") && hour < 12) hour += 12;
     if (/am/i.test(m[7] || "") && hour === 12) hour = 0;
-    return istEpoch(+m[3], month, day, hour, minute, second);
+    return statusSheetEpoch(+m[3], month, day, hour, minute, second);
   }
 
   function formatStatusTime(at) {

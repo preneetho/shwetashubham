@@ -235,8 +235,8 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       !panel.querySelector("img") &&
       /&lt;img/.test(d.querySelector('[data-service="pool"]').innerHTML),
       d.querySelector('[data-service="pool"]').innerHTML);
-    check("the form timestamp is shown in IST",
-      /18 Oct 2026.*8:06 AM IST/.test(d.getElementById("statusUpdated").textContent),
+    check("the Google Sheet UTC timestamp is converted to IST",
+      /18 Oct 2026.*1:36 PM IST/.test(d.getElementById("statusUpdated").textContent),
       d.getElementById("statusUpdated").textContent);
 
     w = makeDom(serve({
