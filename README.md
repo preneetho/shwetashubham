@@ -18,6 +18,8 @@ Static, dependency-free website for **Shweta Shubham Flat Owners Cooperative Mai
 
 Build/test helpers, not needed for hosting: `build-sheet-csv.js`,
 `build-sheet-xlsx.js`, `test-roundtrip.js`, `test-failures.js`, `sheet-template/`.
+`tools/create-status-form.gs` is a one-time Google Apps Script that creates the
+committee's phone-friendly Society Status update form.
 
 No build step, no npm, no CDN. Open `index.html` in a browser and it works.
 

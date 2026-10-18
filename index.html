@@ -178,6 +178,45 @@ a.tile:hover{transform:translateY(-3px); border-color:var(--brand); text-decorat
 .tile b{color:var(--ink); font-size:1rem}
 .tile small{color:var(--muted); font-size:.85rem; line-height:1.45}
 
+/* ---------- live society status ---------- */
+.status-band{background:linear-gradient(180deg,#edf7f3,#f8fbfa); border-block:1px solid #d9e9e3}
+.status-top{display:flex; align-items:flex-start; justify-content:space-between; gap:20px; margin-bottom:22px}
+.status-top .sec-head{margin:0}
+.status-overall{display:flex; align-items:center; gap:9px; flex:none; padding:9px 14px;
+  border-radius:999px; background:#ddf2e7; color:#17653f; font-size:.84rem; font-weight:700}
+.status-overall::before{content:""; width:9px; height:9px; border-radius:50%; background:#2a9b61}
+.status-overall[data-tone="advisory"]{background:#fff2d4; color:#8b5d09}
+.status-overall[data-tone="advisory"]::before{background:#d69a20}
+.status-overall[data-tone="disrupted"]{background:#fde9e4; color:#9c2f1c}
+.status-overall[data-tone="disrupted"]::before{background:#c8462e}
+.status-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px}
+.status-card{min-width:0; background:var(--card); border:1px solid var(--line); border-left:4px solid #2a9b61;
+  border-radius:12px; padding:16px; box-shadow:0 4px 16px rgba(14,43,37,.06)}
+.status-card[data-tone="advisory"]{border-left-color:#d69a20}
+.status-card[data-tone="maintenance"]{border-left-color:#3d7fab}
+.status-card[data-tone="disrupted"]{border-left-color:#c8462e}
+.status-card-top{display:flex; align-items:center; gap:9px; margin-bottom:8px}
+.status-ico{width:34px; height:34px; border-radius:9px; display:grid; place-items:center;
+  flex:none; background:var(--brand-50); font-size:1.02rem}
+.status-card b{font-size:.94rem; line-height:1.3}
+.status-state{display:block; color:#17653f; font-size:.78rem; font-weight:750; text-transform:uppercase;
+  letter-spacing:.04em}
+.status-card[data-tone="advisory"] .status-state{color:#8b5d09}
+.status-card[data-tone="maintenance"] .status-state{color:#28668f}
+.status-card[data-tone="disrupted"] .status-state{color:#9c2f1c}
+.status-card p{margin:6px 0 0; color:var(--muted); font-size:.82rem; line-height:1.48}
+.status-meta{display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; margin-top:16px;
+  color:var(--muted); font-size:.78rem}
+.status-meta strong{color:var(--ink-2)}
+@media(max-width:640px){
+  .status-top{display:block}
+  .status-overall{display:inline-flex; margin-top:16px}
+  .status-grid{grid-template-columns:1fr 1fr; gap:9px}
+  .status-card{padding:13px}
+  .status-card p{font-size:.77rem}
+}
+@media(max-width:360px){.status-grid{grid-template-columns:1fr}}
+
 /* ---------- tables ---------- */
 .tbl-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card)}
 table{border-collapse:collapse; width:100%; min-width:520px; font-size:.92rem}
@@ -596,6 +635,7 @@ window.phFallback = function(img){
     </a>
     <nav class="main" id="nav" aria-label="Main navigation">
       <a href="#timings">Timings</a>
+      <a class="nav-secondary" href="#society-status" id="statusNavLink" hidden>Society Status</a>
       <a class="nav-secondary" href="#gates">Gate Access</a>
       <a href="#helplines">Helplines</a>
       <a class="nav-secondary" href="#announcements">Announcements</a>
@@ -734,6 +774,27 @@ window.phFallback = function(img){
         <b>Forms &amp; Downloads</b>
         <small>Guidelines PDF, move-in proforma, NOC request and more.</small>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE SOCIETY STATUS ============ -->
+<!-- This section stays hidden until a committee status form submission
+     explicitly enables it. Residents never see sample or stale content. -->
+<section class="band status-band" id="society-status" hidden aria-labelledby="statusTitle">
+  <div class="wrap">
+    <div class="status-top">
+      <div class="sec-head">
+        <div class="kicker">Live Society Status</div>
+        <h2 id="statusTitle">Today at Shweta Shubham</h2>
+        <p>Current information about essential services and shared facilities.</p>
+      </div>
+      <span class="status-overall" id="statusOverall">All services normal</span>
+    </div>
+    <div class="status-grid" id="statusGrid"></div>
+    <div class="status-meta">
+      <span id="statusUpdated"></span>
+      <span>For emergencies, use the <a href="#helplines"><strong>helpline numbers</strong></a>.</span>
     </div>
   </div>
 </section>

@@ -83,6 +83,50 @@ The extra shortcuts appear in the folded menu on phones and tablets. The
 desktop header keeps its compact row of links rather than overflowing.
 These navigation links do not require any new rows in the Google Sheet.
 
+### Live Society Status — committee form, not Excel
+
+The **Live Society Status** panel is deliberately **off** until the committee
+creates its private update form and enables the panel. Residents never see
+sample data.
+
+One committee member performs this setup once:
+
+1. Sign into the society Google account and open <https://script.google.com>.
+2. Create a **New project**.
+3. Open **`tools/create-status-form.gs`** from the website source folder.
+4. Copy its full contents into `Code.gs`, replacing the starter function.
+5. Choose **`createStatusUpdateForm`** at the top and click **Run**.
+6. Approve Google's permissions. Open **Execution log** and copy the
+   **FORM URL**.
+7. Send that URL only to committee members. On each committee phone, open it
+   in Chrome or Safari and use **Add to Home Screen**. Name it
+   **Update Society Status**.
+
+The setup creates a `status_updates` response tab automatically. Do not edit
+that tab. The form appends its own rows and the website reads them.
+
+The form begins with four actions:
+
+| Action | What happens |
+|---|---|
+| **Update a service** | Choose Water, Electricity/DG, Lifts, Pool or Gate Access; choose a status; write a short message and an expiry |
+| **Mark everything normal** | Clears every earlier alert in one submission |
+| **Enable Society Status on website** | Shows the panel to residents |
+| **Disable Society Status on website** | Hides the whole panel immediately |
+
+That last pair is the administrator's feature flag. The **latest** Enable or
+Disable submission wins. No Excel editing is required.
+
+Temporary updates may last **1 hour**, **4 hours**, or until the **end of
+today**. They return to green automatically. Use **Until resolved** only when
+the committee will submit another update or choose **Mark everything normal**
+after the issue is fixed.
+
+Keep messages factual and brief. Do not publish resident names, flat numbers,
+complaint details or security-sensitive information. The response tab is part
+of the public content spreadsheet even though residents normally see only the
+rendered status cards.
+
 ### Changing something
 
 Find the tab, edit the cell, done. Changes appear on the website within about

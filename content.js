@@ -116,7 +116,7 @@
   var TABS = ["settings", "notices", "festivals", "timings", "guidelines",
     "staff_scope", "fees", "committee", "escalation", "checklist",
     "downloads", "gallery", "quick_actions", "resolutions", "records", "posters",
-    "helplines", "events", "improvements", "gates"];
+    "helplines", "events", "improvements", "gates", "status_updates"];
 
   function fetchTab(tab) {
     return fetch(sheetURL(tab), { cache: "no-store" })
@@ -154,6 +154,165 @@
       });
     });
     applyMapEmbed(map.map_embed);
+  };
+
+  /* ---------- live society status ---------- */
+  var STATUS_SERVICES = [
+    { key: "water", label: "Water supply", icon: "\uD83D\uDCA7" },
+    { key: "power", label: "Electricity / DG", icon: "\u26A1" },
+    { key: "lifts", label: "Lifts", icon: "\u2195" },
+    { key: "pool", label: "Swimming pool", icon: "\uD83C\uDFCA" },
+    { key: "gates", label: "Gate access", icon: "\uD83D\uDEA7" }
+  ];
+
+  function statusService(raw) {
+    var s = String(raw || "").toLowerCase();
+    if (/water/.test(s)) return "water";
+    if (/power|electric|dg/.test(s)) return "power";
+    if (/lift|elevator/.test(s)) return "lifts";
+    if (/pool|swim/.test(s)) return "pool";
+    if (/gate|access/.test(s)) return "gates";
+    return "";
+  }
+
+  function statusTone(raw) {
+    var s = String(raw || "").toLowerCase();
+    if (/disrupt|closed|outage|unavailable|red/.test(s)) return "disrupted";
+    if (/maint|repair|blue/.test(s)) return "maintenance";
+    if (/advis|warning|delay|limited|amber|yellow/.test(s)) return "advisory";
+    return "normal";
+  }
+
+  function statusLabel(tone) {
+    return tone === "disrupted" ? "Disrupted" :
+      tone === "maintenance" ? "Maintenance" :
+        tone === "advisory" ? "Advisory" : "Normal";
+  }
+
+  /* Form timestamps are written in the spreadsheet's locale. Accept ISO,
+     Indian day-first dates, and US month-first dates when the middle number
+     makes that unambiguous. Rows still apply in form order if a timestamp is
+     unreadable; only automatic expiry then falls back to "until resolved". */
+  function statusTime(raw) {
+    var s = String(raw || "").trim(), m;
+    if (!s) return 0;
+    var iso = Date.parse(s);
+    if (/^\d{4}-\d{1,2}-\d{1,2}/.test(s) && !isNaN(iso)) return iso;
+    m = s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{4})(?:\s+(\d{1,2}):(\d{2})(?::(\d{2}))?\s*(AM|PM)?)?/i);
+    if (!m) return isNaN(iso) ? 0 : iso;
+    var a = +m[1], b = +m[2], day = a, month = b;
+    if (b > 12) { month = a; day = b; }
+    var hour = +(m[4] || 0), minute = +(m[5] || 0), second = +(m[6] || 0);
+    if (/pm/i.test(m[7] || "") && hour < 12) hour += 12;
+    if (/am/i.test(m[7] || "") && hour === 12) hour = 0;
+    var d = new Date(+m[3], month - 1, day, hour, minute, second);
+    return isNaN(d.getTime()) ? 0 : d.getTime();
+  }
+
+  function statusExpiry(row, at) {
+    var exact = pick(row, ["valid_until", "expires_at", "expiry"]);
+    if (exact) {
+      var t = statusTime(exact);
+      if (t) return t;
+    }
+    var span = pick(row, ["valid_for", "duration"]).toLowerCase();
+    if (/until resolved|no expiry|indefinite/.test(span) || !at) return Infinity;
+    if (/1\s*hour/.test(span)) return at + 60 * 60000;
+    if (/4\s*hour/.test(span)) return at + 4 * 60 * 60000;
+    if (/12\s*hour/.test(span)) return at + 12 * 60 * 60000;
+    if (/today|end of day/.test(span)) {
+      var end = new Date(at);
+      end.setHours(23, 59, 59, 999);
+      return end.getTime();
+    }
+    return at + 12 * 60 * 60000;
+  }
+
+  R.status_updates = function (rows) {
+    var sec = document.getElementById("society-status");
+    var grid = document.getElementById("statusGrid");
+    var nav = document.getElementById("statusNavLink");
+    if (!sec || !grid) return;
+    sec.hidden = true;
+    if (nav) nav.hidden = true;
+
+    var services = {};
+    STATUS_SERVICES.forEach(function (s) {
+      services[s.key] = { key: s.key, label: s.label, icon: s.icon, tone: "normal", message: "Operating normally" };
+    });
+    var enabled = null, latestRaw = "", latestAt = 0, recognised = 0;
+
+    rows.forEach(function (row) {
+      var action = pick(row, ["action", "what_would_you_like_to_do"]).toLowerCase();
+      var display = pick(row, ["show_society_status", "display_status", "enabled", "visibility"]).toLowerCase();
+      var rawTime = pick(row, ["timestamp", "submitted_at", "updated_at", "date"]);
+      var at = statusTime(rawTime);
+      if (display) {
+        if (/disable|hide|off|no/.test(display)) enabled = false;
+        else if (/enable|show|on|yes/.test(display)) enabled = true;
+        recognised++;
+      }
+      if (/disable/.test(action)) { enabled = false; recognised++; }
+      else if (/enable/.test(action)) { enabled = true; recognised++; }
+
+      if (/everything normal|all services normal|mark all normal/.test(action)) {
+        STATUS_SERVICES.forEach(function (s) {
+          services[s.key] = { key: s.key, label: s.label, icon: s.icon, tone: "normal",
+            message: "Operating normally", at: at, rawTime: rawTime, expires: Infinity };
+        });
+        recognised++;
+      } else {
+        var service = statusService(pick(row, ["service", "area", "facility"]));
+        var rawState = pick(row, ["status", "state", "condition"]);
+        if (service && rawState) {
+          var base = STATUS_SERVICES.filter(function (s) { return s.key === service; })[0];
+          services[service] = {
+            key: service, label: base.label, icon: base.icon,
+            tone: statusTone(rawState),
+            message: pick(row, ["resident_message", "message", "details", "note"]) ||
+              (statusTone(rawState) === "normal" ? "Operating normally" : statusLabel(statusTone(rawState))),
+            at: at, rawTime: rawTime, expires: statusExpiry(row, at)
+          };
+          recognised++;
+        }
+      }
+      if (rawTime && (!latestAt || !at || at >= latestAt)) {
+        latestRaw = rawTime;
+        if (at) latestAt = at;
+      }
+    });
+
+    if (!recognised || enabled !== true) return;
+    var now = Date.now(), tones = [];
+    STATUS_SERVICES.forEach(function (s) {
+      var item = services[s.key];
+      if (item.expires !== undefined && item.expires < now) {
+        item = { key: s.key, label: s.label, icon: s.icon, tone: "normal", message: "Operating normally" };
+      }
+      services[s.key] = item;
+      tones.push(item.tone);
+    });
+
+    grid.innerHTML = STATUS_SERVICES.map(function (s) {
+      var item = services[s.key];
+      return '<article class="status-card" data-service="' + item.key + '" data-tone="' + item.tone + '">' +
+        '<div class="status-card-top"><span class="status-ico" aria-hidden="true">' + item.icon + "</span>" +
+        "<div><b>" + esc(item.label) + '</b><span class="status-state">' +
+        statusLabel(item.tone) + "</span></div></div><p>" + esc(item.message) + "</p></article>";
+    }).join("");
+
+    var overall = document.getElementById("statusOverall");
+    var worst = tones.indexOf("disrupted") >= 0 ? "disrupted" :
+      (tones.indexOf("advisory") >= 0 || tones.indexOf("maintenance") >= 0 ? "advisory" : "normal");
+    if (overall) {
+      overall.setAttribute("data-tone", worst);
+      overall.textContent = worst === "disrupted" ? "Service disruption" :
+        worst === "advisory" ? "Attention needed" : "All services normal";
+    }
+    var updated = document.getElementById("statusUpdated");
+    if (updated) updated.innerHTML = latestRaw ? "<strong>Last updated:</strong> " + esc(latestRaw) : "";
+    sec.hidden = false;
+    if (nav) nav.hidden = false;
   };
 
   /* The map is the one place the sheet hands us a URL that goes straight into

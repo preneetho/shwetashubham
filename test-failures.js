@@ -190,6 +190,104 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       d.querySelectorAll("#gal figure").length === 8, "");
   }
 
+  /* 3b. live society status is controlled entirely by committee submissions */
+  {
+    const head = "timestamp,action,service,status,resident message,valid for,valid until\r\n";
+    let w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18 08:00,Disable Society Status on website,,,,,\r\n" +
+        "2026-10-18 08:05,Update a service,Lifts,Maintenance,Block C lift under repair,Until resolved,\r\n"
+    }));
+    await wait();
+    let d = w.document;
+    check("the committee disable flag keeps Society Status off",
+      d.getElementById("society-status").hidden &&
+      d.getElementById("statusNavLink").hidden, "panel and menu hidden");
+
+    w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18 08:00,Enable Society Status on website,,,,,\r\n" +
+        "2026-10-18 08:05,Update a service,Lifts,Maintenance,Block C lift under repair,Until resolved,\r\n" +
+        "2026-10-18 08:06,Update a service,Swimming pool,Disrupted,<img src=x onerror=alert(1)>,,2099-10-18 20:00\r\n"
+    }));
+    await wait();
+    d = w.document;
+    const panel = d.getElementById("society-status");
+    const cards = [...d.querySelectorAll("#statusGrid .status-card")];
+    check("the enable flag reveals the status panel and its menu shortcut",
+      !panel.hidden && !d.getElementById("statusNavLink").hidden,
+      cards.length + " service cards");
+    check("the resident view always shows the five essential services",
+      cards.length === 5 &&
+      cards.map(c => c.getAttribute("data-service")).join("|") ===
+        "water|power|lifts|pool|gates",
+      cards.map(c => c.getAttribute("data-service")).join("|"));
+    check("a committee update changes only the selected service",
+      d.querySelector('[data-service="lifts"]').getAttribute("data-tone") === "maintenance" &&
+      /Block C lift under repair/.test(d.querySelector('[data-service="lifts"]').textContent) &&
+      d.querySelector('[data-service="water"]').getAttribute("data-tone") === "normal",
+      d.querySelector('[data-service="lifts"]').textContent.trim());
+    check("a disruption changes the overall summary",
+      d.getElementById("statusOverall").getAttribute("data-tone") === "disrupted" &&
+      d.getElementById("statusOverall").textContent === "Service disruption",
+      d.getElementById("statusOverall").textContent);
+    check("a status message is escaped before residents see it",
+      !panel.querySelector("img") &&
+      /&lt;img/.test(d.querySelector('[data-service="pool"]').innerHTML),
+      d.querySelector('[data-service="pool"]').innerHTML);
+    check("the form timestamp is shown as the last-updated value",
+      /2026-10-18 08:06/.test(d.getElementById("statusUpdated").textContent),
+      d.getElementById("statusUpdated").textContent);
+
+    w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18 08:00,Enable Society Status on website,,,,,\r\n" +
+        "2026-10-18 08:05,Update a service,Water supply,Disrupted,Supply interrupted,,2000-01-01 00:00\r\n"
+    }));
+    await wait();
+    d = w.document;
+    check("an expired alert returns to normal automatically",
+      d.querySelector('[data-service="water"]').getAttribute("data-tone") === "normal" &&
+      /Operating normally/.test(d.querySelector('[data-service="water"]').textContent),
+      d.querySelector('[data-service="water"]').textContent.trim());
+
+    w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18 08:00,Enable Society Status on website,,,,,\r\n" +
+        "2026-10-18 08:05,Update a service,Water supply,Disrupted,Supply interrupted,,04/03/2000 10:00\r\n"
+    }));
+    await wait();
+    d = w.document;
+    check("Google Form day-first timestamps expire correctly",
+      d.querySelector('[data-service="water"]').getAttribute("data-tone") === "normal",
+      d.querySelector('[data-service="water"]').textContent.trim());
+
+    w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18 08:00,Enable Society Status on website,,,,,\r\n" +
+        "2026-10-18 08:05,Update a service,Gate access,Advisory,Gate 5 closed,Until resolved,\r\n" +
+        "2026-10-18 08:10,Mark everything normal,,,,,\r\n"
+    }));
+    await wait();
+    d = w.document;
+    check("Everything normal clears every earlier alert in one submission",
+      [...d.querySelectorAll("#statusGrid .status-card")].every(c =>
+        c.getAttribute("data-tone") === "normal") &&
+      d.getElementById("statusOverall").textContent === "All services normal",
+      d.getElementById("statusOverall").textContent);
+
+    w = makeDom(serve({
+      status_updates: head +
+        "2026-10-18 08:00,Enable Society Status on website,,,,,\r\n" +
+        "2026-10-18 08:05,Disable Society Status on website,,,,,\r\n"
+    }));
+    await wait();
+    d = w.document;
+    check("the latest visibility flag wins",
+      d.getElementById("society-status").hidden &&
+      d.getElementById("statusNavLink").hidden, "disabled last");
+  }
+
   /* 4. empty tab -> static fallback for that section only */
   {
     const w = makeDom(serve({ festivals: "name\n" }));
