@@ -625,6 +625,12 @@
           note = "Download, complete and submit for society clearance";
         }
       }
+      if (href === "#contact" && /pet.*vaccination.*certificate/i.test(r.title || "")) {
+        href = "forms/pet-vaccination-certificate-submission.pdf";
+        if (!note || /submitted regularly|society office/i.test(note)) {
+          note = "Download and submit with the pet's current vaccination certificate";
+        }
+      }
       /* An off-site file (Google Drive, say) must not navigate the portal away,
          and "download" is ignored across origins anyway, so send it to a new tab. */
       var dl = /^https?:\/\//i.test(href) ? ' target="_blank" rel="noopener"'

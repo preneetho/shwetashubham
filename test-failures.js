@@ -1185,14 +1185,20 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       n.getAttribute("href") === "forms/noc-request-resale-move-out.pdf" &&
       n.hasAttribute("download"),
       n.getAttribute("href"));
+    const pet = links(w)[4];
+    check("the built-in pet vaccination form downloads the PDF",
+      pet.getAttribute("href") === "forms/pet-vaccination-certificate-submission.pdf" &&
+      pet.hasAttribute("download"),
+      pet.getAttribute("href"));
 
     w = makeDom(serve({
       downloads: head + "Guidelines,Version 2,https://drive.google.com/file/d/abc/view\r\n" +
         "Owner & tenant sign-off proforma,Collect from the society office,#contact\r\n" +
         "Vehicle registration form,Required for Gate 2 boom barrier access,#contact\r\n" +
         "NOC request — resale / move-out,Issued by the society office,#contact\r\n" +
+        "Pet vaccination certificate submission,To be submitted regularly to the society office,#contact\r\n" +
         "Other form,Ask at the office,\r\n" +
-        "Pet form,Fill and return,forms/pet.pdf\r\n"
+        "Other local form,Fill and return,forms/other.pdf\r\n"
     }));
     await wait();
     const a = links(w);
@@ -1215,12 +1221,17 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
       a[3].hasAttribute("download") &&
       /society clearance/.test(a[3].textContent),
       a[3].textContent.trim());
+    check("the live sheet pet placeholder resolves to the downloadable form",
+      a[4].getAttribute("href") === "forms/pet-vaccination-certificate-submission.pdf" &&
+      a[4].hasAttribute("download") &&
+      /current vaccination certificate/.test(a[4].textContent),
+      a[4].textContent.trim());
     check("a row with no link still points at the office",
-      a[4].getAttribute("href") === "#contact" && !a[4].hasAttribute("target"),
-      a[4].getAttribute("href"));
-    check("a file sitting beside the page is still downloaded, not opened",
-      a[5].hasAttribute("download") && !a[5].hasAttribute("target"),
+      a[5].getAttribute("href") === "#contact" && !a[5].hasAttribute("target"),
       a[5].getAttribute("href"));
+    check("a file sitting beside the page is still downloaded, not opened",
+      a[6].hasAttribute("download") && !a[6].hasAttribute("target"),
+      a[6].getAttribute("href"));
 
     /* a pasted link must never be able to run anything */
     w = makeDom(serve({

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pet Registration &amp; Vaccination Certificate Submission Form</title>
+<style>
+@page{size:A4;margin:7mm}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#fff;color:#17352e}
+body{font-family:"Segoe UI",Arial,sans-serif;font-size:8.4pt;line-height:1.2}
+.page{width:196mm;min-height:283mm;margin:0 auto;border:1px solid #cfdcd7;padding:5mm 7mm;position:relative}
+.header{display:flex;align-items:center;gap:6mm;padding-bottom:2mm;border-bottom:2px solid #14564a}
+.logo{width:35mm;height:auto;display:block}
+.society{flex:1;text-align:right}
+.society strong{display:block;font-family:Georgia,serif;font-size:12pt;line-height:1.1;color:#0f4239}
+.society span{display:block;margin-top:.8mm;font-size:6.8pt;letter-spacing:.05em;text-transform:uppercase;color:#65807a}
+.gold-rule{height:.8mm;background:#c08a2e;margin-top:.8mm}
+h1{margin:2.4mm 0 .8mm;text-align:center;font-family:Georgia,serif;font-size:14pt;color:#0f4239}
+.subtitle{text-align:center;color:#58756e;font-size:7.5pt;margin-bottom:2.2mm}
+.section{margin-top:2mm}
+.section-title{background:#e8f2ef;color:#0f4239;border-left:3px solid #14564a;padding:1.1mm 2mm;
+font-size:8.2pt;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.grid{display:grid;grid-template-columns:1fr 1fr;column-gap:7mm;row-gap:1.5mm;padding:1.9mm 1.5mm .6mm}
+.grid.three{grid-template-columns:1fr 1fr 1fr;column-gap:5mm}
+.field{display:flex;align-items:flex-end;gap:2mm;min-width:0}
+.field.full{grid-column:1/-1}.field.two{grid-column:span 2}
+.label{white-space:nowrap;font-weight:600;color:#2f4f47}
+.line{height:3.8mm;flex:1;border-bottom:1px solid #789089;min-width:12mm}
+.choices{display:flex;flex-wrap:wrap;gap:2mm 9mm;padding:2mm 1.5mm .5mm}
+.check::before{content:"";display:inline-block;width:2.9mm;height:2.9mm;border:1px solid #58756e;margin-right:1.5mm;vertical-align:-.4mm}
+.vaccine{margin:1.7mm 1.5mm 0;border:1px solid #d5dfdb;border-radius:2mm;padding:2mm 2.5mm}
+.vaccine h3{font-size:9pt;margin:0 0 1.2mm;color:#0f4239}
+.vaccine .grid{padding:0;row-gap:1.4mm}
+.attachments{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1mm 5mm;padding:1.7mm 1.5mm .3mm;font-size:7.7pt}
+.declaration{margin:1.6mm 1.5mm 0;padding:1.8mm 2.5mm;border:1px solid #d8e2de;border-radius:2mm;background:#fbfcfb;font-size:7.6pt}
+.declaration p{margin:0 0 .8mm}.declaration ol{margin:0;padding-left:5mm}
+.declaration li{margin:0 0 .5mm;padding-left:.7mm}
+.sign-row{display:grid;grid-template-columns:1.05fr .95fr;gap:6mm;padding:2mm 1.5mm 0}
+.signature,.office{border:1px solid #d5dfdb;border-radius:2mm;padding:2mm}
+.sig-space{height:6.5mm;border-bottom:1px solid #789089;margin:1mm 0}
+.office{border-color:#c08a2e;background:#fffaf0}
+.office-title{font-weight:800;color:#75500d;text-transform:uppercase;letter-spacing:.05em;margin-bottom:1.3mm}
+.office-grid{display:grid;grid-template-columns:1fr 1fr;gap:1mm 4mm}
+.office-grid .full{grid-column:1/-1}
+.footer{position:absolute;left:7mm;right:7mm;bottom:2mm;border-top:1px solid #d8e2de;padding-top:1mm;
+display:flex;justify-content:space-between;gap:5mm;color:#65807a;font-size:6.7pt}
+.footer b{color:#2f4f47}
+@media print{.page{border:0;margin:0;width:auto;min-height:283mm}}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="header">
+    <img class="logo" src="../images/brand/logo.png" alt="Shweta Shubham">
+    <div class="society">
+      <strong>Shweta Shubham Flat Owners</strong>
+      <strong>Co-operative Maintenance Society Ltd</strong>
+      <span>Resident administration form</span>
+    </div>
+  </header>
+  <div class="gold-rule"></div>
+
+  <h1>Pet Registration &amp; Vaccination Certificate Submission Form</h1>
+  <div class="subtitle">Submit to the Society Office with a copy of the pet's current vaccination certificate</div>
+
+  <section class="section">
+    <div class="section-title">1. Submission type</div>
+    <div class="choices">
+      <span class="check">New pet registration</span>
+      <span class="check">Vaccination certificate renewal</span>
+      <span class="check">Update pet details</span>
+      <span class="check">Pet no longer residing in the society</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">2. Resident &amp; flat details</div>
+    <div class="grid">
+      <div class="field"><span class="label">Block / Tower:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Flat No.:</span><span class="line"></span></div>
+      <div class="field full"><span class="label">Pet owner's full name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Mobile:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Email:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Resident type:</span><span class="check">Owner</span><span class="check">Tenant</span></div>
+      <div class="field"><span class="label">Alternate contact:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">3. Pet details</div>
+    <div class="grid three">
+      <div class="field"><span class="label">Pet name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Species:</span><span class="check">Dog</span><span class="check">Cat</span></div>
+      <div class="field"><span class="label">Other:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Breed:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Sex:</span><span class="check">Male</span><span class="check">Female</span></div>
+      <div class="field"><span class="label">Colour / markings:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date of birth / age:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Sterilised:</span><span class="check">Yes</span><span class="check">No</span></div>
+      <div class="field"><span class="label">Microchip / ID No.:</span><span class="line"></span></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">4. Vaccination &amp; veterinary details</div>
+    <div class="vaccine">
+      <h3>Current vaccination record</h3>
+      <div class="grid">
+        <div class="field"><span class="label">Rabies vaccination date:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Valid / booster due until:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Other vaccination(s):</span><span class="line"></span></div>
+        <div class="field"><span class="label">Vaccination date:</span><span class="line"></span></div>
+        <div class="field full"><span class="label">Veterinarian / clinic name:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Clinic contact:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Certificate / record No.:</span><span class="line"></span></div>
+      </div>
+    </div>
+    <div class="attachments">
+      <span class="check">Vaccination certificate copy enclosed</span>
+      <span class="check">Pet photograph enclosed</span>
+      <span class="check">Municipal licence copy, if applicable</span>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">5. Pet owner declaration</div>
+    <div class="declaration">
+      <p>I confirm that the information and documents provided are current and agree that:</p>
+      <ol>
+        <li>The pet will be kept on a leash and accompanied by its owner in common areas; a muzzle will be used as required by the society guidelines.</li>
+        <li>I will prevent excessive barking or other disturbance and will immediately clean pet waste from common areas.</li>
+        <li>The pet will not roam freely in corridors or lifts and will not be taken to rooftops, the swimming-pool area or other prohibited spaces.</li>
+        <li>I am responsible for any injury, nuisance or damage caused by the pet and will comply with applicable society rules and lawful requirements.</li>
+        <li>I will submit renewed vaccination records before the current certificate expires and promptly notify the Society Office of any change in the pet's details or residence.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sign-row">
+    <div class="signature">
+      <b>Pet owner acknowledgement</b>
+      <div class="sig-space"></div>
+      <div class="field"><span class="label">Name:</span><span class="line"></span></div>
+      <div class="field"><span class="label">Date:</span><span class="line"></span></div>
+    </div>
+    <div class="office">
+      <div class="office-title">For Society Office Use</div>
+      <div class="office-grid">
+        <div class="field"><span class="label">Pet ID / Ref.:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Received date:</span><span class="line"></span></div>
+        <div class="field"><span class="label">Verified by:</span><span class="line"></span></div>
+        <div class="field full"><span class="label">Certificate valid until:</span><span class="line"></span></div>
+        <div class="field full"><span class="check">Recorded</span><span class="check">Renewal required</span><span class="check">Incomplete</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span><b>Society Office:</b> 97042 85706</span>
+    <span>Pet owners should submit a renewed certificate whenever the current vaccination record expires.</span>
+  </footer>
+</main>
+</body>
+</html>
