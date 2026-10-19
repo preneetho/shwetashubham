@@ -370,14 +370,14 @@
     var el = document.getElementById("noticeList");
     if (!el) return;
     var pill = { red: "pill-red", gold: "pill-gold", green: "pill-green", grey: "pill-grey" };
-    el.innerHTML = rows.map(function (r) {
-      return '<div class="notice-slide">' +
+    el.innerHTML = rows.map(function (r, i) {
+      var last = i === rows.length - 1;
+      return '<div style="padding:18px 22px' + (last ? "" : ";border-bottom:1px solid var(--line)") + '">' +
         '<span class="pill ' + (pill[(r.colour || r.color || "grey").toLowerCase()] || "pill-grey") + '">' + esc(r.tag || "Notice") + "</span>" +
-        "<b>" + rich(r.title) + "</b>" +
-        (r.body ? "<small>" + rich(r.body) + "</small>" : "") +
+        '<b style="display:block;margin-top:8px">' + rich(r.title) + "</b>" +
+        (r.body ? '<small style="color:var(--muted)">' + rich(r.body) + "</small>" : "") +
         "</div>";
     }).join("");
-    if (typeof window.SSNotices === "function") window.SSNotices();
   };
 
   R.festivals = function (rows) {
