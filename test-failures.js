@@ -319,6 +319,8 @@ const check = (name, pass, detail) => { results.push([name, pass, detail]); };
     check("edited notice renders", /Water tanker on Sunday/.test(html2), "");
     check("only one notice now", d.querySelectorAll("#noticeList > div").length === 1,
       d.querySelectorAll("#noticeList > div").length + "");
+    check("the announcement is rendered as a carousel slide",
+      d.querySelectorAll("#noticeList > .notice-slide").length === 1, "");
     check("**bold** becomes <b>", /<b>Bring<\/b>/.test(html2), "");
     check("[link](url) becomes anchor", /<a href="#contact">form<\/a>/.test(html2), "");
     check("red colour applied", /pill-red/.test(html2), "");
